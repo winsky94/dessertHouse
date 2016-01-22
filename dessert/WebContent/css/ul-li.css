@@ -1,0 +1,11 @@
+.collection{
+	list-style:none;
+	border: 1px solid grey;
+	overflow:hidden;
+}
+
+.collection-item{
+	border-top: 1px solid grey;
+	 margin-top:-1px;
+	 padding: 3px;
+}

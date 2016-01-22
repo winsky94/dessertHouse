@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="testJson" namespace="/api" extends="json-default">
+		<action name="testJson" class="testJsonController">
+			<result type="json" />
+		</action>
+	</package>
+	<package name="sign_up" namespace="/api" extends="json-default">
+		<action name="signUp" class="signUpController">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+	</package>
+	<!-- <package name="shop_manage" namespace="/api" extends="json-default">
+		<action name="getShops" class="shopController">
+			<result type="json">
+				<param name="shops">shops</param>
+			</result>
+		</action>
+	</package> -->
+	<!-- <package name="query" namespace="/api" extends="json-default">
+		<action name="queryt" class="teacherJsonController">
+			<result type="json">
+				<param name="rlist">rlist</param>
+			</result>
+		</action>
+		<action name="getRank" class="teacherJsonController" method="rank">
+			<result type="json">
+				<param name="rankList">rankList</param>
+			</result>
+		</action>
+		<action name="getMajor" class="teacherJsonController" method="major">
+			<result type="json">
+				<param name="majorList">majorList</param>
+			</result>
+		</action>
+		<action name="sort" class="teacherJsonController" method="sort">
+			<result type="json">
+				<param name="rlist">rlist</param>
+			</result>
+		</action>
+	</package>
+	<package name="upload" namespace="/api" extends="json-default">
+		<action name="upload" class="uploadJsonController">
+			<result type="json">
+				<param name="result">result</param>
+			</result>
+		</action>
+	</package> -->
+</struts>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="test" extends="struts-default">
+		<action name="test" class="testController">
+			<result name="success">index.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin" extends="struts-default">
+		<action name="shop_manage" class="shopController">
+			<result name="admin_shop">shopManage.jsp</result>
+		</action>
+		<!-- <action name="teacher_query" class="indexController" method="t_query">
+			<result name="success">queryT.jsp</result>
+		</action> -->
+	</package>
+	
+	<!-- <package name="index" extends="struts-default">
+		<action name="login" class="indexController">
+			<result name="teacher">temp.jsp</result>
+			<result name="student">index.jsp</result>
+		</action>
+		<action name="teacher_query" class="indexController" method="t_query">
+			<result name="success">queryT.jsp</result>
+		</action>
+	</package>
+	<package name="award" extends="struts-default">
+		<action name="award" class="awardController">
+			<result name="success">index.jsp</result>
+		</action>
+	</package> -->
+</struts>

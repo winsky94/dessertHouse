@@ -1,9 +1,7 @@
 //用户注册
 function verify_sign_up() {
-	// 使用dom的方式获取文本框中的值
-	// .value可以获取一个元素节点的value属性
-	var userName = $("#memberName").val();
-	var password = $("#password_input").val();
+	userName = $("#memberName").val();
+	var password = $("#password").val();
 	var confirm_password = $("#confirm_password").val();
 	var age = $("#age").val();
 	var sex = $("#sex").val();
@@ -101,7 +99,7 @@ function callback_signup(result) {
 			alert("成功啦");
 //			window.location.href = "index.html";
 		} else {
-			var divNode = $("#result");
+			var divNode = $("#message");
 			divNode.innerHTML = message;
 		}
 	}

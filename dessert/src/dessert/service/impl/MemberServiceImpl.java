@@ -8,6 +8,7 @@ import dessert.configure.Configure;
 import dessert.dao.MemberDao;
 import dessert.entity.Member;
 import dessert.service.MemberService;
+import dessert.util.DesUtils;
 
 /**
  * @author 严顺宽
@@ -21,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 
 		String message = "";
+
 		// 检查注册条件
 		String name = member.getName();
 		int age = member.getAge();
@@ -29,11 +31,17 @@ public class MemberServiceImpl implements MemberService {
 		} else if (memberDao.findByName(name) != null) {
 			message = Configure.NAME_ERROR;
 		} else {
-			// 用户存在，可以注册
+			// 用户不存在，可以注册
 			// 生成7位的会员号
 			String memberId = generateMemberId();
 			member.setMemberId(memberId);
-			memberDao.add(member);
+
+			// 密码加密
+			DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+			String password = des.encrypt(member.getPassword());
+			member.setPassword(password);
+
+			memberDao.signUp(member);
 			message = Configure.SUCCESS;
 		}
 
@@ -47,8 +55,8 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	private String generateMemberId() {
 		String max = memberDao.getMaxMemberId();
-		if(max==null){
-			max="0";
+		if (max == null) {
+			max = "0";
 		}
 		int maxId = Integer.parseInt(max);
 		int id = maxId + 1;

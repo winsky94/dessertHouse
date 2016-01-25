@@ -10,46 +10,39 @@
 		</action>
 	</package>
 	<package name="sign_up" namespace="/api" extends="json-default">
-		<action name="signUp" class="signUpController">
+		<action name="signUp" class="signUpJsonController">
 			<result type="json">
 				<param name="message">message</param>
 			</result>
 		</action>
 	</package>
-	<!-- <package name="shop_manage" namespace="/api" extends="json-default">
-		<action name="getShops" class="shopController">
+	<package name="login" namespace="/api" extends="json-default">
+		<action name="login" class="loginJsonController" method="login">
+			<result type="json">
+				<param name="userType">userType</param>
+			</result>
+		</action>
+	</package>
+	<package name="shopManage" namespace="/api/shop" extends="json-default">
+		<action name="getShops" class="shopJsonController">
 			<result type="json">
 				<param name="shops">shops</param>
 			</result>
 		</action>
-	</package> -->
-	<!-- <package name="query" namespace="/api" extends="json-default">
-		<action name="queryt" class="teacherJsonController">
+		<action name="add" class="shopJsonController" method="addShop">
 			<result type="json">
-				<param name="rlist">rlist</param>
+				<param name="shops">shops</param>
 			</result>
 		</action>
-		<action name="getRank" class="teacherJsonController" method="rank">
+		<action name="edit" class="shopJsonController" method="editShop">
 			<result type="json">
-				<param name="rankList">rankList</param>
+				<param name="shops">shops</param>
 			</result>
 		</action>
-		<action name="getMajor" class="teacherJsonController" method="major">
+		<action name="delete" class="shopJsonController" method="deleteShop">
 			<result type="json">
-				<param name="majorList">majorList</param>
-			</result>
-		</action>
-		<action name="sort" class="teacherJsonController" method="sort">
-			<result type="json">
-				<param name="rlist">rlist</param>
+				<param name="shops">shops</param>
 			</result>
 		</action>
 	</package>
-	<package name="upload" namespace="/api" extends="json-default">
-		<action name="upload" class="uploadJsonController">
-			<result type="json">
-				<param name="result">result</param>
-			</result>
-		</action>
-	</package> -->
 </struts>

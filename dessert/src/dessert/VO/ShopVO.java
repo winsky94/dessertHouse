@@ -6,17 +6,15 @@ package dessert.VO;
  */
 public class ShopVO {
 	private long id;
-	private String shopId;// 店面编号
 	private String name;// 店面名称
 	private String address;// 地址
 	private String owner;// 拥有者
 	private String telephone;// 联系电话
 
-	public ShopVO(long id, String shopId, String name, String address,
+	public ShopVO(long id, String name, String address,
 			String owner, String telephone) {
 		super();
 		this.id = id;
-		this.shopId = shopId;
 		this.name = name;
 		this.address = address;
 		this.owner = owner;
@@ -29,14 +27,6 @@ public class ShopVO {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getShopId() {
-		return shopId;
-	}
-
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
 	}
 
 	public String getName() {

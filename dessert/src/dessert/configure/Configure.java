@@ -27,6 +27,8 @@ public class Configure {
 
 	// 总店服务员的身份，用0表示，其余分店服务员的指向对应店铺的shopId
 	public static final String WAITRESS = "0";
+	// 系统管理员身份，用户-1表示
+	public static final String ADMIN = "-1";
 
 	// 管理员总店的session名
 	public static final String SHOP_SESSION = "shop_session";

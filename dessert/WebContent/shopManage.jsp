@@ -11,16 +11,21 @@ pageEncoding="utf-8"%>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
+
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/table_css/metisMenu.css">
+	<link href="css/table_css/jquery.dataTables.min.css" rel="stylesheet" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/table_css/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/table_css/dataTables.responsive.css">
+	<link rel="stylesheet" type="text/css" href="css/table_css/sb-admin-2.css">
+	<link href="css/table_css/editor.dataTables.min.css" rel="stylesheet" media="screen" />
+	<link rel="stylesheet" type="text/css" href="font-awesome-4.4.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="css/ul-li.css">
 	<link rel="stylesheet" type="text/css" href="css/base.css">
-	<link href="skins/square/red.css" rel="stylesheet" />
-	<link href="skins/all.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="css/buttons.css">
-	<link href="css/table_css/jquery.dataTables.min.css" rel="stylesheet" media="screen" />
 	<link href="css/table_css/select.dataTables.min.css" rel="stylesheet" media="screen" />
 	<link href="css/table_css/buttons.dataTables.min.css" rel="stylesheet" media="screen" />
-	<link href="css/table_css/editor.dataTables.min.css" rel="stylesheet" media="screen" />
+	
 	<style type="text/css">
 		#shopTable thead tr th {
 			text-align: center;
@@ -36,6 +41,18 @@ pageEncoding="utf-8"%>
 
 		.order-header {
 			cursor: pointer;
+		}
+
+		td.highlight {
+    		background-color: whitesmoke !important;
+		}
+
+		.table-hover>tbody>tr.active:hover>td {
+		        background-color: green;
+		}
+
+		.table>tbody>tr.active>td {
+		        background-color: green;
 		}
 	</style>
 </head>
@@ -96,8 +113,7 @@ pageEncoding="utf-8"%>
 					<!--右侧店面表格 -->
 					<div class="span10">
 						<div class="table-container table-responsive">
-							<table id="shopTable"
-							class="table display dataTable table-hover table-condensed table-striped table-sm" width="100%">
+							<table id="shopTable" class="table display dataTable table-hover table-condensed table-striped table-sm" width="100%">
 							<thead>
 								<tr>
 									<th class="order-header text-center">名称</th>
@@ -123,9 +139,10 @@ pageEncoding="utf-8"%>
 			</h4>
 		</div>
 	</div>
-	<!-- 加载js 
-	<script src="js/jquery-2.1.1.min.js"></script>-->
-	<script src='js/vendor/jquery-1.11.3.min.js'></script>
+	<!-- 加载js -->
+	<script src="js/jquery-2.1.1.min.js"></script>
+
+	<!--<script src='js/vendor/jquery-1.11.3.min.js'></script>-->
 	<script src='bootstrap/js/bootstrap.js'></script>
 	<script src="js/icheck.js"></script>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
@@ -166,12 +183,13 @@ pageEncoding="utf-8"%>
 					dataSrc: 'shops'
 				},
 				columns : [ 
-				{data : "name"}, 
-				{data : "owner"}, 
-				{data : "telephone"}, 
-				{data : "address"} 
+					{data : "name"}, 
+					{data : "owner"}, 
+					{data : "telephone"}, 
+					{data : "address"}
 				],
-				select : false,
+				"bStateSave": true,
+				select : true,
 				filter : true,
 				ordering : true,
 				buttons : [ 

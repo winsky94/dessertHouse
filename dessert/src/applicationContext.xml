@@ -19,16 +19,21 @@
 	<bean id="testController" class="dessert.controller.html.TestController"
 		scope="prototype" />
 	<bean id="testJsonController" class="dessert.controller.api.TestJsonController" />
-	<bean id="signUpController" class="dessert.controller.api.SignUpController" />
+	<bean id="signUpJsonController" class="dessert.controller.api.SignUpJsonController" />
 	<bean id="shopController" class="dessert.controller.html.ShopController" />
+	<bean id="shopJsonController" class="dessert.controller.api.ShopJsonController" />
+	<bean id="loginJsonController" class="dessert.controller.api.LoginJsonController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />
 	<bean id="memberService" class="dessert.service.impl.MemberServiceImpl" />
 	<bean id="shopService" class="dessert.service.impl.ShopServiceImpl" />
+	<bean id="loginService" class="dessert.service.impl.LoginServiceImpl" />
 
 	<!-- dao -->
 	<bean id="testDao" class="dessert.dao.impl.TestDaoImpl" />
 	<bean id="memberDao" class="dessert.dao.impl.MemberDaoImpl" />
 	<bean id="shopDao" class="dessert.dao.impl.ShopDaoImpl" />
+	<bean id="workerDao" class="dessert.dao.impl.WorkerDaoImpl" />
+	<bean id="loginDao" class="dessert.dao.impl.LoginDaoImpl" />
 </beans>

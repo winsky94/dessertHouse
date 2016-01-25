@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>会员注册</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<meta charset="utf-8">
+	<title>注册</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- CSS  -->
-	<link href="css/material_icons.css" rel="stylesheet" media="screen,projection">
-	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-	<style type="text/css">
-		.table-container {
-			display: table;
-		}
-
-		.row-container {
-			display: table-row;
-		}
-
-		.cell {
-			display: table-cell;
-		}
-	</style>
+	<!-- CSS -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="css/base.css">
 	
-	<!-- 必须在开头引入的js -->
-	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/cookie.js"></script>
-	<script src="js/writeHTML.js"></script>
 </head>
 <body>
-	<!-- 顶部导航栏 -->
-	<header></header>
-	<script type="text/javascript">
-		write_header();
-	</script>
-
-	<!-- 注册正文 -->
-	<div class="main container">
-		<div class="row">
-			<div class="col s12">
-				<h4 style="font-family: '楷体';">
-					会员注册
-				</h4>
+	<div class="container">
+		<!-- 顶部导航栏 -->
+		<div class="navbar navbar-default navbar-fixed-top"  role="navigation">
+			<div class="navbar-inner">
+				<a class="brand" href="#" style="margin-left: 100px">Dessert House</a>
 			</div>
-			<div class="col s12 m4 l2"></div>
-			<div class="col s12 m8 l8">
-				<div class="row">
-					<div class="input-field col s12 m12 l12">
-						<div class="input-field col s6 ">
-							<input id="memberName" type="text" name="memberName" class="validate">
-							<label for="memberName">昵　称</label>
-						</div>
-
-						<div class="input-field col s6 ">
-							<input id="age" type="text" name="age" class="validate">
-							<label for="age">年　龄</label>
-						</div>
-
-					</div>
-
-					<div class="input-field col s12">
-						<div class="input-field col s6">
-							<input id="password_input" type="password" name="password_input" class="validate">
-							<label for="password_input">密　码</label>
-						</div>
-
-						<div class="input-field col s6">
-							<input id="confirm_password" type="password" name="confirm_password" class="validate">
-							<label for="confirm_password">确认密码</label>
+		</div>
+	
+		<!-- 注册表单 -->
+		<div class="">
+			<form class="form-horizontal">
+				<div class="row-fluid control-group"></div>
+				
+				<div class="row-fluid control-group">
+					<div class="span8">
+						<div class="controls">
+							<h3 class="center">会员注册</h3>
 						</div>
 					</div>
+					
+				</div>
 
-					<div class="input-field col s12">
-						<div class="input-field col s6">
+				<div class="row-fluid control-group"></div>
+				
+				<div class="row-fluid control-group">
+					<div class="span4">
+						<label class="control-label" for="memberName">用户名：</label>
+						<div class="controls">
+							<input type="text" id="memberName" placeholder="用户名">
+						</div>
+					</div>
+					<div class="span4">
+						<label class="control-label" for="age">年　龄：</label>
+						<div class="controls">
+							<input type="text" id="age" placeholder="年　龄">
+						</div>
+					</div>
+				</div>
+
+				<div class="row-fluid control-group"></div>
+
+				<div class="row-fluid control-group">
+					<div class="span4">
+						<label class="control-label" for="password">密　码：</label>
+						<div class="controls">
+							<input type="password" id="password" placeholder="密　码">
+						</div>
+					</div>
+					<div class="span4">
+						<label class="control-label" for="confirm_password">确认密码：</label>
+						<div class="controls">
+							<input type="password" id="confirm_password" placeholder="确认密码">
+						</div>
+					</div>
+				</div>
+
+				<div class="row-fluid control-group"></div>
+				
+				<div class="row-fluid control-group">
+					<div class="span4">
+						<label class="control-label" for="age">性　别：</label>
+						<div class="controls">
 							<select class="browser-default" id="sex">
 								<option value="" disabled selected>请选择性别</option>
 								<option value="男">男</option>
@@ -81,64 +81,70 @@
 								<option value="保密">保密</option>
 							</select>
 						</div>
-
-						<div class="input-field col s6">
-							<label for="birthday">生　日</label>
-							<input id="birthday" type="date" class="datePicker">
-						</div>
+						
 					</div>
-
-					<div class="input-field col s12">
-						<div class="input-field col s6">
-							<input id="telephone" type="tel" name="telephone" class="validate">
-							<label for="telephone">电　话</label>
-						</div>
-
-						<div class="input-field col s6">
-							<input id="cardId" type="text" name="cardId" onkeyup="formatBankNo(this)" onkeydown="formatBankNo(this)" class="validate">
-							<label for="cardId">银行卡号</label>
+					<div class="span4">
+						<label class="control-label" for="birthday">生　日：</label>
+						<div class="controls">
+							<input id="birthday" class="Wdate" type="text" onClick="WdatePicker();" placeholder="生　日">
 						</div>
 					</div>
 				</div>
 
-				<div class="table-container col s12">
-					<div class="row-container">
-						<div class="input-field cell">
-							<a class="btn btn-primary" style="margin-left: 30px;" onclick="verify_sign_up()">注册</a>
-							<font color="red" size="3"><span id="message" style="margin-left: 100px;"></span></font>
+				<div class="row-fluid control-group"></div>
+
+				<div class="row-fluid control-group">
+					<div class="span4">
+						<label class="control-label" for="telephone">电　话：</label>
+						<div class="controls">
+							<input type="text" id="telephone" placeholder="电　话">
+						</div>
+					</div>
+					<div class="span4">
+						<label class="control-label" for="cardId">银行卡号：</label>
+						<div class="controls">
+							<input type="text" id="cardId" placeholder="银行卡号" onkeyup="formatBankNo(this)" onkeydown="formatBankNo(this)">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid control-group"></div>
+
+				<div class="row-fluid control-group">
+					<div class="span4">
+						<div class="controls">
+							<button type="button" class="btn btn-primary center" onclick="verify_sign_up();">注册</button>
 						</div>
 					</div>
 
+					<div class="span4">
+						<div class="controls">
+							<font color="red" size="2" class="center">
+								<span id="message" ></span>
+							</font>
+						</div>
+					</div>
 				</div>
-				<div class="col s12 m4 l2"></div>
-			</div>
-			<div class="row">
-				<div class="col s12 m6 l3"></div>
-				<div class="col s12 m6 l3"></div>
-				<div class="col s12 m6 l3"></div>
-				<div class="col s12 m6 l3"></div>
+				
+			</form>
+		</div>
+
+		<!-- 页脚 -->
+		<div class="navbar navbar-default navbar-fixed-bottom"  role="navigation">
+			<div class="navbar-inner text-center">
+				<h4>
+					© 2016 <abbr title="ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
+				</h4>
 			</div>
 		</div>
 	</div>
-	
-	<!-- 页脚 -->
-	<div id="footer"></div>
-	<script type="text/javascript">
-		write_footer();
-	</script>
-
-	<!-- 引入js -->
+	<!-- 引入相关JS -->
 	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/materialize.js"></script>
+	<script src="js/cookie.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/My97DatePicker/WdatePicker.js"></script>
 	<script src="js/sign_up_ajax.js"></script>
 	<script type="text/javascript">
-		$(function () {
-			$('.datePicker').pickadate({
-	            selectMonths: true, // Creates a dropdown to control month
-	            selectYears: 15, // Creates a dropdown of 15 years to control year
-	            format: 'yyyy-mm-dd ',
-	        });
-		});
 
 	</script>
 </body>

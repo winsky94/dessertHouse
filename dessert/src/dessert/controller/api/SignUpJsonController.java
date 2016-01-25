@@ -49,7 +49,7 @@ public class SignUpJsonController extends BaseController {
 		member.setCardId(cardId);
 
 		message = memberService.signUp(member);
-		System.out.println(message);
+		
 		return Configure.SUCCESS;
 	}
 

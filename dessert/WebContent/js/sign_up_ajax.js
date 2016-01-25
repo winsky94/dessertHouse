@@ -95,11 +95,11 @@ function callback_signup(result) {
 	} else {
 		var message = result.message;
 		if (message == "success") {
-			add_cookie('userName',userName,30*24);
+			add_cookie('userName', userName, 30 * 24);
 			alert("成功啦");
-//			window.location.href = "index.html";
+			window.location.href = "index.html";
 		} else {
-			var divNode = $("#message");
+			var divNode = document.getElementById("message");
 			divNode.innerHTML = message;
 		}
 	}

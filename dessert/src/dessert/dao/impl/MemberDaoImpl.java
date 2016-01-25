@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import dessert.configure.Configure;
 import dessert.dao.MemberDao;
 import dessert.entity.Member;
 import dessert.util.CheckError;
@@ -20,8 +21,19 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	@Override
 	public String signUp(Member member) {
 		// TODO Auto-generated method stub
-		add(member);
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Member.class);
+		String name = member.getName();
+		criteria.add(Restrictions.eq("name", name));
+		@SuppressWarnings("unchecked")
+		List<Member> members = criteria.list();
+		if (members == null || members.size() == 0) {
+			updateLastLoadTime(member);
+			add(member);
+			return Configure.SUCCESS;
+		} else {
+			return Configure.MEMBER_EXIST;
+		}
 	}
 
 	@Override
@@ -54,12 +66,16 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		} else {
 			// 检查可能的错误
 			CheckError.checkListSize(members);
-			// 更新最近登录时间
 			Member member = members.get(0);
-			String lastLoadTime = TimeUtil.getCurrentTime();
-			member.setLastLoadTime(lastLoadTime);
+			updateLastLoadTime(member);
 			update(member);
 			return UserType.member;
 		}
+	}
+
+	private void updateLastLoadTime(Member member) {
+		// 更新最近登录时间
+		String lastLoadTime = TimeUtil.getCurrentTime();
+		member.setLastLoadTime(lastLoadTime);
 	}
 }

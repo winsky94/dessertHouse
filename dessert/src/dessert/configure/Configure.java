@@ -35,4 +35,6 @@ public class Configure {
 	// 管理员总店的session名
 	public static final String SHOP_SESSION = "shop_session";
 
+	// 会员注册用户名存在
+	public static final String MEMBER_EXIST = "该名称已被占用";
 }

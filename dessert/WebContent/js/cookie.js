@@ -86,8 +86,9 @@ function write_header_login(userName, type) {
 		</div>\
 	</div>\
 		';
-	} else if (type == 'user') {
-		var txt = '';
+	} else if (type == 'member') {
+		var txt = '\
+		';
 	} else if (type == 'coach' || type == 'doctor') {
 		var txt = '';
 	}

@@ -1,5 +1,6 @@
 package dessert.dao;
 
+import dessert.entity.Worker;
 import dessert.util.UserType;
 
 /** 
@@ -7,4 +8,12 @@ import dessert.util.UserType;
  */
 public interface WorkerDao {
 	public UserType checkLogin(String workerId,String password);
+	
+	public void add(Worker worker);
+	
+	public void delete(Worker worker);
+	
+	public void update(Worker worker);
+	
+	public String getMaxWorkerId();
 }

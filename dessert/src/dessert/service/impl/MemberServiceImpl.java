@@ -41,8 +41,7 @@ public class MemberServiceImpl implements MemberService {
 			String password = des.encrypt(member.getPassword());
 			member.setPassword(password);
 
-			memberDao.signUp(member);
-			message = Configure.SUCCESS;
+			message = memberDao.signUp(member);
 		}
 
 		return message;

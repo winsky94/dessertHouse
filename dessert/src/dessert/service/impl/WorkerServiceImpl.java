@@ -42,7 +42,6 @@ public class WorkerServiceImpl implements WorkerService {
 		}
 
 		workerId += generateWorkerId();
-		System.out.println(workerId);
 		worker.setWorkerId(workerId);
 
 		// 密码加密

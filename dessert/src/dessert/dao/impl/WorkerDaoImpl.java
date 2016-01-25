@@ -42,4 +42,19 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 			return type;
 		}
 	}
+
+	@Override
+	public String getMaxWorkerId() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<String> list = session.createQuery(
+				"select max(substring(w.workerId,3,7)) from worker w").list();
+		String res=list.get(0);
+		if(res!=null){
+			return res.substring(2);
+		}else{
+			return null;
+		}
+	}
 }

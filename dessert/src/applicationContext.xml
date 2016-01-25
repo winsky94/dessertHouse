@@ -29,6 +29,7 @@
 	<bean id="memberService" class="dessert.service.impl.MemberServiceImpl" />
 	<bean id="shopService" class="dessert.service.impl.ShopServiceImpl" />
 	<bean id="loginService" class="dessert.service.impl.LoginServiceImpl" />
+	<bean id="workerService" class="dessert.service.impl.WorkerServiceImpl" />
 
 	<!-- dao -->
 	<bean id="testDao" class="dessert.dao.impl.TestDaoImpl" />

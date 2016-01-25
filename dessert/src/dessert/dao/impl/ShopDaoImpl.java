@@ -15,5 +15,4 @@ public class ShopDaoImpl extends BaseDaoImpl<Shop> implements ShopDao {
 		// TODO Auto-generated method stub
 		return (ArrayList<Shop>) getAll(Shop.class);
 	}
-
 }

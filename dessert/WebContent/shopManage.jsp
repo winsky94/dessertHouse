@@ -58,81 +58,48 @@ pageEncoding="utf-8"%>
 </head>
 <body>
 	<!-- 顶部导航栏 -->
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">
-	<div class="navbar-inner">
-		<a class="brand" href="#" style="margin-left: 5%">Dessert House</a>
-
-		<ul class="nav navbar-nav" style="margin-left: 5%">
-			<li><a href="#">健康管理</a></li>
-			<li><a href="#">统计</a></li>
-			<li><a href="#">活动</a></li>
-			<li><a href="#">建议</a></li>
-			<li><a href="#">圈子</a></li>
-		</ul>
-
-			<!-- <ul class="nav navbar-nav" style="margin-right: 10px">
-					<li >
-						<a href="#loginModel" role="button" data-toggle="modal" >登录/注册</a>
+	<header></header>
+	<!-- 导航栏结束 -->
+	
+	<!-- 正文内容 -->
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<!--左侧用户信息-->
+			<div class="span2">
+				<ul class="collection">
+					<li class="collection-item"><img src="image/index1.jpg" width="180px" height="150px">
+						<h5 id="userName" class="text-center">admin</h5>
 					</li>
-				</ul> -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> 小王 <b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="#">登录</a></li>
-						<li><a href="#">注册</a></li>
-						<li><a href="#">退出</a></li>
-						<li class="divider"></li>
-						<li><a href="#">邀请好友</a></li>
-						<li class="divider"></li>
-						<li><a href="#">分享</a></li>
-					</ul></li>
+					<li class="collection-item">
+						<p>
+							最近登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; 2016-01-20 15:50:00
+						</p>
+					</li>
 				</ul>
 			</div>
-		</div>
-		<!-- 导航栏结束 -->
-
-		<!-- 正文内容 -->
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<!--左侧用户信息-->
-				<div class="span2">
-					<ul class="collection">
-						<li class="collection-item"><img src="image/index1.jpg"
-							width="180px" height="150px">
-							<h5 id="userName" class="text-center">admin</h5></li>
-							<li class="collection-item">
-								<p>
-									最近登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; 2016-01-20 15:50:00
-								</p>
-							</li>
-						</ul>
-					</div>
-					<!-- 左侧用户信息结束 -->
-					<!--右侧店面表格 -->
-					<div class="span10">
-						<div class="table-container table-responsive">
-							<table id="shopTable" class="table display dataTable table-hover table-condensed table-striped table-sm" width="100%">
-							<thead>
-								<tr>
-									<th class="order-header text-center">名称</th>
-									<th class="order-header text-center">负责人</th>
-									<th class="order-header text-center">联系电话</th>
-									<th class="order-header text-center">地址</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
+			<!-- 左侧用户信息结束 -->
+			<!--右侧店面表格 -->
+			<div class="span10">
+				<div class="table-container table-responsive">
+					<table id="shopTable" class="table display dataTable table-hover table-condensed table-striped table-sm" width="100%">
+						<thead>
+							<tr>
+								<th class="order-header text-center">名称</th>
+								<th class="order-header text-center">负责人</th>
+								<th class="order-header text-center">联系电话</th>
+								<th class="order-header text-center">地址</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
-				<!--右侧店面表格结束 -->
 			</div>
+			<!--右侧店面表格结束 -->
 		</div>
-		<!-- 正文内容结束 -->
+	</div>
+	<!-- 正文内容结束 -->
 
-		<!-- 页脚 -->
-		<div class="navbar navbar-default navbar-fixed-bottom"
-		role="navigation">
+	<!-- 页脚 -->
+	<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 		<div class="navbar-inner text-center">
 			<h4>
 				© 2016 <abbr title="ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU

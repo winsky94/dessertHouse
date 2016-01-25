@@ -36,12 +36,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<String> list = session.createQuery(
-				"select max(memberId) from member").list();
-		if (list == null) {
-			return null;
-		} else {
-			return list.get(0);
-		}
+				"select max(m.memberId) from member m").list();
+		return list.get(0);
 	}
 
 	@Override
@@ -66,5 +62,4 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 			return UserType.member;
 		}
 	}
-
 }

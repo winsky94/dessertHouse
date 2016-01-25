@@ -81,11 +81,12 @@
 				var error="<%= UserType.error %>";
 				if (message != error) {
 					add_cookie('userName',userName,30*24);
+					add_cookie("type", userType, 30*24);
 					alert("成功啦");
-		//			window.location.href = "index.html";
+		//			window.location.href = "index.jsp";
 				} else {
 					var divNode = $("#message");
-					divNode.innerHTML = message;
+					divNode.innerHTML = "用户名密码错误~";
 				}
 			}
 		}

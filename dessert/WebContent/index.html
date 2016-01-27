@@ -7,21 +7,76 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 
 	<!-- 引入css -->
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		.caption{
+			opacity 0;
+			top: 15%;
+			left: 15%;
+			width: 70%;
+			background-color: #ccc;
+			background-color: rgba(0, 0, 0, 0.0);
+		}
+	</style>
+
 	<!-- 加载js -->
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
-	
+	<script>
+		function func() {
+			// 获取窗口宽度
+			if (window.innerWidth)
+				winWidth = window.innerWidth;
+			else if ((document.body) && (document.body.clientWidth))
+				winWidth = document.body.clientWidth;
+			// 获取窗口高度
+			if (window.innerHeight)
+				winHeight = window.innerHeight;
+			else if ((document.body) && (document.body.clientHeight))
+				winHeight = document.body.clientHeight;
+
+			$(".item").css("height", winHeight);
+			$(".slide").css("height", winHeight);
+			$("img").css("height", winHeight);
+
+			$(".item").css("width", winWidth);
+			$(".slide").css("width", winWidth);
+			$("img").css("width", winWidth);
+		}
+	</script>
 </head>
-<body>
+<body onload="func();" onresize="func();">
 	<header></header>
 	<script type="text/javascript">
 		write_header();
 	</script>
 
+	<div id="myCarousel" class="carousel slide" style="margin: 0px ;padding: 0px">
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			<div class="item active">
+				<img src="image/index1.jpg" alt="First slide">
+				<!-- <div class="carousel-caption text-center caption">
+					<h3>图片标题1</h3>
+					<p style="color:black;font-weight: bold">描述内容1...</p>
+				</div> -->
+			</div>
+			<div class="item">
+				<img src="image/index2.jpg" alt="Second slide">
+			</div>
+			<div class="item">
+				<img src="image/index3.jpg" alt="Third slide">
+			</div>
+		</div>
+	</div>
+
+
 	<!-- 加载js -->
 	<script src="bootstrap/js/bootstrap.js"></script>
-
+	<script type="text/javascript">
+		$('#myCarousel').carousel({
+			interval: 3000
+		})
+	</script>
 </body>
 </html>

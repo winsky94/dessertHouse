@@ -62,10 +62,10 @@ function write_header_login(userName, type) {
 		var txt = '\
 			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
 		<div class="navbar-inner">\
-			<a class="brand" href="#" style="margin-left: 5%">Dessert House</a>\
+			<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 \
 			<ul class="nav navbar-nav" style="margin-left: 5%">\
-				<li><a href="#">店面管理</a></li>\
+				<li><a href="shopManage.jsp">店面管理</a></li>\
 				<li><a href="#">店员管理</a></li>\
 			</ul>\
 \
@@ -79,7 +79,7 @@ function write_header_login(userName, type) {
 					<ul class="dropdown-menu">\
 						<li><a href="#">个人信息</a></li>\
 						<li class="divider"></li>\
-						<li><a href="#">退出登录</a></li>\
+						<li><a href="index.html" onclick="exit();">退出登录</a></li>\
 					</ul>\
 				</li>\
 			</ul>\
@@ -88,6 +88,31 @@ function write_header_login(userName, type) {
 		';
 	} else if (type == 'member') {
 		var txt = '\
+			<!-- 顶部导航栏 -->\
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
+				<div class="navbar-inner">\
+					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
+					<ul class="nav navbar-nav" style="margin-left: 5%">\
+						<li><a href="#">产品预订</a></li>\
+						<li><a href="#">会员资格</a></li>\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> 小王 <b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">个人信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+							</ul>\
+						</li>\
+					</ul>\
+				</div>\
+			</div>\
+			<!-- 导航栏结束 -->\
 		';
 	} else if (type == 'coach' || type == 'doctor') {
 		var txt = '';
@@ -97,59 +122,60 @@ function write_header_login(userName, type) {
 }
 
 function write_header_not_login() {
-	var txt = '<!-- 顶部导航栏 -->\
+	var txt = '\
+		<!-- 顶部导航栏 -->\
     	<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
-	<div class="navbar-inner">\
-		<a class="brand" href="#" style="margin-left: 5%">Dessert House</a>\
-\
-		<ul class="nav navbar-nav clearfix pull-right">\
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-		</ul>\
-		<ul class="nav navbar-nav pull-right">\
-			<li >\
-				<a href="#loginModel" role="button" data-toggle="modal" >登录/注册</a>\
-			</li>\
-		</ul>\
-	</div>\
-</div>\
-<!-- 导航栏结束 -->\
-\
-<!-- Modal -->\
-<div id="loginModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">\
-	<div class="modal-header">\
-		<h3>登录</h3>\
-	</div>\
-	<div class="modal-body">\
-		<form class="form-horizontal">\
-			<div class="control-group"></div>\
-			<div class="control-group">\
-				<label class="control-label" for="userName">用户名:</label>\
-				<div class="controls">\
-					<input type="text" id="userName" placeholder="请输入用户名...">\
-				</div>\
+			<div class="navbar-inner">\
+				<a class="brand" href="#" style="margin-left: 5%">Dessert House</a>\
+				\
+				<ul class="nav navbar-nav clearfix pull-right">\
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+				</ul>\
+				<ul class="nav navbar-nav pull-right">\
+					<li >\
+						<a href="#loginModel" role="button" data-toggle="modal" >登录/注册</a>\
+					</li>\
+				</ul>\
 			</div>\
-			<div class="control-group">\
-				<label class="control-label" for="password">密　码:</label>\
-				<div class="controls">\
-					<input type="password" id="password" placeholder="请输入密码...">\
-				</div>\
-			</div>\
-		</form>\
-		\
-	</div>\
-	<div class="modal-footer">\
-		<div style="text-align:center">\
-			<button class="btn btn-primary" onclick="login()">登录</button>\
-			<button class="btn btn-primary" style="margin-left: 10px" onclick="sign_up();">注册</button>\
-			<font color="red" size="2" style="margin-left: 4%">\
-				<span id="message">呵呵</span>\
-			</font>\
 		</div>\
-\
-	</div>\
-</div>\
-';
+		<!-- 导航栏结束 -->\
+		\
+		<!-- Modal -->\
+		<div id="loginModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">\
+			<div class="modal-header">\
+				<h3>登录</h3>\
+			</div>\
+			<div class="modal-body">\
+				<form class="form-horizontal">\
+					<div class="control-group"></div>\
+					<div class="control-group">\
+						<label class="control-label" for="userName">用户名:</label>\
+						<div class="controls">\
+							<input type="text" id="userName" placeholder="请输入用户名...">\
+						</div>\
+					</div>\
+					<div class="control-group">\
+						<label class="control-label" for="password">密　码:</label>\
+						<div class="controls">\
+							<input type="password" id="password" placeholder="请输入密码...">\
+						</div>\
+					</div>\
+				</form>\
+				\
+			</div>\
+			<div class="modal-footer">\
+				<div style="text-align:center">\
+					<button class="btn btn-primary" onclick="login()">登录</button>\
+					<button class="btn btn-primary" style="margin-left: 10px" onclick="sign_up();">注册</button>\
+					<font color="red" size="2" style="margin-left: 4%">\
+						<span id="message"></span>\
+					</font>\
+				</div>\
+		\
+			</div>\
+		</div>\
+	';
 	$("header").html(txt);
 }
 
@@ -182,7 +208,7 @@ function callback_login(result) {
 			add_cookie('userName', userName, 30 * 24);
 			add_cookie("type", userType, 30 * 24);
 			alert("成功啦");
-			// window.location.href = "index.html";
+			window.location.href = "index.html";
 		} else if(userType == error){
 			// var divNode = $("#message");
 			var divNode=document.getElementById("message");

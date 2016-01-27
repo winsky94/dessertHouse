@@ -55,10 +55,16 @@ pageEncoding="utf-8"%>
 		        background-color: green;
 		}
 	</style>
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/cookie.js"></script>
 </head>
 <body>
 	<!-- 顶部导航栏 -->
 	<header></header>
+	<script type="text/javascript">
+		write_header();
+	</script>
 	<!-- 导航栏结束 -->
 	
 	<!-- 正文内容 -->
@@ -115,7 +121,7 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
-	<script src="js/table_js/dataTables.editor.min.js" charset="UTF-8"></script>
+	<script src="js/table_js/dataTables.editor.js" charset="UTF-8"></script>
 	<script>
 		var editor; // use a global for the submit and return data rendering in the examples
 
@@ -131,7 +137,7 @@ pageEncoding="utf-8"%>
 				"idSrc" : "id",
 				fields : [ {
 					label : "名称:",
-					name : "name",
+					name : "name"
 				}, {
 					label : "负责人:",
 					name : "owner"
@@ -147,7 +153,12 @@ pageEncoding="utf-8"%>
 				dom : "Bfrtip",
 				ajax : {
 					url: "api/shop/getShops",
-					dataSrc: 'shops'
+					dataSrc: 'shops',
+					"data":function() {
+				    	arguments={
+				    	}
+				    	return arguments;
+				    }
 				},
 				columns : [ 
 					{data : "name"}, 

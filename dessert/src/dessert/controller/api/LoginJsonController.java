@@ -29,6 +29,7 @@ public class LoginJsonController extends BaseController {
 		String userName = params.get("userName");
 		String password = params.get("password");
 		userType = loginService.login(userName, password);
+		
 		return Configure.SUCCESS;
 	}
 

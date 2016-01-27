@@ -17,7 +17,6 @@ import dessert.service.ShopService;
 
 /**
  * @author 严顺宽
- * @date 2016年1月22日 下午3:24:18
  */
 public class ShopJsonController extends BaseController {
 	private static final long serialVersionUID = 1L;
@@ -41,6 +40,7 @@ public class ShopJsonController extends BaseController {
 		shop.setTelephone(params.get("data[0][telephone]"));
 		shop.setAddress(params.get("data[0][address]"));
 		shopService.add(shop);
+		shops = shopService.getShops();
 
 		return Configure.SUCCESS;
 
@@ -66,6 +66,7 @@ public class ShopJsonController extends BaseController {
 		shop.setAddress(params.get("data[" + id + "][address]"));
 
 		shopService.update(shop);
+		shops = shopService.getShops();
 		return Configure.SUCCESS;
 	}
 
@@ -85,6 +86,7 @@ public class ShopJsonController extends BaseController {
 		shop.setId(Integer.parseInt(id));
 
 		shopService.delete(shop);
+		shops = shopService.getShops();
 		return Configure.SUCCESS;
 	}
 

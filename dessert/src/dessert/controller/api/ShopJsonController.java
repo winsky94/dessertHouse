@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.ShopVO;
@@ -28,6 +30,8 @@ public class ShopJsonController extends BaseController {
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
 		shops = shopService.getShops();
+		HttpSession session = session();
+		session.setAttribute(Configure.SHOP_SESSION, shops);
 		return Configure.SUCCESS;
 	}
 

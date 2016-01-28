@@ -2,7 +2,6 @@ package dessert.VO;
 
 /**
  * @author 严顺宽
- * @date 2016年1月20日 下午8:27:39
  */
 public class ShopVO {
 	private long id;

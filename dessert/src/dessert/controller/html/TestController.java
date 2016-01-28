@@ -27,8 +27,8 @@ public class TestController extends BaseController {
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-		// initShops();
-		initWorker();
+//		 initShops();
+//		initWorker();
 		return Configure.SUCCESS;
 	}
 

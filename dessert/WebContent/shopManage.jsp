@@ -89,7 +89,24 @@ pageEncoding="utf-8"%>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<%
+							@SuppressWarnings("unchecked")
+							ArrayList<ShopVO> shops=(ArrayList<ShopVO>)session.getAttribute(Configure.SHOP_SESSION);
+							for(ShopVO shopVO:shops){
+								String name=shopVO.getName();
+								String owner=shopVO.getOwner();
+								String telephone=shopVO.getTelephone();
+								String address=shopVO.getAddress();
+						%>
+							<tr class="point-line">
+								<td><% out.println(name); %></td>
+								<td><% out.println(owner); %></td>
+								<td><% out.println(telephone); %></td>
+								<td><% out.println(address); %></td>
+							</tr>
+						<%
+							}
+						%>
 						</tbody>
 						
 					</table>

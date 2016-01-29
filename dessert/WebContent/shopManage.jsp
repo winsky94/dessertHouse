@@ -38,14 +38,6 @@ pageEncoding="utf-8"%>
 			font-size: 16px;
 			line-height: 14px;
 		}
-
-		.order-header {
-			cursor: pointer;
-		}
-
-		.point-line{
-			cursor: pointer;
-		}
 	</style>
 
 	<script src="js/jquery-2.1.1.min.js"></script>
@@ -78,10 +70,22 @@ pageEncoding="utf-8"%>
 			<!-- 左侧用户信息结束 -->
 			<!--右侧店面表格 -->
 			<div class="span10">
+				<div>
+					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteShop();">
+						<i class="icon-minus icon-white"></i>删除
+					</a>
+					<a id="update" class="btn btn-primary btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('update');">
+						<i class="icon-edit icon-white"></i>修改
+					</a>
+					<a class="btn btn-primary btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('add');">
+						<i class="icon-plus icon-white"></i>增加
+					</a>
+				</div>
 				<div class="table-container table-responsive">
-					<table id="shopTable" class="table display dataTable" width="100%">
+					<table id="shopTable" class="table display dataTable">
 						<thead>
 							<tr>
+								<th style="display:none">id</th>
 								<th class="order-header text-center">名称</th>
 								<th class="order-header text-center">负责人</th>
 								<th class="order-header text-center">联系电话</th>
@@ -93,12 +97,14 @@ pageEncoding="utf-8"%>
 							@SuppressWarnings("unchecked")
 							ArrayList<ShopVO> shops=(ArrayList<ShopVO>)session.getAttribute(Configure.SHOP_SESSION);
 							for(ShopVO shopVO:shops){
+								long shopId=shopVO.getId();
 								String name=shopVO.getName();
 								String owner=shopVO.getOwner();
 								String telephone=shopVO.getTelephone();
 								String address=shopVO.getAddress();
 						%>
-							<tr class="point-line">
+							<tr class="point-line" onclick='getLine(this)'>
+								<td style="display:none;"><% out.println(shopId); %></td>
 								<td><% out.println(name); %></td>
 								<td><% out.println(owner); %></td>
 								<td><% out.println(telephone); %></td>
@@ -121,10 +127,61 @@ pageEncoding="utf-8"%>
 	<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 		<div class="navbar-inner text-center">
 			<h4>
-				© 2016 <abbr title="ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
+				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
 			</h4>
 		</div>
 	</div>
+
+
+	<!-- Modal -->
+	<div id="shopModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">
+		<div class="modal-header">
+			<h3 id="title">创建店面</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+				<input type="hidden" id="shopId" value="-1">
+				<div class="control-group"></div>
+				<div class="control-group">
+					<label class="control-label" for="name">用户名:</label>
+					<div class="controls">
+						<input type="text" id="name" placeholder="请输入店名..." style="height:25px;">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="owner">负责人:</label>
+					<div class="controls">
+						<input type="text" id="owner" placeholder="请输入负责人..." style="height:25px;">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="telephone">电　话:</label>
+					<div class="controls">
+						<input type="tel" id="telephone" placeholder="请输入联系电话..." style="height:25px;">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="address">地　址:</label>
+					<div class="controls">
+						<input type="text" id="address" placeholder="请输入地址..." style="height:25px;">
+					</div>
+				</div>
+			</form>
+
+		</div>
+		<div class="modal-footer">
+			<div style="text-align:center">
+				<input type="hidden" id="action" value="add">
+				<button class="btn btn-primary" onclick="process()">确定</button>
+				<button class="btn btn-primary" style="margin-left: 10%" data-dismiss="modal" aria-hidden="true">取消</button>
+				<font color="red" size="2" style="margin-left: 4%">
+					<span id="process_result"></span>
+				</font>
+			</div>
+
+		</div>
+	</div>
+
 	<!-- 加载js -->
 	<script src="js/jquery-2.1.1.min.js"></script>
 
@@ -134,6 +191,7 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
+	<script src="js/shopTableManage.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#shopTable').DataTable({
@@ -151,7 +209,11 @@ pageEncoding="utf-8"%>
 					"info" : "第_PAGE_页，共_PAGES_页  共有记录_MAX_条",
 					"emptyTable" : "",
 					"zeroRecords" : "",
-					"infoEmpty" : "检索到记录0条"
+					"infoEmpty" : "检索到记录0条",
+					"lengthMenu": "每页显示 _MENU_ 条记录",
+					"infoFiltered": "(从 _MAX_ 条记录筛选)",
+					"loadingRecords": "载入中...",
+					"processing": "处理中..."
 				}
 			});
 		});

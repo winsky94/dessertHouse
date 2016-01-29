@@ -8,7 +8,7 @@ import dessert.entity.Shop;
  * @author 严顺宽
  */
 public interface ShopDao {
-	public void add(Shop shop);
+	public long add(Shop shop);
 
 	public void delete(Shop shop);
 

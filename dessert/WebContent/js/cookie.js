@@ -61,30 +61,30 @@ function write_header_login(userName, type) {
 		// 系统管理员的页头
 		var txt = '\
 			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
-		<div class="navbar-inner">\
-			<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
-\
-			<ul class="nav navbar-nav" style="margin-left: 5%">\
-				<li><a href="shopManage.jsp">店面管理</a></li>\
-				<li><a href="#">店员管理</a></li>\
-			</ul>\
-\
-			<ul class="nav navbar-nav clearfix pull-right">\
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-			</ul>\
-			<ul class="nav navbar-nav pull-right">\
-				<li class="dropdown">\
-					<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
-					<ul class="dropdown-menu">\
-						<li><a href="#">个人信息</a></li>\
-						<li class="divider"></li>\
-						<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+				<div class="navbar-inner">\
+					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
+					\
+					<ul class="nav navbar-nav" style="margin-left: 5%">\
+						<li><a href="shop_manage">店面管理</a></li>\
+						<li><a href="#">店员管理</a></li>\
 					</ul>\
-				</li>\
-			</ul>\
-		</div>\
-	</div>\
+					\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					</ul>\
+					<ul class="nav navbar-nav pull-right">\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">个人信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+							</ul>\
+						</li>\
+					</ul>\
+				</div>\
+			</div>\
 		';
 	} else if (type == 'member') {
 		var txt = '\
@@ -152,13 +152,13 @@ function write_header_not_login() {
 					<div class="control-group">\
 						<label class="control-label" for="userName">用户名:</label>\
 						<div class="controls">\
-							<input type="text" id="userName" placeholder="请输入用户名...">\
+							<input type="text" id="userName" placeholder="请输入用户名..." style="height:25px;">\
 						</div>\
 					</div>\
 					<div class="control-group">\
 						<label class="control-label" for="password">密　码:</label>\
 						<div class="controls">\
-							<input type="password" id="password" placeholder="请输入密码...">\
+							<input type="password" id="password" placeholder="请输入密码..." style="height:25px;">\
 						</div>\
 					</div>\
 				</form>\
@@ -207,7 +207,6 @@ function callback_login(result) {
 		if (userType != error) {
 			add_cookie('userName', userName, 30 * 24);
 			add_cookie("type", userType, 30 * 24);
-			alert("成功啦");
 			window.location.href = "index.html";
 		} else if(userType == error){
 			// var divNode = $("#message");

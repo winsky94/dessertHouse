@@ -9,7 +9,7 @@ import dessert.util.UserType;
 public interface WorkerDao {
 	public UserType checkLogin(String workerId,String password);
 	
-	public void add(Worker worker);
+	public long add(Worker worker);
 	
 	public void delete(Worker worker);
 	

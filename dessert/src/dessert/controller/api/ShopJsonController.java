@@ -1,11 +1,7 @@
 package dessert.controller.api;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +20,7 @@ public class ShopJsonController extends BaseController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	public ShopService shopService;
+	private String message;
 	public ArrayList<ShopVO> shops = new ArrayList<ShopVO>();
 
 	@Override
@@ -39,58 +36,42 @@ public class ShopJsonController extends BaseController {
 		Map<String, String> params = getParams();
 
 		Shop shop = new Shop();
-		shop.setName(params.get("data[0][name]"));
-		shop.setOwner(params.get("data[0][owner]"));
-		shop.setTelephone(params.get("data[0][telephone]"));
-		shop.setAddress(params.get("data[0][address]"));
-		shopService.add(shop);
-		shops = shopService.getShops();
-
+		shop.setName(params.get("name"));
+		shop.setOwner(params.get("owner"));
+		shop.setTelephone(params.get("telephone"));
+		shop.setAddress(params.get("address"));
+		long res = shopService.add(shop);
+		if (res == Configure.SHOP_EXIST) {
+			message = Configure.SHOP_EXIST_MESSAGE;
+		} else {
+			message = Configure.SHOP_SUCCESS_ACTION;
+		}
 		return Configure.SUCCESS;
 
 	}
 
 	public String editShop() {
 		Map<String, String> params = getParams();
-		Set<String> keyset = params.keySet();
-
-		Iterator<String> iter = keyset.iterator();
-		String str = iter.next();
-		Pattern pattern = Pattern.compile("[^0-9]");
-		Matcher matcher = pattern.matcher(str);
-		String id_str = matcher.replaceAll("");
-		long id = Integer.parseInt(id_str);
-
 		Shop shop = new Shop();
-
-		shop.setId(id);
-		shop.setName(params.get("data[" + id + "][name]"));
-		shop.setOwner(params.get("data[" + id + "][owner]"));
-		shop.setTelephone(params.get("data[" + id + "][telephone]"));
-		shop.setAddress(params.get("data[" + id + "][address]"));
+		shop.setId(Long.parseLong(params.get("shopId")));
+		shop.setName(params.get("name"));
+		shop.setOwner(params.get("owner"));
+		shop.setTelephone(params.get("telephone"));
+		shop.setAddress(params.get("address"));
 
 		shopService.update(shop);
-		shops = shopService.getShops();
+		message = Configure.SHOP_SUCCESS_ACTION;
+
 		return Configure.SUCCESS;
 	}
 
 	public String deleteShop() {
 		Map<String, String> params = getParams();
-		Set<String> keyset = params.keySet();
-
-		Iterator<String> iter = keyset.iterator();
-		String str = iter.next();
-
-		Pattern pattern = Pattern.compile("[^0-9]");
-		Matcher matcher = pattern.matcher(str);
-		String id = matcher.replaceAll("");
-
 		Shop shop = new Shop();
-
-		shop.setId(Integer.parseInt(id));
+		shop.setId(Long.parseLong(params.get("shopId")));
 
 		shopService.delete(shop);
-		shops = shopService.getShops();
+		message = Configure.SHOP_SUCCESS_ACTION;
 		return Configure.SUCCESS;
 	}
 
@@ -100,6 +81,14 @@ public class ShopJsonController extends BaseController {
 
 	public void setShops(ArrayList<ShopVO> shops) {
 		this.shops = shops;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

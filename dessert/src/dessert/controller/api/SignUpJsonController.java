@@ -25,15 +25,7 @@ public class SignUpJsonController extends BaseController {
 		String userName = params.get("userName");
 		String password = params.get("password");
 
-		int age = 0;
-		try {
-			age = Integer.parseInt(params.get("age"));
-		} catch (Exception e) {
-			// TODO: handle exception
-			return Configure.AGE_ERROR;
-		} finally {
-		}
-
+		int age = Integer.parseInt(params.get("age"));
 		String sex = params.get("sex");
 		String birthday = params.get("birthday");
 		String telephone = params.get("telephone");

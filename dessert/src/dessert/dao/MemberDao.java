@@ -13,7 +13,7 @@ public interface MemberDao {
 
 	public String getMaxMemberId();
 
-	public void add(Member member);
+	public long add(Member member);
 
 	public void update(Member member);
 

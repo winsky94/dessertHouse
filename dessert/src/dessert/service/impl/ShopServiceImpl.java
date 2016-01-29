@@ -19,9 +19,9 @@ public class ShopServiceImpl implements ShopService {
 	public ShopDao shopDao;
 
 	@Override
-	public void add(Shop shop) {
+	public long add(Shop shop) {
 		// TODO Auto-generated method stub
-		shopDao.add(shop);
+		return shopDao.add(shop);
 
 	}
 

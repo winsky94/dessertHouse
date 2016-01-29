@@ -19,7 +19,7 @@ public class WorkerServiceImpl implements WorkerService {
 	public WorkerDao workerDao;
 
 	@Override
-	public void add(Worker worker) {
+	public long add(Worker worker) {
 		// TODO Auto-generated method stub
 		UserType type = worker.getType();
 		String workerId = "";
@@ -48,7 +48,7 @@ public class WorkerServiceImpl implements WorkerService {
 		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
 		String password = des.encrypt(worker.getPassword());
 		worker.setPassword(password);
-		workerDao.add(worker);
+		return workerDao.add(worker);
 	}
 
 	@Override

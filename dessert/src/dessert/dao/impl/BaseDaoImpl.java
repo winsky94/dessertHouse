@@ -104,9 +104,9 @@ public class BaseDaoImpl<T> {
 		return criteria.list();
 	}
 
-	public void add(T t) {
+	public long add(T t) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(t);
+		return (long) session.save(t);
 	};
 
 	public void delete(T t) {

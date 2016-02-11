@@ -11,26 +11,14 @@
 	</package>
 	
 	<package name="admin" extends="struts-default">
+		<!-- 店面管理 -->
 		<action name="shop_manage" class="shopController">
 			<result name="admin_shop">shopManage.jsp</result>
 		</action>
-		<!-- <action name="teacher_query" class="indexController" method="t_query">
-			<result name="success">queryT.jsp</result>
-		</action> -->
-	</package>
-	
-	<!-- <package name="index" extends="struts-default">
-		<action name="login" class="indexController">
-			<result name="teacher">temp.jsp</result>
-			<result name="student">index.jsp</result>
-		</action>
-		<action name="teacher_query" class="indexController" method="t_query">
-			<result name="success">queryT.jsp</result>
+		
+		<!-- 服务员管理 -->
+		<action name="waitress_manage" class="waitressController">
+			<result name="admin_waitress">waitressManage.jsp</result>
 		</action>
 	</package>
-	<package name="award" extends="struts-default">
-		<action name="award" class="awardController">
-			<result name="success">index.jsp</result>
-		</action>
-	</package> -->
 </struts>

@@ -1,5 +1,6 @@
 package dessert.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -16,6 +17,22 @@ import dessert.util.UserType;
  * @author 严顺宽
  */
 public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
+
+	@Override
+	public ArrayList<Worker> getWorkers(ArrayList<UserType> types) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Worker.class);
+		if(types!=null){
+			for(UserType type:types){
+				criteria.add(Restrictions.or(Restrictions.eq("type", type)));
+			}
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<Worker> workers = criteria.list();
+		return (ArrayList<Worker>) workers;
+	}
 
 	@Override
 	public UserType checkLogin(String workerId, String password) {
@@ -50,11 +67,18 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 		@SuppressWarnings("unchecked")
 		List<String> list = session.createQuery(
 				"select max(substring(w.workerId,3,7)) from worker w").list();
-		String res=list.get(0);
-		if(res!=null){
+		String res = list.get(0);
+		if (res != null) {
 			return res.substring(2);
-		}else{
+		} else {
 			return null;
 		}
 	}
+
+	@Override
+	public ArrayList<Worker> getWorkers() {
+		// TODO Auto-generated method stub
+		return (ArrayList<Worker>) getAll(Worker.class);
+	}
+
 }

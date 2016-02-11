@@ -1,13 +1,14 @@
+<%@page import="dessert.util.UserType"%>
 <%@page import="dessert.configure.Configure"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <%@ page language="java" import="java.util.*"%>
-<%@ page language="java" import="dessert.VO.ShopVO"%>
+<%@ page language="java" import="dessert.VO.WorkerVO"%>
 <%@ page language="java" import="dessert.configure.*"%>
 
 <html>
 <head>
-	<title>店面管理</title>
+	<title>服务员管理</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -27,13 +28,13 @@ pageEncoding="utf-8"%>
 	<link href="css/table_css/buttons.dataTables.min.css" rel="stylesheet" media="screen" />
 	
 	<style type="text/css">
-		#shopTable thead tr th {
+		#waitressTable thead tr th {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
 		}
 
-		#shopTable tbody tr td {
+		#waitressTable tbody tr td {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
@@ -50,7 +51,7 @@ pageEncoding="utf-8"%>
 		write_header();
 	</script>
 	<!-- 导航栏结束 -->
-	
+
 	<!-- 正文内容 -->
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -68,49 +69,49 @@ pageEncoding="utf-8"%>
 				</ul>
 			</div>
 			<!-- 左侧用户信息结束 -->
-			<!--右侧店面表格 -->
+			<!--右侧服务员表格 -->
 			<div class="span10">
 				<!-- 操作按钮 -->
 				<div>
 					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteShop();">
 						<i class="icon-minus icon-white"></i>删除
 					</a>
-					<a id="update" class="btn btn-primary btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('update');">
+					<a id="update" class="btn btn-primary btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('update');">
 						<i class="icon-edit icon-white"></i>修改
 					</a>
-					<a class="btn btn-primary btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('add');">
+					<a class="btn btn-primary btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('add');">
 						<i class="icon-plus icon-white"></i>增加
 					</a>
 				</div>
 				<!-- 操作按钮结束 -->
 				<div class="table-container table-responsive">
-					<table id="shopTable" class="table display dataTable">
+					<table id="waitressTable" class="table display dataTable">
 						<thead>
 							<tr>
 								<th style="display:none">id</th>
-								<th class="order-header text-center">名称</th>
-								<th class="order-header text-center">负责人</th>
-								<th class="order-header text-center">联系电话</th>
-								<th class="order-header text-center">地址</th>
+								<th class="order-header text-center">工号</th>
+								<th class="order-header text-center">职务</th>
+								<th class="order-header text-center">所属店面</th>
+								<th class="order-header text-center">上次登录时间</th>
 							</tr>
 						</thead>
 						<tbody>
 						<%
 							@SuppressWarnings("unchecked")
-							ArrayList<ShopVO> shops=(ArrayList<ShopVO>)session.getAttribute(Configure.SHOP_SESSION);
-							for(ShopVO shopVO:shops){
-								long shopId=shopVO.getId();
-								String name=shopVO.getName();
-								String owner=shopVO.getOwner();
-								String telephone=shopVO.getTelephone();
-								String address=shopVO.getAddress();
+							ArrayList<WorkerVO> workers=(ArrayList<WorkerVO>)session.getAttribute(Configure.WAITRESS_SESSION);
+							for(WorkerVO workerVO:workers){
+								long id=workerVO.getId();
+								String workerId=workerVO.getWorkerId();
+								UserType type=workerVO.getType();
+								String owingTo=workerVO.getOwingTo();
+								String lastLoadTime=workerVO.getLastLoadTime();
 						%>
 							<tr class="point-line" onclick='getLine(this)'>
-								<td style="display:none;"><% out.println(shopId); %></td>
-								<td><% out.println(name); %></td>
-								<td><% out.println(owner); %></td>
-								<td><% out.println(telephone); %></td>
-								<td><% out.println(address); %></td>
+								<td style="display:none;"><% out.println(id); %></td>
+								<td><% out.println(workerId); %></td>
+								<td><% out.println(type); %></td>
+								<td><% out.println(owingTo); %></td>
+								<td><% out.println(lastLoadTime); %></td>
 							</tr>
 						<%
 							}
@@ -134,38 +135,31 @@ pageEncoding="utf-8"%>
 		</div>
 	</div>
 
-
 	<!-- Modal -->
-	<div id="shopModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div id="waitressModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">
 		<div class="modal-header">
-			<h3 id="title">创建店面</h3>
+			<h3 id="title">添加员工</h3>
 		</div>
 		<div class="modal-body">
 			<form class="form-horizontal">
-				<input type="hidden" id="shopId" value="-1">
+				<input type="hidden" id="wid" value="-1">
 				<div class="control-group"></div>
 				<div class="control-group">
-					<label class="control-label" for="name">用户名:</label>
+					<label class="control-label" for="workerId">工　号:</label>
 					<div class="controls">
-						<input type="text" id="name" placeholder="请输入店名..." style="height:25px;">
+						<input type="text" id="workerId" placeholder="请输入工号..." style="height:25px;">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="owner">负责人:</label>
+					<label class="control-label" for="type">职　务:</label>
 					<div class="controls">
-						<input type="text" id="owner" placeholder="请输入负责人..." style="height:25px;">
+						<input type="text" id="type" placeholder="请输入职务..." style="height:25px;">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="telephone">电　话:</label>
+					<label class="control-label" for="owingTo">所属店面:</label>
 					<div class="controls">
-						<input type="tel" id="telephone" placeholder="请输入联系电话..." style="height:25px;">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="address">地　址:</label>
-					<div class="controls">
-						<input type="text" id="address" placeholder="请输入地址..." style="height:25px;">
+						<input type="text" id="owingTo" placeholder="请输入所属店面..." style="height:25px;">
 					</div>
 				</div>
 			</form>
@@ -185,18 +179,14 @@ pageEncoding="utf-8"%>
 	</div>
 
 	<!-- 加载js -->
-	<script src="js/jquery-2.1.1.min.js"></script>
-
-	<!--<script src='js/vendor/jquery-1.11.3.min.js'></script>-->
 	<script src='bootstrap/js/bootstrap.js'></script>
 	<script src="js/icheck.js"></script>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
-	<script src="js/shopTableManage.js"></script>
 	<script>
 		$(document).ready(function() {
-			var table=$('#shopTable').DataTable({
+			var table=$('#waitressTable').DataTable({
 				"bStateSave": true,
 				select : true,
 				filter : true,
@@ -220,5 +210,6 @@ pageEncoding="utf-8"%>
 			});
 		});
 	</script>
+
 </body>
 </html>

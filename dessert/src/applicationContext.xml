@@ -23,6 +23,8 @@
 	<bean id="shopController" class="dessert.controller.html.ShopController" />
 	<bean id="shopJsonController" class="dessert.controller.api.ShopJsonController" />
 	<bean id="loginJsonController" class="dessert.controller.api.LoginJsonController" />
+	<bean id="waitressController" class="dessert.controller.html.WaitressController" />
+	<bean id="waitressJsonController" class="dessert.controller.api.WaitressJsonController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />

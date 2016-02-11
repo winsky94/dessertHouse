@@ -1,27 +1,28 @@
-package dessert.entity;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package dessert.VO;
 
 import dessert.util.UserType;
 
 /**
- * 服务员
- * 
  * @author 严顺宽
  */
-@Entity(name = "worker")
-public class Worker {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class WorkerVO {
 	public long id;
 	private String workerId; // 工号
 	private String password; // 密码
 	private String lastLoadTime;// 上次登录时间
 	private UserType type;// 员工类型
-	private String owingTo;// 归属哪个分店 Configure.WAITRESS表明是总店服务员
+	private String owingTo;// 归属哪个分店 Configure.WAITRESS表明是总店服务员，
+
+	public WorkerVO(long id, String workerId, String password,
+			String lastLoadTime, UserType type, String owingTo) {
+		super();
+		this.id = id;
+		this.workerId = workerId;
+		this.password = password;
+		this.lastLoadTime = lastLoadTime;
+		this.type = type;
+		this.owingTo = owingTo;
+	}
 
 	public long getId() {
 		return id;

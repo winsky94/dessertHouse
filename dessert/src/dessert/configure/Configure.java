@@ -32,10 +32,13 @@ public class Configure {
 	public static final String MANAGER = "-2";
 
 	// ==================================管理员==========================================
-	// 管理员总店的session名
+	// 管理员管理店面的session名
 	public static final String SHOP_SESSION = "shop_session";
+	// 管理员管理服务员的session名
+	public static final String WAITRESS_SESSION = "waitress	_session";
 	// 系统管理员跳转页面
 	public static final String ADMIN_SHOP = "admin_shop";
+	public static final String ADMIN_WAITRESS = "admin_waitress";
 
 	// ==================================店面===========================================
 	// 店名存在

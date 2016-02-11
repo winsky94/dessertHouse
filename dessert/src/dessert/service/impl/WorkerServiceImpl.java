@@ -1,13 +1,16 @@
 package dessert.service.impl;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.WorkerVO;
 import dessert.configure.Configure;
 import dessert.dao.WorkerDao;
 import dessert.entity.Worker;
 import dessert.service.WorkerService;
+import dessert.util.ConvertVO;
 import dessert.util.DesUtils;
 import dessert.util.UserType;
 
@@ -61,6 +64,21 @@ public class WorkerServiceImpl implements WorkerService {
 	public void update(Worker worker) {
 		// TODO Auto-generated method stub
 		workerDao.update(worker);
+	}
+
+	@Override
+	public ArrayList<WorkerVO> getWorkers(ArrayList<UserType> types) {
+		// TODO Auto-generated method stub
+		ArrayList<WorkerVO> result = new ArrayList<WorkerVO>();
+		ArrayList<Worker> workers = new ArrayList<Worker>();
+		if (workers != null) {
+			workers = workerDao.getWorkers(types);
+			for (Worker worker : workers) {
+				WorkerVO vo = ConvertVO.workerToVO(worker);
+				result.add(vo);
+			}
+		}
+		return result;
 	}
 
 	/**

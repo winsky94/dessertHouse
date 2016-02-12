@@ -74,6 +74,19 @@ public class ShopJsonController extends BaseController {
 		message = Configure.SHOP_SUCCESS_ACTION;
 		return Configure.SUCCESS;
 	}
+	
+	public String checkShop(){
+		Map<String, String> params = getParams();
+		String name = params.get("name");
+		boolean result = shopService.checkShop(name);
+		if(result){
+			message=Configure.WAITRESS_OWINGTO_EXIST;
+		}else{
+			message=Configure.WAITRESS_OWINGTO_FAIL;
+		}
+		return Configure.SUCCESS;
+	}
+
 
 	public ArrayList<ShopVO> getShops() {
 		return shops;

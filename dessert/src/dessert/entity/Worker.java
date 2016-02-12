@@ -21,7 +21,7 @@ public class Worker {
 	private String password; // 密码
 	private String lastLoadTime;// 上次登录时间
 	private UserType type;// 员工类型
-	private String owingTo;// 归属哪个分店 Configure.WAITRESS表明是总店服务员
+	private String owingTo;// 归属哪个分店 Configure.WAITRESS表明是总店服务员，其余指向店面名称
 
 	public long getId() {
 		return id;

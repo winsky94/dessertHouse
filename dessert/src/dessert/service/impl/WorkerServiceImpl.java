@@ -24,32 +24,9 @@ public class WorkerServiceImpl implements WorkerService {
 	@Override
 	public long add(Worker worker) {
 		// TODO Auto-generated method stub
-		UserType type = worker.getType();
-		String workerId = "";
-		switch (type) {
-		case admin:
-			workerId += "GL";
-			break;
-		case waitress:
-			workerId += "FW";
-			break;
-		case waitressManager:
-			workerId += "ZD";
-			break;
-		case manager:
-			workerId += "JL";
-			break;
-		default:
-			System.err.println("WorkerServiceImpl.add() 出错啦");
-			break;
-		}
-
-		workerId += generateWorkerId();
-		worker.setWorkerId(workerId);
-
-		// 密码加密
+		// 设置默认密码并加密
 		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
-		String password = des.encrypt(worker.getPassword());
+		String password = des.encrypt(Configure.DEFAULT_PASSWORD);
 		worker.setPassword(password);
 		return workerDao.add(worker);
 	}
@@ -81,12 +58,38 @@ public class WorkerServiceImpl implements WorkerService {
 		return result;
 	}
 
+	@Override
+	public String generateWorkerId(UserType type) {
+		// TODO Auto-generated method stub
+		String workerId = "";
+		switch (type) {
+		case admin:
+			workerId += "GL";
+			break;
+		case waitress:
+			workerId += "FW";
+			break;
+		case waitressManager:
+			workerId += "ZD";
+			break;
+		case manager:
+			workerId += "JL";
+			break;
+		default:
+			System.err.println("WorkerServiceImpl.generateWorkerId 出错啦");
+			break;
+		}
+
+		workerId += generateWorkerIdNum();
+		return workerId;
+	}
+
 	/**
-	 * 生成7位的员工id
+	 * 生成固定位数数字编号的员工id，常量定义Configure.STR_FORMAT
 	 * 
 	 * @return
 	 */
-	private String generateWorkerId() {
+	private String generateWorkerIdNum() {
 		String max = workerDao.getMaxWorkerId();
 		if (max == null) {
 			max = "0";

@@ -73,7 +73,7 @@ pageEncoding="utf-8"%>
 			<div class="span10">
 				<!-- 操作按钮 -->
 				<div>
-					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteShop();">
+					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteWaitress();">
 						<i class="icon-minus icon-white"></i>删除
 					</a>
 					<a id="update" class="btn btn-primary btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('update');">
@@ -102,9 +102,12 @@ pageEncoding="utf-8"%>
 							for(WorkerVO workerVO:workers){
 								long id=workerVO.getId();
 								String workerId=workerVO.getWorkerId();
-								UserType type=workerVO.getType();
+								String type=workerVO.getType();
 								String owingTo=workerVO.getOwingTo();
 								String lastLoadTime=workerVO.getLastLoadTime();
+								if(lastLoadTime==null||lastLoadTime.equals("null")){
+									lastLoadTime="-";
+								}
 						%>
 							<tr class="point-line" onclick='getLine(this)'>
 								<td style="display:none;"><% out.println(id); %></td>
@@ -145,21 +148,26 @@ pageEncoding="utf-8"%>
 				<input type="hidden" id="wid" value="-1">
 				<div class="control-group"></div>
 				<div class="control-group">
-					<label class="control-label" for="workerId">工　号:</label>
+					<label class="control-label" for="type">职　务:</label>
 					<div class="controls">
-						<input type="text" id="workerId" placeholder="请输入工号..." style="height:25px;">
+						<select id="type" style="height:30px;width:206px;" onchange="setNewWorkerId();changeOwing();">
+							<option value="请选择职务" disabled selected="selected">请选择职务</option>
+							<option value="总店服务员">总店服务员</option>
+							<option value="分店服务员">分店服务员</option>
+						</select>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="type">职　务:</label>
+					<label class="control-label" for="workerId">工　号:</label>
 					<div class="controls">
-						<input type="text" id="type" placeholder="请输入职务..." style="height:25px;">
+						<input type="text" id="workerId" placeholder="工号..." style="height:30px;">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="owingTo">所属店面:</label>
 					<div class="controls">
-						<input type="text" id="owingTo" placeholder="请输入所属店面..." style="height:25px;">
+						<input type="text" id="owingTo" placeholder="请输入所属店面..." style="height:30px;" list="shopList" size="5">
+						<div id="data"></div>
 					</div>
 				</div>
 			</form>
@@ -184,6 +192,7 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
+	<script src="js/waitressTableManage.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#waitressTable').DataTable({

@@ -15,4 +15,13 @@ public interface ShopDao {
 	public void update(Shop shop);
 
 	public ArrayList<Shop> getShops();
+
+	/**
+	 * 检查服务员所属店面是否存在
+	 * 
+	 * @param shopName
+	 *            店面名称
+	 * @return
+	 */
+	public boolean checkShop(String shopName);
 }

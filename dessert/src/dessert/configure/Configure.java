@@ -24,12 +24,12 @@ public class Configure {
 	public static final String STR_FORMAT = "0000000";
 
 	// ==================================员工===========================================
-	// 总店服务员的身份，用0表示，其余分店服务员的指向对应店铺的shopId
-	public static final String WAITRESS = "0";
+	// 总店服务员的身份，用0表示，其余分店服务员的指向对应店铺的店名
+	public static final String WAITRESS = "waitressManager";
 	// 系统管理员身份，指向店铺用-1表示
-	public static final String ADMIN = "-1";
+	public static final String ADMIN = "admin";
 	// 总经理身份，指向店铺用-2表示
-	public static final String MANAGER = "-2";
+	public static final String MANAGER = "manager";
 
 	// ==================================管理员==========================================
 	// 管理员管理店面的session名
@@ -45,4 +45,11 @@ public class Configure {
 	public static final long SHOP_EXIST = -1;
 	public static final String SHOP_EXIST_MESSAGE = "该店名已存在";
 	public static final String SHOP_SUCCESS_ACTION = "success";
+
+	// ==================================服务员==========================================
+	public static final String DEFAULT_PASSWORD = "12345a";
+	public static final String WAITRESS_SUCCESS_ACTION = "success";
+	public static final String WAITRESS_OWINGTO_EXIST = "所属店面存在";
+	public static final String WAITRESS_OWINGTO_FAIL = "所属店面不存在";
+
 }

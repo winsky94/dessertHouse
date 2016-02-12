@@ -1,5 +1,6 @@
 package dessert.VO;
 
+import dessert.configure.Configure;
 import dessert.util.UserType;
 
 /**
@@ -56,8 +57,13 @@ public class WorkerVO {
 		this.lastLoadTime = lastLoadTime;
 	}
 
-	public UserType getType() {
-		return type;
+	/**
+	 * 职位，转为中文到界面上显示
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return UserType.getChinese(type);
 	}
 
 	public void setType(UserType type) {
@@ -65,7 +71,11 @@ public class WorkerVO {
 	}
 
 	public String getOwingTo() {
-		return owingTo;
+		if (owingTo.equals(Configure.WAITRESS)) {
+			return "-";
+		} else {
+			return owingTo;
+		}
 	}
 
 	public void setOwingTo(String owingTo) {

@@ -17,4 +17,6 @@ public interface WorkerService {
 	public void update(Worker worker);
 
 	public ArrayList<WorkerVO> getWorkers(ArrayList<UserType> types);
+	
+	public String generateWorkerId(UserType type);
 }

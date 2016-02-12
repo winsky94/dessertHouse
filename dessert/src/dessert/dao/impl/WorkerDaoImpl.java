@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 
 import dessert.dao.WorkerDao;
@@ -21,14 +23,22 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 	@Override
 	public ArrayList<Worker> getWorkers(ArrayList<UserType> types) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Worker.class);
-		if(types!=null){
-			for(UserType type:types){
-				criteria.add(Restrictions.or(Restrictions.eq("type", type)));
+
+		// 先拼接查询条件
+		DetachedCriteria detachedCriteria = DetachedCriteria
+				.forClass(Worker.class);
+		// 逻辑或
+		Disjunction dis = Restrictions.disjunction();
+
+		if (types != null) {
+			for (UserType type : types) {
+				dis.add(Restrictions.eq("type", type));
 			}
 		}
-		
+		detachedCriteria.add(dis);
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = detachedCriteria.getExecutableCriteria(session);
 		@SuppressWarnings("unchecked")
 		List<Worker> workers = criteria.list();
 		return (ArrayList<Worker>) workers;

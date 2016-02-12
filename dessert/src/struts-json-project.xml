@@ -25,6 +25,7 @@
 			</result>
 		</action>
 	</package>
+	
 	<!-- 店面管理 -->
 	<package name="shopManage" namespace="/api/shop" extends="json-default">
 		<action name="getShops" class="shopJsonController">
@@ -47,10 +48,16 @@
 				<param name="message">message</param>
 			</result>
 		</action>
+		<action name="checkShop" class="shopJsonController" method="checkShop">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 	</package>
 
 	<!-- 服务员管理 -->
-	<package name="waitressManage" namespace="/api/waitress" extends="json-default">
+	<package name="waitressManage" namespace="/api/waitress"
+		extends="json-default">
 		<action name="getWaitresses" class="waitressJsonController">
 			<result type="json">
 				<param name="waitresses">waitresses</param>
@@ -69,6 +76,12 @@
 		<action name="delete" class="waitressJsonController" method="deleteWaitress">
 			<result type="json">
 				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="generateWaitressId" class="waitressJsonController"
+			method="generateWaitressId">
+			<result type="json">
+				<param name="workerId">workerId</param>
 			</result>
 		</action>
 	</package>

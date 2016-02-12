@@ -5,6 +5,8 @@ function getLine (tr) {
 function changeAction(action){
 	$("#action").val(action);
 
+	setShops();
+
 	if(action=="update"){
 		// 检测是否选中行
 		if (typeof(cells) == "undefined") {
@@ -21,14 +23,12 @@ function changeAction(action){
 		    var workerId = cells[1].innerHTML;
 		    var type = cells[2].innerHTML;
 		    var owingTo = cells[3].innerHTML;
-		    var address = cells[4].innerHTML;
 
 			//给模态框的输入框赋值
 			$("#wid").val(wid);
 			$("#workerId").val(workerId);
 			$("#type").val(type);
 			$("#owingTo").val(owingTo);
-			$("#address").val(address);
 
 			// 设置服务员编号不可以被修改
 			$("#workerId").attr("disabled",true);
@@ -36,13 +36,13 @@ function changeAction(action){
 	} else if(action=="add"){
 		// 调整模态框
 		$("#title").text("添加服务员");
-		// 设置服务员工号可以被输入
-		$("#workerId").attr("disabled",false);
+		// 设置服务员工号不可以被输入
+		$("#workerId").attr("disabled",true);
 		$("#wid").val("-1");
-		$("#workerId").val("");
-		$("#type").val("");
 		$("#owingTo").val("");
-		$("#address").val("");
+
+		setNewWorkerId();
+		
 	}
 }
 
@@ -50,9 +50,9 @@ function process () {
 	var action = $("#action").val();
 	var ajax_url='';
 	if(action=="add"){
-		ajax_url='api/worker/add';
+		ajax_url='api/waitress/add';
 	}else if(action=="update"){
-		ajax_url='api/worker/edit';
+		ajax_url='api/waitress/edit';
 	}else{
 		alert("ajax错误");
 	}
@@ -63,19 +63,33 @@ function process () {
 	var address = $("#address").val();
 
 	if (wid==""){
-		$("#process_result").html("店面id异常");
+		$("#process_result").html("服务员id异常");
 		return;
 	}else if (workerId==""){
-		$("#process_result").html("店面名字不能为空");
+		$("#process_result").html("员工工号不能为空");
 		return;
-	}else if (type==""){
-		$("#process_result").html("店面负责人不能为空");
+	}else if (type==""||type=="请选择职务"){
+		$("#process_result").html("请选择员工职务");
 		return;
-	}else if (owingTo==""){
-		$("#process_result").html("联系电话不能为空");
+	}else if (type!="总店服务员"&&owingTo==""){
+		$("#process_result").html("服务员所属店面不能为空");
 		return;
-	}else if (address==""){
-		$("#process_result").html("店面地址不能为空");
+	}else if (type=="分店服务员"){
+		var res=checkShop(owingTo);
+		if(!res){
+			$("#process_result").html("服务员所属店面不存在");
+			$("#owingTo").val("");
+			return;
+		}
+	}
+	var userType="";
+
+	if(type=="总店服务员"){
+		userType='waitressManager';
+	}else if(type=="分店服务员"){
+		userType='waitress';
+	}else {
+		alert("用户身份错误");
 		return;
 	}
 
@@ -86,9 +100,8 @@ function process () {
 		data : {
 			wid:wid,
 			workerId : workerId,
-			type : type,
+			type : userType,
 			owingTo:owingTo,
-			address:address
 		},
 		success : function(result, textStatus) {
 			callback_func(result);
@@ -97,7 +110,7 @@ function process () {
 }
 
 
-function deleteShop () {
+function deleteWaitress () {
 	// 检测是否选中行
 	if (typeof(cells) == "undefined") {
 	   alert("请选择一行");
@@ -108,7 +121,7 @@ function deleteShop () {
 		    wid = wid.replace(/[\r\n]/g,"");//去掉回车换行
 
 		    $.ajax({
-		    	url : 'api/worker/delete',
+		    	url : 'api/waitress/delete',
 		    	type : 'post',
 		    	dataType : 'json',
 		    	data : {
@@ -130,9 +143,105 @@ function callback_func(result) {
 		var message = result.message;
 		var success = "success";
 		if (message == success) {
-			window.location.href = "shop_manage";
+			window.location.href = "waitress_manage";
 		} else {
 			$("#process_result").html(message);
 		}
 	}
+}
+
+//设置新员工编号
+function setNewWorkerId () {
+	//向后台请求这次增加服务员的工号，这是系统自动生成的
+	var workerId="";
+
+	var type=$("#type option:selected").text();
+	if (type!="请选择职务") {
+		var userType="";
+		if(type=="总店服务员"){
+			userType='waitressManager';
+		}else if(type=="分店服务员"){
+			userType='waitress';
+		}else {
+			alert("用户身份错误");
+			return;
+		}
+		$.ajax({
+			url : 'api/waitress/generateWaitressId',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				type:userType
+			},
+			success : function(result, textStatus) {
+				workerId=result.workerId;
+				$("#workerId").val(workerId);
+			}
+		});
+	} else{
+		$("#workerId").val(workerId);
+	}
+}
+
+//设置店面输入框的值
+function setShops(){
+	$.ajax({
+		url : 'api/shop/getShops',
+		type : 'post',
+		dataType : 'json',
+		data : {
+		},
+		success : function(result, textStatus) {
+			var shops=result.shops;
+
+			var shopList = document.createElement("datalist");
+			shopList.setAttribute("id", "shopList");
+			$("#data").append(shopList);
+
+			for(var i=0;i<shops.length;i++){
+				var shop=shops[i];
+
+				var opt = document.createElement("option");
+				opt.setAttribute("value", shop.name);
+				$("#shopList").append(opt);
+			}
+		}
+	});
+}
+
+function changeOwing () {
+	// 设置总店服务员不可以选取所属店面
+	var type=$("#type option:selected").text();
+	if (type!="请选择职务"&&type=="总店服务员") {
+		$("#owingTo").val("");
+		$("#owingTo").attr("disabled",true);
+		$("#owingTo").attr('placeholder','不隶属于任何店面');
+	}else if(type=="分店服务员"){
+		$("#owingTo").val("");
+		$("#owingTo").attr("disabled",false);
+		$("#owingTo").attr('placeholder','请输入所属店面...');
+	}
+}
+
+//检查店面是否存在,true-存在 false-不存在
+function checkShop(shopName){
+	var res=false;
+	$.ajax({
+		url : '/api/shop/checkShop',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			name:shopName
+		},
+		success : function(result, textStatus) {
+			var mes=result.message;
+			if(mes=="所属店面存在") {
+				res=true;
+			}else {
+				res=false;
+			}
+		}
+	});
+
+	return res;
 }

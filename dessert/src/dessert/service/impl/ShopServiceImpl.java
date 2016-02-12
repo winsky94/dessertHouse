@@ -52,4 +52,10 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 
+	@Override
+	public boolean checkShop(String shopName) {
+		// TODO Auto-generated method stub
+		return shopDao.checkShop(shopName);
+	}
+
 }

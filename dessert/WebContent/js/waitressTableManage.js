@@ -18,6 +18,8 @@ function changeAction(action){
 			$("#update").attr('href','#waitressModel');
 			$("#title").text("修改服务员信息");
 
+			$("#type").attr('onchange',"changeOwing();");
+
 			var wid = cells[0].innerHTML;
 			wid = wid.replace(/[\r\n]/g,"");//去掉回车换行
 		    var workerId = cells[1].innerHTML;
@@ -27,7 +29,8 @@ function changeAction(action){
 			//给模态框的输入框赋值
 			$("#wid").val(wid);
 			$("#workerId").val(workerId);
-			$("#type").val(type);
+			$("#type option[value="+type+"]").attr("selected",true); 
+
 			$("#owingTo").val(owingTo);
 
 			// 设置服务员编号不可以被修改
@@ -36,6 +39,8 @@ function changeAction(action){
 	} else if(action=="add"){
 		// 调整模态框
 		$("#title").text("添加服务员");
+		$("#type").attr("onchange","setNewWorkerId();changeOwing();")
+
 		// 设置服务员工号不可以被输入
 		$("#workerId").attr("disabled",true);
 		$("#wid").val("-1");
@@ -49,6 +54,7 @@ function changeAction(action){
 function process () {
 	var action = $("#action").val();
 	var ajax_url='';
+
 	if(action=="add"){
 		ajax_url='api/waitress/add';
 	}else if(action=="update"){
@@ -60,7 +66,6 @@ function process () {
 	var workerId = $("#workerId").val();
 	var type = $("#type").val();
 	var owingTo = $("#owingTo").val();
-	var address = $("#address").val();
 
 	if (wid==""){
 		$("#process_result").html("服务员id异常");
@@ -227,7 +232,8 @@ function changeOwing () {
 function checkShop(shopName){
 	var res=false;
 	$.ajax({
-		url : '/api/shop/checkShop',
+		url : 'api/shop/checkShop',
+		async: false,//设置ajax同步,不然返回值在调用方if判断完了之后才会返回，返回时间不确定
 		type : 'post',
 		dataType : 'json',
 		data : {
@@ -242,6 +248,5 @@ function checkShop(shopName){
 			}
 		}
 	});
-
 	return res;
 }

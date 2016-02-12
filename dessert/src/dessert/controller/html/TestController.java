@@ -27,8 +27,8 @@ public class TestController extends BaseController {
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-//		 initShops();
-//		initWorker();
+		// initShops();
+		initWorker();
 		return Configure.SUCCESS;
 	}
 
@@ -48,12 +48,16 @@ public class TestController extends BaseController {
 		worker.setOwingTo(Configure.ADMIN);
 		worker.setPassword("12345a");
 		worker.setType(UserType.admin);
+		String workerId = workerService.generateWorkerId(UserType.admin);
+		worker.setWorkerId(workerId);
 		workerService.add(worker);
 
 		worker = new Worker();
 		worker.setOwingTo(Configure.MANAGER);
 		worker.setPassword("12345a");
 		worker.setType(UserType.manager);
+		String workerId2 = workerService.generateWorkerId(UserType.manager);
+		worker.setWorkerId(workerId2);
 		workerService.add(worker);
 	}
 

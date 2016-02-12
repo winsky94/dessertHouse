@@ -61,6 +61,7 @@ public class WaitressJsonController extends BaseController {
 		Map<String, String> params = getParams();
 
 		Worker worker = new Worker();
+		worker.setId(Long.parseLong(params.get("wid")));
 		worker.setWorkerId(params.get("workerId"));
 		worker.setType(EnumUtil.getEnuByName(UserType.class, params.get("type")));
 		worker.setOwingTo(params.get("owingTo"));
@@ -74,7 +75,7 @@ public class WaitressJsonController extends BaseController {
 	public String deleteWaitress() {
 		Map<String, String> params = getParams();
 		Worker worker = new Worker();
-		worker.setId(Long.parseLong(params.get("id")));
+		worker.setId(Long.parseLong(params.get("wid")));
 
 		workerService.delete(worker);
 		message = Configure.WAITRESS_SUCCESS_ACTION;

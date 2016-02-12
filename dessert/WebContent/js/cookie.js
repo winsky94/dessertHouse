@@ -66,7 +66,7 @@ function write_header_login(userName, type) {
 					\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
 						<li><a href="shop_manage">店面管理</a></li>\
-						<li><a href="#">店员管理</a></li>\
+						<li><a href="waitress_manage">店员管理</a></li>\
 					</ul>\
 					\
 					<ul class="nav navbar-nav clearfix pull-right">\

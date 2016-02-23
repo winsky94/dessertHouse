@@ -51,5 +51,13 @@ public class Configure {
 	public static final String WAITRESS_SUCCESS_ACTION = "success";
 	public static final String WAITRESS_OWINGTO_EXIST = "所属店面存在";
 	public static final String WAITRESS_OWINGTO_FAIL = "所属店面不存在";
+	// 文件上传位置
+	public static final String FOLDER = "E:/files";
+	// 服务员上传的商品名称已经存在
+	public static final String Dessert_EXIST = "该名称的商品已存在";
+	// 管理员管理服务员的session名
+	public static final String PLAN_SESSION = "plan_session";
+	public static final String ZD_WAITRESS = "ZD_waitress";
+	public static final String PLAN = "plan";
 
 }

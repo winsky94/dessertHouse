@@ -1,0 +1,44 @@
+#add-button{
+    margin-top:60px;
+    margin-left:300px;
+    margin-right:20px;
+    width:100px;
+    float:left;
+}
+
+#start-button{
+    margin-top:60px;
+    margin-right:20px;
+    margin-left: 300px;
+    width:100px;
+    float:left;
+}
+
+#local-file{
+    width:95%;
+    margin:30px auto;
+}
+
+#server-file{
+    width:95%;
+    margin:30px auto;
+}
+
+.title{
+    margin: 40px auto;
+}
+
+.title h1{
+    text-align:center;
+    font-family: 微软雅黑,Aria;
+}
+
+#filequeue{
+	margin:0px auto;
+	text-align:center;
+}
+
+.prompt{
+	width:90%;
+	margin-left:250px;
+}

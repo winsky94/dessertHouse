@@ -25,6 +25,8 @@
 	<bean id="loginJsonController" class="dessert.controller.api.LoginJsonController" />
 	<bean id="waitressController" class="dessert.controller.html.WaitressController" />
 	<bean id="waitressJsonController" class="dessert.controller.api.WaitressJsonController" />
+	<bean id="planController" class="dessert.controller.html.PlanController" />
+	<bean id="planJsonController" class="dessert.controller.api.PlanJsonController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />
@@ -32,6 +34,8 @@
 	<bean id="shopService" class="dessert.service.impl.ShopServiceImpl" />
 	<bean id="loginService" class="dessert.service.impl.LoginServiceImpl" />
 	<bean id="workerService" class="dessert.service.impl.WorkerServiceImpl" />
+	<bean id="planService" class="dessert.service.impl.PlanServiceImpl" />
+	<bean id="dessertService" class="dessert.service.impl.DessertServiceImpl" />
 
 	<!-- dao -->
 	<bean id="testDao" class="dessert.dao.impl.TestDaoImpl" />
@@ -39,4 +43,6 @@
 	<bean id="shopDao" class="dessert.dao.impl.ShopDaoImpl" />
 	<bean id="workerDao" class="dessert.dao.impl.WorkerDaoImpl" />
 	<bean id="loginDao" class="dessert.dao.impl.LoginDaoImpl" />
+	<bean id="planDao" class="dessert.dao.impl.PlanDaoImpl" />
+	<bean id="dessertDao" class="dessert.dao.impl.DessertDaoImpl" />
 </beans>

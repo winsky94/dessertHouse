@@ -21,4 +21,10 @@
 			<result name="admin_waitress">waitressManage.jsp</result>
 		</action>
 	</package>
+	
+	<package name="waitress" extends="struts-default">
+		<action name="ZD_waitress" class="planController">
+			<result name="ZD_waitress">makePlan.html</result>
+		</action>
+	</package>
 </struts>

@@ -25,7 +25,7 @@
 			</result>
 		</action>
 	</package>
-	
+
 	<!-- 店面管理 -->
 	<package name="shopManage" namespace="/api/shop" extends="json-default">
 		<action name="getShops" class="shopJsonController">
@@ -56,8 +56,7 @@
 	</package>
 
 	<!-- 服务员管理 -->
-	<package name="waitressManage" namespace="/api/waitress"
-		extends="json-default">
+	<package name="waitressManage" namespace="/api/waitress" extends="json-default">
 		<action name="getWaitresses" class="waitressJsonController">
 			<result type="json">
 				<param name="waitresses">waitresses</param>
@@ -82,6 +81,40 @@
 			method="generateWaitressId">
 			<result type="json">
 				<param name="workerId">workerId</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- 销售计划管理 -->
+	<package name="planManage" namespace="/api/plan" extends="json-default">
+		<action name="getPlans" class="planJsonController" method="getPlanByShopName">
+			<result type="json">
+				<param name="plans">plans</param>
+			</result>
+		</action>
+		<action name="add" class="planJsonController" method="addPlan">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="edit" class="planJsonController" method="editPlan">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="delete" class="planJsonController" method="deletePlan">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="checkExist" class="planJsonController" method="checkExist">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="submitPlan" class="planJsonController" method="submitPlan">
+			<result type="json">
+				<param name="message">message</param>
 			</result>
 		</action>
 	</package>

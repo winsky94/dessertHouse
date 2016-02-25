@@ -36,16 +36,12 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public PlanVO getPlans(String shopName) {
 		// TODO Auto-generated method stub
-		Plan plan = planDao.getPlans(shopName);
-		if (plan != null) {
-			return ConvertVO.planToVO(plan);
-		} else {
-			return null;
-		}
+		PlanVO plan = planDao.getPlans(shopName);
+		return plan;
 	}
 
 	@Override
-	public void submitPlans(Plan plan) {
+	public void submitPlans(PlanVO plan) {
 		// TODO Auto-generated method stub
 		planDao.submitPlans(plan);
 	}

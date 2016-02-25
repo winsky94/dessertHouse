@@ -22,6 +22,6 @@ public interface PlanService {
 	 */
 	public PlanVO getPlans(String shopName);
 
-	public void submitPlans(Plan plan);
+	public void submitPlans(PlanVO plan);
 
 }

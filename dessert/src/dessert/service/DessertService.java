@@ -22,5 +22,13 @@ public interface DessertService {
 	 */
 	public boolean checkExist(String name);
 
-	public ArrayList<Dessert> getDessertByName( ArrayList<String> names);
+	public ArrayList<Dessert> getDessertByName(ArrayList<String> names);
+
+	/**
+	 * 用在删除的地方，通过名称得到dessert的id
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public long getDesertIdByName(String name);
 }

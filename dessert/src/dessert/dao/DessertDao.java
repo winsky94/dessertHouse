@@ -15,4 +15,6 @@ public interface DessertDao {
 	public boolean checkExist(String name);
 
 	public Dessert getDessertByName(String name);
+
+	public Dessert getDesertByName(String name);
 }

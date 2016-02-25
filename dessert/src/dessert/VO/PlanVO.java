@@ -3,7 +3,6 @@ package dessert.VO;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dessert.entity.Dessert;
 import dessert.util.Week;
 
 /**
@@ -13,15 +12,21 @@ public class PlanVO {
 	public long id;
 	private String shop;// 店名
 	private String createAt;// 创建日期
-	private HashMap<Week, ArrayList<Dessert>> plans = new HashMap<Week, ArrayList<Dessert>>();
+	private HashMap<Week, ArrayList<String>> plans = new HashMap<Week, ArrayList<String>>();
+	private boolean checked;// 经理是否审批了
+
+	public PlanVO() {
+
+	}
 
 	public PlanVO(long id, String shop, String createAt,
-			HashMap<Week, ArrayList<Dessert>> plans) {
+			HashMap<Week, ArrayList<String>> plans, boolean checked) {
 		super();
 		this.id = id;
 		this.shop = shop;
 		this.createAt = createAt;
 		this.plans = plans;
+		this.checked = checked;
 	}
 
 	public long getId() {
@@ -48,15 +53,23 @@ public class PlanVO {
 		this.createAt = createAt;
 	}
 
-	public HashMap<Week, ArrayList<Dessert>> getPlans() {
+	public HashMap<Week, ArrayList<String>> getPlans() {
 		return plans;
 	}
 
-	public void setPlans(HashMap<Week, ArrayList<Dessert>> plans) {
+	public void setPlans(HashMap<Week, ArrayList<String>> plans) {
 		this.plans = plans;
 	}
 
-	public void setPlanByDay(Week week, ArrayList<Dessert> plan) {
+	public void setPlanByDay(Week week, ArrayList<String> plan) {
 		this.plans.put(week, plan);
+	}
+
+	public boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }

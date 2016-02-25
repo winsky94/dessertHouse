@@ -1,5 +1,6 @@
 package dessert.dao;
 
+import dessert.VO.PlanVO;
 import dessert.entity.Plan;
 
 /**
@@ -19,8 +20,8 @@ public interface PlanDao {
 	 *            店名
 	 * @return
 	 */
-	public Plan getPlans(String shopName);
+	public PlanVO getPlans(String shopName);
 
-	public void submitPlans(Plan plan);
+	public void submitPlans(PlanVO plan);
 
 }

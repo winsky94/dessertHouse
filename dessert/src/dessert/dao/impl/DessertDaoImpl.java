@@ -44,4 +44,10 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 		}
 	}
 
+	@Override
+	public Dessert getDesertByName(String name) {
+		// TODO Auto-generated method stub
+		return getByColumn(Dessert.class,"name",name);
+	}
+
 }

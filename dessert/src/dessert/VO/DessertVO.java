@@ -1,11 +1,14 @@
 package dessert.VO;
 
+import java.io.Serializable;
+
 import dessert.util.Week;
 
 /**
  * @author 严顺宽
  */
-public class DessertVO {
+public class DessertVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	public long id;
 	private String name;// 商品名
 	private double price;// 售价

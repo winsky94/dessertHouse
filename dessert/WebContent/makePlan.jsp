@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%@page import="dessert.configure.Configure"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"%>
+<%@ page language="java" import="dessert.VO.DessertVO"%>
+<!-- http://localhost:8080/dessert/ZD_waitress?day=Sunday&shopName=shop1&action=create -->
 <html>
 <head>
 	<title>销售计划</title>
@@ -80,7 +85,7 @@
 			<div class="span10">
 				<!-- 选择制定周几的计划 -->
 				<div>
- 					<!-- <label class="radio inline" style="margin-left:15%">
+ 					<label class="radio inline" style="margin-left:15%">
 						<input type="radio" name="week" id="Sunday" value="Sunday" onclick="refresh()">
 						  周日
 					</label>
@@ -107,7 +112,7 @@
 					<label class="radio inline" style="margin-left: 5%">
 						<input type="radio" name="week" id="Saturday" value="Saturday" onclick="refresh()">
 						  周六
-					</label> -->
+					</label>
 
 					<script type="text/javascript">
 						//得到url的参数
@@ -167,18 +172,38 @@
 									<th class="order-header text-center">销售量</th>
 								</tr>
 							</thead>
-							<script type="text/javascript">
-								// refresh();
-							</script>
-							<tbody id="table_body">
+							<tbody>
+							<%
+								@SuppressWarnings("unchecked")
+								ArrayList<DessertVO> desserts=(ArrayList<DessertVO>)session.getAttribute(Configure.PLAN_SESSION);
+								if(desserts!=null){
+									for (int i=0;i<desserts.size();i++) {
+										DessertVO dessertVO=desserts.get(i);
+										long id=dessertVO.getId();
+										String picName=dessertVO.getPath();
+										int index=picName.lastIndexOf("\\");
+										picName=picName.substring(index+1);
+										
+										String path=dessertVO.getPath();
+										String name=dessertVO.getName();
+										double price=dessertVO.getPrice();
+										int stockNum=dessertVO.getStockNum();
+							%>
 								<tr onclick='getLine(this);'>
-									<td style="display:none;">1</td>
-									<td style="display:none;">2.jpg</td>
-									<td class="point-line"><img src="image/desserts/shop1/2.jpg"></td>
-									<td class="point-line">shop1</td>
-									<td class="point-line">18</td>
-									<td class="point-line">10</td>
+									<td style="display:none;"><% out.println(id); %></td>
+									<td style="display:none;"><% out.println(picName); %></td>
+									<td class="point-line"><img src="<% out.println(path); %>"></td>
+									<td class="point-line"><% out.println(name); %></td>
+									<td class="point-line"><% out.println(price); %></td>
+									<td class="point-line"><% out.println(stockNum); %></td>
 								</tr>
+							<%
+									}
+								}else{
+							%>
+							<%
+								}
+							%>
 							</tbody>
 						</table>
 					</div>

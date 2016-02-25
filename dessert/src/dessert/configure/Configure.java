@@ -52,12 +52,13 @@ public class Configure {
 	public static final String WAITRESS_OWINGTO_EXIST = "所属店面存在";
 	public static final String WAITRESS_OWINGTO_FAIL = "所属店面不存在";
 	// 文件上传位置
-	public static final String FOLDER = "E:/files";
+	public static final String FOLDER = "E:\\本科课程\\6.大三二\\J2EE与中间件\\Lab\\dessert\\WebContent\\image\\desserts";
 	// 服务员上传的商品名称已经存在
 	public static final String Dessert_EXIST = "该名称的商品已存在";
 	// 管理员管理服务员的session名
 	public static final String PLAN_SESSION = "plan_session";
 	public static final String ZD_WAITRESS = "ZD_waitress";
-	public static final String PLAN = "plan";
+	//某个店的全部商品计划session，map的value为商品名列表
+	public static final String PLAN_SHOP_ALL = "plan";
 
 }

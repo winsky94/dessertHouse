@@ -44,5 +44,6 @@
 	<bean id="workerDao" class="dessert.dao.impl.WorkerDaoImpl" />
 	<bean id="loginDao" class="dessert.dao.impl.LoginDaoImpl" />
 	<bean id="planDao" class="dessert.dao.impl.PlanDaoImpl" />
+	<bean id="planDetailDao" class="dessert.dao.impl.PlanDetailDaoImpl" />
 	<bean id="dessertDao" class="dessert.dao.impl.DessertDaoImpl" />
 </beans>

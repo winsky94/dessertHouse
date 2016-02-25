@@ -2,50 +2,8 @@ function refresh(){
 	var shopName = $("#shopName").val();
 	//获取选中的值
 	var selectedDay=$("input[name='week']:checked").val();
-	var params={
-		shopName:shopName
-	}
-	$.getJSON("api/plan/getPlans",params, function(data) {
-		//js解析json格式的字符串
-		var obj = eval("("+data.plansJson+")");
-        //如果有，就拼装表格数据
-
-        if(selectedDay=="Sunday"){
-        	var plans=obj.Sunday;
-        }else if (selectedDay=="Monday") {
-        	var plans=obj.Monday;
-        }else if (selectedDay=="Tuesday") {
-        	var plans=obj.Tuesday;
-        }else if (selectedDay=="Wednesday") {
-        	var plans=obj.Wednesday;
-        }else if (selectedDay=="Thursday") {
-        	var plans=obj.Thursday;
-        }else if (selectedDay=="Friday") {
-        	var plans=obj.Friday;
-        }else if (selectedDay=="Saturday") {
-        	var plans=obj.Saturday;
-        };
-
-        var txt='';
-        if(plans!=undefined){
-        	$.each(plans, function(i, item) {
-                txt+='\
-                <tr onclick="getLine(this);">\
-	                <td style="display:none;">'+item.id+'</td>\
-	                <td style="display:none;">'+item.path+'</td>\
-	                <td class="point-line"><img src="'+item.path+'"></td>\
-	                <td class="point-line">'+item.owingTo+'</td>\
-	                <td class="point-line">'+item.price+'</td>\
-	                <td class="point-line">'+item.stockNum+'</td>\
-				</tr>\
-				'
-        	});
-        }
-        // $("#table_body").html(txt);
-	});
-
-	
-
+	var url="/dessert/ZD_waitress?action=create&day="+selectedDay+"&shopName="+shopName
+	window.location.href=url;
 }
 
 
@@ -95,6 +53,7 @@ function changeAction(action){
 		$("#name").attr("disabled",false);
 
 		$("#dessertId").val("-1");
+		$("#originalPicName").val("null");
 		$("#picName").val("");
 		$("#picture").val("");
 		$("#name").val("");
@@ -114,7 +73,9 @@ function process(){
 		alert("ajax错误");
 	}
 	var dessertId = $("#dessertId").val();
-	var picName = $("#picName").val();
+	var originalPicName=$("#originalPicName").val();
+	originalPicName = originalPicName.replace(/[\r\n]/g,"");//去掉回车换行
+	var picName = $('#picture').uploadify('settings','buttonText');
 	var name = $("#name").val();
 	var price = $("#price").val();
 	var stockNum = $("#stockNum").val();
@@ -143,7 +104,9 @@ function process(){
 
 	//传额外参数
 	$("#picture").uploadify("settings", "formData", {
+		'action' : action,
 		'dessertId' : dessertId, 
+		'originalPicName':originalPicName,
 		'picName' : picName, 
 		'owingTo' : owingTo,
 		'name' : name, 
@@ -152,37 +115,29 @@ function process(){
 		'day' : day
 	});
 
-	//先检测商品是否存在了，存在就不可以上传
-	$.ajax({
-		url : 'api/plan/checkExist',
-		type : 'post',
-		dataType : 'json',
-		data : {
-			name:name
-		},
-		success : function(result, textStatus) {
-			if(result.message!=""){
-				//商品名存在，不可以上传
-				$("#process_result").html(result.message);
-			}else{
-				//商品名不存在，可以上传
-				javascript:$('#picture').uploadify('upload', '*');
+	if(action=="add"){
+		//先检测商品是否存在了，存在就不可以上传
+		$.ajax({
+			url : 'api/plan/checkExist',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				name:name
+			},
+			success : function(result, textStatus) {
+				if(result.message!=""){
+					//商品名存在，不可以上传
+					$("#process_result").html(result.message);
+				}else{
+					//商品名不存在，可以上传
+					javascript:$('#picture').uploadify('upload', '*');
+				}
 			}
-			
-		}
-	});
-
+		});
+	}else{
+		javascript:$('#picture').uploadify('upload', '*');
+	}
 	
-	// var params = $("#dessertForm").serialize();
-	// $.ajax({
-	// 	url : ajax_url,
-	// 	type : 'post',
-	// 	dataType : 'json',
-	// 	data : params,
-	// 	success : function(result, textStatus) {
-	// 		callback_func(result);
-	// 	}
-	// });
 }
 
 function deleteDessert () {
@@ -194,16 +149,31 @@ function deleteDessert () {
 		if(window.confirm('你确定要删除所选店面吗？')){
 		    var dessertId = cells[0].innerHTML;
 		    dessertId = dessertId.replace(/[\r\n]/g,"");//去掉回车换行
-
+			var picName = cells[1].innerHTML;
 		    $.ajax({
 		    	url : 'api/plan/delete',
 		    	type : 'post',
 		    	dataType : 'json',
 		    	data : {
-		    		dessertId:dessertId
+		    		dessertId:dessertId,
+		    		picName:picName
 		    	},
 		    	success : function(result, textStatus) {
-		    		callback_func(result);
+		    		if (result.length == 0) {
+						alert("出现错误");
+					} else {
+						var message = result.message;
+						var success = "success";
+						if (message == success) {
+							alert("success");
+							//刷新界面
+							location.reload();
+						} else {
+							alert("error");
+						}
+					}
+
+
 		    	}
 		    });
 		}

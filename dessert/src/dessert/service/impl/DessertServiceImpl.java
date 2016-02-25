@@ -48,11 +48,20 @@ public class DessertServiceImpl implements DessertService {
 			if (dessert != null) {
 				result.add(dessert);
 			} else {
-				System.err.println("有个商品的名字不存在~");
+				System.err.println("有个商品的名字不存在~，名字为："+name);
 			}
 
 		}
 		return result;
+	}
+
+	@Override
+	public long getDesertIdByName(String name) {
+		// TODO Auto-generated method stub
+		System.out.println(name);
+		Dessert dessert=dessertDao.getDesertByName(name);
+		long id = dessert.getId();
+		return id;
 	}
 
 }

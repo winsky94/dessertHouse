@@ -1,8 +1,6 @@
 package dessert.controller.api;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,17 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StreamUtils;
 
 import dessert.VO.PlanVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Dessert;
-import dessert.entity.Plan;
 import dessert.service.DessertService;
 import dessert.service.PlanService;
 import dessert.util.DateUtil;
-import dessert.util.JsonUtil;
 import dessert.util.Week;
 
 /**
@@ -38,8 +33,6 @@ public class PlanJsonController extends BaseController {
 	@Autowired
 	public DessertService dessertService;
 	private String message;
-	private HashMap<String, ArrayList<Dessert>> plans;
-	private String plansJson;
 
 	/*
 	 * 下面的uploadFiles有两点需要注意 1、必须是List数组
@@ -56,7 +49,6 @@ public class PlanJsonController extends BaseController {
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
 
 		String shopName = params.get("shopName");
 		PlanVO planVO = planService.getPlans(shopName);
@@ -67,7 +59,6 @@ public class PlanJsonController extends BaseController {
 
 	public String checkExist() {
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
 
 		Map<String, String> params = getParams();
 		String name = params.get("name");
@@ -80,8 +71,21 @@ public class PlanJsonController extends BaseController {
 
 	public String addPlan() {
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
+		Map<String, String> params = getParams();
+		String action = params.get("action");
+		if ("add".equals(action)) {
+			add();
+		} else if ("update".equals(action)) {
+			edit();
+		} else {
+			System.err.println("上传中action出错");
+		}
 
+		return Configure.SUCCESS;
+
+	}
+
+	private void add() {
 		Map<String, String> params = getParams();
 		String owingTo = params.get("owingTo");
 		String name = params.get("name");
@@ -94,164 +98,232 @@ public class PlanJsonController extends BaseController {
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
-			for (int i = 0; i < uploadFiles.size(); i++) {
-				try {
-					StreamUtils.copy(
-							new FileInputStream(uploadFiles.get(i)),
-							new FileOutputStream(new File(folder
-									+ File.separator
-									+ uploadFilesFileName.get(i))));
-					FileUtils.copyFileToDirectory(uploadFiles.get(i), new File(
-							folder));
-					String path = folder + "/" + uploadFilesFileName.get(i);
-					Dessert dessert = new Dessert();
-					dessert.setName(name);
-					dessert.setOwingTo(owingTo);
-					dessert.setPath(path);
-					dessert.setPrice(price);
-					dessert.setStockNum(stockNum);
-					dessert.setDate(date);
-					dessert.setWeekDay(weekDay);
-					dessertService.add(dessert);
+			// for (int i = 0; i < uploadFiles.size(); i++) {
+			try {
+				// StreamUtils.copy(
+				// new FileInputStream(uploadFiles.get(i)),
+				// new FileOutputStream(new File(folder
+				// + File.separator
+				// + uploadFilesFileName.get(i))));
+				// ======================================================================
+				FileUtils.copyFile(uploadFiles.get(0),
+						new File(new File(folder) + File.separator
+								+ uploadFilesFileName.get(0)));
+				uploadFiles.get(0).delete();
+				// ======================================================================
+				String path = folder + "\\" + uploadFilesFileName.get(0);
+				Dessert dessert = new Dessert();
+				dessert.setName(name);
+				dessert.setOwingTo(owingTo);
+				dessert.setPath(path);
+				dessert.setPrice(price);
+				dessert.setStockNum(stockNum);
+				dessert.setDate(date);
+				dessert.setWeekDay(weekDay);
+				dessertService.add(dessert);
 
-					// 在session中添加
-					@SuppressWarnings("unchecked")
-					Map<Week, ArrayList<String>> planWithDessertName = (Map<Week, ArrayList<String>>) request()
-							.getSession().getAttribute(Configure.PLAN);
-					ArrayList<String> dayPlan = planWithDessertName
-							.get(weekDay);
-					dayPlan.add(dessert.getName());
-				} catch (IOException e) {
-					e.printStackTrace();
+				// 在session中添加，更新session
+				@SuppressWarnings("unchecked")
+				Map<Week, ArrayList<String>> planWithDessertName = (Map<Week, ArrayList<String>>) session()
+						.getAttribute(Configure.PLAN_SHOP_ALL);
+				if (planWithDessertName == null) {
+					planWithDessertName = new HashMap<Week, ArrayList<String>>();
+
 				}
+				ArrayList<String> dayPlan = planWithDessertName.get(weekDay);
+				if (dayPlan == null) {
+					dayPlan = new ArrayList<String>();
+				}
+				dayPlan.add(dessert.getName());
+				planWithDessertName.put(weekDay, dayPlan);
+				// 更新session的内容
+				session().setAttribute(Configure.PLAN_SHOP_ALL,
+						planWithDessertName);
+				System.out
+						.println("PlanJsonController.addPlan()设置Configure.PLAN_SHOP_ALL，大小为："
+								+ planWithDessertName.size());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+			// }
 		}
-
-		return Configure.SUCCESS;
-
 	}
 
 	public String editPlan() {
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
 
+		edit();
+
+		return Configure.SUCCESS;
+	}
+
+	private void edit() {
 		Map<String, String> params = getParams();
 		long dessertId = Long.parseLong(params.get("dessertId"));
 		String owingTo = params.get("owingTo");
+		String originalPicName = params.get("originalPicName");
 		String name = params.get("name");
 		double price = Double.parseDouble(params.get("price"));
 		int stockNum = Integer.parseInt(params.get("stockNum"));
+		String day = params.get("day");
+		String date = DateUtil.getDate(day);
+		Week weekDay = Week.getWeek(DateUtil.getNumByDayEn(day));
 
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
-			for (int i = 0; i < uploadFiles.size(); i++) {
-				try {
-					StreamUtils.copy(
-							new FileInputStream(uploadFiles.get(i)),
-							new FileOutputStream(new File(folder
-									+ File.separator
-									+ uploadFilesFileName.get(i))));
-					FileUtils.copyFileToDirectory(uploadFiles.get(i), new File(
-							folder));
-					String path = folder + "/" + uploadFilesFileName.get(i);
-					Dessert dessert = new Dessert();
-					dessert.setId(dessertId);
-					dessert.setName(name);
-					dessert.setOwingTo(owingTo);
-					dessert.setPath(path);
-					dessert.setPrice(price);
-					dessert.setStockNum(stockNum);
-					dessertService.update(dessert);
-				} catch (IOException e) {
-					e.printStackTrace();
+			// for (int i = 0; i < uploadFiles.size(); i++) {
+			try {
+				// ======================================================================
+				if (!uploadFilesFileName.get(0).equals(originalPicName)) {
+					// 删除原图片
+					String path = folder + "\\" + originalPicName;
+					deleteFile(path);
+					// 重新复制图片
+					FileUtils.copyFile(uploadFiles.get(0),
+							new File(new File(folder) + File.separator
+									+ uploadFilesFileName.get(0)));
+					uploadFiles.get(0).delete();
 				}
-			}
-		}
 
-		return Configure.SUCCESS;
+				// ======================================================================
+				String path = folder + "\\" + uploadFilesFileName.get(0);
+				Dessert dessert = new Dessert();
+				dessert.setId(dessertId);
+				dessert.setName(name);
+				dessert.setOwingTo(owingTo);
+				dessert.setPath(path);
+				dessert.setPrice(price);
+				dessert.setStockNum(stockNum);
+				dessert.setDate(date);
+				dessert.setWeekDay(weekDay);
+				dessertService.update(dessert);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// }
+		} else {
+			String folder = Configure.FOLDER;
+
+			// 图片是一样的，不要考虑图片的 问题
+			String path = folder + "\\" + uploadFilesFileName.get(0);
+			Dessert dessert = new Dessert();
+			dessert.setId(dessertId);
+			dessert.setName(name);
+			dessert.setOwingTo(owingTo);
+			dessert.setPath(path);
+			dessert.setPrice(price);
+			dessert.setStockNum(stockNum);
+			dessert.setDate(date);
+			dessert.setWeekDay(weekDay);
+			dessertService.update(dessert);
+		}
 	}
 
 	public String deletePlan() {
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
-
-		// Map<String, String> params = getParams();
-		// long dessertId=Long.parseLong(params.get("dessertId"));
-		// Dessert dessert=new Dessert();
-		// dessert.setId(dessertId);
-		// dessertService.delete(dessert);
-		// message="success";
-		System.out.println("delete");
-
-		return Configure.SUCCESS;
-	}
-
-	public String getPlanByShopName() {
-		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
 
 		Map<String, String> params = getParams();
-		
+		long dessertId = Long.parseLong(params.get("dessertId"));
+		String picName = params.get("picName");
+		Dessert dessert = new Dessert();
+		dessert.setId(dessertId);
+
+		// 删除session中对应的
 		@SuppressWarnings("unchecked")
-		Map<Week, ArrayList<String>> plan = (Map<Week, ArrayList<String>>) request()
-				.getSession(false).getAttribute(Configure.PLAN);
+		Map<Week, ArrayList<String>> plan = (Map<Week, ArrayList<String>>) session()
+				.getAttribute(Configure.PLAN_SHOP_ALL);
 		if (plan != null) {
+			Map<Week, ArrayList<String>> planAllResult = new HashMap<Week, ArrayList<String>>();
+
+			session().removeAttribute(Configure.PLAN_SESSION);
 			for (Week key : plan.keySet()) {
 				ArrayList<String> dessertNames = plan.get(key);
-				ArrayList<Dessert> desserts = dessertService
-						.getDessertByName(dessertNames);
-				plans.put(Week.toString(key), desserts);
+				ArrayList<String> dessertNamesResult = new ArrayList<String>();
+				if (dessertNames != null) {
+					for (String name : dessertNames) {
+						System.out.println("PlanJsonController.deletePlan() "
+								+ name);
+						long id = dessertService.getDesertIdByName(name);
+						if (id != dessertId) {
+							dessertNamesResult.add(name);
+						}
+					}
+					planAllResult.put(key, dessertNamesResult);
+				}
 			}
+			session().setAttribute(Configure.PLAN_SHOP_ALL, planAllResult);
 		}
-		ArrayList<Dessert> desserts = new ArrayList<Dessert>();
-		Dessert dessert=new Dessert();
-		dessert.setId(1);
-		dessert.setName("测试名称");
-		dessert.setOwingTo("shop1");
-		dessert.setPath("image/desserts/shop1/2.jpg");
-		dessert.setPrice(10);
-		dessert.setStockNum(1);
-		dessert.setDate(DateUtil.getToday());
-		desserts.add(dessert);
-		plans.put(Week.toString(Week.Sunday), desserts);
 
-		plansJson = JsonUtil.toJson(plans);
-//		plansJson="{\"comments\":[{\"content\":\"很不错嘛\",\"id\":1,\"nickname\":\"纳尼\"},{\"content\":\"哟西哟西\",\"id\":2,\"nickname\":\"小强\"}]}";
+		dessertService.delete(dessert);
+		// 删除原图片
+		String folder = Configure.FOLDER;
+		String path = folder + "\\" + picName;
+		deleteFile(path);
+
+		message = "success";
+		System.out.println("delete");
 
 		return Configure.SUCCESS;
 	}
 
 	public String submitPlan() {
 		message = "";
-		plans = new HashMap<String, ArrayList<Dessert>>();
+
+		HashMap<Week, ArrayList<String>> planDetail = new HashMap<Week, ArrayList<String>>();
+
 		@SuppressWarnings("unchecked")
-		Map<Week, ArrayList<String>> plan = (Map<Week, ArrayList<String>>) request()
-				.getSession(false).getAttribute(Configure.PLAN);
+		Map<Week, ArrayList<String>> plan = (Map<Week, ArrayList<String>>) session()
+				.getAttribute(Configure.PLAN_SHOP_ALL);
 		if (plan != null) {
 			for (Week key : plan.keySet()) {
 				ArrayList<String> dessertNames = plan.get(key);
-				ArrayList<Dessert> desserts = dessertService
-						.getDessertByName(dessertNames);
-				plans.put(Week.toString(key), desserts);
+				planDetail.put(key, dessertNames);
 			}
 		}
 		Map<String, String> params = getParams();
 		String shopName = params.get("shopName");
 		long planId = Long.parseLong(params.get("planId"));
 
-		Plan plan2 = new Plan();
-		plan2.setId(planId);
-		plan2.setShop(shopName);
-//		plan2.setPlans(null);
+		PlanVO planVO = new PlanVO();
+		planVO.setId(planId);
+		planVO.setShop(shopName);
+		planVO.setPlans(planDetail);
+		// 新上传的plan没有被check
+		planVO.setChecked(false);
 
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String createAt = sdf.format(date);
-		plan2.setCreateAt(createAt);
-		planService.submitPlans(plan2);
+		planVO.setCreateAt(createAt);
+		planService.submitPlans(planVO);
+
+		// 删除session，免得混淆其他店面的
+		session().removeAttribute(Configure.PLAN_SHOP_ALL);
+		session().removeAttribute(Configure.PLAN_SESSION);
+
+		System.out.println("提交计划");
 		message = Configure.SUCCESS;
 		return Configure.SUCCESS;
+	}
+
+	/**
+	 * 删除单个文件
+	 * 
+	 * @param sPath
+	 *            被删除文件的文件名
+	 * @return 单个文件删除成功返回true，否则返回false
+	 */
+	public boolean deleteFile(String sPath) {
+		boolean flag = false;
+		File file = new File(sPath);
+		// 路径为文件且不为空则进行删除
+		if (file.isFile() && file.exists()) {
+			file.delete();
+			flag = true;
+		}
+		return flag;
 	}
 
 	public String getMessage() {
@@ -261,21 +333,4 @@ public class PlanJsonController extends BaseController {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	public HashMap<String, ArrayList<Dessert>> getPlans() {
-		return plans;
-	}
-
-	public void setPlans(HashMap<String, ArrayList<Dessert>> plans) {
-		this.plans = plans;
-	}
-
-	public String getPlansJson() {
-		return plansJson;
-	}
-
-	public void setPlansJson(String plansJson) {
-		this.plansJson = plansJson;
-	}
-
 }

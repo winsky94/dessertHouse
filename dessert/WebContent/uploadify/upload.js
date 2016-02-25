@@ -47,14 +47,18 @@ $(function() {
         },
         //当队列中的所有文件全部完成上传时触发
         'onQueueComplete' : function(stats) {
+        	// alert(stats);
         },
         'onUploadSuccess':function(file, data, response){
+        	//每个文件上传成功后都会触发
+        	// alert("success");
         	$(".after").remove();
         	var jsonObject = jQuery.parseJSON(data);
             if(jsonObject.message!=""){
             	$("#process_result").html(jsonObject.message);
             }else{
-            	alert("success，加界面跳转");
+            	// alert("success，界面跳转，刷新界面");
+            	location.reload();
             }
         },
         'onUploadError' : function(file, errorCode, errorMsg, errorString) {

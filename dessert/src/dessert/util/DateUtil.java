@@ -13,20 +13,18 @@ public class DateUtil {
 
 	public static void main(String[] args) {
 		// 定义输出日期格式
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd EEE");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		Date currentDate = new Date();
 
 		// 比如今天是2012-12-25
-		List<Date> days = dateToWeek(currentDate);
-		System.out.println("今天的日期: " + sdf.format(currentDate));
-		for (Date date : days) {
-			System.out.println(sdf.format(date));
-		}
+		String date=sdf.format(currentDate);
+		System.out.println(date);
+		System.out.println(getWeekByDate(date));
 	}
 
 	public static String getToday() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd EEE");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date currentDate = new Date();
 		return sdf.format(currentDate);
 	}
@@ -46,7 +44,7 @@ public class DateUtil {
 		int day = Integer.parseInt(dates[2]);
 		calendar.set(year, month - 1, day);// 设置当前时间,月份是从0月开始计算
 		int number = calendar.get(Calendar.DAY_OF_WEEK);// 星期表示1-7，是从星期日开始，
-		return Week.getWeek(number);
+		return Week.getWeek(number-1);
 	}
 
 	/**
@@ -81,6 +79,8 @@ public class DateUtil {
 		int todayNum = Week.getNum(todayWeek);
 		int chosenNum = getNumByDayEn(day);
 		int gap = (6 - todayNum) + (chosenNum - 0) + 1;
+		
+		System.out.println("todayNum="+todayNum+";chosenNum="+chosenNum);
 		return getDateAfter(date, gap);
 	}
 
@@ -108,6 +108,7 @@ public class DateUtil {
 		case "Saturday":
 			return 6;
 		default:
+			System.err.println("日期转换错误");
 			return -1;
 		}
 	}

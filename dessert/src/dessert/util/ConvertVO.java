@@ -1,14 +1,9 @@
 package dessert.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import dessert.VO.DessertVO;
-import dessert.VO.PlanVO;
 import dessert.VO.ShopVO;
 import dessert.VO.WorkerVO;
 import dessert.entity.Dessert;
-import dessert.entity.Plan;
 import dessert.entity.Shop;
 import dessert.entity.Worker;
 
@@ -39,21 +34,27 @@ public class ConvertVO {
 		return vo;
 	}
 
-	public static PlanVO planToVO(Plan plan) {
-		long id = plan.getId();
-		String shop = plan.getShop();
-		String createAt = plan.getCreateAt();
-		HashMap<Week, ArrayList<Dessert>> plans = plan.getPlans();
-		PlanVO vo = new PlanVO(id, shop, createAt, plans);
-		return vo;
-	}
+	// public static PlanVO planToVO(Plan plan) {
+	// long id = plan.getId();
+	// String shop = plan.getShop();
+	// String createAt = plan.getCreateAt();
+	// HashMap<Week, ArrayList<Dessert>> plans = plan.getPlans();
+	// PlanVO vo = new PlanVO(id, shop, createAt, plans);
+	// return vo;
+	// }
 
 	public static DessertVO dessertToVO(Dessert dessert) {
 		long id = dessert.getId();
 		String name = dessert.getName();
 		double price = dessert.getPrice();
 		int stockNum = dessert.getStockNum();
+
+		// 图片路径处理
 		String path = dessert.getPath();
+		// E:\本科课程\6.大三二\J2EE与中间件\Lab\dessert\WebContent\image\desserts
+		String t[] = path.split("WebContent");
+		path = t[1].substring(1);// image\desserts\6.jpg
+
 		String owingTo = dessert.getOwingTo();
 		Week weekDay = dessert.getWeekDay();
 		String date = dessert.getDate();

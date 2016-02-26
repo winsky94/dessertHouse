@@ -42,6 +42,7 @@ pageEncoding="utf-8"%>
 
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
+	
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -87,12 +88,16 @@ pageEncoding="utf-8"%>
 						<%
 							@SuppressWarnings("unchecked")
 							ArrayList<ShopVO> shops=(ArrayList<ShopVO>)session.getAttribute(Configure.SHOP_SESSION);
+							@SuppressWarnings("unchecked")
+							HashMap<String,String> result = (HashMap<String,String>)session.getAttribute(Configure.SHOP_PLAN_SESSION);
 							for(ShopVO shopVO:shops){
 								long shopId=shopVO.getId();
 								String name=shopVO.getName();
 								String owner=shopVO.getOwner();
 								String telephone=shopVO.getTelephone();
 								String address=shopVO.getAddress();
+								String planResult=result.get(name);
+								String d[]=planResult.split("-");
 						%>
 							<tr class="point-line" onclick='getLine(this)'>
 								<td style="display:none;"><% out.println(shopId); %></td>
@@ -100,16 +105,47 @@ pageEncoding="utf-8"%>
 								<td><% out.println(owner); %></td>
 								<td><% out.println(telephone); %></td>
 								<td><% out.println(address); %></td>
+								<%
+								String url="";
+								if(d[0].equals("完成")){
+									url="/dessert/ZD_waitress?action=view&day=Sunday&shopName="+name;
+								}else{
+									url="/dessert/ZD_waitress?action=create&day=Sunday&shopName="+name;
+								}
+								%>
 								<td>
-									<a type="button" class="btn btn-mini btn-warning" href="/dessert/ZD_waitress?action=create&day=Sunday&shopName=<%out.println(name); %>" role="button">
-										<i class="icon-edit icon-white"></i> &nbsp;制定
+									<a type="button" class="btn btn-mini btn-warning" href="<%out.println(url); %>" role="button">
+										<i class="icon-edit icon-white"></i> &nbsp;<%=d[0] %>
 									</a>
 								</td>
-								<td>
-									<button type="button" class="btn btn-mini btn-info" disabled="true">
-										<i class="icon-eye-open icon-white"></i> &nbsp;待审
-									</button>
-								</td>
+								<%
+								if(d[1].equals("待审")){
+								%>
+									<td>
+										<button type="button" class="btn btn-mini btn-info" disabled>
+											<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
+										</button>
+									</td>
+								<%
+								}else if(d[1].equals("不过")){
+								%>
+									<td>
+										<a type="button" class="btn btn-mini btn-danger" href="/dessert/ZD_waitress?action=update&day=Sunday&shopName=<%out.println(name); %>" role="button">
+											<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
+										</a>
+									</td>
+								<%		
+								}else if(d[1].equals("通过")){
+								%>
+									<td>
+										<button type="button" class="btn btn-mini btn-info" disabled>
+											<i class="icon-ok icon-white"></i> &nbsp;<%=d[1] %>
+										</button>
+									</td>
+								<%
+								}
+								%>
+								
 							</tr>
 						<%
 							}

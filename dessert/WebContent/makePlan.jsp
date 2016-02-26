@@ -50,6 +50,9 @@ pageEncoding="utf-8"%>
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
 	<script src="js/makePlan.js"></script>
+	<script type="text/javascript">
+         javascript:window.history.forward(1); //禁止返回
+	</script>
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -135,10 +138,25 @@ pageEncoding="utf-8"%>
 
 				<!-- 操作按钮 -->
 				<div>
+				<%
+					String param=request.getQueryString();
+					String action="create";
+					if(param!=null){
+						String []params = param.split("&");
+						for(int i=0;i<params.length;i++){
+							String temp=params[i];
+							if(temp.startsWith("action=")){
+								int index=temp.indexOf("=");
+								action=temp.substring(index+1);
+							}
+						}
+					}
+					
+					if("create".equals(action)||"update".equals(action)){
+				%>
 					<a class="btn btn-primary btn-small pull-left margin_button" href="#" onclick="submitPlan();">
 						<i class="icon-ok icon-white"></i>提交
 					</a>
-
 					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteDessert();">
 						<i class="icon-minus icon-white"></i>删除
 					</a>
@@ -148,6 +166,16 @@ pageEncoding="utf-8"%>
 					<a class="btn btn-primary btn-small pull-right margin_button" href="#dessertModel" role="button" data-toggle="modal" onclick="changeAction('add');">
 						<i class="icon-plus icon-white"></i>增加
 					</a>
+				<%
+					}else{
+				%>
+					<a class="btn btn-primary btn-small pull-left margin_button" href="/dessert/ZD_shop">
+						<i class="icon-ok icon-white"></i>返回
+					</a>
+				<%
+					}
+				%>
+					
 				</div>
 				<!-- 操作按钮结束 -->
 
@@ -226,7 +254,20 @@ pageEncoding="utf-8"%>
 			<form id="dessertForm" class="form-horizontal" enctype="multipart/form-data">
 				<input type="hidden" id="dessertId" value="-1">
 				<!-- 记录商品属于哪个店铺 -->
-				<input type="hidden" id="owingTo" value="shop1">
+				<%
+				String shopName="";
+				if(param!=null){
+					String []params = param.split("&");
+					for(int i=0;i<params.length;i++){
+						String temp=params[i];
+						if(temp.startsWith("shopName=")){
+							int index=temp.indexOf("=");
+							shopName=temp.substring(index+1);
+						}
+					}
+				}
+				%>
+				<input type="hidden" id="owingTo" value="<%=shopName %>">
 				<input type="hidden" id="originalPicName" value="null">
 				<div class="control-group"></div>
 				<div class="control-group">

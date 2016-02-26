@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import dessert.dao.DessertDao;
 import dessert.entity.Dessert;
+import dessert.util.Week;
 
 /**
  * @author 严顺宽
@@ -15,11 +16,12 @@ import dessert.entity.Dessert;
 public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 
 	@Override
-	public boolean checkExist(String name) {
+	public boolean checkExist(String name,String weekDay) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Dessert.class);
 		criteria.add(Restrictions.eq("name", name));
+		criteria.add(Restrictions.eq("weekDay", Week.getWeek(weekDay)));
 		@SuppressWarnings("unchecked")
 		List<Dessert> desserts = criteria.list();
 		if (desserts == null || desserts.size() == 0) {

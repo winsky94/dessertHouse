@@ -72,6 +72,7 @@ function changeAction(action){
 
 function process(){
 	var action = $("#action").val();
+	var weekDay = $("input[name='week']:checked").val();
 	var ajax_url='';
 	if(action=="add"){
 		ajax_url='api/plan/add';
@@ -130,7 +131,8 @@ function process(){
 			type : 'post',
 			dataType : 'json',
 			data : {
-				name:name
+				name:name,
+				weekDay:weekDay
 			},
 			success : function(result, textStatus) {
 				if(result.message!=""){
@@ -223,8 +225,7 @@ function submitPlan () {
 					var message = result.message;
 					var success = "success";
 					if (message == success) {
-						alert("submit plan success");
-						// window.location.href = "#";
+						window.location.href = "/dessert/ZD_shop";
 					} else {
 						$("#process_result").html(message);
 					}

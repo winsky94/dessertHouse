@@ -91,7 +91,7 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 
 			String shop = plan.getShop();
 			String createAt = plan.getCreateAt();
-			boolean checked = plan.getChecked();
+			int checked = plan.getChecked();
 			String validSunday = plan.getValidSunday();
 			PlanVO vo = new PlanVO(id, shop, createAt, planDetails, checked,
 					validSunday);
@@ -116,7 +116,13 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String sunday = sdf.format(list.get(0));
 		plan.setValidSunday(sunday);
-		long planId = add(plan);
+		long planId = checkExist(plan);
+		if (planId == -1) {
+			planId = add(plan);
+		} else {
+			plan.setId(planId);
+			update(plan);
+		}
 
 		// 保存plan的具体内容
 		HashMap<Week, ArrayList<String>> planDetails = vo.getPlans();
@@ -134,13 +140,55 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 						planDetail.setPlanId(planId);
 						planDetail.setWeekDay(weekDay);
 						planDetail.setDessertName(dessertName);
-						planDetailDao.add(planDetail);
+						boolean exist = checkPlanDetail(planDetail);
+						if (!exist) {
+							planDetailDao.add(planDetail);
+						}
 					}
 				}
 			}
 		}
-
-		System.out.println("数据库保存");
 	}
 
+	private long checkExist(Plan vo) {
+		long result = -1;
+
+		String shopName = vo.getShop();
+		String validSunday = vo.getValidSunday();
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Plan.class);
+		criteria.add(Restrictions.eq("shop", shopName));
+		criteria.add(Restrictions.eq("validSunday", validSunday));
+		@SuppressWarnings("unchecked")
+		List<Plan> plans = criteria.list();
+		if (plans == null || plans.size() == 0) {
+			return result;
+		} else {
+			Plan plan = plans.get(0);
+			result = plan.getId();
+			return result;
+		}
+	}
+
+	private boolean checkPlanDetail(PlanDetail detail) {
+		boolean result = false;
+		String dessertName = detail.getDessertName();
+		String weekDay = detail.getWeekDay();
+		long planId = detail.getPlanId();
+
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(PlanDetail.class);
+		criteria.add(Restrictions.eq("dessertName", dessertName));
+		criteria.add(Restrictions.eq("weekDay", weekDay));
+		criteria.add(Restrictions.eq("planId", planId));
+		@SuppressWarnings("unchecked")
+		List<PlanDetail> plans = criteria.list();
+		if (plans == null || plans.size() == 0) {
+		} else {
+			result = true;
+		}
+
+		return result;
+	}
 }

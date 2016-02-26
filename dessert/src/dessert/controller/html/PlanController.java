@@ -33,19 +33,23 @@ public class PlanController extends BaseController {
 		String shopName = params.get("shopName");
 		String day = params.get("day");
 		String action = params.get("action");
-		Map<Week, ArrayList<String>> plan=null;
+		Map<Week, ArrayList<String>> plan = null;
 		if ("create".equals(action)) {
 			// 总店服务员创建计划
-			plan = (Map<Week, ArrayList<String>>) session()
-					.getAttribute(Configure.PLAN_SHOP_ALL);
-			
-		} else if ("view".equals(action)) {
+			plan = (Map<Week, ArrayList<String>>) session().getAttribute(
+					Configure.PLAN_SHOP_ALL);
+
+		} else if ("view".equals(action)||"update".equals(action)) {
 			PlanVO planVO = planService.getPlans(shopName, false);
-			HashMap<Week, ArrayList<String>> result = planVO.getPlans();
-			session().setAttribute(Configure.PLAN_SHOP_ALL, result);
-			plan=result;
+			if (planVO == null) {
+				plan = null;
+			} else {
+				HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+				session().setAttribute(Configure.PLAN_SHOP_ALL, result);
+				plan = result;
+			}
 		}
-		
+
 		if (plan != null) {
 			session().removeAttribute(Configure.PLAN_SESSION);
 			for (Week key : plan.keySet()) {

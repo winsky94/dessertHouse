@@ -34,9 +34,9 @@ public class DessertServiceImpl implements DessertService {
 	}
 
 	@Override
-	public boolean checkExist(String name) {
+	public boolean checkExist(String name,String weekDay) {
 		// TODO Auto-generated method stub
-		return dessertDao.checkExist(name);
+		return dessertDao.checkExist(name,weekDay);
 	}
 
 	@Override

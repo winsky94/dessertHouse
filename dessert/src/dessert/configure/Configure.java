@@ -58,9 +58,13 @@ public class Configure {
 	// 管理员管理服务员的session名
 	public static final String PLAN_SESSION = "plan_session";
 	public static final String ZD_WAITRESS = "ZD_waitress";
-	//某个店的全部商品计划session，map的value为商品名列表
+	// 某个店的全部商品计划session，map的value为商品名列表
 	public static final String PLAN_SHOP_ALL = "plan";
 	public static final String ZD_SHOP = "ZD_shop";
-	
+	// 记录店面下周计划的情况，hashmap，key 为 店名，value 为结果，形如"制定-待审";
+	public static final String SHOP_PLAN_SESSION = "shop_plan_session";
+	public static final int PLAN_READY = -1;// 计划待审
+	public static final int PLAN_PASS = 1;// 计划审核通过
+	public static final int PLAN_FAIL = 0;// 计划审核不过
 
 }

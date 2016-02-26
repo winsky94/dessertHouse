@@ -1,6 +1,7 @@
 package dessert.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -45,8 +46,9 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 	}
 
 	@Override
-	public UserType checkLogin(String workerId, String password) {
+	public HashMap<UserType, String> checkLogin(String workerId, String password) {
 		// TODO Auto-generated method stub
+		HashMap<UserType, String> result = new HashMap<UserType, String>();
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Worker.class);
 		criteria.add(Restrictions.eq("workerId", workerId));
@@ -54,20 +56,22 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 		@SuppressWarnings("unchecked")
 		List<Worker> workers = criteria.list();
 		if (workers == null || workers.size() == 0) {
-			return UserType.error;
+			result.put(UserType.error, "");
 		} else {
 			// 检查可能的错误
 			CheckError.checkListSize(workers);
 
 			Worker worker = workers.get(0);
+			String lastTime = worker.getLastLoadTime();
 
 			// 更新最近登录时间
 			String lastLoadTime = TimeUtil.getCurrentTime();
 			worker.setLastLoadTime(lastLoadTime);
 			update(worker);
 			UserType type = worker.getType();
-			return type;
+			result.put(type, lastTime);
 		}
+		return result;
 	}
 
 	@Override

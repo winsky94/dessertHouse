@@ -60,7 +60,8 @@ public class PlanJsonController extends BaseController {
 
 		Map<String, String> params = getParams();
 		String name = params.get("name");
-		boolean exist = dessertService.checkExist(name);
+		String weekDay=params.get("weekDay");
+		boolean exist = dessertService.checkExist(name,weekDay);
 		if (exist) {
 			message = Configure.Dessert_EXIST;
 		}
@@ -289,7 +290,7 @@ public class PlanJsonController extends BaseController {
 		planVO.setShop(shopName);
 		planVO.setPlans(planDetail);
 		// 新上传的plan没有被check
-		planVO.setChecked(false);
+		planVO.setChecked(Configure.PLAN_READY);
 
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

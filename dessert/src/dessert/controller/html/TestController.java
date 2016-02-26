@@ -1,17 +1,22 @@
 package dessert.controller.html;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.PlanVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Shop;
 import dessert.entity.Worker;
+import dessert.service.PlanService;
 import dessert.service.ShopService;
 import dessert.service.TestService;
 import dessert.service.WorkerService;
 import dessert.util.UserType;
+import dessert.util.Week;
 
 public class TestController extends BaseController {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +29,26 @@ public class TestController extends BaseController {
 	@Autowired
 	public WorkerService workerService;
 
+	@Autowired
+	public PlanService planService;
+
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
 		// initShops();
-		initWorker();
+		// initWorker();
+		PlanVO planVO = planService.getPlans("shop1", false);
+		HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+		for (Week key : result.keySet()) {
+			ArrayList<String> t=result.get(key);
+			System.out.println(Week.toString(key));
+			if(t!=null){
+				for(String string:t){
+					System.out.println(string);
+				}
+			}
+			System.out.println("=======================");
+		}
 		return Configure.SUCCESS;
 	}
 

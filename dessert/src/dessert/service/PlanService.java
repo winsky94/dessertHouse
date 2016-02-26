@@ -20,7 +20,7 @@ public interface PlanService {
 	 *            店名
 	 * @return
 	 */
-	public PlanVO getPlans(String shopName);
+	public PlanVO getPlans(String shopName, boolean current);
 
 	public void submitPlans(PlanVO plan);
 

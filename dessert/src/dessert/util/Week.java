@@ -6,6 +6,26 @@ package dessert.util;
 public enum Week {
 	Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
 
+	public static Week getWeek(String weekDay) {
+		switch (weekDay) {
+		case "Sunday":
+			return Week.Sunday;
+		case "Monday":
+			return Week.Monday;
+		case "Tuesday":
+			return Week.Tuesday;
+		case "Wednesday":
+			return Week.Wednesday;
+		case "Thursday":
+			return Week.Thursday;
+		case "Friday":
+			return Week.Friday;
+		case "Saturday":
+			return Week.Saturday;
+		}
+		return null;
+	}
+
 	public static Week getWeek(int number) {
 		switch (number) {
 		case 0:

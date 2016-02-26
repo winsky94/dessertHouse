@@ -18,6 +18,7 @@ public class Plan {
 	private String shop;// 店名
 	private String createAt;// 创建日期
 	private boolean checked;// 经理是否审批了
+	private String validSunday;// 记录开始生效的那一周的周日
 
 	public long getId() {
 		return id;
@@ -49,5 +50,13 @@ public class Plan {
 
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+
+	public String getValidSunday() {
+		return validSunday;
+	}
+
+	public void setValidSunday(String validSunday) {
+		this.validSunday = validSunday;
 	}
 }

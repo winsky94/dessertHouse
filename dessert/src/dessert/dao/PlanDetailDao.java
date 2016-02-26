@@ -1,5 +1,7 @@
 package dessert.dao;
 
+import java.util.List;
+
 import dessert.entity.PlanDetail;
 
 /**
@@ -11,5 +13,7 @@ public interface PlanDetailDao {
 	public void delete(PlanDetail planDetail);
 
 	public void update(PlanDetail planDetail);
+
+	public List<PlanDetail> getListByColumn(@SuppressWarnings("rawtypes") Class t, String column, Object value);
 
 }

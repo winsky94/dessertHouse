@@ -18,9 +18,11 @@ public interface PlanDao {
 	 * 
 	 * @param shopName
 	 *            店名
+	 * @param current
+	 *            是否是当前周
 	 * @return
 	 */
-	public PlanVO getPlans(String shopName);
+	public PlanVO getPlans(String shopName, boolean current);
 
 	public void submitPlans(PlanVO plan);
 

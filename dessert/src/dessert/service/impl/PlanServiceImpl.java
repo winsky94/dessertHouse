@@ -6,7 +6,6 @@ import dessert.VO.PlanVO;
 import dessert.dao.PlanDao;
 import dessert.entity.Plan;
 import dessert.service.PlanService;
-import dessert.util.ConvertVO;
 
 /**
  * @author 严顺宽
@@ -34,9 +33,9 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public PlanVO getPlans(String shopName) {
+	public PlanVO getPlans(String shopName, boolean current) {
 		// TODO Auto-generated method stub
-		PlanVO plan = planDao.getPlans(shopName);
+		PlanVO plan = planDao.getPlans(shopName,current);
 		return plan;
 	}
 

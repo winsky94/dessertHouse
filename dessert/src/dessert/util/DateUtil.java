@@ -17,10 +17,31 @@ public class DateUtil {
 
 		Date currentDate = new Date();
 
-		// 比如今天是2012-12-25
-		String date=sdf.format(currentDate);
-		System.out.println(date);
-		System.out.println(getWeekByDate(date));
+		List<Date> list = getNextWeek(currentDate);
+		for (Date date : list) {
+			System.out.println(sdf.format(date));
+		}
+
+	}
+
+	/**
+	 * 得到输入日期的下一周时间，从周日到周六
+	 * 
+	 * @param mdate
+	 * @return
+	 */
+	public static List<Date> getNextWeek(Date mdate) {
+		@SuppressWarnings("deprecation")
+		int b = mdate.getDay();
+		Date fdate;
+		List<Date> list = new ArrayList<Date>();
+		Long fTime = mdate.getTime() - b * 24 * 3600000;
+		for (int a = 7; a < 14; a++) {
+			fdate = new Date();
+			fdate.setTime(fTime + (a * 24 * 3600000));
+			list.add(a - 7, fdate);
+		}
+		return list;
 	}
 
 	public static String getToday() {
@@ -44,7 +65,7 @@ public class DateUtil {
 		int day = Integer.parseInt(dates[2]);
 		calendar.set(year, month - 1, day);// 设置当前时间,月份是从0月开始计算
 		int number = calendar.get(Calendar.DAY_OF_WEEK);// 星期表示1-7，是从星期日开始，
-		return Week.getWeek(number-1);
+		return Week.getWeek(number - 1);
 	}
 
 	/**
@@ -79,8 +100,7 @@ public class DateUtil {
 		int todayNum = Week.getNum(todayWeek);
 		int chosenNum = getNumByDayEn(day);
 		int gap = (6 - todayNum) + (chosenNum - 0) + 1;
-		
-		System.out.println("todayNum="+todayNum+";chosenNum="+chosenNum);
+
 		return getDateAfter(date, gap);
 	}
 
@@ -131,5 +151,54 @@ public class DateUtil {
 			list.add(a, fdate);
 		}
 		return list;
+	}
+
+	/**
+	 * 判断两个日期是否在同一周，以周日为一周的开始
+	 * 
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	public static boolean isInSameWeek(String date1, String date2) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date d1 = null;
+		Date d2 = null;
+		try {
+			d1 = format.parse(date1);
+			d2 = format.parse(date2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(d1);
+		cal2.setTime(d2);
+		int subYear = cal1.get(Calendar.YEAR) - cal2.get(Calendar.YEAR);
+		// subYear==0,说明是同一年
+		if (subYear == 0) {
+			if (cal1.get(Calendar.WEEK_OF_YEAR) == cal2
+					.get(Calendar.WEEK_OF_YEAR))
+				return true;
+		}
+		// 例子:cal1是"2005-1-1"，cal2是"2004-12-25"
+		// java对"2004-12-25"处理成第52周
+		// "2004-12-26"它处理成了第1周，和"2005-1-1"相同了
+		// 大家可以查一下自己的日历
+		// 处理的比较好
+		// 说明:java的一月用"0"标识，那么12月用"11"
+		else if (subYear == 1 && cal2.get(Calendar.MONTH) == 11) {
+			if (cal1.get(Calendar.WEEK_OF_YEAR) == cal2
+					.get(Calendar.WEEK_OF_YEAR))
+				return true;
+		}
+		// 例子:cal1是"2004-12-31"，cal2是"2005-1-1"
+		else if (subYear == -1 && cal1.get(Calendar.MONTH) == 11) {
+			if (cal1.get(Calendar.WEEK_OF_YEAR) == cal2
+					.get(Calendar.WEEK_OF_YEAR))
+				return true;
+
+		}
+		return false;
 	}
 }

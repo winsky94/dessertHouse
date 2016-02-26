@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,10 +48,10 @@ public class PlanJsonController extends BaseController {
 		// TODO Auto-generated method stub
 		message = "";
 
-		String shopName = params.get("shopName");
-		PlanVO planVO = planService.getPlans(shopName);
-		HttpSession session = session();
-		session.setAttribute(Configure.PLAN_SESSION, planVO);
+		// String shopName = params.get("shopName");
+		// PlanVO planVO = planService.getPlans(shopName);
+		// HttpSession session = session();
+		// session.setAttribute(Configure.PLAN_SESSION, planVO);
 		return Configure.SUCCESS;
 	}
 

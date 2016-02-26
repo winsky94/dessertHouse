@@ -96,8 +96,9 @@ pageEncoding="utf-8"%>
 								<td><% out.println(address); %></td>
 								<%
 								String url="";
+								boolean planSubmit=false;
 								if(d[0].equals("完成")){
-									url="/dessert/ZD_waitress?action=view&day=Sunday&shopName="+name;
+									planSubmit=true;
 								%>
 								<td>
 									<button type="button" class="btn btn-mini btn-success" role="button" disabled>
@@ -106,19 +107,18 @@ pageEncoding="utf-8"%>
 								</td>
 								<%
 								}else{
-									url="/dessert/ZD_waitress?action=create&day=Sunday&shopName="+name;
 								%>
 								<td>
-									<a type="button" class="btn btn-mini btn-warning" href="<%out.println(url); %>" role="button">
-										<i class="icon-ok icon-white"></i> &nbsp;<%=d[0] %>
-									</a>
+									<button type="button" class="btn btn-mini btn-warning" role="button" disabled>
+										<i class="icon-edit icon-white"></i> &nbsp;<%=d[0] %>
+									</button>
 								</td>
 								<%
 								}
 								%>
 								
 								<%
-								if(d[1].equals("待审")){
+								if(!planSubmit){
 								%>
 									<td>
 										<button type="button" class="btn btn-mini btn-info" disabled>
@@ -126,22 +126,33 @@ pageEncoding="utf-8"%>
 										</button>
 									</td>
 								<%
-								}else if(d[1].equals("不过")){
-								%>
-									<td>
-										<a type="button" class="btn btn-mini btn-danger" href="/dessert/ZD_waitress?action=update&day=Sunday&shopName=<%out.println(name); %>" role="button">
-											<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
-										</a>
-									</td>
-								<%		
-								}else if(d[1].equals("通过")){
-								%>
-									<td>
-										<button type="button" class="btn btn-mini btn-success" disabled>
-											<i class="icon-ok icon-white"></i> &nbsp;<%=d[1] %>
-										</button>
-									</td>
-								<%
+								}else{
+									if(d[1].equals("待审")){
+										String approve_url="/dessert/ZD_waitress?action=approve&day=Sunday&shopName="+name;
+									%>
+										<td>
+											<a type="button" class="btn btn-mini btn-info" href="<%=approve_url %>" role="button">
+												<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
+											</a>
+										</td>
+									<%
+									}else if(d[1].equals("不过")){
+									%>
+										<td>
+											<button type="button" class="btn btn-mini btn-danger" disabled>
+												<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
+											</button>
+										</td>
+									<%		
+									}else if(d[1].equals("通过")){
+									%>
+										<td>
+											<button type="button" class="btn btn-mini btn-success" disabled>
+												<i class="icon-ok icon-white"></i> &nbsp;<%=d[1] %>
+											</button>
+										</td>
+									<%
+									}
 								}
 								%>
 								

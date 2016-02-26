@@ -39,7 +39,8 @@ public class PlanController extends BaseController {
 			plan = (Map<Week, ArrayList<String>>) session().getAttribute(
 					Configure.PLAN_SHOP_ALL);
 
-		} else if ("view".equals(action)||"update".equals(action)) {
+		} else if ("view".equals(action) || "update".equals(action)
+				|| "approve".equals(action)) {
 			PlanVO planVO = planService.getPlans(shopName, false);
 			if (planVO == null) {
 				plan = null;

@@ -30,4 +30,11 @@
 			<result name="ZD_shop">waitressManager.jsp</result>
 		</action>
 	</package>
+	
+	<package name="manager" extends="struts-default">
+		<!-- 计划批准-->
+		<action name="manager_shop_plan" class="managerShopController">
+			<result name="manager shop list">manager_shop_plan.jsp</result>
+		</action>
+	</package>
 </struts>

@@ -28,6 +28,7 @@
 	<bean id="zDShopController" class="dessert.controller.html.ZDShopController" />
 	<bean id="planController" class="dessert.controller.html.PlanController" />
 	<bean id="planJsonController" class="dessert.controller.api.PlanJsonController" />
+	<bean id="managerShopController" class="dessert.controller.html.ManagerShopController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />

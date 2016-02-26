@@ -176,7 +176,7 @@ function write_header_login(userName, type) {
 				<div class="navbar-inner">\
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
-						<li><a href="#">计划批准</a></li>\
+						<li><a href="manager_shop_plan">计划批准</a></li>\
 						<li><a href="#">统计分析</a></li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\

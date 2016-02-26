@@ -60,5 +60,7 @@ public class Configure {
 	public static final String ZD_WAITRESS = "ZD_waitress";
 	//某个店的全部商品计划session，map的value为商品名列表
 	public static final String PLAN_SHOP_ALL = "plan";
+	public static final String ZD_SHOP = "ZD_shop";
+	
 
 }

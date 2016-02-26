@@ -1,8 +1,16 @@
+//得到url的参数
+function getQueryString(name){
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return  unescape(r[2]); return null;
+}
+
 function refresh(){
 	var shopName = $("#shopName").val();
 	//获取选中的值
 	var selectedDay=$("input[name='week']:checked").val();
-	var url="/dessert/ZD_waitress?action=create&day="+selectedDay+"&shopName="+shopName
+	var action=getQueryString("action");
+	var url="/dessert/ZD_waitress?action="+action+"&day="+selectedDay+"&shopName="+shopName
 	window.location.href=url;
 }
 

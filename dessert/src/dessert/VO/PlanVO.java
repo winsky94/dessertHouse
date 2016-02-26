@@ -14,19 +14,29 @@ public class PlanVO {
 	private String createAt;// 创建日期
 	private HashMap<Week, ArrayList<String>> plans = new HashMap<Week, ArrayList<String>>();
 	private boolean checked;// 经理是否审批了
+	private String validSunday;// 记录开始生效的那一周的周日
 
 	public PlanVO() {
 
 	}
 
 	public PlanVO(long id, String shop, String createAt,
-			HashMap<Week, ArrayList<String>> plans, boolean checked) {
+			HashMap<Week, ArrayList<String>> plans, boolean checked,
+			String validSunday) {
 		super();
 		this.id = id;
 		this.shop = shop;
 		this.createAt = createAt;
 		this.plans = plans;
 		this.checked = checked;
+	}
+
+	public String getValidSunday() {
+		return validSunday;
+	}
+
+	public void setValidSunday(String validSunday) {
+		this.validSunday = validSunday;
 	}
 
 	public long getId() {

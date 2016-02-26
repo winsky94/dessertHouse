@@ -25,6 +25,7 @@
 	<bean id="loginJsonController" class="dessert.controller.api.LoginJsonController" />
 	<bean id="waitressController" class="dessert.controller.html.WaitressController" />
 	<bean id="waitressJsonController" class="dessert.controller.api.WaitressJsonController" />
+	<bean id="zDShopController" class="dessert.controller.html.ZDShopController" />
 	<bean id="planController" class="dessert.controller.html.PlanController" />
 	<bean id="planJsonController" class="dessert.controller.api.PlanJsonController" />
 

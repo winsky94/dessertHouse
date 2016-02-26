@@ -115,13 +115,6 @@ pageEncoding="utf-8"%>
 					</label>
 
 					<script type="text/javascript">
-						//得到url的参数
-						function getQueryString(name){
-						    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-						    var r = window.location.search.substr(1).match(reg);
-						    if(r!=null)return  unescape(r[2]); return null;
-						}
-
 						var day=getQueryString("day");
 						if(day!=null&&day.toString().length>1){
 							//传过来的参数不为空

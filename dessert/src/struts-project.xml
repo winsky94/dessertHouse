@@ -26,5 +26,8 @@
 		<action name="ZD_waitress" class="planController">
 			<result name="ZD_waitress">makePlan.jsp</result>
 		</action>
+		<action name="ZD_shop" class="zDShopController">
+			<result name="ZD_shop">waitressManager.jsp</result>
+		</action>
 	</package>
 </struts>

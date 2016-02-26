@@ -20,7 +20,7 @@ public interface DessertService {
 	 * @param name
 	 * @return
 	 */
-	public boolean checkExist(String name);
+	public boolean checkExist(String name, String weekDay);
 
 	public ArrayList<Dessert> getDessertByName(ArrayList<String> names);
 

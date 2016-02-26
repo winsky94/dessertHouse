@@ -1,5 +1,7 @@
 package dessert.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.configure.Configure;
@@ -16,11 +18,10 @@ public class LoginServiceImpl implements LoginService {
 	public LoginDao loginDao;
 
 	@Override
-	public UserType login(String userName, String password) {
+	public HashMap<UserType, String> login(String userName, String password) {
 		// TODO Auto-generated method stub
 		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
 		String passwordEncrypt = des.encrypt(password);
 		return loginDao.login(userName, passwordEncrypt);
 	}
-
 }

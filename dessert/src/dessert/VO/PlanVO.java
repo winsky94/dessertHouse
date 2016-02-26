@@ -13,7 +13,7 @@ public class PlanVO {
 	private String shop;// 店名
 	private String createAt;// 创建日期
 	private HashMap<Week, ArrayList<String>> plans = new HashMap<Week, ArrayList<String>>();
-	private boolean checked;// 经理是否审批了
+	private int checked;// 经理是否审批了，-1：待审；0，不过；1，通过
 	private String validSunday;// 记录开始生效的那一周的周日
 
 	public PlanVO() {
@@ -21,7 +21,7 @@ public class PlanVO {
 	}
 
 	public PlanVO(long id, String shop, String createAt,
-			HashMap<Week, ArrayList<String>> plans, boolean checked,
+			HashMap<Week, ArrayList<String>> plans, int checked,
 			String validSunday) {
 		super();
 		this.id = id;
@@ -75,11 +75,12 @@ public class PlanVO {
 		this.plans.put(week, plan);
 	}
 
-	public boolean getChecked() {
+	public int getChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(int checked) {
 		this.checked = checked;
 	}
+
 }

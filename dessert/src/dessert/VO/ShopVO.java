@@ -1,9 +1,12 @@
 package dessert.VO;
 
+import java.io.Serializable;
+
 /**
  * @author 严顺宽
  */
-public class ShopVO {
+public class ShopVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String name;// 店面名称
 	private String address;// 地址

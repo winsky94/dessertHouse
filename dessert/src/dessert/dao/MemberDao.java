@@ -1,5 +1,7 @@
 package dessert.dao;
 
+import java.util.HashMap;
+
 import dessert.entity.Member;
 import dessert.util.UserType;
 
@@ -17,5 +19,5 @@ public interface MemberDao {
 
 	public void update(Member member);
 
-	public UserType checkLogin(String userName, String password);
+	public HashMap<UserType, String> checkLogin(String userName, String password);
 }

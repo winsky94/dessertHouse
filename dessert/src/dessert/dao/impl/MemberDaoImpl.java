@@ -1,5 +1,6 @@
 package dessert.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -53,8 +54,10 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	}
 
 	@Override
-	public UserType checkLogin(String userName, String password) {
+	public HashMap<UserType, String> checkLogin(String userName, String password) {
 		// TODO Auto-generated method stub
+		HashMap<UserType, String> result = new HashMap<UserType, String>();
+
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Member.class);
 		criteria.add(Restrictions.eq("name", userName));
@@ -62,15 +65,18 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		@SuppressWarnings("unchecked")
 		List<Member> members = criteria.list();
 		if (members == null || members.size() == 0) {
-			return UserType.error;
+			result.put(UserType.error, "");
 		} else {
 			// 检查可能的错误
 			CheckError.checkListSize(members);
 			Member member = members.get(0);
+			String lastLoadTime = member.getLastLoadTime();
 			updateLastLoadTime(member);
 			update(member);
-			return UserType.member;
+
+			result.put(UserType.member, lastLoadTime);
 		}
+		return result;
 	}
 
 	private void updateLastLoadTime(Member member) {

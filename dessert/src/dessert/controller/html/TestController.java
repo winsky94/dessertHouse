@@ -37,17 +37,21 @@ public class TestController extends BaseController {
 		// TODO Auto-generated method stub
 		// initShops();
 		// initWorker();
-		PlanVO planVO = planService.getPlans("shop1", false);
-		HashMap<Week, ArrayList<String>> result = planVO.getPlans();
-		for (Week key : result.keySet()) {
-			ArrayList<String> t=result.get(key);
-			System.out.println(Week.toString(key));
-			if(t!=null){
-				for(String string:t){
-					System.out.println(string);
+		PlanVO planVO = planService.getPlans("shop2", false);
+		if (planVO == null) {
+			System.out.println("尚未制定计划");
+		} else {
+			HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+			for (Week key : result.keySet()) {
+				ArrayList<String> t = result.get(key);
+				System.out.println(Week.toString(key));
+				if (t != null) {
+					for (String string : t) {
+						System.out.println(string);
+					}
 				}
+				System.out.println("=======================");
 			}
-			System.out.println("=======================");
 		}
 		return Configure.SUCCESS;
 	}

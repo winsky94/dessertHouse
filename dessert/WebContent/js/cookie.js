@@ -102,7 +102,7 @@ function write_header_login(userName, type) {
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						<li class="dropdown">\
-							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> 小王 <b class="caret"></b></a>\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
 								<li><a href="#">个人信息</a></li>\
 								<li class="divider"></li>\
@@ -114,8 +114,89 @@ function write_header_login(userName, type) {
 			</div>\
 			<!-- 导航栏结束 -->\
 		';
-	} else if (type == 'coach' || type == 'doctor') {
-		var txt = '';
+	} else if (type == 'waitressManager') {
+		//总店服务员
+		var txt = '\
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
+				<div class="navbar-inner">\
+					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
+					<ul class="nav navbar-nav" style="margin-left: 5%">\
+						<li><a href="ZD_shop">计划制定</a></li>\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					</ul>\
+					<ul class="nav navbar-nav pull-right">\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">个人信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+							</ul>\
+						</li>\
+					</ul>\
+				</div>\
+			</div>\
+		';
+	} else if(type == 'waitress'){
+		//分店服务员
+		var txt = '\
+			<!-- 顶部导航栏 -->\
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
+				<div class="navbar-inner">\
+					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
+					<ul class="nav navbar-nav" style="margin-left: 5%">\
+						<li><a href="#">产品销售</a></li>\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">个人信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+							</ul>\
+						</li>\
+					</ul>\
+				</div>\
+			</div>\
+			<!-- 导航栏结束 -->\
+		';
+	} else if(type == 'manager'){
+		//经理
+		var txt = '\
+			<!-- 顶部导航栏 -->\
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">\
+				<div class="navbar-inner">\
+					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
+					<ul class="nav navbar-nav" style="margin-left: 5%">\
+						<li><a href="#">计划批准</a></li>\
+						<li><a href="#">统计分析</a></li>\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
+					</ul>\
+					<ul class="nav navbar-nav clearfix pull-right">\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">个人信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
+							</ul>\
+						</li>\
+					</ul>\
+				</div>\
+			</div>\
+			<!-- 导航栏结束 -->\
+		';
 	}
 
 	$("header").html(txt);
@@ -203,10 +284,12 @@ function callback_login(result) {
 		alert("出现错误");
 	} else {
 		var userType = result.userType;
+		var lastLoadTime = result.lastLoadTime;
 		var error = "error";
 		if (userType != error) {
 			add_cookie('userName', userName, 30 * 24);
 			add_cookie("type", userType, 30 * 24);
+			add_cookie("lastLoadTime", lastLoadTime, 30 * 24);
 			window.location.href = "index.html";
 		} else if(userType == error){
 			// var divNode = $("#message");

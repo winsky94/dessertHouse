@@ -17,7 +17,7 @@ public class Plan {
 	public long id;
 	private String shop;// 店名
 	private String createAt;// 创建日期
-	private boolean checked;// 经理是否审批了
+	private int checked;// 经理是否审批了，-1：待审；0，不过；1，通过
 	private String validSunday;// 记录开始生效的那一周的周日
 
 	public long getId() {
@@ -44,11 +44,11 @@ public class Plan {
 		this.createAt = createAt;
 	}
 
-	public boolean getChecked() {
+	public int getChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(int checked) {
 		this.checked = checked;
 	}
 

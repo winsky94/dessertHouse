@@ -12,7 +12,7 @@ public interface DessertDao {
 
 	public void update(Dessert dessert);
 
-	public boolean checkExist(String name);
+	public boolean checkExist(String name,String weekDay);
 
 	public Dessert getDessertByName(String name);
 

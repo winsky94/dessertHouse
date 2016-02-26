@@ -1,5 +1,7 @@
 package dessert.dao.impl;
 
+import java.util.HashMap;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,17 @@ public class LoginDaoImpl implements LoginDao {
 	public MemberDao memberDao;
 
 	@Override
-	public UserType login(String userName, String password) {
+	public HashMap<UserType, String> login(String userName, String password) {
 		// TODO Auto-generated method stub
-		UserType result = UserType.error;
+		HashMap<UserType, String> result = new HashMap<UserType, String>();
 
-		if (memberDao.checkLogin(userName, password) != UserType.error) {
-			// 检查是否是会员登录
-			result = UserType.member;
+		HashMap<UserType, String> memberResult = memberDao.checkLogin(userName,
+				password);
+		if (!memberResult.containsKey(UserType.error)) {
+			// 会员登录
+			result = memberResult;
 		} else {
-			// 检查是否是员工登录
-			return workerDao.checkLogin(userName, password);
+			result = workerDao.checkLogin(userName, password);
 		}
 		return result;
 	}

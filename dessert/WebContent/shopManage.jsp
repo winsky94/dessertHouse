@@ -55,19 +55,8 @@ pageEncoding="utf-8"%>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<!--左侧用户信息-->
-			<div class="span2">
-				<ul class="collection">
-					<li class="collection-item"><img src="image/index1.jpg" width="180px" height="150px">
-						<h5 id="userName" class="text-center">admin</h5>
-					</li>
-					<li class="collection-item">
-						<p>
-							最近登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; 2016-01-20 15:50:00
-						</p>
-					</li>
-				</ul>
-			</div>
-			<!-- 左侧用户信息结束 -->
+			<%@ include file="WorkerInfo.jsp"%>
+			<!--左侧用户信息 结束-->
 			<!--右侧店面表格 -->
 			<div class="span10">
 				<!-- 操作按钮 -->

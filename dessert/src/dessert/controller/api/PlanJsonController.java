@@ -60,8 +60,10 @@ public class PlanJsonController extends BaseController {
 
 		Map<String, String> params = getParams();
 		String name = params.get("name");
+		String shopName=params.get("shopName");
 		String weekDay=params.get("weekDay");
-		boolean exist = dessertService.checkExist(name,weekDay);
+		String date = DateUtil.getDate(weekDay);
+		boolean exist = dessertService.checkExist(name,date,shopName);
 		if (exist) {
 			message = Configure.Dessert_EXIST;
 		}

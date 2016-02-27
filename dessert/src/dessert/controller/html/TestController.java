@@ -1,12 +1,9 @@
 package dessert.controller.html;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dessert.VO.PlanVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Shop;
@@ -16,7 +13,6 @@ import dessert.service.ShopService;
 import dessert.service.TestService;
 import dessert.service.WorkerService;
 import dessert.util.UserType;
-import dessert.util.Week;
 
 public class TestController extends BaseController {
 	private static final long serialVersionUID = 1L;
@@ -35,24 +31,27 @@ public class TestController extends BaseController {
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
+
 		// initShops();
+
 		// initWorker();
-		PlanVO planVO = planService.getPlans("shop2", false);
-		if (planVO == null) {
-			System.out.println("尚未制定计划");
-		} else {
-			HashMap<Week, ArrayList<String>> result = planVO.getPlans();
-			for (Week key : result.keySet()) {
-				ArrayList<String> t = result.get(key);
-				System.out.println(Week.toString(key));
-				if (t != null) {
-					for (String string : t) {
-						System.out.println(string);
-					}
-				}
-				System.out.println("=======================");
-			}
-		}
+
+		// PlanVO planVO = planService.getPlans("shop2", false);
+		// if (planVO == null) {
+		// System.out.println("尚未制定计划");
+		// } else {
+		// HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+		// for (Week key : result.keySet()) {
+		// ArrayList<String> t = result.get(key);
+		// System.out.println(Week.toString(key));
+		// if (t != null) {
+		// for (String string : t) {
+		// System.out.println(string);
+		// }
+		// }
+		// System.out.println("=======================");
+		// }
+		// }
 		return Configure.SUCCESS;
 	}
 

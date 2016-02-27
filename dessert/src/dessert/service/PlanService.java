@@ -24,4 +24,15 @@ public interface PlanService {
 
 	public void submitPlans(PlanVO plan);
 
+	/**
+	 * 总经理审批计划
+	 * 
+	 * @param planId
+	 *            计划id
+	 * @param result
+	 *            审批结果，configure.PLAN_PASS和configure.PLAN_FAIL
+	 * @return 受影响的行数
+	 */
+	public int approve(long planId, int result);
+
 }

@@ -63,14 +63,14 @@ pageEncoding="utf-8"%>
 			<div class="span10">
 				<!-- 操作按钮 -->
 				<div>
-					<a class="btn btn-primary btn-small pull-right margin_button" href="#" onclick="deleteWaitress();">
-						<i class="icon-minus icon-white"></i>删除
+					<a class="btn btn-small pull-right margin_button" href="#" onclick="deleteWaitress();">
+						<i class="icon-minus"></i>删除
 					</a>
-					<a id="update" class="btn btn-primary btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('update');">
-						<i class="icon-edit icon-white"></i>修改
+					<a id="update" class="btn btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('update');">
+						<i class="icon-edit"></i>修改
 					</a>
-					<a class="btn btn-primary btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('add');">
-						<i class="icon-plus icon-white"></i>增加
+					<a class="btn btn-small pull-right margin_button" href="#waitressModel" role="button" data-toggle="modal" onclick="changeAction('add');">
+						<i class="icon-plus"></i>增加
 					</a>
 				</div>
 				<!-- 操作按钮结束 -->

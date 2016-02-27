@@ -45,4 +45,10 @@ public class PlanServiceImpl implements PlanService {
 		planDao.submitPlans(plan);
 	}
 
+	@Override
+	public int  approve(long planId, int result) {
+		// TODO Auto-generated method stub
+		return planDao.approve(planId, result);
+	}
+
 }

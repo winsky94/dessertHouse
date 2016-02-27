@@ -18,6 +18,16 @@ import dessert.configure.Configure;
 public class BaseDaoImpl<T> {
 	@Autowired
 	public SessionFactory sessionFactory;
+	
+	/**
+	 * 执行sql原生语句，返回受影响的行数
+	 * @param sql
+	 * @return
+	 */
+	public int doSql(String sql) {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createSQLQuery(sql).executeUpdate();
+	}
 
 	public List<?> doSqlQuery(String sql) {
 		Session session = sessionFactory.getCurrentSession();

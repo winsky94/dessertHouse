@@ -15,12 +15,13 @@ public interface DessertService {
 	public void update(Dessert dessert);
 
 	/**
-	 * 根据名称判断是否存在，不允许商品重名
-	 * 
+	 * 根据名称、店名和日期判断是否存在，不允许商品重名
 	 * @param name
+	 * @param date
+	 * @param shopName
 	 * @return
 	 */
-	public boolean checkExist(String name, String weekDay);
+	public boolean checkExist(String name, String date,String shopName);
 
 	public ArrayList<Dessert> getDessertByName(ArrayList<String> names);
 

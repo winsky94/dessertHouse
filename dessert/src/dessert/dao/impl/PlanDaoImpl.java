@@ -191,4 +191,12 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 
 		return result;
 	}
+
+	@Override
+	public int approve(long planId, int result) {
+		// TODO Auto-generated method stub
+		String sql = "update plan set checked=" + result + " where id="
+				+ planId;
+		return doSql(sql);
+	}
 }

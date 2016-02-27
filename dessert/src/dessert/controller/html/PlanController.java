@@ -38,14 +38,17 @@ public class PlanController extends BaseController {
 			// 总店服务员创建计划
 			plan = (Map<Week, ArrayList<String>>) session().getAttribute(
 					Configure.PLAN_SHOP_ALL);
+			session().removeAttribute(Configure.PLAN_ID);
 
 		} else if ("view".equals(action) || "update".equals(action)
-				|| "approve".equals(action)) {
+				|| "approve".equals(action)|| "approveView".equals(action)) {
 			PlanVO planVO = planService.getPlans(shopName, false);
 			if (planVO == null) {
 				plan = null;
 			} else {
 				HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+				long planId = planVO.getId();
+				session().setAttribute(Configure.PLAN_ID, planId);
 				session().setAttribute(Configure.PLAN_SHOP_ALL, result);
 				plan = result;
 			}
@@ -55,7 +58,6 @@ public class PlanController extends BaseController {
 			session().removeAttribute(Configure.PLAN_SESSION);
 			for (Week key : plan.keySet()) {
 				if (Week.toString(key).equals(day)) {
-					System.out.println("找到了这天的值");
 					ArrayList<String> dessertNames = plan.get(key);
 					ArrayList<Dessert> desserts = dessertService
 							.getDessertByName(dessertNames);
@@ -77,6 +79,7 @@ public class PlanController extends BaseController {
 		} else {
 			// 假数据，实际不要处理
 			plan = new HashMap<Week, ArrayList<String>>();
+			session().removeAttribute(Configure.PLAN_ID);
 			session().setAttribute(Configure.PLAN_SHOP_ALL, plan);
 			// ArrayList<DessertVO> desserts = new ArrayList<DessertVO>();
 			// Dessert dessert = new Dessert();

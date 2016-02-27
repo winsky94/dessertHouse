@@ -137,19 +137,21 @@ pageEncoding="utf-8"%>
 										</td>
 									<%
 									}else if(d[1].equals("不过")){
+										String view_url="/dessert/ZD_waitress?action=approveView&day=Sunday&shopName="+name;
 									%>
 										<td>
-											<button type="button" class="btn btn-mini btn-danger" disabled>
-												<i class="icon-eye-open icon-white"></i> &nbsp;<%=d[1] %>
-											</button>
+											<a type="button" class="btn btn-mini btn-danger" href="<%=view_url %>" role="button">
+												<i class="icon-remove icon-white"></i> &nbsp;<%=d[1] %>
+											</a>
 										</td>
 									<%		
 									}else if(d[1].equals("通过")){
+										String view_url="/dessert/ZD_waitress?action=approveView&day=Sunday&shopName="+name;
 									%>
 										<td>
-											<button type="button" class="btn btn-mini btn-success" disabled>
+											<a type="button" class="btn btn-mini btn-success" href="<%=view_url %>" role="button">
 												<i class="icon-ok icon-white"></i> &nbsp;<%=d[1] %>
-											</button>
+											</a>
 										</td>
 									<%
 									}
@@ -163,8 +165,7 @@ pageEncoding="utf-8"%>
 						</tbody>
 					</table>
 				</div>
-			</div>
-			<!--右侧店面表格结束 -->	
+				<!--右侧店面表格结束 -->
 			</div>
 			<!--右侧销售计划信息 结束 -->
 		</div>

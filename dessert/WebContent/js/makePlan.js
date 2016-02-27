@@ -132,7 +132,8 @@ function process(){
 			dataType : 'json',
 			data : {
 				name:name,
-				weekDay:weekDay
+				weekDay:weekDay,
+				shopName:owingTo
 			},
 			success : function(result, textStatus) {
 				if(result.message!=""){
@@ -220,16 +221,16 @@ function submitPlan () {
 		},
 		success : function(result, textStatus) {
 			if (result.length == 0) {
-					alert("出现错误");
+				alert("出现错误");
+			} else {
+				var message = result.message;
+				var success = "success";
+				if (message == success) {
+					window.location.href = "/dessert/ZD_shop";
 				} else {
-					var message = result.message;
-					var success = "success";
-					if (message == success) {
-						window.location.href = "/dessert/ZD_shop";
-					} else {
-						$("#process_result").html(message);
-					}
+					$("#process_result").html(message);
 				}
+			}
 		}
 	});
 }
@@ -243,3 +244,40 @@ function CheckInputIntFloat(oInput) {
 
 //输入库存数量
 //onkeyup="value=value.replace(/[^\d]/g,'')"
+
+//经理审批
+function approve (action) {
+	var planId=$("#planId").val();
+	if (action=="通过") {
+		var result = 1;//通过标记，见configure.plan_pass
+	} else if(action=="不过"){
+		var result = 0;//不过标记，见configure.plan_fail
+	}
+
+	$.ajax({
+		url : 'api/plan/approve',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			planId:planId,
+			result:result
+		},
+		success : function(result, textStatus) {
+			approve_callback(result);
+		}
+	});
+}
+
+function approve_callback (result) {
+	if (result.length == 0) {
+		alert("出现错误");
+	} else {
+		var message = result.message;
+		var success = "success";
+		if (message == success) {
+			window.location.href = "manager_shop_plan";
+		} else {
+			alert("审批失败，系统出现错误，审批计划不存在");
+		}
+	}
+}

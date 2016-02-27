@@ -112,5 +112,12 @@
 				<param name="message">message</param>
 			</result>
 		</action>
+		<!-- 总经理审批计划 -->
+		<action name="approve" class="managerJsonController" method="approvePlan">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 	</package>
+	
 </struts>

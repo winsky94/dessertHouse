@@ -29,6 +29,7 @@
 	<bean id="planController" class="dessert.controller.html.PlanController" />
 	<bean id="planJsonController" class="dessert.controller.api.PlanJsonController" />
 	<bean id="managerShopController" class="dessert.controller.html.ManagerShopController" />
+	<bean id="managerJsonController" class="dessert.controller.api.ManagerJsonController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />

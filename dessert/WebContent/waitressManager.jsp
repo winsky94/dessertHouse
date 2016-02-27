@@ -100,9 +100,9 @@ pageEncoding="utf-8"%>
 									url="/dessert/ZD_waitress?action=view&day=Sunday&shopName="+name;
 								%>
 								<td>
-									<button type="button" class="btn btn-mini btn-success" role="button" disabled>
+									<a type="button" class="btn btn-mini btn-success" href="<%out.println(url); %>" role="button">
 										<i class="icon-ok icon-white"></i> &nbsp;<%=d[0] %>
-									</button>
+									</a>
 								</td>
 								<%
 								}else{
@@ -110,7 +110,7 @@ pageEncoding="utf-8"%>
 								%>
 								<td>
 									<a type="button" class="btn btn-mini btn-warning" href="<%out.println(url); %>" role="button">
-										<i class="icon-ok icon-white"></i> &nbsp;<%=d[0] %>
+										<i class="icon-edit icon-white"></i> &nbsp;<%=d[0] %>
 									</a>
 								</td>
 								<%

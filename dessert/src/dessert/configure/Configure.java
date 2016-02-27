@@ -66,7 +66,8 @@ public class Configure {
 	public static final int PLAN_READY = -1;// 计划待审
 	public static final int PLAN_PASS = 1;// 计划审核通过
 	public static final int PLAN_FAIL = 0;// 计划审核不过
-	
+	public static final String PLAN_ID = "planId";// 展示的plan在数据库中的id
+
 	// ==================================经理===========================================
 	public static final String MANAGER_SHOP_LIST = "manager shop list";
 }

@@ -47,4 +47,19 @@ public class ShopDaoImpl extends BaseDaoImpl<Shop> implements ShopDao {
 			return true;
 		}
 	}
+
+	@Override
+	public Shop getShop(String shopName) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Shop.class);
+		criteria.add(Restrictions.eq("name", shopName));
+		@SuppressWarnings("unchecked")
+		List<Shop> shops = criteria.list();
+		if (shops == null || shops.size() == 0) {
+			return null;
+		} else {
+			return shops.get(0);
+		}
+	}
 }

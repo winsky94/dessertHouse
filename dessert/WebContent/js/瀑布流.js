@@ -57,6 +57,10 @@ function imgLocation(parent, content) {
     //将父级空间parent下的所有内容全部取出
     var cParent = document.getElementById(parent);
     var cContent = getChildElemet(cParent, content);
+    
+    if(cContent.length==0){
+        return;
+    }
     //每张图片的宽度
     var imgWidth = cContent[0].offsetWidth;
     //每行可以放多少张图片

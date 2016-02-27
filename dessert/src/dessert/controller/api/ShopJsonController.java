@@ -1,9 +1,7 @@
 package dessert.controller.api;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +10,8 @@ import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Shop;
 import dessert.service.ShopService;
+import dessert.util.DateUtil;
+import dessert.util.Week;
 
 /**
  * @author 严顺宽
@@ -19,16 +19,17 @@ import dessert.service.ShopService;
 public class ShopJsonController extends BaseController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	public ShopService shopService;
+	private ShopService shopService;
 	private String message;
-	public ArrayList<ShopVO> shops = new ArrayList<ShopVO>();
+	private ShopVO shopVO;
+	private Map<String, Week> weeks = new LinkedHashMap<String, Week>();
 
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-		shops = shopService.getShops();
-		HttpSession session = session();
-		session.setAttribute(Configure.SHOP_SESSION, shops);
+		// shops = shopService.getShops();
+		// HttpSession session = session();
+		// session.setAttribute(Configure.SHOP_SESSION, shops);
 		return Configure.SUCCESS;
 	}
 
@@ -74,26 +75,29 @@ public class ShopJsonController extends BaseController {
 		message = Configure.SHOP_SUCCESS_ACTION;
 		return Configure.SUCCESS;
 	}
-	
-	public String checkShop(){
+
+	public String checkShop() {
 		Map<String, String> params = getParams();
 		String name = params.get("name");
 		boolean result = shopService.checkShop(name);
-		if(result){
-			message=Configure.WAITRESS_OWINGTO_EXIST;
-		}else{
-			message=Configure.WAITRESS_OWINGTO_FAIL;
+		if (result) {
+			message = Configure.WAITRESS_OWINGTO_EXIST;
+		} else {
+			message = Configure.WAITRESS_OWINGTO_FAIL;
 		}
 		return Configure.SUCCESS;
 	}
 
-
-	public ArrayList<ShopVO> getShops() {
-		return shops;
+	public String getShop() {
+		Map<String, String> params = getParams();
+		String name = params.get("shopName");
+		shopVO = shopService.getShop(name);
+		return Configure.SUCCESS;
 	}
 
-	public void setShops(ArrayList<ShopVO> shops) {
-		this.shops = shops;
+	public String getSevenDay() {
+		weeks = DateUtil.getNextSevenDay();
+		return Configure.SUCCESS;
 	}
 
 	public String getMessage() {
@@ -102,6 +106,22 @@ public class ShopJsonController extends BaseController {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public ShopVO getShopVO() {
+		return shopVO;
+	}
+
+	public void setShopVO(ShopVO shopVO) {
+		this.shopVO = shopVO;
+	}
+
+	public Map<String, Week> getWeeks() {
+		return weeks;
+	}
+
+	public void setWeeks(Map<String, Week> weeks) {
+		this.weeks = weeks;
 	}
 
 }

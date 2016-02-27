@@ -3,6 +3,7 @@
 pageEncoding="utf-8"%>
 <%@ page language="java" import="java.util.*"%>
 <%@ page language="java" import="dessert.VO.DessertVO"%>
+<%@ page language="java" import="java.net.URLDecoder"%>
 <!-- http://localhost:8080/dessert/ZD_waitress?day=Sunday&shopName=shop1&action=create -->
 <html>
 <head>
@@ -73,6 +74,7 @@ pageEncoding="utf-8"%>
 			if(temp.startsWith("shopName=")){
 				int index=temp.indexOf("=");
 				shopName=temp.substring(index+1);
+				shopName=URLDecoder.decode(shopName, "utf-8");
 			}
 		}
 	}
@@ -138,7 +140,6 @@ pageEncoding="utf-8"%>
 					</script>
 				</div>
 				<!-- 选择制定周几的计划 结束-->
-
 				<!-- 操作按钮 -->
 				<div>
 				<%

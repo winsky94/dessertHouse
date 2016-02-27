@@ -25,4 +25,6 @@ public interface ShopService {
 	 * @return
 	 */
 	public boolean checkShop(String shopName);
+	
+	public ShopVO getShop(String shopName);
 }

@@ -1,10 +1,13 @@
 package dessert.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 严顺宽
@@ -13,15 +16,37 @@ public class DateUtil {
 
 	public static void main(String[] args) {
 		// 定义输出日期格式
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//
+		// Date currentDate = new Date();
+		//
+		// List<Date> list = getNextWeek(currentDate);
+		// for (Date date : list) {
+		// System.out.println(sdf.format(date));
+		// }
 
-		Date currentDate = new Date();
-
-		List<Date> list = getNextWeek(currentDate);
-		for (Date date : list) {
-			System.out.println(sdf.format(date));
+		Map<String, Week> result = new LinkedHashMap<String, Week>();
+		result = getNextSevenDay();
+		for (String s : result.keySet()) {
+			System.out.println(s + ":" + result.get(s));
 		}
 
+	}
+
+	/**
+	 * 得到包括今天在内的后7天的日期及星期
+	 * 
+	 * @return <日期xxxx-xx-xx，星期几>
+	 */
+	public static Map<String, Week> getNextSevenDay() {
+		Map<String, Week> result = new LinkedHashMap<String, Week>();
+		Date today = new Date();
+		for (int i = 0; i < 7; i++) {
+			String date = getDateAfter(today, i);
+			Week week = getWeekByDate(date);
+			result.put(date, week);
+		}
+		return result;
 	}
 
 	/**
@@ -30,6 +55,7 @@ public class DateUtil {
 	 * @param mdate
 	 * @return
 	 */
+
 	public static List<Date> getNextWeek(Date mdate) {
 		@SuppressWarnings("deprecation")
 		int b = mdate.getDay();
@@ -45,9 +71,7 @@ public class DateUtil {
 	}
 
 	public static String getToday() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date currentDate = new Date();
-		return sdf.format(currentDate);
+		return getFormattedDate(new Date());
 	}
 
 	/**
@@ -69,7 +93,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 得到某天的后几天
+	 * 得到某天后几天的日期
 	 * 
 	 * @param date
 	 *            日期
@@ -81,8 +105,7 @@ public class DateUtil {
 		Calendar now = Calendar.getInstance();
 		now.setTime(date);
 		now.set(Calendar.DATE, now.get(Calendar.DATE) + gap);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(now.getTime());
+		return getFormattedDate(now.getTime());
 	}
 
 	/**
@@ -92,10 +115,9 @@ public class DateUtil {
 	 *            星期的英文
 	 * @return 日期 ，格式形如xxxx-xx-xx
 	 */
-	public static String getDate(String day) {
+	public static String getDateByWeekDay(String day) {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sdf.format(date);
+		String today = getFormattedDate(date);
 		Week todayWeek = getWeekByDate(today);
 		int todayNum = Week.getNum(todayWeek);
 		int chosenNum = getNumByDayEn(day);
@@ -140,7 +162,7 @@ public class DateUtil {
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	public static List<Date> dateToWeek(Date mdate) {
+	public static List<Date> getCurrentWeek(Date mdate) {
 		int b = mdate.getDay();
 		Date fdate;
 		List<Date> list = new ArrayList<Date>();
@@ -157,7 +179,9 @@ public class DateUtil {
 	 * 判断两个日期是否在同一周，以周日为一周的开始
 	 * 
 	 * @param date1
+	 *            xxxx-xx-xx
 	 * @param date2
+	 *            xxxx-xx-xx
 	 * @return
 	 */
 	public static boolean isInSameWeek(String date1, String date2) {
@@ -200,5 +224,61 @@ public class DateUtil {
 
 		}
 		return false;
+	}
+
+	/**
+	 * 规范日期格式
+	 * 
+	 * @param date
+	 *            日期
+	 * @return 返回XXXX-XX-XX的形式
+	 */
+	public static String getFormattedDate(Date date) {
+		return getFormattedDate(date, "yyyy-MM-dd");
+	}
+
+	/**
+	 * 规范日期格式
+	 * 
+	 * @param date
+	 *            日期
+	 * @param form
+	 *            格式
+	 * @return
+	 */
+	public static String getFormattedDate(Date date, String form) {
+		SimpleDateFormat sdf = new SimpleDateFormat(form);
+		return sdf.format(date);
+	}
+
+	/**
+	 * 将字符串日期转为Date类型
+	 * 
+	 * @param date
+	 *            xxxx-xx-xx格式的日期
+	 * @return
+	 */
+	public static Date getDate(String date) {
+		return getDate(date, "yyyy-MM-dd");
+	}
+
+	/**
+	 * 将字符串日期转为Date类型
+	 * 
+	 * @param date
+	 *            给定参数格式的日期
+	 * @param form
+	 *            日期格式
+	 * @return
+	 */
+	public static Date getDate(String date, String form) {
+		SimpleDateFormat sdf = new SimpleDateFormat(form);
+		try {
+			return sdf.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

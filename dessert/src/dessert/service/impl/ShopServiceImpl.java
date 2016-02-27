@@ -58,4 +58,16 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.checkShop(shopName);
 	}
 
+	@Override
+	public ShopVO getShop(String shopName) {
+		// TODO Auto-generated method stub
+		Shop shop = shopDao.getShop(shopName);
+		if (shop != null) {
+			return ConvertVO.shopToVO(shopDao.getShop(shopName));
+		} else {
+			return null;
+		}
+
+	}
+
 }

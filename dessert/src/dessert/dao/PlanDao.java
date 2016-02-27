@@ -1,6 +1,9 @@
 package dessert.dao;
 
+import java.util.ArrayList;
+
 import dessert.VO.PlanVO;
+import dessert.entity.Dessert;
 import dessert.entity.Plan;
 
 /**
@@ -36,5 +39,19 @@ public interface PlanDao {
 	 * @return 受影响行数
 	 */
 	public int approve(long planId, int result);
+
+	/**
+	 * 得到某店某天的可销售商品
+	 * 
+	 * @param date
+	 *            日期 xxxx-xx-xx
+	 * @param weekDay
+	 *            星期几，英文
+	 * @param shopName
+	 *            店名
+	 * @return
+	 */
+	public ArrayList<Dessert> getDayDessert(String date, String weekDay,
+			String shopName);
 
 }

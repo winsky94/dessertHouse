@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import dessert.VO.PlanVO;
 import dessert.dao.PlanDao;
 import dessert.dao.PlanDetailDao;
+import dessert.entity.Dessert;
 import dessert.entity.Plan;
 import dessert.entity.PlanDetail;
 import dessert.util.DateUtil;
@@ -198,5 +199,46 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 		String sql = "update plan set checked=" + result + " where id="
 				+ planId;
 		return doSql(sql);
+	}
+
+	@Override
+	public ArrayList<Dessert> getDayDessert(String date, String weekDay,
+			String shopName) {
+		// TODO Auto-generated method stub
+		ArrayList<Dessert> result = new ArrayList<Dessert>();
+
+		List<Date> dates = DateUtil.getCurrentWeek(DateUtil.getDate(date));
+		String validSunday = DateUtil.getFormattedDate(dates.get(0));
+		// 直接联表查询得了，真是的
+		String hql = "select d.name, d.path, d.price, d.stockNum, d.id";
+		hql += " from plan p, planDetail pd, dessert d";
+		hql += " where p.checked=1 and p.shop='" + shopName + "'";
+		hql += " and p.validSunday='" + validSunday + "'";
+		hql += " and pd.weekDay='" + weekDay + "'";
+		hql += " and p.id=pd.planId and pd.dessertName=d.name";
+		List<?> lists = doHqlQuery(hql);
+		if (lists != null) {
+			for (int i = 0; i < lists.size(); i++) {
+				Object[] obj = (Object[]) lists.get(i);
+
+				String name = (String) obj[0];
+				String path = (String) obj[1];
+				double price = (double) obj[2];
+				int stockNum = (int) obj[3];
+				long id = (long) obj[4];
+
+				Dessert dessert = new Dessert();
+				dessert.setId(id);
+				dessert.setName(name);
+				dessert.setOwingTo(shopName);
+				dessert.setPath(path);
+				dessert.setPrice(price);
+				dessert.setStockNum(stockNum);
+				dessert.setWeekDay(Week.getWeek(weekDay));
+				dessert.setDate(date);
+				result.add(dessert);
+			}
+		}
+		return result;
 	}
 }

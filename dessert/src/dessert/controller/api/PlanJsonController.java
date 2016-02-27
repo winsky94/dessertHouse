@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.DessertVO;
 import dessert.VO.PlanVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
@@ -31,6 +32,7 @@ public class PlanJsonController extends BaseController {
 	@Autowired
 	public DessertService dessertService;
 	private String message;
+	private ArrayList<DessertVO> desserts = new ArrayList<DessertVO>();
 
 	/*
 	 * 下面的uploadFiles有两点需要注意 1、必须是List数组
@@ -60,10 +62,10 @@ public class PlanJsonController extends BaseController {
 
 		Map<String, String> params = getParams();
 		String name = params.get("name");
-		String shopName=params.get("shopName");
-		String weekDay=params.get("weekDay");
-		String date = DateUtil.getDate(weekDay);
-		boolean exist = dessertService.checkExist(name,date,shopName);
+		String shopName = params.get("shopName");
+		String weekDay = params.get("weekDay");
+		String date = DateUtil.getDateByWeekDay(weekDay);
+		boolean exist = dessertService.checkExist(name, date, shopName);
 		if (exist) {
 			message = Configure.Dessert_EXIST;
 		}
@@ -93,12 +95,17 @@ public class PlanJsonController extends BaseController {
 		double price = Double.parseDouble(params.get("price"));
 		int stockNum = Integer.parseInt(params.get("stockNum"));
 		String day = params.get("day");
-		String date = DateUtil.getDate(day);
+		String date = DateUtil.getDateByWeekDay(day);
 		Week weekDay = Week.getWeek(DateUtil.getNumByDayEn(day));
 
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
+			//文件夹不存在就创建
+			File fileFolder = new File(folder);
+			if (!fileFolder.exists() && !fileFolder.isDirectory()) {
+				fileFolder.mkdir();
+			}
 			// for (int i = 0; i < uploadFiles.size(); i++) {
 			try {
 				// StreamUtils.copy(
@@ -107,9 +114,8 @@ public class PlanJsonController extends BaseController {
 				// + File.separator
 				// + uploadFilesFileName.get(i))));
 				// ======================================================================
-				FileUtils.copyFile(uploadFiles.get(0),
-						new File(new File(folder) + File.separator
-								+ uploadFilesFileName.get(0)));
+				FileUtils.copyFile(uploadFiles.get(0), new File(fileFolder
+						+ File.separator + uploadFilesFileName.get(0)));
 				uploadFiles.get(0).delete();
 				// ======================================================================
 				String path = folder + "\\" + uploadFilesFileName.get(0);
@@ -140,9 +146,6 @@ public class PlanJsonController extends BaseController {
 				// 更新session的内容
 				session().setAttribute(Configure.PLAN_SHOP_ALL,
 						planWithDessertName);
-				System.out
-						.println("PlanJsonController.addPlan()设置Configure.PLAN_SHOP_ALL，大小为："
-								+ planWithDessertName.size());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -167,12 +170,17 @@ public class PlanJsonController extends BaseController {
 		double price = Double.parseDouble(params.get("price"));
 		int stockNum = Integer.parseInt(params.get("stockNum"));
 		String day = params.get("day");
-		String date = DateUtil.getDate(day);
+		String date = DateUtil.getDateByWeekDay(day);
 		Week weekDay = Week.getWeek(DateUtil.getNumByDayEn(day));
 
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
+			//文件夹不存在就创建
+			File fileFolder = new File(folder);
+			if (!fileFolder.exists() && !fileFolder.isDirectory()) {
+				fileFolder.mkdir();
+			}
 			// for (int i = 0; i < uploadFiles.size(); i++) {
 			try {
 				// ======================================================================
@@ -181,9 +189,8 @@ public class PlanJsonController extends BaseController {
 					String path = folder + "\\" + originalPicName;
 					deleteFile(path);
 					// 重新复制图片
-					FileUtils.copyFile(uploadFiles.get(0),
-							new File(new File(folder) + File.separator
-									+ uploadFilesFileName.get(0)));
+					FileUtils.copyFile(uploadFiles.get(0), new File(fileFolder
+							+ File.separator + uploadFilesFileName.get(0)));
 					uploadFiles.get(0).delete();
 				}
 
@@ -327,11 +334,29 @@ public class PlanJsonController extends BaseController {
 		return flag;
 	}
 
+	public String getDayDessert() {
+		Map<String, String> params = getParams();
+		String weekDay = params.get("weekDay");
+		String date = params.get("date");
+		String shopName = params.get("shopName");
+		desserts = planService.getDayDessert(date, weekDay, shopName);
+
+		return Configure.SUCCESS;
+	}
+
 	public String getMessage() {
 		return message;
 	}
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public ArrayList<DessertVO> getDesserts() {
+		return desserts;
+	}
+
+	public void setDesserts(ArrayList<DessertVO> desserts) {
+		this.desserts = desserts;
 	}
 }

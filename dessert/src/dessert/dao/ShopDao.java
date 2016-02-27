@@ -24,4 +24,6 @@ public interface ShopDao {
 	 * @return
 	 */
 	public boolean checkShop(String shopName);
+
+	public Shop getShop(String shopName);
 }

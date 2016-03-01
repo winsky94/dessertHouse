@@ -1,13 +1,7 @@
-<%@page import="dessert.configure.Configure"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
-<%@ page language="java" import="java.util.*"%>
-<%@ page language="java" import="dessert.VO.ShopVO"%>
-<%@ page language="java" import="dessert.configure.*"%>
-<!-- http://localhost:8080/dessert/shop_manage -->
+<!DOCTYPE html>
 <html>
 <head>
-	<title>店面管理</title>
+	<title>会员</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -25,7 +19,7 @@ pageEncoding="utf-8"%>
 	<link rel="stylesheet" type="text/css" href="css/buttons.css">
 	<link href="css/table_css/select.dataTables.min.css" rel="stylesheet" media="screen" />
 	<link href="css/table_css/buttons.dataTables.min.css" rel="stylesheet" media="screen" />
-	
+
 	<style type="text/css">
 		#shopTable thead tr th {
 			text-align: center;
@@ -42,6 +36,7 @@ pageEncoding="utf-8"%>
 
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
+
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -50,30 +45,41 @@ pageEncoding="utf-8"%>
 		write_header();
 	</script>
 	<!-- 导航栏结束 -->
-	
+
 	<!-- 正文内容 -->
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<!--左侧用户信息-->
-			<%@ include file="WorkerInfo.jsp"%>
-			<!--左侧用户信息 结束-->
-			<!--右侧店面表格 -->
+			<div class="span2">
+				<ul class="collection">
+					<li class="collection-item"><img src="image/index1.jpg" width="180px" height="150px">
+						<h5 id="memberId" class="text-center">欢迎您~~0000001</h5>
+					</li>
+					<li class="collection-item">
+						<p>
+							会员名：winsky
+						</p>
+					</li>
+					<li class="collection-item">
+						<p>
+							当前等级：1
+						</p>
+					</li>
+					<li class="collection-item">
+						<p>
+							消费积分：0
+						</p>
+					</li>
+					<li class="collection-item">
+						<p>
+							最近登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; 2016-03-01 18:02:19
+						</p>
+					</li>
+				</ul>
+			</div>
+			<!-- 左侧用户信息结束 -->
+			<!--右侧店铺信息 -->
 			<div class="span10">
-				<!-- 操作按钮 -->
-				<div>
-					<a class="btn btn-small pull-right margin_button" href="#" onclick="deleteShop();">
-						<i class="icon-minus"></i>删除
-					</a>
-					<a id="update" class="btn btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('update');">
-						<i class="icon-edit"></i>修改
-					</a>
-					<a class="btn btn-small pull-right margin_button" href="#shopModel" role="button" data-toggle="modal" onclick="changeAction('add');">
-						<i class="icon-plus"></i>增加
-					</a>
-				</div>
-				<!-- 操作按钮结束 -->
-
-				<!--右侧店面表格 -->
 				<div class="table-container table-responsive">
 					<table id="shopTable" class="table display dataTable">
 						<thead>
@@ -86,33 +92,20 @@ pageEncoding="utf-8"%>
 							</tr>
 						</thead>
 						<tbody>
-						<%
-							@SuppressWarnings("unchecked")
-							ArrayList<ShopVO> shops=(ArrayList<ShopVO>)session.getAttribute(Configure.SHOP_SESSION);
-							for(ShopVO shopVO:shops){
-								long shopId=shopVO.getId();
-								String name=shopVO.getName();
-								String owner=shopVO.getOwner();
-								String telephone=shopVO.getTelephone();
-								String address=shopVO.getAddress();
-						%>
 							<tr class="point-line" onclick='getLine(this)'>
-								<td style="display:none;"><% out.println(shopId); %></td>
-								<td><% out.println(name); %></td>
-								<td><% out.println(owner); %></td>
-								<td><% out.println(telephone); %></td>
-								<td><% out.println(address); %></td>
+								<td style="display:none;">1</td>
+								<td>名称1</td>
+								<td>负责人1</td>
+								<td>联系电话1</td>
+								<td>地址1</td>
 							</tr>
-						<%
-							}
-						%>
 						</tbody>
-						
 					</table>
 				</div>
 			</div>
 			<!--右侧店面表格结束 -->
 		</div>
+		<!--右侧店面信息 结束 -->
 	</div>
 	<!-- 正文内容结束 -->
 
@@ -125,66 +118,13 @@ pageEncoding="utf-8"%>
 		</div>
 	</div>
 
-
-	<!-- Modal -->
-	<div id="shopModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">
-		<div class="modal-header">
-			<h3 id="title">创建店面</h3>
-		</div>
-		<div class="modal-body">
-			<form class="form-horizontal">
-				<input type="hidden" id="shopId" value="-1">
-				<div class="control-group"></div>
-				<div class="control-group">
-					<label class="control-label" for="name">店　名:</label>
-					<div class="controls">
-						<input type="text" id="name" placeholder="请输入店名..." style="height:25px;">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="owner">负责人:</label>
-					<div class="controls">
-						<input type="text" id="owner" placeholder="请输入负责人..." style="height:25px;">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="telephone">电　话:</label>
-					<div class="controls">
-						<input type="tel" id="telephone" placeholder="请输入联系电话..." style="height:25px;">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="address">地　址:</label>
-					<div class="controls">
-						<input type="text" id="address" placeholder="请输入地址..." style="height:25px;">
-					</div>
-				</div>
-			</form>
-
-		</div>
-		<div class="modal-footer">
-			<div style="text-align:center">
-				<input type="hidden" id="action" value="add">
-				<button class="btn btn-primary" onclick="process()">确定</button>
-				<button class="btn btn-primary" style="margin-left: 10%" data-dismiss="modal" aria-hidden="true">取消</button>
-				<font color="red" size="2" style="margin-left: 4%">
-					<span id="process_result"></span>
-				</font>
-			</div>
-
-		</div>
-	</div>
-
 	<!-- 加载js -->
-	<script src="js/jquery-2.1.1.min.js"></script>
-
-	<!--<script src='js/vendor/jquery-1.11.3.min.js'></script>-->
 	<script src='bootstrap/js/bootstrap.js'></script>
 	<script src="js/icheck.js"></script>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
-	<script src="js/shopTableManage.js"></script>
+	<script src="js/memberShopList.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#shopTable').DataTable({

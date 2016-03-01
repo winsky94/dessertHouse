@@ -20,4 +20,6 @@ public interface MemberDao {
 	public void update(Member member);
 
 	public HashMap<UserType, String> checkLogin(String userName, String password);
+
+	public Member getMemberInfo(String name);
 }

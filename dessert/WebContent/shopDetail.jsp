@@ -3,11 +3,11 @@
 pageEncoding="utf-8"%>
 <%@ page language="java" import="java.util.*"%>
 <%@ page language="java" import="dessert.configure.*"%>
-<!-- http://localhost:8080/dessert/ -->
+<!-- http://localhost:8080/dessert/shopDetail.jsp?shopName=shop1 -->
 
 <html>
 <head>
-	<title>XX店面</title>
+	<title>店铺详情</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>

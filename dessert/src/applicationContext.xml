@@ -31,6 +31,8 @@
 	<bean id="managerShopController" class="dessert.controller.html.ManagerShopController" />
 	<bean id="managerJsonController" class="dessert.controller.api.ManagerJsonController" />
 	<bean id="dessertDetailController" class="dessert.controller.html.DessertDetailController" />
+	<bean id="memberShopController" class="dessert.controller.html.MemberShopController" />
+	<bean id="memberJsonController" class="dessert.controller.api.MemberJsonController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />

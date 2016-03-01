@@ -137,4 +137,13 @@
 		</action>
 	</package>
 
+	<!-- 会员操作 -->
+	<package name="memberAction" namespace="/api/member" extends="json-default">
+		<action name="memberInfo" class="memberJsonController" method="memberInfo">
+			<result type="json">
+				<param name="member">member</param>
+			</result>
+		</action>
+	</package>
+
 </struts>

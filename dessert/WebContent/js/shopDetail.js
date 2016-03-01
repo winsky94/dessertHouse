@@ -5,7 +5,7 @@ function getQueryString(name){
 	if(r!=null)return  unescape(r[2]); return null;
 }
 
-function refresh () {
+function refreshSelectedDay () {
 	//选中周几
 	var selectedDay=$("input[name='week']:checked").val();
 	//选中的星期是哪一天
@@ -14,7 +14,7 @@ function refresh () {
 
 	//ajax取当天的商品内容
 	$.ajax({
-		url : 'api/plan/getDayDessert',
+		url : 'api/plan/dayDessert',
 		type : 'post',
 		dataType : 'json',
 		data : {
@@ -35,7 +35,7 @@ function refresh () {
 				txt+='\
 					<div class="box">\
 						<div class="box_img">\
-							<a href="" target="_self">\
+							<a href="dessert_detail?shopName='+shopName+'" target="_self">\
 								<img src="'+path+'">\
 								<div class="text_center">\
 									<span>'+name+'</span>\
@@ -96,7 +96,7 @@ function setWeekBar () {
 					}
 				}
 			// }
-			refresh();
+			refreshSelectedDay();
 		}
 	});
 }
@@ -106,7 +106,7 @@ function getDayRadio (date,weekDay) {
 	var t='\
 		<label class="radio inline" style="margin-left:5%">\
 			<input type="hidden" value="'+date+'" id="'+weekDay+'">\
-			<input type="radio" name="week" value="'+weekDay+'" onclick="refresh();">\
+			<input type="radio" name="week" value="'+weekDay+'" onclick="refreshSelectedDay();">\
 	';
 	if(weekDay=="Sunday"){
 		t+='\

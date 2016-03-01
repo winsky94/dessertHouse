@@ -30,7 +30,7 @@ public class TestJsonController extends BaseController {
 		// System.out.println(testService.test());
 		a = 1;
 		weeks = DateUtil.getNextSevenDay();
-		desserts=planService.getDayDessert("2016-02-28", "Sunday", "shop1");
+//		desserts=planService.getDayDessert("2016-02-28", "Sunday", "shop1");
 		return Configure.SUCCESS;
 	}
 

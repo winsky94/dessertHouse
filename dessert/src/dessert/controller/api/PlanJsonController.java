@@ -101,7 +101,7 @@ public class PlanJsonController extends BaseController {
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
-			//文件夹不存在就创建
+			// 文件夹不存在就创建
 			File fileFolder = new File(folder);
 			if (!fileFolder.exists() && !fileFolder.isDirectory()) {
 				fileFolder.mkdir();
@@ -176,7 +176,7 @@ public class PlanJsonController extends BaseController {
 		// 复制文件
 		if (uploadFiles != null) {
 			String folder = Configure.FOLDER;
-			//文件夹不存在就创建
+			// 文件夹不存在就创建
 			File fileFolder = new File(folder);
 			if (!fileFolder.exists() && !fileFolder.isDirectory()) {
 				fileFolder.mkdir();
@@ -292,10 +292,13 @@ public class PlanJsonController extends BaseController {
 		}
 		Map<String, String> params = getParams();
 		String shopName = params.get("shopName");
-		long planId = Long.parseLong(params.get("planId"));
-
+		String planIdString = params.get("planId");
 		PlanVO planVO = new PlanVO();
-		planVO.setId(planId);
+
+		if (planIdString != null && !"null".equals(planIdString)) {
+			long planId = Long.parseLong(planIdString);
+			planVO.setId(planId);
+		}
 		planVO.setShop(shopName);
 		planVO.setPlans(planDetail);
 		// 新上传的plan没有被check
@@ -334,15 +337,17 @@ public class PlanJsonController extends BaseController {
 		return flag;
 	}
 
-	public String getDayDessert() {
-		Map<String, String> params = getParams();
-		String weekDay = params.get("weekDay");
-		String date = params.get("date");
-		String shopName = params.get("shopName");
-		desserts = planService.getDayDessert(date, weekDay, shopName);
+	public String dayDessert() {
+		 Map<String, String> params = getParams();
+		 String weekDay = params.get("weekDay");
+		 String date = params.get("date");
+		 String shopName = params.get("shopName");
+		 System.out.println("getDayDessert date="+date);
+		 desserts = planService.getDayDessert(date, weekDay, shopName);
 
 		return Configure.SUCCESS;
 	}
+	
 
 	public String getMessage() {
 		return message;

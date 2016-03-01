@@ -253,7 +253,7 @@ public class PlanJsonController extends BaseController {
 					for (String name : dessertNames) {
 						System.out.println("PlanJsonController.deletePlan() "
 								+ name);
-						long id = dessertService.getDesertIdByName(name);
+						long id = dessertService.getDessertIdByName(name);
 						if (id != dessertId) {
 							dessertNamesResult.add(name);
 						}

@@ -10,10 +10,8 @@ import dessert.VO.DessertVO;
 import dessert.VO.PlanVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
-import dessert.entity.Dessert;
 import dessert.service.DessertService;
 import dessert.service.PlanService;
-import dessert.util.ConvertVO;
 import dessert.util.Week;
 
 /**
@@ -41,7 +39,7 @@ public class PlanController extends BaseController {
 			session().removeAttribute(Configure.PLAN_ID);
 
 		} else if ("view".equals(action) || "update".equals(action)
-				|| "approve".equals(action)|| "approveView".equals(action)) {
+				|| "approve".equals(action) || "approveView".equals(action)) {
 			PlanVO planVO = planService.getPlans(shopName, false);
 			if (planVO == null) {
 				plan = null;
@@ -59,18 +57,12 @@ public class PlanController extends BaseController {
 			for (Week key : plan.keySet()) {
 				if (Week.toString(key).equals(day)) {
 					ArrayList<String> dessertNames = plan.get(key);
-					ArrayList<Dessert> desserts = dessertService
+					ArrayList<DessertVO> desserts = dessertService
 							.getDessertByName(dessertNames);
 
 					if (desserts != null) {
-						ArrayList<DessertVO> dessertVOs = new ArrayList<DessertVO>();
-						for (Dessert dessert : desserts) {
-							// 在这儿转换了图片地址，保证前台能显示
-							DessertVO vo = ConvertVO.dessertToVO(dessert);
-							dessertVOs.add(vo);
-						}
-						session().setAttribute(Configure.PLAN_SESSION,
-								dessertVOs);
+						session()
+								.setAttribute(Configure.PLAN_SESSION, desserts);
 					}
 					break;
 				}

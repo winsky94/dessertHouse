@@ -2,6 +2,7 @@ package dessert.service;
 
 import java.util.ArrayList;
 
+import dessert.VO.DessertVO;
 import dessert.entity.Dessert;
 
 /**
@@ -16,14 +17,15 @@ public interface DessertService {
 
 	/**
 	 * 根据名称、店名和日期判断是否存在，不允许商品重名
+	 * 
 	 * @param name
 	 * @param date
 	 * @param shopName
 	 * @return
 	 */
-	public boolean checkExist(String name, String date,String shopName);
+	public boolean checkExist(String name, String date, String shopName);
 
-	public ArrayList<Dessert> getDessertByName(ArrayList<String> names);
+	public ArrayList<DessertVO> getDessertByName(ArrayList<String> names);
 
 	/**
 	 * 用在删除的地方，通过名称得到dessert的id
@@ -31,5 +33,7 @@ public interface DessertService {
 	 * @param name
 	 * @return
 	 */
-	public long getDesertIdByName(String name);
+	public long getDessertIdByName(String name);
+
+	public DessertVO getDessertById(long id);
 }

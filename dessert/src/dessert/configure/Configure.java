@@ -70,7 +70,10 @@ public class Configure {
 
 	// ==================================经理===========================================
 	public static final String MANAGER_SHOP_LIST = "manager shop list";
-	
+
 	// ==================================会员===========================================
 	public static final String DESSERT_DETAIL = "dessert_detail";
+	public static final String DESSERT_DETAIL_NOT_FOUND = "dessert_detail_not_found";
+	// 商品详情界面的商品session
+	public static final String DESSERT_DETAIL_SESSION = "dessert_detail_session";
 }

@@ -27,6 +27,7 @@ function refreshSelectedDay () {
 			var txt='';
 			for(var i=0;i<data.length;i++){
 				var dessert=data[i];
+				var id=dessert.id;
 				var path=dessert.path;
 				var name=dessert.name;
 				var price=dessert.price;
@@ -35,7 +36,7 @@ function refreshSelectedDay () {
 				txt+='\
 					<div class="box">\
 						<div class="box_img">\
-							<a href="dessert_detail?shopName='+shopName+'" target="_self">\
+							<a href="dessert_detail?shopName='+shopName+'&id='+id+'" target="_self">\
 								<img src="'+path+'">\
 								<div class="text_center">\
 									<span>'+name+'</span>\

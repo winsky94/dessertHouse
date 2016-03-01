@@ -42,6 +42,7 @@
 	<package name="member" extends="struts-default">
 		<action name="dessert_detail" class="dessertDetailController">
 			<result name="dessert_detail">dessertDetail.jsp</result>
+			<result name="dessert_detail_not_found">dessertDetailNotFound.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -124,7 +124,7 @@
 			</result>
 		</action>
 		<!-- 会员得到某天该店的可购买商品 -->
-		<action name="getDayDessert" class="planJsonController" method="getDayDessert">
+		<action name="dayDessert" class="planJsonController" method="dayDessert">
 			<result type="json">
 				<param name="desserts">desserts</param>
 			</result>

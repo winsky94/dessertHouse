@@ -70,4 +70,7 @@ public class Configure {
 
 	// ==================================经理===========================================
 	public static final String MANAGER_SHOP_LIST = "manager shop list";
+	
+	// ==================================会员===========================================
+	public static final String DESSERT_DETAIL = "dessert_detail";
 }

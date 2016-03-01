@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@page import="dessert.configure.Configure"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"%>
+<%@ page language="java" import="dessert.configure.*"%>
+<!-- http://localhost:8080/dessert/ -->
+
 <html>
 <head>
 	<title>甜点名</title>
@@ -26,35 +32,9 @@
 	<!-- 正文内容 -->
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<!--左侧用户信息-->
-			<div class="span2">
-				<ul class="collection">
-					<li class="collection-item"><img src="image/index1.jpg" width="180px" height="150px">
-						<h5 id="userName" class="text-center">admin</h5>
-					</li>
-					<li class="collection-item">
-						<p>
-							店名：shop1
-						</p>
-					</li>
-					<li class="collection-item">
-						<p>
-							负责人：严顺宽
-						</p>
-					</li>
-					<li class="collection-item">
-						<p>
-							联系电话：18013878510
-						</p>
-					</li>
-					<li class="collection-item">
-						<p>
-							地址：江苏省南京市鼓楼区汉口路22号
-						</p>
-					</li>
-				</ul>
-			</div>
-			<!-- 左侧用户信息结束 -->
+			<!--左侧店面信息-->
+			<%@ include file="ShopInfo.jsp"%>
+			<!-- 左侧店面信息结束 -->
 			<!--右侧店铺内甜点具体信息 -->
 			<div class="span10">
 				<!-- 右之左侧甜点图片 -->

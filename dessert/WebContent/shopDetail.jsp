@@ -18,8 +18,6 @@ pageEncoding="utf-8"%>
 	<link rel="stylesheet" type="text/css" href="css/base.css">
 	<link rel="stylesheet" type="text/css" href="css/瀑布流效果.css">
 
-
-
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
 	<script src="js/瀑布流.js"></script>
@@ -49,16 +47,16 @@ pageEncoding="utf-8"%>
 				</div>
 				<!-- 选择周几的产品 结束-->
 				<div id="container">
-					<!-- <div class="box">
+					<div class="box">
 						<div class="box_img">
-							<a href="" target="_self">
+							<a href="dessert_detail?shopName=shop1" target="_self">
 								<img src="image/desserts/shop1/1.jpg">
 								<div class="text">
 									这是海中体育馆
 								</div>
 							</a>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</div>
 			<!--右侧店面甜点图片结束 -->

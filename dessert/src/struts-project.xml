@@ -37,4 +37,11 @@
 			<result name="manager shop list">manager_shop_plan.jsp</result>
 		</action>
 	</package>
+	
+	<!-- 会员 -->
+	<package name="member" extends="struts-default">
+		<action name="dessert_detail" class="dessertDetailController">
+			<result name="dessert_detail">dessertDetail.jsp</result>
+		</action>
+	</package>
 </struts>

@@ -43,6 +43,7 @@ function changeAction(action){
 		    var stockNum = cells[5].innerHTML;
 
 			//给模态框的输入框赋值
+		    $("#action").val("update");
 			$("#dessertId").val(dessertId);
 			$("#originalPicName").val(picName);
 			$('#picture').uploadify('settings','buttonText',picName);
@@ -148,7 +149,6 @@ function process(){
 	}else{
 		javascript:$('#picture').uploadify('upload', '*');
 	}
-	
 }
 
 function deleteDessert () {
@@ -176,7 +176,6 @@ function deleteDessert () {
 						var message = result.message;
 						var success = "success";
 						if (message == success) {
-							alert("success");
 							//刷新界面
 							location.reload();
 						} else {

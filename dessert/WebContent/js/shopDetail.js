@@ -32,9 +32,11 @@ function refreshSelectedDay () {
 				var name=dessert.name;
 				var price=dessert.price;
 				var stockNum=dessert.stockNum;
+				var owingTo=dessert.owingTo;
 
 				txt+='\
 					<div class="box">\
+						<input id="shopName" type="hidden" value="'+owingTo+'">\
 						<div class="box_img">\
 							<a href="dessert_detail?shopName='+shopName+'&id='+id+'" target="_self">\
 								<img src="'+path+'">\

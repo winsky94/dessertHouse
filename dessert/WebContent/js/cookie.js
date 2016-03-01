@@ -41,9 +41,14 @@ function check_cookie() {
 	}
 }
 
-function write_header() {
+function write_header(index) {
 	var login = check_cookie();
 	if (!login) {
+		// if(index!="index"){
+		// 	window.location.href="index.html";
+		// }else{
+		// 	write_header_not_login();
+		// }
 		write_header_not_login();
 	} else {
 		var userName = get_cookie('userName');
@@ -54,6 +59,7 @@ function write_header() {
 
 function exit() {
 	delete_cookie('userName');
+	window.location.href="index.html";
 }
 
 function write_header_login(userName, type) {

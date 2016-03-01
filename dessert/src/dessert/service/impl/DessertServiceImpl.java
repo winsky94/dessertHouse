@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.DessertVO;
 import dessert.dao.DessertDao;
 import dessert.entity.Dessert;
 import dessert.service.DessertService;
+import dessert.util.ConvertVO;
 
 /**
  * @author 严顺宽
@@ -34,21 +36,21 @@ public class DessertServiceImpl implements DessertService {
 	}
 
 	@Override
-	public boolean checkExist(String name,String date,String shopName) {
+	public boolean checkExist(String name, String date, String shopName) {
 		// TODO Auto-generated method stub
-		return dessertDao.checkExist(name,date,shopName);
+		return dessertDao.checkExist(name, date, shopName);
 	}
 
 	@Override
-	public ArrayList<Dessert> getDessertByName(ArrayList<String> names) {
+	public ArrayList<DessertVO> getDessertByName(ArrayList<String> names) {
 		// TODO Auto-generated method stub
-		ArrayList<Dessert> result = new ArrayList<Dessert>();
+		ArrayList<DessertVO> result = new ArrayList<DessertVO>();
 		for (String name : names) {
 			Dessert dessert = dessertDao.getDessertByName(name);
 			if (dessert != null) {
-				result.add(dessert);
+				result.add(ConvertVO.dessertToVO(dessert));
 			} else {
-				System.err.println("有个商品的名字不存在~，名字为："+name);
+				System.err.println("有个商品的名字不存在~，名字为：" + name);
 			}
 
 		}
@@ -56,12 +58,25 @@ public class DessertServiceImpl implements DessertService {
 	}
 
 	@Override
-	public long getDesertIdByName(String name) {
+	public long getDessertIdByName(String name) {
 		// TODO Auto-generated method stub
-		System.out.println(name);
-		Dessert dessert=dessertDao.getDesertByName(name);
-		long id = dessert.getId();
-		return id;
+		Dessert dessert = dessertDao.getDessertByName(name);
+		if (dessert != null) {
+			long id = dessert.getId();
+			return id;
+		} else {
+			return -1;
+		}
+	}
+
+	@Override
+	public DessertVO getDessertById(long id) {
+		// TODO Auto-generated method stub
+		Dessert dessert = dessertDao.getDessertById(id);
+		if (dessert != null) {
+			return ConvertVO.dessertToVO(dessert);
+		}
+		return null;
 	}
 
 }

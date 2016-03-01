@@ -34,22 +34,20 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 	@Override
 	public Dessert getDessertByName(String name) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Dessert.class);
-		criteria.add(Restrictions.eq("name", name));
-		@SuppressWarnings("unchecked")
-		List<Dessert> desserts = criteria.list();
-		if (desserts == null || desserts.size() == 0) {
-			return null;
-		} else {
-			return desserts.get(0);
-		}
-	}
-
-	@Override
-	public Dessert getDesertByName(String name) {
-		// TODO Auto-generated method stub
+//		Session session = sessionFactory.getCurrentSession();
+//		Criteria criteria = session.createCriteria(Dessert.class);
+//		criteria.add(Restrictions.eq("name", name));
+//		@SuppressWarnings("unchecked")
+//		List<Dessert> desserts = criteria.list();
+//		if (desserts == null || desserts.size() == 0) {
+//			return null;
+//		} else {
+//			return desserts.get(0);
+//		}
 		return getByColumn(Dessert.class, "name", name);
 	}
 
+	public Dessert getDessertById(long id){
+		return getByColumn(Dessert.class, "id", id);
+	}
 }

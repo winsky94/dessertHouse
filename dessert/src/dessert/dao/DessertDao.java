@@ -15,6 +15,6 @@ public interface DessertDao {
 	public boolean checkExist(String name,String date,String shopName);
 
 	public Dessert getDessertByName(String name);
-
-	public Dessert getDesertByName(String name);
+	
+	public Dessert getDessertById(long id);
 }

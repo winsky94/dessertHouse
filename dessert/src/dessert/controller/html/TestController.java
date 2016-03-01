@@ -8,6 +8,7 @@ import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Shop;
 import dessert.entity.Worker;
+import dessert.service.DessertService;
 import dessert.service.PlanService;
 import dessert.service.ShopService;
 import dessert.service.TestService;
@@ -18,19 +19,23 @@ public class TestController extends BaseController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	public TestService testService;
-
 	@Autowired
 	public ShopService shopService;
-
 	@Autowired
 	public WorkerService workerService;
-
 	@Autowired
 	public PlanService planService;
+	@Autowired
+	public DessertService dessertService;
 
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
+
+		System.out.println(dessertService.getDessertIdByName("周三单品"));
+
+		// Dessert dessert = dessertService.getDessertById(17);
+		// System.out.println(dessert.getName());
 
 		// initShops();
 

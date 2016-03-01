@@ -1,13 +1,21 @@
+<%@page import="dessert.VO.DessertVO"%>
 <%@page import="dessert.configure.Configure"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <%@ page language="java" import="java.util.*"%>
-<%@ page language="java" import="dessert.configure.*"%>
-<!-- http://localhost:8080/dessert/ -->
+<!-- http://localhost:8080/dessert/dessert_detail?shopName=shop1&id=17 -->
 
 <html>
+<%
+	String sessionName=Configure.DESSERT_DETAIL_SESSION;
+	DessertVO dessert=(DessertVO)session.getAttribute(sessionName);
+	String name=dessert.getName();
+	String path=dessert.getPath();
+	double price=dessert.getPrice();
+	int stockNum=dessert.getStockNum();
+%>
 <head>
-	<title>甜点名</title>
+	<title><%=name %></title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -39,13 +47,13 @@ pageEncoding="utf-8"%>
 			<div class="span10">
 				<!-- 右之左侧甜点图片 -->
 				<div class="span4">
-					<img src="image/desserts/1.jpg">
+					<img src="<%=path %>">
 				</div>
 				<!-- 右之左侧甜点图片 结束 -->
 
 				<!-- 右之商品详情 -->
 				<div class="span6">
-					<h3 class="text-center dessert_title" id="dessertName">好好吃的商品</h3>
+					<h3 class="text-center dessert_title" id="dessertName"><%=name %></h3>
 					<!-- 粉色底的条形区域 -->
 					<div class="price_bar">
 						<div style="height:12px;"></div>
@@ -53,7 +61,7 @@ pageEncoding="utf-8"%>
 							<ul class="report_data">
 								<span class="price_word">价格:</span>
 								<span class="price_num">
-									￥<strong>10.00</strong>
+									￥<strong><%=price %></strong>
 								</span>
 								<li class="sale_style co6 tc">
 									<span class="f25 co6" id="meters_total">0</span>
@@ -80,7 +88,7 @@ pageEncoding="utf-8"%>
 							<button id="addBtn" class="btn" type="button" onclick="addNum();">+</button>
 						</div>
 						<span class="price_word">(库存:</span>
-						<span class="price_word" id="stockNum">10</span>
+						<span class="price_word" id="stockNum"><%=stockNum %></span>
 						<span class="price_word">件)</span>
 					</div>
 					<!-- 购买数量 结束 -->

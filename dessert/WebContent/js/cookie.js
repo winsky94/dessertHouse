@@ -99,7 +99,14 @@ function write_header_login(userName, type) {
 				<div class="navbar-inner">\
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
-						<li><a href="#">产品预订</a></li>\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">产品预订<b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#">随便看看</a></li>\
+								<li class="divider"></li>\
+								<li><a href="memebr_shop_list"">浏览店铺</a></li>\
+							</ul>\
+						</li>\
 						<li><a href="#">会员资格</a></li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\

@@ -76,4 +76,6 @@ public class Configure {
 	public static final String DESSERT_DETAIL_NOT_FOUND = "dessert_detail_not_found";
 	// 商品详情界面的商品session
 	public static final String DESSERT_DETAIL_SESSION = "dessert_detail_session";
+	// 会员查看店面列表
+	public static final String MEMBER_SHOP = "member_shop";
 }

@@ -62,4 +62,11 @@ public class MemberServiceImpl implements MemberService {
 		DecimalFormat df = new DecimalFormat(Configure.STR_FORMAT);
 		return df.format(id);
 	}
+
+
+	@Override
+	public Member getMemberInfo(String name) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberInfo(name);
+	}
 }

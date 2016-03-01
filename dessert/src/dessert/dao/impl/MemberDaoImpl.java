@@ -84,4 +84,10 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		String lastLoadTime = TimeUtil.getCurrentTime();
 		member.setLastLoadTime(lastLoadTime);
 	}
+
+	@Override
+	public Member getMemberInfo(String name) {
+		// TODO Auto-generated method stub
+		return getByColumn(Member.class, "name", name);
+	}
 }

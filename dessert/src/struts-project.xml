@@ -44,5 +44,8 @@
 			<result name="dessert_detail">dessertDetail.jsp</result>
 			<result name="dessert_detail_not_found">dessertDetailNotFound.jsp</result>
 		</action>
+		<action name="memebr_shop_list" class="memberShopController">
+			<result name="member_shop">memberShopList.jsp</result>
+		</action>
 	</package>
 </struts>

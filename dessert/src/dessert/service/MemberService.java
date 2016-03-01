@@ -7,4 +7,6 @@ import dessert.entity.Member;
  */
 public interface MemberService {
 	public String signUp(Member member);
+	
+	public Member getMemberInfo(String name);
 }

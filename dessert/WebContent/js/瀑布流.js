@@ -1,29 +1,29 @@
 window.onload = function () {
     imgLocation("container", "box");
 
-    //模拟网络图片流
-    var imgData = {"data": [{"src": "1.jpg"}, {"src": "2.jpg"}, {"src": "3.jpg"}, {"src": "4.jpg"}, {"src": "5.jpg"}]};
-    //监听浏览器滚动条
-    window.onscroll = function () {
-        if (checkFlag("container", "box")) {
-            var cParent = document.getElementById("container");
-            for (var i = 0; i < imgData.data.length; i++) {
-                //创建图片节点
-                var cContent = document.createElement("div");
-                cContent.className = "box";
-                cParent.appendChild(cContent);
-
-                var boxImg = document.createElement("div");
-                boxImg.className = "box_img";
-                cContent.appendChild(boxImg);
-
-                var img = document.createElement("img");
-                img.src = "image/desserts/shop1/" + imgData.data[i].src;
-                boxImg.appendChild(img);
-            }
-            imgLocation("container", "box");
-        }
-    }
+//    //模拟网络图片流
+//    var imgData = {"data": [{"src": "1.jpg"}, {"src": "2.jpg"}, {"src": "3.jpg"}, {"src": "4.jpg"}, {"src": "5.jpg"}]};
+//    //监听浏览器滚动条
+//    window.onscroll = function () {
+//        if (checkFlag("container", "box")) {
+//            var cParent = document.getElementById("container");
+//            for (var i = 0; i < imgData.data.length; i++) {
+//                //创建图片节点
+//                var cContent = document.createElement("div");
+//                cContent.className = "box";
+//                cParent.appendChild(cContent);
+//
+//                var boxImg = document.createElement("div");
+//                boxImg.className = "box_img";
+//                cContent.appendChild(boxImg);
+//
+//                var img = document.createElement("img");
+//                img.src = "image/desserts/shop1/" + imgData.data[i].src;
+//                boxImg.appendChild(img);
+//            }
+//            imgLocation("container", "box");
+//        }
+//    }
 }
 
 /**

@@ -1,0 +1,72 @@
+.dessert_title{
+	color: rgb(60,60,60);
+}
+.price_bar{
+	height: 70px;
+	background-color: rgb(255,242,232);
+}
+
+.price_word{
+	color: rgb(108,108,108)
+}
+
+.price_num{
+	margin-left: 20px;
+	color: rgb(255,68,0);
+	font-size: 26px;
+}
+
+.result_word{
+	float: right;
+	color: rgb(108,108,108);
+}
+
+
+.report_data li {
+	float: right;
+	list-style-type:none;
+}
+
+.sale_style {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.comment_Style {
+	border-right: 1px solid #E9E9E9;
+	margin-left: 10px;
+	padding-right: 10px;
+}
+
+.buyBtn{
+	margin-left: 20px;
+}
+
+.appointmentBtn{
+	margin-left: 20px;
+}
+
+.cartBtn{
+	margin-left: 20px;
+}
+
+.co6 {
+	color: #666666;
+}
+
+.co8 {
+	color: #999999;
+}
+
+.f25 {
+	font-size: 25px;
+}
+
+.tl {
+	text-align: left
+}
+
+.tc {
+	text-align: center
+}
+

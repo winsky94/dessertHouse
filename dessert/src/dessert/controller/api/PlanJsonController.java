@@ -342,7 +342,6 @@ public class PlanJsonController extends BaseController {
 		 String weekDay = params.get("weekDay");
 		 String date = params.get("date");
 		 String shopName = params.get("shopName");
-		 System.out.println("getDayDessert date="+date);
 		 desserts = planService.getDayDessert(date, weekDay, shopName);
 
 		return Configure.SUCCESS;

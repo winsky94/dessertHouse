@@ -22,4 +22,6 @@ public interface MemberDao {
 	public HashMap<UserType, String> checkLogin(String userName, String password);
 
 	public Member getMemberInfo(String name);
+
+	public Member getMemberInfoById(String memberId);
 }

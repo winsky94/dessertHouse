@@ -34,6 +34,7 @@
 	<bean id="memberShopController" class="dessert.controller.html.MemberShopController" />
 	<bean id="memberJsonController" class="dessert.controller.api.MemberJsonController" />
 	<bean id="dessertJsonController" class="dessert.controller.api.DessertJsonController" />
+	<bean id="memberInfoController" class="dessert.controller.html.MemberInfoController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />
@@ -53,4 +54,5 @@
 	<bean id="planDao" class="dessert.dao.impl.PlanDaoImpl" />
 	<bean id="planDetailDao" class="dessert.dao.impl.PlanDetailDaoImpl" />
 	<bean id="dessertDao" class="dessert.dao.impl.DessertDaoImpl" />
+	<bean id="rechargeDao" class="dessert.dao.impl.RechargeDaoImpl" />
 </beans>

@@ -29,6 +29,8 @@ public class Member {
 	private MemberStatus status = MemberStatus.Init;// 会员卡状态
 	private int point = 0;// 消费积分
 	private String lastLoadTime;// 上次登录时间
+	private double validMoney;// 会员卡上余额
+	private String validDate;// 会员有效期
 
 	public String getLastLoadTime() {
 		return lastLoadTime;
@@ -132,6 +134,22 @@ public class Member {
 
 	public void setPoint(int point) {
 		this.point = point;
+	}
+
+	public double getValidMoney() {
+		return validMoney;
+	}
+
+	public void setValidMoney(double validMoney) {
+		this.validMoney = validMoney;
+	}
+
+	public String getValidDate() {
+		return validDate;
+	}
+
+	public void setValidDate(String validDate) {
+		this.validDate = validDate;
 	}
 
 }

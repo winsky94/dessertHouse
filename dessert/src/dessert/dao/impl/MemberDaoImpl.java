@@ -90,4 +90,10 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		return getByColumn(Member.class, "name", name);
 	}
+
+	@Override
+	public Member getMemberInfoById(String memberId) {
+		// TODO Auto-generated method stub
+		return getByColumn(Member.class, "memberId", memberId);
+	}
 }

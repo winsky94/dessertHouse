@@ -78,4 +78,6 @@ public class Configure {
 	public static final String DESSERT_DETAIL_SESSION = "dessert_detail_session";
 	// 会员查看店面列表
 	public static final String MEMBER_SHOP = "member_shop";
+	// 会员资格管理
+	public static final String MEMBER_INFO = "member_info";
 }

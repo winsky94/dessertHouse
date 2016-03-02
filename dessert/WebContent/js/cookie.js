@@ -108,7 +108,7 @@ function write_header_login(userName, type) {
 								<li><a href="#"">我的购物车</a></li>\
 							</ul>\
 						</li>\
-						<li><a href="#">会员资格</a></li>\
+						<li><a href="member_info">会员资格</a></li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\

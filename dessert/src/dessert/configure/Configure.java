@@ -80,4 +80,9 @@ public class Configure {
 	public static final String MEMBER_SHOP = "member_shop";
 	// 会员资格管理
 	public static final String MEMBER_INFO = "member_info";
+	public static final String MEMBER_INIT_MES = "您的会员资格尚未激活，请尽快充值>=200元以激活";
+	public static final String MEMBER_OK_MES = "状态正常";
+	public static final String MEMBER_PAUSE_MES = "您的会员资格已暂停，请尽快充值以恢复";
+	public static final String MEMBER_OVER_MES = "状态停止";
+
 }

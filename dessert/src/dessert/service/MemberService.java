@@ -19,4 +19,6 @@ public interface MemberService {
 	 * 扫描全部会员，判断是否其会员资格是否已失效
 	 */
 	public void deactivate();
+
+	public String checkMemberStatus(String memberName);
 }

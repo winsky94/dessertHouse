@@ -31,6 +31,7 @@ public class Member {
 	private String lastLoadTime;// 上次登录时间
 	private double validMoney;// 会员卡上余额
 	private String validDate;// 会员有效期
+	private String overDate;// 需要停止会员记录的时间，暂停1年后未支付，会员记录停止
 
 	public String getLastLoadTime() {
 		return lastLoadTime;
@@ -146,6 +147,14 @@ public class Member {
 
 	public String getValidDate() {
 		return validDate;
+	}
+
+	public String getOverDate() {
+		return overDate;
+	}
+
+	public void setOverDate(String overDate) {
+		this.overDate = overDate;
 	}
 
 	public void setValidDate(String validDate) {

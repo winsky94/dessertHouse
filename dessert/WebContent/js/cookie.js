@@ -304,7 +304,31 @@ function callback_login(result) {
 			add_cookie('userName', userName, 30 * 24);
 			add_cookie("type", userType, 30 * 24);
 			add_cookie("lastLoadTime", lastLoadTime, 30 * 24);
-			window.location.href = "index.html";
+
+			//检查会员状态
+			$.ajax({
+				url : 'api/member/checkStatus',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					name : userName,
+				},
+				success : function(result, textStatus) {
+					var msg=result.message;
+					var url="index.html";
+					if(msg==null||msg=="null"){
+						alert("检查会员状态出错啦");
+					}else if(msg=="您的会员资格尚未激活，请尽快充值>=200元以激活"){
+						alert(msg);
+						url="member_info?action=pay";
+					}else if(msg=="您的会员资格已暂停，请尽快充值以恢复"){
+						alert(msg);
+						url="member_info?action=pay";
+					}
+					window.location.href = url;
+				}
+			});
+			
 		} else if(userType == error){
 			// var divNode = $("#message");
 			var divNode=document.getElementById("message");

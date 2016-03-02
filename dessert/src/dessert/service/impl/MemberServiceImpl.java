@@ -108,8 +108,14 @@ public class MemberServiceImpl implements MemberService {
 		double originalMoney = member.getValidMoney();
 		double validMoney = originalMoney + pay_money;
 		member.setValidMoney(validMoney);
+
+		// 会员有效期
 		String validDate = DateUtil.getDateAfter(new Date(), 365);// 暂且定义一年后就是365天
 		member.setValidDate(validDate);
+
+		// 会员记录停止日期
+		String overDate = DateUtil.getDateAfter(new Date(), 365 * 2);// 暂且定义两年后就是365*2天
+		member.setOverDate(overDate);
 
 		// 会员等级
 		int rank = RankCalcutor.getRank(pay_money);
@@ -128,5 +134,24 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDao.deactivate();
 
+	}
+
+	@Override
+	public String checkMemberStatus(String memberName) {
+		// TODO Auto-generated method stub
+		Member member = memberDao.getMemberInfo(memberName);
+		if (member != null) {
+			MemberStatus status = member.getStatus();
+			if (status.equals(MemberStatus.Init)) {
+				return Configure.MEMBER_INIT_MES;
+			} else if (status.equals(MemberStatus.OK)) {
+				return Configure.MEMBER_OK_MES;
+			} else if (status.equals(MemberStatus.pause)) {
+				return Configure.MEMBER_PAUSE_MES;
+			} else if (status.equals(MemberStatus.over)) {
+				return Configure.MEMBER_OVER_MES;
+			}
+		}
+		return null;
 	}
 }

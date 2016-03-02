@@ -159,6 +159,11 @@
 				<param name="message">message</param>
 			</result>
 		</action>
+		<action name="cancelMember" class="memberJsonController" method="cancelMember">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 商品管理 -->

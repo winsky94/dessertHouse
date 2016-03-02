@@ -37,7 +37,31 @@ function getMemberInfo() {
 }
 
 function cancelMember() {
-	alert("取消会员资格");
+	if(window.confirm('你确定要取消会员资格吗？')){
+		$.ajax({
+			url : 'api/member/cancelMember',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				memberId : memberId
+			},
+			success : function(result, textStatus) {
+				if (result.length == 0) {
+					alert("出现错误");
+				} else {
+					var message = result.message;
+					if (message == "success") {
+						exit();
+					} else {
+						var divNode = document.getElementById("pay_message");
+						divNode.innerHTML = message;
+					}
+				}
+			}
+		});
+    }else{
+    	//取消就是啥都不干
+    }
 }
 
 function charge() {

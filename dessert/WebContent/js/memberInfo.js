@@ -13,7 +13,7 @@ function writeMemberShowInfo () {
 				var name=member.name;
 				var rank=member.rank;
 				var point=member.point;
-				var lastLoadTime=member.lastLoadTime;
+				var lastLoadTime=get_cookie("lastLoadTime");
 				var id = member.memberId;
 				
 				var txt='\
@@ -38,7 +38,7 @@ function writeMemberShowInfo () {
 						</li>\
 						<li class="collection-item">\
 							<p>\
-								最近登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; '+lastLoadTime+'\
+								上次登录时间：<br> &nbsp;&nbsp;&nbsp;&nbsp; '+lastLoadTime+'\
 							</p>\
 						</li>\
 					</ul>\

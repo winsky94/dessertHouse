@@ -29,4 +29,11 @@ public interface MemberDao {
 	 * 设置过期的会员暂停其资格
 	 */
 	public void deactivate();
+
+	/**
+	 * 取消会员资格
+	 * 
+	 * @param memberId
+	 */
+	public void cancelMember(String memberId);
 }

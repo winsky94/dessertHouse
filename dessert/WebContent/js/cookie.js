@@ -59,6 +59,8 @@ function write_header(index) {
 
 function exit() {
 	delete_cookie('userName');
+	delete_cookie('type');
+	delete_cookie('lastLoadTime');
 	window.location.href="index.html";
 }
 

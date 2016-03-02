@@ -11,6 +11,7 @@ import dessert.configure.Configure;
 import dessert.dao.MemberDao;
 import dessert.entity.Member;
 import dessert.util.CheckError;
+import dessert.util.MemberStatus;
 import dessert.util.TimeUtil;
 import dessert.util.UserType;
 
@@ -95,5 +96,14 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	public Member getMemberInfoById(String memberId) {
 		// TODO Auto-generated method stub
 		return getByColumn(Member.class, "memberId", memberId);
+	}
+
+	@Override
+	public void deactivate() {
+		// TODO Auto-generated method stub
+		String sql = "update member ";
+		sql += "set status=" + MemberStatus.pause;
+		sql += " where validDate < curdate();";
+		doSql(sql);
 	}
 }

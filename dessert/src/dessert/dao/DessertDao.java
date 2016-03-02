@@ -1,5 +1,7 @@
 package dessert.dao;
 
+import java.util.ArrayList;
+
 import dessert.entity.Dessert;
 
 /**
@@ -17,4 +19,6 @@ public interface DessertDao {
 	public Dessert getDessertByName(String name);
 	
 	public Dessert getDessertById(long id);
+
+	public ArrayList<Dessert> getAllDesserts();
 }

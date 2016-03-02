@@ -122,4 +122,11 @@ public class MemberServiceImpl implements MemberService {
 		// 保存会员信息
 		memberDao.update(member);
 	}
+
+	@Override
+	public void deactivate() {
+		// TODO Auto-generated method stub
+		memberDao.deactivate();
+
+	}
 }

@@ -24,4 +24,9 @@ public interface MemberDao {
 	public Member getMemberInfo(String name);
 
 	public Member getMemberInfoById(String memberId);
+
+	/**
+	 * 设置过期的会员暂停其资格
+	 */
+	public void deactivate();
 }

@@ -79,4 +79,19 @@ public class DessertServiceImpl implements DessertService {
 		return null;
 	}
 
+	@Override
+	public ArrayList<DessertVO> getAllDesserts() {
+		// TODO Auto-generated method stub
+		ArrayList<DessertVO> result = new ArrayList<DessertVO>();
+		ArrayList<Dessert> desserts = new ArrayList<Dessert>();
+		desserts = dessertDao.getAllDesserts();
+		if (desserts != null) {
+			for (Dessert dessert : desserts) {
+				DessertVO vo = ConvertVO.dessertToVO(dessert);
+				result.add(vo);
+			}
+		}
+		return result;
+	}
+
 }

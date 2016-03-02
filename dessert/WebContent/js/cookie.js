@@ -102,9 +102,10 @@ function write_header_login(userName, type) {
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">产品预订<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
-								<li><a href="#">随便看看</a></li>\
-								<li class="divider"></li>\
+								<li><a href="allDesserts.jsp">随便看看</a></li>\
 								<li><a href="memebr_shop_list"">浏览店铺</a></li>\
+								<li class="divider"></li>\
+								<li><a href="#"">我的购物车</a></li>\
 							</ul>\
 						</li>\
 						<li><a href="#">会员资格</a></li>\

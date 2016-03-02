@@ -145,5 +145,14 @@
 			</result>
 		</action>
 	</package>
+	
+	<!-- 商品管理 -->
+	<package name="dessertManage" namespace="/api/dessert" extends="json-default">
+		<action name="allDesserts" class="dessertJsonController">
+			<result type="json">
+				<param name="desserts">desserts</param>
+			</result>
+		</action>
+	</package>
 
 </struts>

@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.PlanVO;
+import dessert.configure.Configure;
 import dessert.dao.PlanDao;
 import dessert.dao.PlanDetailDao;
 import dessert.entity.Dessert;
@@ -212,7 +213,8 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 		// 直接联表查询得了，真是的
 		String hql = "select d.name, d.path, d.price, d.stockNum, d.id";
 		hql += " from plan p, planDetail pd, dessert d";
-		hql += " where p.checked=1 and p.shop='" + shopName + "'";
+		hql += " where p.checked=" + Configure.PLAN_PASS;
+		hql += " and p.shop='" + shopName + "'";
 		hql += " and p.validSunday='" + validSunday + "'";
 		hql += " and pd.weekDay='" + weekDay + "'";
 		hql += " and p.id=pd.planId and pd.dessertName=d.name";

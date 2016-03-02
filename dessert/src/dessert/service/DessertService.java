@@ -36,4 +36,11 @@ public interface DessertService {
 	public long getDessertIdByName(String name);
 
 	public DessertVO getDessertById(long id);
+
+	/**
+	 * 得到全部商品
+	 * 
+	 * @return
+	 */
+	public ArrayList<DessertVO> getAllDesserts();
 }

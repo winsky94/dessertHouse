@@ -1,3 +1,4 @@
+<%@page import="dessert.util.DateUtil"%>
 <%@page import="dessert.VO.DessertVO"%>
 <%@page import="dessert.configure.Configure"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -13,6 +14,7 @@ pageEncoding="utf-8"%>
 	String path=dessert.getPath();
 	double price=dessert.getPrice();
 	int stockNum=dessert.getStockNum();
+	String date=dessert.getDate();
 %>
 <head>
 	<title><%=name %></title>
@@ -69,9 +71,12 @@ pageEncoding="utf-8"%>
 									<span class="co8">交易成功</span>
 								</li>
 								<li class="comment_Style co6 tc" style="padding-top:0;">
-									<span class="f25 co6" id="calories_total">0</span>
-									<br/>
-									<span class="co8">累计评论</span>
+									<a href="#comments">
+										<span class="f25 co6" id="calories_total">1</span>
+										<br/>
+										<span class="co8">累计评论</span>
+									</a>
+									
 								</li>
 							</ul>
 						</div>
@@ -96,11 +101,29 @@ pageEncoding="utf-8"%>
 					<!-- 操作按钮 -->
 					<div style="height:15px;"></div>
 					<div>
+					<%
+						String today=DateUtil.getToday();
+						if(today.equals(date)){
+					%>
 						<button class="btn buyBtn btn-large" type="button" onclick="buy();">立即购买</button>
+						<button class="btn cartBtn btn-large" type="button" onclick="cart();">
+							<i class="icon-shopping-cart"></i>&nbsp;加入购物车
+						</button>
+					<%
+						}else if(today.compareTo(date)<0){
+					%>
 						<button class="btn appointmentBtn btn-large" type="button" onclick="appointment();">现在预约</button>
 						<button class="btn cartBtn btn-large" type="button" onclick="cart();">
 							<i class="icon-shopping-cart"></i>&nbsp;加入购物车
 						</button>
+					<%		
+						}else{
+					%>
+						<p class="text-center muted" style="padding-top:5%;font-size:16px;">对不起，您要找的商品已下架~~~</p>
+					<%				
+						}
+					%>
+						
 					</div>
 					<!-- 操作按钮结束 -->
 					
@@ -110,7 +133,6 @@ pageEncoding="utf-8"%>
 			<!--右侧甜点具体信息 结束 -->
 	
 			<!-- 商品评论 -->
-			
 			<div id="comments" class="span10" style="margin-top: 0px;">
 				<div style="height:15px;"></div>
 				<!-- 虚线效果 -->

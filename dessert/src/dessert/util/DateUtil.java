@@ -25,11 +25,13 @@ public class DateUtil {
 		// System.out.println(sdf.format(date));
 		// }
 
-		Map<String, Week> result = new LinkedHashMap<String, Week>();
-		result = getNextSevenDay();
-		for (String s : result.keySet()) {
-			System.out.println(s + ":" + result.get(s));
-		}
+//		Map<String, Week> result = new LinkedHashMap<String, Week>();
+//		result = getNextSevenDay();
+//		for (String s : result.keySet()) {
+//			System.out.println(s + ":" + result.get(s));
+//		}
+		
+		System.out.println(getDateAfter(new Date(), 365));
 
 	}
 

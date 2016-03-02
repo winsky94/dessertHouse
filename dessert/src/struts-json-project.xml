@@ -144,6 +144,16 @@
 				<param name="member">member</param>
 			</result>
 		</action>
+		<action name="update" class="memberJsonController" method="update">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="pay" class="memberJsonController" method="pay">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 	</package>
 	
 	<!-- 商品管理 -->

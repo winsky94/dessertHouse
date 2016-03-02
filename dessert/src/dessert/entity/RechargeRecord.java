@@ -16,33 +16,40 @@ public class RechargeRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long id;
-	private String userId;// 会员的七位识别码
+	private String memberId;// 会员的七位识别码
 	private double money;// 充值钱数
 	private String date;// 充值日期
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getUserId() {
-		return userId;
+
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
+
 	public double getMoney() {
 		return money;
 	}
+
 	public void setMoney(double money) {
 		this.money = money;
 	}
+
 	public String getDate() {
 		return date;
 	}
+
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
+
 }

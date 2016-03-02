@@ -35,7 +35,6 @@ public class DessertDetailController extends BaseController {
 				session().setAttribute(sessionName, dessert);
 				return Configure.DESSERT_DETAIL;
 			}
-
 		}
 
 	}

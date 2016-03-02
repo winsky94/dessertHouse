@@ -112,10 +112,18 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		sql += " where validDate < curdate();";
 		doSql(sql);
 
-		// 检查会员记录停止——后面可能需要删除那些不需要的记录省的麻烦
+		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
 		sql += " set status=" + MemberStatus.over;
 		sql += " where overDate <　curdate();";
 		doSql(sql);
+	}
+
+	@Override
+	public void cancelMember(String memberId) {
+		// TODO Auto-generated method stub
+		Member member = getByColumn(Member.class, "memberId", memberId);
+		member.setStatus(MemberStatus.over);
+		update(member);
 	}
 }

@@ -120,6 +120,15 @@ public class MemberJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	public String cancelMember() {
+		Map<String, String> params = getParams();
+		String memberId = params.get("memberId");
+		memberService.cancelMember(memberId);
+		
+		message = Configure.SUCCESS;
+		return Configure.SUCCESS;
+	}
+
 	public void setMember(Member member) {
 		this.member = member;
 	}

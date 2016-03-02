@@ -21,4 +21,12 @@ public interface MemberService {
 	public void deactivate();
 
 	public String checkMemberStatus(String memberName);
+
+	/**
+	 * 取消会员资格
+	 * 
+	 * @param memberId
+	 *            会员编号
+	 */
+	public void cancelMember(String memberId);
 }

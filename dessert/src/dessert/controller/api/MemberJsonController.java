@@ -94,6 +94,16 @@ public class MemberJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	public String checkMemberStatus() {
+		message = "";
+
+		Map<String, String> params = getParams();
+		String memberName = params.get("name");
+		message = memberService.checkMemberStatus(memberName);
+
+		return Configure.SUCCESS;
+	}
+
 	public String pay() {
 		Map<String, String> params = getParams();
 

@@ -63,6 +63,10 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		Criteria criteria = session.createCriteria(Member.class);
 		criteria.add(Restrictions.eq("name", userName));
 		criteria.add(Restrictions.eq("password", password));
+		criteria.add(Restrictions.or(
+				Restrictions.eq("status", MemberStatus.Init),
+				Restrictions.eq("status", MemberStatus.OK),
+				Restrictions.eq("status", MemberStatus.pause)));
 		@SuppressWarnings("unchecked")
 		List<Member> members = criteria.list();
 		if (members == null || members.size() == 0) {
@@ -101,9 +105,17 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	@Override
 	public void deactivate() {
 		// TODO Auto-generated method stub
-		String sql = "update member ";
-		sql += "set status=" + MemberStatus.pause;
+		// 检查会员失效
+		String sql = "update member";
+		sql += " set status=" + MemberStatus.pause;
+		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
 		sql += " where validDate < curdate();";
+		doSql(sql);
+
+		// 检查会员记录停止——后面可能需要删除那些不需要的记录省的麻烦
+		sql = "update member";
+		sql += " set status=" + MemberStatus.over;
+		sql += " where overDate <　curdate();";
 		doSql(sql);
 	}
 }

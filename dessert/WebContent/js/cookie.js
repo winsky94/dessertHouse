@@ -318,6 +318,8 @@ function callback_login(result) {
 				success : function(result, textStatus) {
 					var msg=result.message;
 					var url="index.html";
+					//关闭登录对话框
+					$('#loginModel').modal('hide')
 					if(msg==null||msg=="null"){
 						alert("检查会员状态出错啦");
 					}else if(msg=="您的会员资格尚未激活，请尽快充值>=200元以激活"){

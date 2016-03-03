@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.DessertVO;
+import dessert.configure.Configure;
+import dessert.dao.ConsumeDao;
 import dessert.dao.DessertDao;
+import dessert.entity.ConsumeRecord;
 import dessert.entity.Dessert;
+import dessert.entity.Member;
 import dessert.service.DessertService;
+import dessert.service.MemberService;
 import dessert.util.ConvertVO;
 
 /**
@@ -15,7 +20,11 @@ import dessert.util.ConvertVO;
  */
 public class DessertServiceImpl implements DessertService {
 	@Autowired
-	public DessertDao dessertDao;
+	private DessertDao dessertDao;
+	@Autowired
+	private ConsumeDao consumeDao;
+	@Autowired
+	private MemberService memberService;
 
 	@Override
 	public long add(Dessert dessert) {
@@ -52,7 +61,6 @@ public class DessertServiceImpl implements DessertService {
 			} else {
 				System.err.println("有个商品的名字不存在~，名字为：" + name);
 			}
-
 		}
 		return result;
 	}
@@ -94,4 +102,65 @@ public class DessertServiceImpl implements DessertService {
 		return result;
 	}
 
+	@Override
+	public String consume(ConsumeRecord record) {
+		// TODO Auto-generated method stub
+
+		//消费，计算优惠和积分
+		
+		
+		boolean cash = record.getCash();
+		if (!cash) {
+			// 从会员余额中扣钱
+			String memberId = record.getMemberId();
+			Member member = memberService.getMemberByMemberId(memberId);
+			double originalMoney = member.getValidMoney();
+			double payMoney = record.getMoney();
+			double validMoney = originalMoney - payMoney;
+			if (validMoney < 0) {
+				return Configure.CARD_NOT_ENOUGH;
+			} else {
+				// 更新账户余额
+				member.setValidMoney(validMoney);
+				memberService.update(member);
+
+				// 商品库存
+				return updateStock(record);
+			}
+		} else {
+			// 商品库存
+			return updateStock(record);
+		}
+	}
+
+	private String updateStock(ConsumeRecord record) {
+		String action = record.getAction();
+		if (Configure.BUY.equals(action)) {
+			// 商品库存
+			long dessertId = record.getDessertId();
+			Dessert dessert = dessertDao.getDessertById(dessertId);
+			int stockNum = dessert.getStockNum();
+			int buyNum = record.getNum();
+			int num = stockNum - buyNum;
+			if (num < 0) {
+				return Configure.STOCK_NOT_ENOUGH;
+			} else {
+				// 更新商品库存
+				dessert.setStockNum(num);
+				dessertDao.update(dessert);
+
+				// 增加购买记录
+				consumeDao.consume(record);
+				return Configure.SUCCESS;
+			}
+		} else if (Configure.APPOINTMENT.equals(action)) {
+			// 预约，不需要-库存
+			// 增加预约记录
+			consumeDao.consume(record);
+			return Configure.SUCCESS;
+
+		} else {
+			return Configure.ERROR;
+		}
+	}
 }

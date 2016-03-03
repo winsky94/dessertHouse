@@ -10,6 +10,7 @@ pageEncoding="utf-8"%>
 <%
 	String sessionName=Configure.DESSERT_DETAIL_SESSION;
 	DessertVO dessert=(DessertVO)session.getAttribute(sessionName);
+	long dessertId=dessert.getId();
 	String name=dessert.getName();
 	String path=dessert.getPath();
 	double price=dessert.getPrice();
@@ -56,6 +57,7 @@ pageEncoding="utf-8"%>
 				<!-- 右之商品详情 -->
 				<div class="span6">
 					<h3 class="text-center dessert_title" id="dessertName"><%=name %></h3>
+					<input type="hidden" id="dessertId" value=<%=dessertId %>>
 					<!-- 粉色底的条形区域 -->
 					<div class="price_bar">
 						<div style="height:12px;"></div>
@@ -63,7 +65,7 @@ pageEncoding="utf-8"%>
 							<ul class="report_data">
 								<span class="price_word">价格:</span>
 								<span class="price_num">
-									￥<strong><%=price %></strong>
+									￥<strong id="price"><%=price %></strong>
 								</span>
 								<li class="sale_style co6 tc">
 									<span class="f25 co6" id="meters_total">0</span>

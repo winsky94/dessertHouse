@@ -10,6 +10,8 @@ public interface MemberService {
 	public String signUp(Member member);
 
 	public Member getMemberInfo(String name);
+	
+	public Member getMemberByMemberId(String memberId);
 
 	public String update(Member member);
 

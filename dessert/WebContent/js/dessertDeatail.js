@@ -1,9 +1,47 @@
 function buy () {
 	alert("buy");
+	process("buy","card");
 }
 
 function appointment () {
-	alert("appointment");
+	process("appointment","card");
+}
+
+function process (action,payMethod) {
+	var memberName=get_cookie("userName");
+	if(memberName==null || typeof(memberName)==undefined){
+		alert("请先登录再操作");
+		window.location.href="index.html";
+		return;
+	}
+	var dessertId=$("#dessertId").val();
+	var num=$("#quantity").val();
+	var price=$("#price").text();
+	$.ajax({
+		url : 'api/dessert/consume',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			memberName : memberName,
+			dessertId : dessertId,
+			num : num,
+			price : price,
+			action : action,
+			payMethod : payMethod
+		},
+		success : function(result, textStatus) {
+			if (result.length == 0) {
+				alert("出现错误");
+			} else {
+				var message = result.message;
+				if (message == "success") {
+					window.location.href="allDesserts.jsp"
+				} else {
+					alert(message);
+				}
+			}
+		}
+	});
 }
 
 function cart () {

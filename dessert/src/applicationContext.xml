@@ -56,4 +56,5 @@
 	<bean id="planDetailDao" class="dessert.dao.impl.PlanDetailDaoImpl" />
 	<bean id="dessertDao" class="dessert.dao.impl.DessertDaoImpl" />
 	<bean id="rechargeDao" class="dessert.dao.impl.RechargeDaoImpl" />
+	<bean id="consumeDao" class="dessert.dao.impl.ConsumeDaoImpl" />
 </beans>

@@ -35,17 +35,48 @@ function process (action,payMethod) {
 			} else {
 				var message = result.message;
 				if (message == "success") {
-					window.location.href="allDesserts.jsp"
+					var discount = result.discount;
+					var point = result.point;
+					var txt='\
+						<!-- Modal -->\
+						<div id="consumeResultModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">\
+							<div class="modal-header">\
+								<h3>消费结果提示</h3>\
+							</div>\
+							<div class="modal-body">\
+								<div class="center">\
+									恭喜您，您此次消费：\
+									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'+discount+'\
+									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'+point+'\
+								</div>\
+							</div>\
+							<div class="modal-footer">\
+								<div style="text-align:center">\
+									<button class="btn btn-primary" onclick="messageOK()">确认</button>\
+								</div>\
+						\
+							</div>\
+						</div>\
+					';
+
+					$("#consume_result").html(txt);
+					$("#consumeResultModel").modal('show');
 				} else {
 					alert(message);
 				}
 			}
+			
+			
 		}
 	});
 }
 
 function cart () {
 	alert("cart");
+}
+
+function messageOK () {
+	history.back();
 }
 
 function addNum () {

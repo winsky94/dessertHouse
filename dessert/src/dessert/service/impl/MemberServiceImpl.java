@@ -13,8 +13,8 @@ import dessert.entity.RechargeRecord;
 import dessert.service.MemberService;
 import dessert.util.DateUtil;
 import dessert.util.DesUtils;
+import dessert.util.MemberHelper;
 import dessert.util.MemberStatus;
-import dessert.util.RankCalcutor;
 import dessert.util.StatusHelper;
 
 /**
@@ -75,13 +75,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member getMemberInfo(String name) {
 		// TODO Auto-generated method stub
-		return memberDao.getMemberInfo(name);
+		Member member = memberDao.getMemberInfo(name);
+		// 把密码解密后返回
+		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+		String password = des.decrypt(member.getPassword());
+		member.setPassword(password);
+		
+		return member;
 	}
 
 	@Override
 	public String update(Member member) {
 		// TODO Auto-generated method stub
+		// 密码加密
+		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+		String password = des.encrypt(member.getPassword());
+		member.setPassword(password);
 		memberDao.update(member);
+
 		return Configure.SUCCESS;
 	}
 
@@ -118,7 +129,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setOverDate(overDate);
 
 		// 会员等级
-		int rank = RankCalcutor.getRank(pay_money);
+		int rank = MemberHelper.getRank(pay_money);
 		member.setRank(rank);
 
 		// 会员状态

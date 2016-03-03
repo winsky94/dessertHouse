@@ -71,7 +71,7 @@ public class MemberJsonController extends BaseController {
 		if ("-".equals(validDate)) {
 			validDate = null;
 		}
-
+		
 		Member member = new Member();
 		member.setId(id);
 		member.setName(userName);
@@ -124,7 +124,7 @@ public class MemberJsonController extends BaseController {
 		Map<String, String> params = getParams();
 		String memberId = params.get("memberId");
 		memberService.cancelMember(memberId);
-		
+
 		message = Configure.SUCCESS;
 		return Configure.SUCCESS;
 	}

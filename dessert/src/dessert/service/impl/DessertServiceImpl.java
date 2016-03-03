@@ -1,6 +1,7 @@
 package dessert.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import dessert.entity.Member;
 import dessert.service.DessertService;
 import dessert.service.MemberService;
 import dessert.util.ConvertVO;
+import dessert.util.MemberHelper;
 
 /**
  * @author 严顺宽
@@ -103,34 +105,47 @@ public class DessertServiceImpl implements DessertService {
 	}
 
 	@Override
-	public String consume(ConsumeRecord record) {
+	public HashMap<String, Object> consume(ConsumeRecord record) {
 		// TODO Auto-generated method stub
+		HashMap<String, Object> result = new HashMap<String, Object>();
 
-		//消费，计算优惠和积分
-		
-		
+		String memberId = record.getMemberId();
+		Member member = memberService.getMemberByMemberId(memberId);
+		double payMoney = record.getMoney();
+
+		// 消费，计算优惠和积分
+		double discount = MemberHelper.getDiscount(member, payMoney);
+		int point = MemberHelper.getPoint(member, payMoney);
+		result.put("discount", discount);
+		result.put("point", point);
+
+		int originalPoint = member.getPoint();
+		int validPoint = originalPoint + point;
+		member.setPoint(validPoint);
+
 		boolean cash = record.getCash();
 		if (!cash) {
 			// 从会员余额中扣钱
-			String memberId = record.getMemberId();
-			Member member = memberService.getMemberByMemberId(memberId);
 			double originalMoney = member.getValidMoney();
-			double payMoney = record.getMoney();
 			double validMoney = originalMoney - payMoney;
 			if (validMoney < 0) {
-				return Configure.CARD_NOT_ENOUGH;
+				result.put("msg", Configure.CARD_NOT_ENOUGH);
 			} else {
 				// 更新账户余额
 				member.setValidMoney(validMoney);
 				memberService.update(member);
 
 				// 商品库存
-				return updateStock(record);
+				String msg = updateStock(record);
+				result.put("msg", msg);
 			}
 		} else {
 			// 商品库存
-			return updateStock(record);
+			String msg = updateStock(record);
+			result.put("msg", msg);
 		}
+
+		return result;
 	}
 
 	private String updateStock(ConsumeRecord record) {

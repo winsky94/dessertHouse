@@ -7,6 +7,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 
+import dessert.configure.Configure;
+
 /**
  * DES加密和解密工具,可以对字符串进行加密和解密操作 。
  * 
@@ -22,14 +24,14 @@ public class DesUtils {
 
 	public static void main(String[] args) {
 		try {
-			String test = "123456789";
-			DesUtils des = new DesUtils("winsky");// 自定义密钥
+			String test = "12345a";
+			DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
 			System.out.println("加密前的字符：" + test);
 			System.out.println("加密后的字符：" + des.encrypt(test));
 			System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));
 
 			System.out.println("解密后的字符："
-					+ des.decrypt("66dcac2fff5377cddf2cc2758e589044"));
+					+ des.decrypt("9321d65950ac4e07"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,7 +45,7 @@ public class DesUtils {
 	 *            需要转换的byte数组
 	 * @return 转换后的字符串
 	 */
-	public static String byteArr2HexStr(byte[] arrB){
+	public static String byteArr2HexStr(byte[] arrB) {
 		int iLen = arrB.length;
 		// 每个byte用两个字符才能表示，所以字符串的长度是数组长度的两倍
 		StringBuffer sb = new StringBuffer(iLen * 2);
@@ -72,7 +74,7 @@ public class DesUtils {
 	 * @throws Exception
 	 *             本方法不处理任何异常，所有异常全部抛出
 	 */
-	public static byte[] hexStr2ByteArr(String strIn){
+	public static byte[] hexStr2ByteArr(String strIn) {
 		byte[] arrB = strIn.getBytes();
 		int iLen = arrB.length;
 
@@ -90,7 +92,7 @@ public class DesUtils {
 	 * 
 	 * @throws Exception
 	 */
-	public DesUtils(){
+	public DesUtils() {
 		this(strDefaultKey);
 	}
 
@@ -101,7 +103,7 @@ public class DesUtils {
 	 *            指定的密钥
 	 * @throws Exception
 	 */
-	public DesUtils(String strKey){
+	public DesUtils(String strKey) {
 		Security.addProvider(new com.sun.crypto.provider.SunJCE());
 		try {
 			Key key = getKey(strKey.getBytes());
@@ -116,7 +118,7 @@ public class DesUtils {
 			e.printStackTrace();
 		} finally {
 		}
-		
+
 	}
 
 	/**
@@ -126,7 +128,7 @@ public class DesUtils {
 	 *            需加密的字节数组
 	 * @return 加密后的字节数组
 	 */
-	public byte[] encrypt(byte[] arrB){
+	public byte[] encrypt(byte[] arrB) {
 		try {
 			return encryptCipher.doFinal(arrB);
 		} catch (IllegalBlockSizeException e) {
@@ -146,7 +148,7 @@ public class DesUtils {
 	 *            需加密的字符串
 	 * @return 加密后的字符串
 	 */
-	public String encrypt(String strIn){
+	public String encrypt(String strIn) {
 		return byteArr2HexStr(encrypt(strIn.getBytes()));
 	}
 
@@ -157,7 +159,7 @@ public class DesUtils {
 	 *            需解密的字节数组
 	 * @return 解密后的字节数组
 	 */
-	public byte[] decrypt(byte[] arrB){
+	public byte[] decrypt(byte[] arrB) {
 		try {
 			return decryptCipher.doFinal(arrB);
 		} catch (IllegalBlockSizeException e) {
@@ -178,7 +180,7 @@ public class DesUtils {
 	 * @return 解密后的字符串
 	 * @throws Exception
 	 */
-	public String decrypt(String strIn){
+	public String decrypt(String strIn) {
 		return new String(decrypt(hexStr2ByteArr(strIn)));
 	}
 
@@ -190,7 +192,7 @@ public class DesUtils {
 	 * @return 生成的密钥
 	 * @throws java.lang.Exception
 	 */
-	private Key getKey(byte[] arrBTmp){
+	private Key getKey(byte[] arrBTmp) {
 		// 创建一个空的8位字节数组（默认值为0）
 		byte[] arrB = new byte[8];
 

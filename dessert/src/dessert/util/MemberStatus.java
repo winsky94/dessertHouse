@@ -12,16 +12,16 @@ public enum MemberStatus {
 	public static MemberStatus getStatus(String type) {
 		MemberStatus status = null;
 		switch (type) {
-		case "0":
+		case "Init":
 			status = Init;
 			break;
-		case "1":
+		case "OK":
 			status = OK;
 			break;
-		case "2":
+		case "pause":
 			status = pause;
 			break;
-		case "3":
+		case "over":
 			status = over;
 			break;
 		default:

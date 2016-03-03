@@ -1,6 +1,7 @@
 package dessert.controller.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class DessertJsonController extends BaseController {
 	private MemberService memberService;
 	private ArrayList<DessertVO> desserts = new ArrayList<DessertVO>();
 	private String message;
+	private double discount;
+	private int point;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -34,6 +37,10 @@ public class DessertJsonController extends BaseController {
 	}
 
 	public String consume() {
+		message = "";
+		discount = 0;
+		point = 0;
+
 		Map<String, String> params = getParams();
 
 		try {
@@ -47,7 +54,7 @@ public class DessertJsonController extends BaseController {
 			Member member = memberService.getMemberInfo(memberName);
 			String memberId = member.getMemberId();
 			double money = price * num;
-			
+
 			ConsumeRecord consumeRecord = new ConsumeRecord();
 			consumeRecord.setDate(TimeUtil.getCurrentTime());
 			consumeRecord.setDessertId(dessertId);
@@ -61,7 +68,11 @@ public class DessertJsonController extends BaseController {
 				consumeRecord.setCash(false);
 			}
 
-			message = dessertService.consume(consumeRecord);
+			HashMap<String, Object> result = dessertService
+					.consume(consumeRecord);
+			message = (String) result.get("msg");
+			discount = (double) result.get("discount");
+			point = (int) result.get("point");
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -85,6 +96,22 @@ public class DessertJsonController extends BaseController {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
 }

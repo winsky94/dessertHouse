@@ -1,6 +1,7 @@
 package dessert.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dessert.VO.DessertVO;
 import dessert.entity.ConsumeRecord;
@@ -50,7 +51,7 @@ public interface DessertService {
 	 * 
 	 * @param consumeRecord
 	 * 
-	 * @return 购买结果
+	 * @return 购买结果，msg:结果；discount：折扣；point：此次消费的累积积分
 	 */
-	public String consume(ConsumeRecord record);
+	public HashMap<String, Object> consume(ConsumeRecord record);
 }

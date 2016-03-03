@@ -160,4 +160,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDao.cancelMember(memberId);
 	}
+
+	@Override
+	public Member getMemberByMemberId(String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberInfoById(memberId);
+	}
 }

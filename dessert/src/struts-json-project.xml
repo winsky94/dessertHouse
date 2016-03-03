@@ -173,6 +173,12 @@
 				<param name="desserts">desserts</param>
 			</result>
 		</action>
+				<action name="consume" class="dessertJsonController" method="consume">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
+		
 	</package>
 
 </struts>

@@ -84,5 +84,13 @@ public class Configure {
 	public static final String MEMBER_OK_MES = "状态正常";
 	public static final String MEMBER_PAUSE_MES = "您的会员资格已暂停，请尽快充值以恢复";
 	public static final String MEMBER_OVER_MES = "状态停止";
+	// 会员消费行为
+	public static final String APPOINTMENT = "appointment";// 预约
+	public static final String BUY = "buy";// 购买
+	// 会员付费行为
+	public static final String CASH = "cash";// 现金付费
+	public static final String CARD = "card";// 会员账户余额
+	public static final String CARD_NOT_ENOUGH = "账户余额不足，请至相应店面使用现金支付~~";// 会员账户余额
+	public static final String STOCK_NOT_ENOUGH = "库存不足，下次早点来哦~~";// 会员账户余额
 
 }

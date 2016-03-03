@@ -73,7 +73,7 @@ function pay () {
 	var confirm_money=$("#money_confirm").val();
 	if(pay_money!=confirm_money){
 		var divNode = document.getElementById("pay_message");
-		$("#money").focus();
+		$("#money_confirm").focus();
 		divNode.innerHTML = "两次充值金额输入不一致";
 		return;
 	}
@@ -217,6 +217,7 @@ function callback_update(result) {
 }
 
 function editInfo() {
+	$("#pay").hide();
 	var txt = '\
 		<form class="form-horizontal">\
 			<div class="row-fluid control-group"></div>\

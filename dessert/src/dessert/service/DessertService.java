@@ -3,6 +3,7 @@ package dessert.service;
 import java.util.ArrayList;
 
 import dessert.VO.DessertVO;
+import dessert.entity.ConsumeRecord;
 import dessert.entity.Dessert;
 
 /**
@@ -43,4 +44,13 @@ public interface DessertService {
 	 * @return
 	 */
 	public ArrayList<DessertVO> getAllDesserts();
+
+	/**
+	 * 会员消费：购买or预约商品
+	 * 
+	 * @param consumeRecord
+	 * 
+	 * @return 购买结果
+	 */
+	public String consume(ConsumeRecord record);
 }

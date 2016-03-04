@@ -66,7 +66,9 @@ pageEncoding="utf-8"%>
 								<th style="display:none">id</th>
 								<th class="order-header text-center">商品名称</th>
 								<th class="order-header text-center">数量</th>
+								<th class="order-header text-center">优惠</th>
 								<th class="order-header text-center">总价</th>
+								<th class="order-header text-center">积分</th>
 								<th class="order-header text-center">行为</th>
 								<th class="order-header text-center">付款方式</th>
 							</tr>
@@ -83,6 +85,8 @@ pageEncoding="utf-8"%>
 									String dessertName =record.getDessertName();
 									double money = record.getMoney();
 									int num = record.getNum();
+									double discount = record.getDiscount();
+									int point = record.getPoint();
 									boolean cash=record.getCash();
 									String method = Configure.CARD_CN; 
 									if(cash){
@@ -97,7 +101,9 @@ pageEncoding="utf-8"%>
 								<td style="display:none;"><%=id %></td>
 								<td><%=dessertName %></td>
 								<td><%=num %></td>
+								<td><%=discount %></td>
 								<td><%=money %></td>
+								<td><%=point %></td>
 								<td><%=actionCN %></td>
 								<td><%=method %></td>
 							</tr>

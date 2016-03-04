@@ -118,6 +118,8 @@ public class DessertServiceImpl implements DessertService {
 		int point = MemberHelper.getPoint(member, payMoney);
 		result.put("discount", discount);
 		result.put("point", point);
+		record.setDiscount(discount);
+		record.setPoint(point);
 
 		int originalPoint = member.getPoint();
 		int validPoint = originalPoint + point;

@@ -13,9 +13,12 @@ public class ConsumeVO {
 	private double money;// 消费金额
 	private String action;// 行为：预约：appointment or 购买：buy
 	private boolean cash;// 是否是现金支付，现金or从会员账户扣钱
+	private double discount;// 优惠
+	private int point;// 累积积分
 
 	public ConsumeVO(long id, String memberId, String dessertName, int num,
-			String date, double money, String action, boolean cash) {
+			String date, double money, String action, boolean cash,
+			double discount, int point) {
 		super();
 		this.id = id;
 		this.memberId = memberId;
@@ -25,6 +28,8 @@ public class ConsumeVO {
 		this.money = money;
 		this.action = action;
 		this.cash = cash;
+		this.discount = discount;
+		this.point = point;
 	}
 
 	public long getId() {
@@ -89,5 +94,21 @@ public class ConsumeVO {
 
 	public void setCash(boolean cash) {
 		this.cash = cash;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
 	}
 }

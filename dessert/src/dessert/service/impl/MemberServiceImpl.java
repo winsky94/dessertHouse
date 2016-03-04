@@ -203,11 +203,13 @@ public class MemberServiceImpl implements MemberService {
 				double money = record.getMoney();
 				int num = record.getNum();
 				boolean cash = record.getCash();
+				double discount = record.getDiscount();
+				int point = record.getPoint();
 				DessertVO dessert = dessertService.getDessertById(dessertId);
 				if (dessert != null) {
 					String dessertName = dessert.getName();
 					ConsumeVO vo = new ConsumeVO(id, memberId, dessertName,
-							num, date, money, action, cash);
+							num, date, money, action, cash,discount,point);
 					result.add(vo);
 				}
 

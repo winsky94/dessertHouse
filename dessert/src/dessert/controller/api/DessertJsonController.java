@@ -62,6 +62,7 @@ public class DessertJsonController extends BaseController {
 			consumeRecord.setNum(num);
 			consumeRecord.setMoney(money);
 			consumeRecord.setAction(action);
+			
 			if (Configure.CASH.equals(payMethod)) {
 				consumeRecord.setCash(true);
 			} else {

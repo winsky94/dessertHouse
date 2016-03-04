@@ -23,6 +23,24 @@ public class ConsumeRecord {
 	private double money;// 消费金额
 	private String action;// 行为：预约：appointment or 购买：buy
 	private boolean cash;// 是否是现金支付，现金or从会员账户扣钱
+	private double discount;// 优惠
+	private int point;// 累积积分
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
 
 	public long getId() {
 		return id;

@@ -23,4 +23,6 @@ public interface WorkerDao {
 	public ArrayList<Worker> getWorkers(ArrayList<UserType> types);
 
 	public String getMaxWorkerId();
+
+	public Worker getWorkerByWorkerId(String workerId);
 }

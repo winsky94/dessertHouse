@@ -38,7 +38,7 @@ function refreshSelectedDay () {
 					<div class="box">\
 						<input id="shopName" type="hidden" value="'+owingTo+'">\
 						<div class="box_img">\
-							<a href="dessert_detail?shopName='+shopName+'&id='+id+'" target="_self">\
+							<a href="dessert_detail?shopName='+shopName+'&id='+id+'&type='+get_cookie("type")+'" target="_self">\
 								<img src="'+path+'">\
 								<div class="text_center">\
 									<span>'+name+'</span>\
@@ -61,10 +61,6 @@ function refreshSelectedDay () {
 			$("#container").html(txt);
 		}
 	});
-
-	
-	
-
 }
 
 function setWeekBar () {

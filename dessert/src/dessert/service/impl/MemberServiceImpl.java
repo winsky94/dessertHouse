@@ -87,11 +87,12 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMemberInfo(String name) {
 		// TODO Auto-generated method stub
 		Member member = memberDao.getMemberInfo(name);
-		// 把密码解密后返回
-		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
-		String password = des.decrypt(member.getPassword());
-		member.setPassword(password);
-
+		if (member != null) {
+			// 把密码解密后返回
+			DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+			String password = des.decrypt(member.getPassword());
+			member.setPassword(password);
+		}
 		return member;
 	}
 
@@ -187,10 +188,12 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMemberByMemberId(String memberId) {
 		// TODO Auto-generated method stub
 		Member member = memberDao.getMemberInfoById(memberId);
-		// 把密码解密后返回
-		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
-		String password = des.decrypt(member.getPassword());
-		member.setPassword(password);
+		if (member != null) {
+			// 把密码解密后返回
+			DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+			String password = des.decrypt(member.getPassword());
+			member.setPassword(password);
+		}
 		return member;
 	}
 

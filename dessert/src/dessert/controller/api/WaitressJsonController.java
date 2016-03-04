@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import dessert.VO.WorkerVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
+import dessert.entity.Member;
 import dessert.entity.Worker;
+import dessert.service.MemberService;
 import dessert.service.WorkerService;
 import dessert.util.EnumUtil;
 import dessert.util.UserType;
@@ -22,8 +24,13 @@ public class WaitressJsonController extends BaseController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	public WorkerService workerService;
+	@Autowired
+	private MemberService memberService;
+
 	private String message;
+	private Member member;
 	private String workerId;
+	private String owingTo;
 	public ArrayList<WorkerVO> workers = new ArrayList<WorkerVO>();
 
 	@Override
@@ -91,7 +98,24 @@ public class WaitressJsonController extends BaseController {
 
 		return Configure.SUCCESS;
 	}
-	
+
+	public String guestInfo() {
+		member = null;
+
+		Map<String, String> params = getParams();
+		String memberId = params.get("memberId");
+		member = memberService.getMemberByMemberId(memberId);
+		return Configure.SUCCESS;
+	}
+
+	public String owingTo() {
+		owingTo = "";
+		Map<String, String> params = getParams();
+		String workerId = params.get("workerId");
+		owingTo = workerService.getWorkerShop(workerId);
+		return Configure.SUCCESS;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -114,6 +138,22 @@ public class WaitressJsonController extends BaseController {
 
 	public void setWorkerId(String workerId) {
 		this.workerId = workerId;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public String getOwingTo() {
+		return owingTo;
+	}
+
+	public void setOwingTo(String owingTo) {
+		this.owingTo = owingTo;
 	}
 
 }

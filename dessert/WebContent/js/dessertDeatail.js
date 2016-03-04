@@ -1,5 +1,8 @@
+function sale () {
+	alert("sale")
+}
+
 function buy () {
-	alert("buy");
 	process("buy","card");
 }
 

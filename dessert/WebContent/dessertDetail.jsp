@@ -98,8 +98,11 @@
 					<div style="height: 15px;"></div>
 					<div>
 						<%
+							String type= request.getParameter("type");
 							String today = DateUtil.getToday();
+							
 							if (today.equals(date)) {
+								if("member".equals(type)){
 						%>
 						<button class="btn buyBtn btn-large" type="button"
 							onclick="buy();">立即购买</button>
@@ -108,7 +111,14 @@
 							<i class="icon-shopping-cart"></i>&nbsp;加入购物车
 						</button>
 						<%
+								}else {
+						%>
+						<button class="btn buyBtn btn-large" type="button"
+							onclick="sale();">销　售</button>	
+						<%
+								}
 							} else if (today.compareTo(date) < 0) {
+								if("member".equals(type)){
 						%>
 						<button class="btn appointmentBtn btn-large" type="button"
 							onclick="appointment();">现在预约</button>
@@ -117,6 +127,12 @@
 							<i class="icon-shopping-cart"></i>&nbsp;加入购物车
 						</button>
 						<%
+								}else {
+						%>
+						<button class="btn appointmentBtn btn-large" type="button"
+							onclick="waitress_appointment();">预　约</button>
+						<%
+								}
 							} else {
 						%>
 						<p class="text-center muted"

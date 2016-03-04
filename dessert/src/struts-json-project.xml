@@ -94,6 +94,16 @@
 				<param name="workerId">workerId</param>
 			</result>
 		</action>
+		<action name="guestInfo" class="waitressJsonController" method="guestInfo">
+			<result type="json">
+				<param name="member">member</param>
+			</result>
+		</action>
+		<action name="owingTo" class="waitressJsonController" method="owingTo">
+			<result type="json">
+				<param name="owingTo">owingTo</param>
+			</result>
+		</action>
 	</package>
 
 	<!-- 销售计划管理 -->
@@ -159,7 +169,8 @@
 				<param name="message">message</param>
 			</result>
 		</action>
-		<action name="cancelMember" class="memberJsonController" method="cancelMember">
+		<action name="cancelMember" class="memberJsonController"
+			method="cancelMember">
 			<result type="json">
 				<param name="message">message</param>
 			</result>
@@ -170,7 +181,7 @@
 			</result>
 		</action>
 	</package>
-	
+
 	<!-- 商品管理 -->
 	<package name="dessertManage" namespace="/api/dessert" extends="json-default">
 		<action name="allDesserts" class="dessertJsonController">
@@ -178,12 +189,12 @@
 				<param name="desserts">desserts</param>
 			</result>
 		</action>
-				<action name="consume" class="dessertJsonController" method="consume">
+		<action name="consume" class="dessertJsonController" method="consume">
 			<result type="json">
 				<param name="message">message</param>
 			</result>
 		</action>
-		
+
 	</package>
 
 </struts>

@@ -72,10 +72,10 @@
 							</a>
 						</div>
 					</div>
-					<div style="height: 15px;"></div>
+					<div style="height: 20px;"></div>
 					<div class="well">
 						<!-- 会员信息 -->
-						<div id="info" class="container">
+						<div id="info" style="width:800px;">
 							<script type="text/javascript">
 								getMemberInfo();
 								//showInfo();
@@ -83,7 +83,7 @@
 						</div>
 						<!-- 会员信息 结束 -->
 						<!-- 修改会员信息 -->
-						<div id="edit_info" class="container"></div>
+						<div id="edit_info" style="width:800px;"></div>
 						<!-- 修改会员信息 结束 -->
 					</div>
 				</div>

@@ -47,7 +47,7 @@
 		function setHref () {
 			//给导航栏上的消费记录增加参数
 			var hrefObj=document.getElementById("consume_href");
-			if(typeof(hrefObj)!=undefined){
+			if(typeof(hrefObj)!=undefined && hrefObj!=null){
 				var hrefs=hrefObj.getAttribute("href")+"?memberId="+get_cookie("memberId");
 				hrefObj.setAttribute("href",hrefs);
 			}

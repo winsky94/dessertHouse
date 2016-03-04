@@ -207,8 +207,8 @@ pageEncoding="utf-8"%>
 						last : '最后一页'
 					},
 					"info" : "第_PAGE_页，共_PAGES_页，共有记录_MAX_条",
-					"emptyTable" : "",
-					"zeroRecords" : "",
+					"emptyTable" : "暂无记录",
+					"zeroRecords" : "没有找到符合条件的记录...",
 					"infoEmpty" : "检索到记录0条",
 					"lengthMenu": "每页显示 _MENU_ 条记录",
 					"infoFiltered": "(从 _MAX_ 条记录筛选)",

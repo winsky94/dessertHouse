@@ -1,13 +1,13 @@
 <%@page import="dessert.configure.Configure"%>
-<%@page import="dessert.VO.ConsumeVO"%>
+<%@page import="dessert.entity.RechargeRecord"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>消费统计</title>
+	<title>充值记录</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -27,13 +27,13 @@ pageEncoding="utf-8"%>
 	<link href="css/table_css/buttons.dataTables.min.css" rel="stylesheet" media="screen" />
 	
 	<style type="text/css">
-		#consumeTable thead tr th {
+		#payTable thead tr th {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
 		}
 
-		#consumeTable tbody tr td {
+		#payTable tbody tr td {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
@@ -57,58 +57,34 @@ pageEncoding="utf-8"%>
 			<!--左侧用户信息-->
 			<%@ include file="WorkerInfo.jsp"%>
 			<!--左侧用户信息 结束-->
-			<!--右侧消费记录表格 -->
+			<!--右侧充值记录表格 -->
 			<div class="span10">
 				<div class="table-container table-responsive">
-					<table id="consumeTable" class="table display dataTable">
+					<table id="payTable" class="table display dataTable">
 						<thead>
 							<tr>
 								<th style="display:none">id</th>
 								<th class="order-header text-center">会员编号</th>
-								<th class="order-header text-center">商品名称</th>
-								<th class="order-header text-center">数量</th>
-								<th class="order-header text-center">优惠</th>
-								<th class="order-header text-center">总价</th>
-								<th class="order-header text-center">积分</th>
-								<th class="order-header text-center">行为</th>
-								<th class="order-header text-center">付款方式</th>
+								<th class="order-header text-center">充值时间</th>
+								<th class="order-header text-center">金额</th>
 							</tr>
 						</thead>
 						<tbody>
 						<%
 							@SuppressWarnings("unchecked")
-							List<ConsumeVO> records=(List<ConsumeVO>)session.getAttribute(Configure.MANAGER_CONSUME_SESSION);
+							List<RechargeRecord> records=(List<RechargeRecord>)session.getAttribute(Configure.MANAGER_RECHARGE_SESSION);
 							if(records!=null){
-								for(ConsumeVO record:records){
+								for(RechargeRecord record:records){
 									long id = record.getId();
 									String memberId=record.getMemberId();
-									String action=record.getAction();
-									String date=record.getDate();
-									String dessertName =record.getDessertName();
-									double money = record.getMoney();
-									int num = record.getNum();
-									double discount = record.getDiscount();
-									int point = record.getPoint();
-									boolean cash=record.getCash();
-									String method = Configure.CARD_CN; 
-									if(cash){
-										method=Configure.CASH_CN;
-									}
-									String actionCN=Configure.BUY_CN;
-									if(Configure.APPOINTMENT.equals(action)){
-										actionCN=Configure.APPOINTMENT_CN;
-									}
+									String date = record.getDate();
+									double money=record.getMoney();
 						%>
-							<tr class="point-line">
+							<tr class="point-line" onclick='getLine(this)'>
 								<td style="display:none;"><%=id %></td>
 								<td><%=memberId %></td>
-								<td><%=dessertName %></td>
-								<td><%=num %></td>
-								<td><%=discount %></td>
+								<td><%=date %></td>
 								<td><%=money %></td>
-								<td><%=point %></td>
-								<td><%=actionCN %></td>
-								<td><%=method %></td>
 							</tr>
 						<%
 								}
@@ -118,7 +94,7 @@ pageEncoding="utf-8"%>
 					</table>
 				</div>
 			</div>
-			<!-- 消费记录内容 结束 -->
+			<!-- 充值记录内容 结束 -->
 		</div>
 	</div>
 	<!-- 正文内容 结束 -->
@@ -141,7 +117,7 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
 	<script>
 		$(document).ready(function() {
-			var table=$('#consumeTable').DataTable({
+			var table=$('#payTable').DataTable({
 				"bStateSave": true,
 				select : true,
 				filter : true,
@@ -154,7 +130,7 @@ pageEncoding="utf-8"%>
 						last : '最后一页'
 					},
 					"info" : "第_PAGE_页，共_PAGES_页，共有记录_MAX_条",
-					"emptyTable" : "暂无消费记录...",
+					"emptyTable" : "暂无充值记录...",
 					"zeroRecords" : "没有找到符合条件的记录...",
 					"infoEmpty" : "检索到记录0条",
 					"lengthMenu": "每页显示 _MENU_ 条记录",

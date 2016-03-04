@@ -116,7 +116,7 @@ function write_header_login(userName, type) {
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">会员管理<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
 								<li><a id="consume_href" href="member_consume">已买到的</a></li>\
-								<li><a href="#"">充值记录</a></li>\
+								<li><a id="recharge_href" href="member_recharge">充值记录</a></li>\
 								<li class="divider"></li>\
 								<li><a href="member_info">资格管理</a></li>\
 							</ul>\
@@ -175,6 +175,15 @@ function write_header_login(userName, type) {
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
 						<li><a href="shopDetail.jsp?shopName='+get_cookie("owingTo")+'">产品销售</a></li>\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">会员信息<b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="#"">基本信息</a></li>\
+								<li class="divider"></li>\
+								<li><a href="waitress_consume">消费记录</a></li>\
+								<li><a href="waitress_recharge"">充值记录</a></li>\
+							</ul>\
+						</li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
@@ -207,7 +216,7 @@ function write_header_login(userName, type) {
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">统计分析<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
 								<li><a href="manager_consume">消费统计</a></li>\
-								<li><a href="#"">预留</a></li>\
+								<li><a href="manager_recharge"">充值统计</a></li>\
 								<li class="divider"></li>\
 								<li><a href="#"">预留</a></li>\
 							</ul>\

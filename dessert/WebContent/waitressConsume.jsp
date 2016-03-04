@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>消费统计</title>
+	<title>消费记录</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -44,6 +44,12 @@ pageEncoding="utf-8"%>
 	<script src="js/cookie.js"></script>
 </head>
 <body>
+	<%
+	String memberId=request.getParameter("memberId");
+	if(memberId==null){
+		memberId="";
+	}
+	%>
 	<!-- 顶部导航栏 -->
 	<header></header>
 	<script type="text/javascript">
@@ -59,12 +65,31 @@ pageEncoding="utf-8"%>
 			<!--左侧用户信息 结束-->
 			<!--右侧消费记录表格 -->
 			<div class="span10">
+				<!-- 输入会员编号 -->
+				<div class="form-horizontal">
+					<div class="row-fluid control-group"></div>
+
+					<div class="row-fluid control-group">
+						<div class="span8">
+							<label class="control-label" for="memberId">请输入会员编号：</label>
+							<div class="controls">
+								<input type="text" class="input-medium search-query" id="memberId" value="<%=memberId %>" placeholder="请输入会员编号...">
+								<button type="button" class="btn" onclick="getConsume();" style="margin-left: 50px;">
+									确定
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 输入会员编号 结束 -->
+				
+				<div class="dotted_line" style="margin-bottom: 30px;"></div>
+				
 				<div class="table-container table-responsive">
 					<table id="consumeTable" class="table display dataTable">
 						<thead>
 							<tr>
 								<th style="display:none">id</th>
-								<th class="order-header text-center">会员编号</th>
 								<th class="order-header text-center">商品名称</th>
 								<th class="order-header text-center">数量</th>
 								<th class="order-header text-center">优惠</th>
@@ -77,11 +102,10 @@ pageEncoding="utf-8"%>
 						<tbody>
 						<%
 							@SuppressWarnings("unchecked")
-							List<ConsumeVO> records=(List<ConsumeVO>)session.getAttribute(Configure.MANAGER_CONSUME_SESSION);
+							List<ConsumeVO> records=(List<ConsumeVO>)session.getAttribute(Configure.WAITRESS_CONSUME_SESSION);
 							if(records!=null){
 								for(ConsumeVO record:records){
 									long id = record.getId();
-									String memberId=record.getMemberId();
 									String action=record.getAction();
 									String date=record.getDate();
 									String dessertName =record.getDessertName();
@@ -99,9 +123,8 @@ pageEncoding="utf-8"%>
 										actionCN=Configure.APPOINTMENT_CN;
 									}
 						%>
-							<tr class="point-line">
+							<tr class="point-line" onclick='getLine(this)'>
 								<td style="display:none;"><%=id %></td>
-								<td><%=memberId %></td>
 								<td><%=dessertName %></td>
 								<td><%=num %></td>
 								<td><%=discount %></td>
@@ -139,6 +162,7 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
+	<script src="js/waitressConsume.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#consumeTable').DataTable({

@@ -24,4 +24,16 @@ public class ConsumeDaoImpl extends BaseDaoImpl<ConsumeRecord> implements
 		return getListByColumn(ConsumeRecord.class, "memberId", memberId);
 	}
 
+	@Override
+	public List<ConsumeRecord> getConsumeRecord() {
+		// TODO Auto-generated method stub
+		return getAll(ConsumeRecord.class);
+	}
+
+	@Override
+	public ConsumeRecord getConsumeRecord(long id) {
+		// TODO Auto-generated method stub
+		return getById(ConsumeRecord.class, id);
+	}
+
 }

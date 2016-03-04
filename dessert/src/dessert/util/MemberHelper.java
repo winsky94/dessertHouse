@@ -10,7 +10,7 @@ import dessert.entity.Member;
  */
 public class MemberHelper {
 	public static void main(String[] args) {
-		System.out.println(getRank(300));
+		System.out.println(getPenalty(12));
 	}
 
 	public static int getRank(double money) {
@@ -46,5 +46,21 @@ public class MemberHelper {
 		int rank = member.getRank();
 		point = (int) (rank * money);
 		return point;
+	}
+
+	/**
+	 * 计算会员取消订单的违约金，暂定算法：金额*0.02
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public static double getPenalty(double money) {
+		// TODO Auto-generated method stub
+		double penalty = 0;
+		penalty = money * 0.02;
+		if (penalty < 2) {
+			penalty = 2;
+		}
+		return penalty;
 	}
 }

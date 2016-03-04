@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>消费记录</title>
+	<title>消费统计</title>
 	<meta charset="utf-8">
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -55,7 +55,7 @@ pageEncoding="utf-8"%>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<!--左侧用户信息-->
-			<%@ include file="memberInfo.jsp"%>
+			<%@ include file="WorkerInfo.jsp"%>
 			<!--左侧用户信息 结束-->
 			<!--右侧消费记录表格 -->
 			<div class="span10">
@@ -64,6 +64,7 @@ pageEncoding="utf-8"%>
 						<thead>
 							<tr>
 								<th style="display:none">id</th>
+								<th class="order-header text-center">会员编号</th>
 								<th class="order-header text-center">商品名称</th>
 								<th class="order-header text-center">数量</th>
 								<th class="order-header text-center">优惠</th>
@@ -71,16 +72,16 @@ pageEncoding="utf-8"%>
 								<th class="order-header text-center">积分</th>
 								<th class="order-header text-center">行为</th>
 								<th class="order-header text-center">付款方式</th>
-								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
 						<%
 							@SuppressWarnings("unchecked")
-							List<ConsumeVO> records=(List<ConsumeVO>)session.getAttribute(Configure.Member_CONSUME_SESSION);
+							List<ConsumeVO> records=(List<ConsumeVO>)session.getAttribute(Configure.MANAGER_CONSUME_SESSION);
 							if(records!=null){
 								for(ConsumeVO record:records){
 									long id = record.getId();
+									String memberId=record.getMemberId();
 									String action=record.getAction();
 									String date=record.getDate();
 									String dessertName =record.getDessertName();
@@ -98,8 +99,9 @@ pageEncoding="utf-8"%>
 										actionCN=Configure.APPOINTMENT_CN;
 									}
 						%>
-							<tr class="point-line" onclick='getLine(this)'>
+							<tr class="point-line">
 								<td style="display:none;"><%=id %></td>
+								<td><%=memberId %></td>
 								<td><%=dessertName %></td>
 								<td><%=num %></td>
 								<td><%=discount %></td>
@@ -107,11 +109,6 @@ pageEncoding="utf-8"%>
 								<td><%=point %></td>
 								<td><%=actionCN %></td>
 								<td><%=method %></td>
-								<td>
-									<button type="button" class="btn btn-mini btn-success" role="button" onclick="cancelOrder(<%=id %>);">
-										<i class="icon-remove icon-white"></i> &nbsp;退单
-									</button>
-								</td>
 							</tr>
 						<%
 								}
@@ -142,7 +139,6 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
-	<script src="js/consumeManage.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#consumeTable').DataTable({

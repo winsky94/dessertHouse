@@ -138,46 +138,77 @@ public class DessertServiceImpl implements DessertService {
 				memberService.update(member);
 
 				// 商品库存
-				String msg = updateStock(record);
+				String msg = updateStock(record, false);
 				result.put("msg", msg);
 			}
 		} else {
 			// 商品库存
-			String msg = updateStock(record);
+			String msg = updateStock(record, false);
 			result.put("msg", msg);
 		}
 
 		return result;
 	}
 
-	private String updateStock(ConsumeRecord record) {
+	private String updateStock(ConsumeRecord record, boolean add) {
 		String action = record.getAction();
-		if (Configure.BUY.equals(action)) {
+		if (add) {
 			// 商品库存
 			long dessertId = record.getDessertId();
 			Dessert dessert = dessertDao.getDessertById(dessertId);
 			int stockNum = dessert.getStockNum();
 			int buyNum = record.getNum();
-			int num = stockNum - buyNum;
-			if (num < 0) {
-				return Configure.STOCK_NOT_ENOUGH;
-			} else {
-				// 更新商品库存
-				dessert.setStockNum(num);
-				dessertDao.update(dessert);
+			int num = stockNum + buyNum;
+			// 更新商品库存
+			dessert.setStockNum(num);
+			dessertDao.update(dessert);
 
-				// 增加购买记录
-				consumeDao.consume(record);
-				return Configure.SUCCESS;
-			}
-		} else if (Configure.APPOINTMENT.equals(action)) {
-			// 预约，不需要-库存
-			// 增加预约记录
-			consumeDao.consume(record);
-			return Configure.SUCCESS;
-
-		} else {
 			return Configure.ERROR;
+		} else {
+			if (Configure.BUY.equals(action)
+					|| Configure.APPOINTMENT.equals(action)) {
+				// 商品库存
+				long dessertId = record.getDessertId();
+				Dessert dessert = dessertDao.getDessertById(dessertId);
+				int stockNum = dessert.getStockNum();
+				int buyNum = record.getNum();
+				int num = stockNum - buyNum;
+				if (num < 0) {
+					return Configure.STOCK_NOT_ENOUGH;
+				} else {
+					// 更新商品库存
+					dessert.setStockNum(num);
+					dessertDao.update(dessert);
+
+					// 增加购买记录
+					consumeDao.consume(record);
+					return Configure.SUCCESS;
+				}
+			} else {
+				return Configure.ERROR;
+			}
 		}
+	}
+
+	@Override
+	public void cancelConsume(long id) {
+		// TODO Auto-generated method stub
+		ConsumeRecord record = consumeDao.getConsumeRecord(id);
+
+		// 更新库存，增加
+		updateStock(record, true);
+
+		// 更新会员账户
+		String memberId = record.getMemberId();
+		Member member = memberService.getMemberByMemberId(memberId);
+		double payMoney = record.getMoney();
+		double penalty = MemberHelper.getPenalty(payMoney);
+		double money = member.getValidMoney();
+		double validMoney = money + payMoney - penalty;
+		member.setValidMoney(validMoney);
+		memberService.update(member);
+
+		// 删除消费记录
+		consumeDao.delete(record);
 	}
 }

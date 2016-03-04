@@ -43,9 +43,18 @@
 			$(".slide").css("width", winWidth);
 			$("img").css("width", winWidth);
 		}
+
+		function setHref () {
+			//给导航栏上的消费记录增加参数
+			var hrefObj=document.getElementById("consume_href");
+			if(typeof(hrefObj)!=undefined){
+				var hrefs=hrefObj.getAttribute("href")+"?memberId="+get_cookie("memberId");
+				hrefObj.setAttribute("href",hrefs);
+			}
+		}
 	</script>
 </head>
-<body onload="func();" onresize="func();">
+<body onload="func();setHref();" onresize="func();">
 	<header></header>
 	<script type="text/javascript">
 		write_header("index");

@@ -22,6 +22,7 @@
 		</action>
 	</package>
 	
+	<!-- 服务员 -->
 	<package name="waitress" extends="struts-default">
 		<action name="ZD_waitress" class="planController">
 			<result name="ZD_waitress">makePlan.jsp</result>
@@ -31,10 +32,15 @@
 		</action>
 	</package>
 	
+	<!-- 经理 -->
 	<package name="manager" extends="struts-default">
 		<!-- 计划批准-->
 		<action name="manager_shop_plan" class="managerShopController">
 			<result name="manager shop list">manager_shop_plan.jsp</result>
+		</action>
+		<!-- 消费统计 -->
+		<action name="manager_consume" class="managerMemberController" method="consume">
+			<result name="manager_consume">managerConsume.jsp</result>
 		</action>
 	</package>
 	

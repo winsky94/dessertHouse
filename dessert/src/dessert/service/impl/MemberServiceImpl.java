@@ -186,7 +186,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member getMemberByMemberId(String memberId) {
 		// TODO Auto-generated method stub
-		return memberDao.getMemberInfoById(memberId);
+		Member member = memberDao.getMemberInfoById(memberId);
+		// 把密码解密后返回
+		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+		String password = des.decrypt(member.getPassword());
+		member.setPassword(password);
+		return member;
 	}
 
 	@Override
@@ -194,9 +199,25 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
 		List<ConsumeRecord> records = consumeDao.getConsumeRecord(memberId);
+		result = recordToVO(records);
+		return result;
+	}
+
+	@Override
+	public ArrayList<ConsumeVO> getConsumeRecord() {
+		// TODO Auto-generated method stub
+		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
+		List<ConsumeRecord> records = consumeDao.getConsumeRecord();
+		result = recordToVO(records);
+		return result;
+	}
+
+	private ArrayList<ConsumeVO> recordToVO(List<ConsumeRecord> records) {
+		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
 		if (records != null) {
 			for (ConsumeRecord record : records) {
 				long id = record.getId();
+				String memberId = record.getMemberId();
 				String action = record.getAction();
 				String date = record.getDate();
 				long dessertId = record.getDessertId();
@@ -209,13 +230,11 @@ public class MemberServiceImpl implements MemberService {
 				if (dessert != null) {
 					String dessertName = dessert.getName();
 					ConsumeVO vo = new ConsumeVO(id, memberId, dessertName,
-							num, date, money, action, cash,discount,point);
+							num, date, money, action, cash, discount, point);
 					result.add(vo);
 				}
-
 			}
 		}
-
 		return result;
 	}
 }

@@ -54,4 +54,11 @@ public interface DessertService {
 	 * @return 购买结果，msg:结果；discount：折扣；point：此次消费的累积积分
 	 */
 	public HashMap<String, Object> consume(ConsumeRecord record);
+
+	/**
+	 * 取消交易
+	 * 
+	 * @param id
+	 */
+	public void cancelConsume(long id);
 }

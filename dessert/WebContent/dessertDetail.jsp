@@ -190,8 +190,7 @@
 		role="navigation">
 		<div class="navbar-inner text-center">
 			<h4>
-				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software
-				institute, NJU
+				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
 			</h4>
 		</div>
 	</div>

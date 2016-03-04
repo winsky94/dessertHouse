@@ -1,5 +1,7 @@
 package dessert.dao;
 
+import java.util.List;
+
 import dessert.entity.RechargeRecord;
 
 /**
@@ -10,4 +12,8 @@ import dessert.entity.RechargeRecord;
  */
 public interface RechargeDao {
 	public void recharge(RechargeRecord record);
+
+	public List<RechargeRecord> getRechargeRecord(String memberId);
+
+	public List<RechargeRecord> getRechargeRecord();
 }

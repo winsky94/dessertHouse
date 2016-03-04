@@ -1,6 +1,7 @@
 package dessert.controller.html;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import dessert.VO.ConsumeVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
+import dessert.entity.RechargeRecord;
 import dessert.service.MemberService;
 
 /**
@@ -35,6 +37,18 @@ public class ManagerMemberController extends BaseController {
 			session().setAttribute(sessionName, records);
 		}
 		return Configure.MANAGER_CONSUME;
+	}
+	
+	public String recharge() {
+		String sessionName = Configure.MANAGER_RECHARGE_SESSION;
+		session().removeAttribute(sessionName);
+
+		List<RechargeRecord> records = memberService.getRechargeRecord();
+		if (records == null) {
+		} else {
+			session().setAttribute(sessionName, records);
+		}
+		return Configure.MANAGER_RECHARGE;
 	}
 
 }

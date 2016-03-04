@@ -67,12 +67,21 @@ public class Configure {
 	public static final int PLAN_PASS = 1;// 计划审核通过
 	public static final int PLAN_FAIL = 0;// 计划审核不过
 	public static final String PLAN_ID = "planId";// 展示的plan在数据库中的id
+	// 查看会员消费记录
+	public static final String WAITRESS_CONSUME_SESSION = "waitress_consume_session";// session
+	public static final String WAITRESS_CONSUME = "waitress_consume";// 页面跳转
+	// 查看会员充值记录
+	public static final String WAITRESS_RECHARGE_SESSION = "waitress_recharge_session";// session
+	public static final String WAITRESS_RECHARGE = "waitress_recharge";// 页面跳转
 
 	// ==================================经理===========================================
 	public static final String MANAGER_SHOP_LIST = "manager shop list";
 	// 会员消费记录
 	public static final String MANAGER_CONSUME_SESSION = "manager_consume_session";// session
 	public static final String MANAGER_CONSUME = "manager_consume";// 页面跳转
+	// 会员充值记录
+	public static final String MANAGER_RECHARGE_SESSION = "manager_recharge_session";// session
+	public static final String MANAGER_RECHARGE = "manager_recharge";// 页面跳转
 
 	// ==================================会员===========================================
 	public static final String DESSERT_DETAIL = "dessert_detail";
@@ -102,5 +111,8 @@ public class Configure {
 	// 会员消费记录
 	public static final String Member_CONSUME_SESSION = "member_consume_session";// session
 	public static final String Member_CONSUME = "member_consume";// 页面跳转
+	// 会员充值记录
+	public static final String Member_RECHARGE_SESSION = "member_recharge_session";// session
+	public static final String Member_RECHARGE = "member_recharge";// 页面跳转
 
 }

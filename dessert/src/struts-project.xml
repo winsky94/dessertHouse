@@ -30,6 +30,12 @@
 		<action name="ZD_shop" class="zDShopController">
 			<result name="ZD_shop">waitressManager.jsp</result>
 		</action>
+		<action name="waitress_consume" class="waitressController" method="memberConsume">
+			<result name="waitress_consume">waitressConsume.jsp</result>
+		</action>
+		<action name="waitress_recharge" class="waitressController" method="memberRecharge">
+			<result name="waitress_recharge">waitressRecharge.jsp</result>
+		</action>
 	</package>
 	
 	<!-- 经理 -->
@@ -41,6 +47,10 @@
 		<!-- 消费统计 -->
 		<action name="manager_consume" class="managerMemberController" method="consume">
 			<result name="manager_consume">managerConsume.jsp</result>
+		</action>
+		<!-- 充值统计 -->
+		<action name="manager_recharge" class="managerMemberController" method="recharge">
+			<result name="manager_recharge">managerPay.jsp</result>
 		</action>
 	</package>
 	
@@ -58,6 +68,9 @@
 		</action>
 		<action name="member_consume" class="consumeController">
 			<result name="member_consume">consumeRecord.jsp</result>
+		</action>
+		<action name="member_recharge" class="rechargeController">
+			<result name="member_recharge">PayRecord.jsp</result>
 		</action>
 	</package>
 </struts>

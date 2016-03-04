@@ -37,6 +37,7 @@
 	<bean id="dessertJsonController" class="dessert.controller.api.DessertJsonController" />
 	<bean id="memberInfoController" class="dessert.controller.html.MemberInfoController" />
 	<bean id="consumeController" class="dessert.controller.html.ConsumeController" />
+	<bean id="rechargeController" class="dessert.controller.html.RechargeController" />
 	<bean id="managerMemberController" class="dessert.controller.html.ManagerMemberController" />
 
 	<!-- service -->

@@ -79,7 +79,7 @@ pageEncoding="utf-8"%>
 			<div class="span10" id="desserts">
 				<div class="form-horizontal">
 					<div class="row-fluid control-group"></div>
-					
+
 					<div class="row-fluid control-group">
 						<div class="span8">
 							<label class="control-label" for="memberId">请输入会员编号：</label>

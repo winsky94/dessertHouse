@@ -1,5 +1,7 @@
 package dessert.dao.impl;
 
+import java.util.List;
+
 import dessert.dao.RechargeDao;
 import dessert.entity.RechargeRecord;
 
@@ -14,6 +16,18 @@ public class RechargeDaoImpl extends BaseDaoImpl<RechargeRecord> implements
 	public void recharge(RechargeRecord record) {
 		// TODO Auto-generated method stub
 		add(record);
+	}
+
+	@Override
+	public List<RechargeRecord> getRechargeRecord(String memberId) {
+		// TODO Auto-generated method stub
+		return getListByColumn(RechargeRecord.class, "memberId", memberId);
+	}
+
+	@Override
+	public List<RechargeRecord> getRechargeRecord() {
+		// TODO Auto-generated method stub
+		return getAll(RechargeRecord.class);
 	}
 
 }

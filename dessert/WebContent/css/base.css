@@ -23,7 +23,7 @@ body{
 	margin-bottom: 1%;
 }
 
-/* 去除超链接下划线 */
+/* 鍘婚櫎瓒呴摼鎺ヤ笅鍒掔嚎 */
 a:link {
     text-decoration: none;
 }
@@ -37,7 +37,7 @@ a:active {
     text-decoration: none;
 }
 
-/*虚线效果*/
+/*铏氱嚎鏁堟灉*/
 .dotted_line{
   border-top:1px dashed #cccccc;
   height: 1px;

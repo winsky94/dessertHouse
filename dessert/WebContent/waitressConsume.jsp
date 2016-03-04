@@ -75,7 +75,7 @@ pageEncoding="utf-8"%>
 							<div class="controls">
 								<input type="text" class="input-medium search-query" id="memberId" value="<%=memberId %>" placeholder="请输入会员编号...">
 								<button type="button" class="btn" onclick="getConsume();" style="margin-left: 50px;">
-									确定
+									查　询
 								</button>
 							</div>
 						</div>

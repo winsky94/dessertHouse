@@ -44,6 +44,17 @@ public class MemberJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	public String memberInfoByMid() {
+		Map<String, String> params = getParams();
+		String memberId = params.get("memberId");
+		if (memberId != null) {
+			member = memberService.getMemberByMemberId(memberId);
+		} else {
+			member = null;
+		}
+		return Configure.SUCCESS;
+	}
+
 	public Member getMember() {
 		return member;
 	}

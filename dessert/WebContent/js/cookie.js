@@ -61,6 +61,8 @@ function exit() {
 	delete_cookie('userName');
 	delete_cookie('type');
 	delete_cookie('lastLoadTime');
+	delete_cookie('owingTo');
+	delete_cookie('memberId');
 	window.location.href="index.html";
 }
 
@@ -172,7 +174,7 @@ function write_header_login(userName, type) {
 				<div class="navbar-inner">\
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
-						<li><a href="#">产品销售</a></li>\
+						<li><a href="shopDetail.jsp?shopName='+get_cookie("owingTo")+'">产品销售</a></li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
@@ -354,11 +356,28 @@ function callback_login(result) {
 						
 					}
 				});
-			}else{
+			} else if(userType == "waitress"){
+				//请求员工所属商店
+				var workerId=get_cookie("userName");
+				$.ajax({
+					url : 'api/waitress/owingTo',
+					type : 'post',
+					dataType : 'json',
+					data : {
+						workerId : workerId,
+					},
+					success : function(result, textStatus) {
+						var owingTo=result.owingTo;
+						add_cookie("owingTo", owingTo, 30 * 24);
+
+						var url="index.html";
+						window.location.href = url;
+					}
+				});
+			} else{
 				var url="index.html";
 				window.location.href = url;
 			}
-			
 		} else if(userType == error){
 			// var divNode = $("#message");
 			var divNode=document.getElementById("message");

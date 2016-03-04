@@ -17,6 +17,14 @@ public interface WorkerService {
 	public void update(Worker worker);
 
 	public ArrayList<WorkerVO> getWorkers(ArrayList<UserType> types);
-	
+
 	public String generateWorkerId(UserType type);
+
+	/**
+	 * 得到服务员的所属分店
+	 * 
+	 * @param workerId
+	 * @return
+	 */
+	public String getWorkerShop(String workerId);
 }

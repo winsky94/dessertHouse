@@ -95,4 +95,10 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 		return (ArrayList<Worker>) getAll(Worker.class);
 	}
 
+	@Override
+	public Worker getWorkerByWorkerId(String workerId) {
+		// TODO Auto-generated method stub
+		return getByColumn(Worker.class, "workerId", workerId);
+	}
+
 }

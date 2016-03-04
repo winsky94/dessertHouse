@@ -117,54 +117,54 @@
 				</div>
 
 				<div id="pay" class="well" style="display:none">
-				<div class="row-fluid control-group">
-							<div class="span8">
-								<div class="controls">
-									<h4>会员充值</h4>
+					<div class="row-fluid control-group">
+								<div class="span8">
+									<div class="controls">
+										<h4>会员充值</h4>
+									</div>
 								</div>
 							</div>
-						</div>
-					<form class="form-horizontal">
-						
-						<div class="row-fluid control-group">
-							<div class="span4">
-								<label class="control-label" for="memberName">金　额：</label>
-								<div class="controls">
-									<input type="number" id="money" placeholder="充值金额">
+						<form class="form-horizontal">
+							
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<label class="control-label" for="memberName">金　额：</label>
+									<div class="controls">
+										<input type="number" id="money" placeholder="充值金额">
+									</div>
+								</div>
+								<div class="span4">
+									<label class="control-label" for="age">确　认：</label>
+									<div class="controls">
+										<input type="number" id="money_confirm" placeholder="确认金额" min="0" max="100">
+									</div>
 								</div>
 							</div>
-							<div class="span4">
-								<label class="control-label" for="age">确　认：</label>
-								<div class="controls">
-									<input type="number" id="money_confirm" placeholder="确认金额" min="0" max="100">
+							<div class="row-fluid control-group"></div>
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<div class="controls center">
+										<button type="button" class="btn" onclick="pay();">
+											充值
+										</button>
+										<button type="button" class="btn" style="margin-left: 20px;" onclick="$('#pay').toggle()">
+											取消
+										</button>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="row-fluid control-group"></div>
-						<div class="row-fluid control-group">
-							<div class="span4">
-								<div class="controls center">
-									<button type="button" class="btn" onclick="pay();">
-										充值
-									</button>
-									<button type="button" class="btn" style="margin-left: 20px;" onclick="$('#pay').toggle()">
-										取消
-									</button>
+
+								<div class="span4">
+									<div class="controls">
+										<font color="red" size="2" class="center">
+											<span id="message" ></span>
+										</font>
+									</div>
 								</div>
 							</div>
 
-							<div class="span4">
-								<div class="controls">
-									<font color="red" size="2" class="center">
-										<span id="message" ></span>
-									</font>
-								</div>
-							</div>
-						</div>
+						</form>
 
-					</form>
-
-				</div>
+					</div>
 
 			</div>
 			<!--右侧会员具体信息 结束 -->

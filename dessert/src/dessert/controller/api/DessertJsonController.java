@@ -25,6 +25,7 @@ public class DessertJsonController extends BaseController {
 	@Autowired
 	private MemberService memberService;
 	private ArrayList<DessertVO> desserts = new ArrayList<DessertVO>();
+	private DessertVO dessertVO;
 	private String message;
 	private double discount;
 	private int point;
@@ -62,7 +63,7 @@ public class DessertJsonController extends BaseController {
 			consumeRecord.setNum(num);
 			consumeRecord.setMoney(money);
 			consumeRecord.setAction(action);
-			
+
 			if (Configure.CASH.equals(payMethod)) {
 				consumeRecord.setCash(true);
 			} else {
@@ -82,6 +83,16 @@ public class DessertJsonController extends BaseController {
 		}
 		return Configure.SUCCESS;
 	}
+
+//	public String dessertInfo() {
+//		dessertVO = null;
+//		Map<String, String> params = getParams();
+//		String dessertIdStr = params.get("dessertId");
+//		if (dessertIdStr != null) {
+//			long dessertId = dessertIdStr
+//		}
+//		return Configure.SUCCESS;
+//	}
 
 	public ArrayList<DessertVO> getDesserts() {
 		return desserts;
@@ -113,6 +124,14 @@ public class DessertJsonController extends BaseController {
 
 	public void setPoint(int point) {
 		this.point = point;
+	}
+
+	public DessertVO getDessertVO() {
+		return dessertVO;
+	}
+
+	public void setDessertVO(DessertVO dessertVO) {
+		this.dessertVO = dessertVO;
 	}
 
 }

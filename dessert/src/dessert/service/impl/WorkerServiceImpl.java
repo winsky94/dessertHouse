@@ -100,4 +100,15 @@ public class WorkerServiceImpl implements WorkerService {
 		return df.format(id);
 	}
 
+	@Override
+	public String getWorkerShop(String workerId) {
+		// TODO Auto-generated method stub
+		String owingTo = null;
+		Worker worker = workerDao.getWorkerByWorkerId(workerId);
+		if (worker != null) {
+			owingTo = worker.getOwingTo();
+		}
+		return owingTo;
+	}
+
 }

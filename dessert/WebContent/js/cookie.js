@@ -201,7 +201,15 @@ function write_header_login(userName, type) {
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
 						<li><a href="manager_shop_plan">计划批准</a></li>\
-						<li><a href="#">统计分析</a></li>\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">统计分析<b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a href="manager_consume">消费统计</a></li>\
+								<li><a href="#"">预留</a></li>\
+								<li class="divider"></li>\
+								<li><a href="#"">预留</a></li>\
+							</ul>\
+						</li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
@@ -315,31 +323,41 @@ function callback_login(result) {
 			add_cookie("type", userType, 30 * 24);
 			add_cookie("lastLoadTime", lastLoadTime, 30 * 24);
 
-			//检查会员状态
-			$.ajax({
-				url : 'api/member/checkStatus',
-				type : 'post',
-				dataType : 'json',
-				data : {
-					name : userName,
-				},
-				success : function(result, textStatus) {
-					var msg=result.message;
-					var url="index.html";
-					//关闭登录对话框
-					$('#loginModel').modal('hide')
-					if(msg==null||msg=="null"){
-						alert("检查会员状态出错啦");
-					}else if(msg=="您的会员资格尚未激活，请尽快充值>=200元以激活"){
-						alert(msg);
-						url="member_info?action=pay";
-					}else if(msg=="您的会员资格已暂停，请尽快充值以恢复"){
-						alert(msg);
-						url="member_info?action=pay";
+			if(userType == "member"){
+				//检查会员状态
+				$.ajax({
+					url : 'api/member/checkStatus',
+					type : 'post',
+					dataType : 'json',
+					data : {
+						name : userName,
+					},
+					success : function(result, textStatus) {
+						var memberId=result.memberId;
+						add_cookie("memberId", memberId, 30 * 24);
+
+						var msg=result.message;
+						var url="index.html";
+						//关闭登录对话框
+						$('#loginModel').modal('hide')
+						if(msg==null||msg=="null"){
+							alert("检查会员状态出错啦");
+						}else if(msg=="您的会员资格尚未激活，请尽快充值>=200元以激活"){
+							alert(msg);
+							url="member_info?action=pay";
+						}else if(msg=="您的会员资格已暂停，请尽快充值以恢复"){
+							alert(msg);
+							url="member_info?action=pay";
+						}
+						window.location.href = url;
+
+						
 					}
-					window.location.href = url;
-				}
-			});
+				});
+			}else{
+				var url="index.html";
+				window.location.href = url;
+			}
 			
 		} else if(userType == error){
 			// var divNode = $("#message");

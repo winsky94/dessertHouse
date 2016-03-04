@@ -42,4 +42,10 @@ public interface MemberService {
 	 * @return
 	 */
 	public ArrayList<ConsumeVO> getConsumeRecord(String memberId);
+
+	/**
+	 * 得到全部会员的消费记录
+	 * @return
+	 */
+	public ArrayList<ConsumeVO> getConsumeRecord();
 }

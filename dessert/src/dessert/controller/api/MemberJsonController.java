@@ -8,6 +8,7 @@ import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Member;
 import dessert.entity.RechargeRecord;
+import dessert.service.DessertService;
 import dessert.service.MemberService;
 import dessert.util.MemberStatus;
 import dessert.util.TimeUtil;
@@ -20,8 +21,11 @@ public class MemberJsonController extends BaseController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private DessertService dessertService;
 	private Member member;
 	private String message;
+	private String memberId;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -102,11 +106,12 @@ public class MemberJsonController extends BaseController {
 
 	public String checkMemberStatus() {
 		message = "";
+		memberId = "";
 
 		Map<String, String> params = getParams();
 		String memberName = params.get("name");
 		message = memberService.checkMemberStatus(memberName);
-
+		memberId = memberService.getMemberInfo(memberName).getMemberId();
 		return Configure.SUCCESS;
 	}
 
@@ -135,9 +140,16 @@ public class MemberJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
-	public String blank() {
+	public String cancelConsume() {
 		Map<String, String> params = getParams();
-		String memberId = params.get("memberId");
+		String idStr = params.get("id");
+		if (idStr == null) {
+			message = Configure.ERROR;
+		} else {
+			long id = Long.parseLong(idStr);
+			dessertService.cancelConsume(id);
+			message = Configure.SUCCESS;
+		}
 
 		return Configure.SUCCESS;
 	}
@@ -152,5 +164,13 @@ public class MemberJsonController extends BaseController {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 }

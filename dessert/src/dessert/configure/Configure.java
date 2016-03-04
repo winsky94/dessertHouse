@@ -70,6 +70,9 @@ public class Configure {
 
 	// ==================================经理===========================================
 	public static final String MANAGER_SHOP_LIST = "manager shop list";
+	// 会员消费记录
+	public static final String MANAGER_CONSUME_SESSION = "manager_consume_session";// session
+	public static final String MANAGER_CONSUME = "manager_consume";// 页面跳转
 
 	// ==================================会员===========================================
 	public static final String DESSERT_DETAIL = "dessert_detail";

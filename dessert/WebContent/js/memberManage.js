@@ -28,6 +28,7 @@ function getMemberInfo() {
 				prov = member.prov;
 				city = member.city;
 				dist = member.dist;
+				createAt = member.createAt;
 				
 				if(validDate=="null"||validDate==null){
 					validDate="-";
@@ -115,6 +116,9 @@ function update() {
 	var birthday = $("#birthday").val();
 	var telephone = $("#telephone").val();
 	var cardId = $("#cardId").val();
+	var prov = jQuery("#prov option:selected").text();
+	var city = jQuery("#city option:selected").text();
+	var dist = jQuery("#dist option:selected").text();
 
 	if (userName == "") {
 		var divNode = document.getElementById("message");
@@ -397,6 +401,12 @@ function showInfo() {
 			+ validMoney
 			+ '元</div> \
 				</div> \
+				<div class="table-row"> \
+					<div class="property">有效期：</div> \
+					<div class="value" id="validDate">'
+			+ validDate
+			+ '</div> \
+				</div> \
 			</div>\
 			<!-- 会员左侧信息 结束 -->\
 			<!-- 会员右侧信息 -->\
@@ -426,9 +436,15 @@ function showInfo() {
 			+ '</div> \
 				</div> \
 				<div class="table-row"> \
-					<div class="property">有效期：</div> \
-					<div class="value" id="validDate">'
-			+ validDate
+					<div class="property">家庭住址：</div> \
+					<div class="value" id="address">'
+			+ prov+'-'+city+'-'+dist
+			+ '</div> \
+				</div> \
+				<div class="table-row"> \
+					<div class="property">创建日期：</div> \
+					<div class="value" id="createAt">'
+			+ createAt
 			+ '</div> \
 				</div> \
 			</div>\

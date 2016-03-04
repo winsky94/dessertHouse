@@ -168,5 +168,6 @@
 	<!-- 加载js -->
 	<script src='bootstrap/js/bootstrap.js'></script>
 	<script src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/city_select/jquery.cityselect.js"></script>
 </body>
 </html>

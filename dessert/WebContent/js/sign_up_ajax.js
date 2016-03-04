@@ -110,9 +110,12 @@ function callback_signup(result) {
 			add_cookie('userName', userName, 30 * 24);
 			//下面两个cookie可能有问题
 			add_cookie("type", "member", 30 * 24);
-			add_cookie("lastLoadTime", lastLoadTime, 30 * 24);
+			add_cookie("lastLoadTime", "-", 30 * 24);
 
-			window.location.href = "index.html";
+			var msg="您的会员资格尚未激活，请尽快充值>=200元以激活";
+			alert(msg);
+			url="member_info?action=pay";
+			window.location.href = url;
 		} else {
 			var divNode = document.getElementById("message");
 			divNode.innerHTML = message;

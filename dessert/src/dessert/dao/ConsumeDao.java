@@ -12,4 +12,10 @@ public interface ConsumeDao {
 	public long consume(ConsumeRecord record);
 
 	public List<ConsumeRecord> getConsumeRecord(String memberId);
+
+	public List<ConsumeRecord> getConsumeRecord();
+
+	public ConsumeRecord getConsumeRecord(long id);
+
+	public void delete(ConsumeRecord record);
 }

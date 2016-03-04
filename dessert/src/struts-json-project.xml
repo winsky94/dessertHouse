@@ -154,6 +154,11 @@
 				<param name="member">member</param>
 			</result>
 		</action>
+		<action name="memberInfoByMid" class="memberJsonController" method="memberInfoByMid">
+			<result type="json">
+				<param name="member">member</param>
+			</result>
+		</action>
 		<action name="update" class="memberJsonController" method="update">
 			<result type="json">
 				<param name="message">message</param>

@@ -75,7 +75,7 @@
 					<div style="height: 20px;"></div>
 					<div class="well">
 						<!-- 会员信息 -->
-						<div id="info" style="width:800px;">
+						<div id="info" style="width: 800px;">
 							<script type="text/javascript">
 								getMemberInfo();
 								//showInfo();
@@ -83,73 +83,74 @@
 						</div>
 						<!-- 会员信息 结束 -->
 						<!-- 修改会员信息 -->
-						<div id="edit_info" style="width:800px;"></div>
+						<div id="edit_info" style="width: 800px;"></div>
 						<!-- 修改会员信息 结束 -->
 					</div>
 				</div>
-				
-			<%
-			String action=request.getParameter("action");
-			if("pay".equals(action)){
-				//主要是为了应对一登录就要付钱的情况
-			%>
+
+				<%
+					String action = request.getParameter("action");
+					if ("pay".equals(action)) {
+						//主要是为了应对一登录就要付钱的情况
+				%>
 				<div id="pay" class="well">
-			<%
-			}else{
-			%>
-				<div id="pay" class="well" style="display: none">
-			<%
-			}
-			%>
-					<div class="row-fluid control-group">
-						<div class="span8">
-							<div class="controls">
-								<h4>会员充值</h4>
+					<%
+						} else {
+					%>
+					<div id="pay" class="well" style="display: none">
+						<%
+							}
+						%>
+						<div class="row-fluid control-group">
+							<div class="span8">
+								<div class="controls">
+									<h4>会员充值</h4>
+								</div>
 							</div>
 						</div>
+						<form class="form-horizontal">
+
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<label class="control-label" for="memberName">金 额：</label>
+									<div class="controls">
+										<input type="number" id="money" placeholder="充值金额">
+									</div>
+								</div>
+								<div class="span4">
+									<label class="control-label" for="age">确 认：</label>
+									<div class="controls">
+										<input type="number" id="money_confirm" placeholder="确认金额">
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid control-group"></div>
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<div class="controls center">
+										<button type="button" class="btn" onclick="pay();">充值
+										</button>
+										<button type="button" class="btn" style="margin-left: 20px;"
+											onclick="$('#pay').toggle()">取消</button>
+									</div>
+								</div>
+
+								<div class="span4">
+									<div class="controls">
+										<font color="red" size="2" class="center"> <span
+											id="pay_message"></span>
+										</font>
+									</div>
+								</div>
+							</div>
+
+						</form>
+
 					</div>
-					<form class="form-horizontal">
-
-						<div class="row-fluid control-group">
-							<div class="span4">
-								<label class="control-label" for="memberName">金 额：</label>
-								<div class="controls">
-									<input type="number" id="money" placeholder="充值金额">
-								</div>
-							</div>
-							<div class="span4">
-								<label class="control-label" for="age">确 认：</label>
-								<div class="controls">
-									<input type="number" id="money_confirm" placeholder="确认金额">
-								</div>
-							</div>
-						</div>
-						<div class="row-fluid control-group"></div>
-						<div class="row-fluid control-group">
-							<div class="span4">
-								<div class="controls center">
-									<button type="button" class="btn" onclick="pay();">充值
-									</button>
-									<button type="button" class="btn" style="margin-left: 20px;"
-										onclick="$('#pay').toggle()">取消</button>
-								</div>
-							</div>
-
-							<div class="span4">
-								<div class="controls">
-									<font color="red" size="2" class="center"> <span
-										id="pay_message"></span>
-									</font>
-								</div>
-							</div>
-						</div>
-
-					</form>
 
 				</div>
-
+				<!--右侧会员具体信息 结束 -->
 			</div>
-			<!--右侧会员具体信息 结束 -->
 		</div>
 	</div>
 	<!-- 正文内容结束 -->
@@ -159,8 +160,7 @@
 		role="navigation">
 		<div class="navbar-inner text-center">
 			<h4>
-				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software
-				institute, NJU
+				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
 			</h4>
 		</div>
 	</div>
@@ -168,6 +168,7 @@
 	<!-- 加载js -->
 	<script src='bootstrap/js/bootstrap.js'></script>
 	<script src="js/My97DatePicker/WdatePicker.js"></script>
-	<script type="text/javascript" src="js/city_select/jquery.cityselect.js"></script>
+	<script type="text/javascript"
+		src="js/city_select/jquery.cityselect.js"></script>
 </body>
 </html>

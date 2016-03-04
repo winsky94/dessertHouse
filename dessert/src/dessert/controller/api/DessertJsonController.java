@@ -51,9 +51,15 @@ public class DessertJsonController extends BaseController {
 			double price = Double.parseDouble(params.get("price"));
 			String action = params.get("action");
 			String payMethod = params.get("payMethod");
-
-			Member member = memberService.getMemberInfo(memberName);
-			String memberId = member.getMemberId();
+			
+			String memberId="";
+			if(memberName==null){
+				memberId=params.get("memberId");
+			}else{
+				Member member = memberService.getMemberInfo(memberName);
+				memberId = member.getMemberId();
+			}
+			
 			double money = price * num;
 
 			ConsumeRecord consumeRecord = new ConsumeRecord();

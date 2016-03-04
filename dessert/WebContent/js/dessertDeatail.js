@@ -1,5 +1,17 @@
 function sale () {
-	alert("sale")
+	var dessertId=$("#dessertId").val();
+	var num=$("#quantity").val();
+	var price=$("#price").text();
+	var url="waitress.jsp?dessertId="+dessertId+"&num="+num+"&price="+price+"&action=waitress_buy";
+	window.location.href=url;
+}
+
+function waitress_appointment(){
+	var dessertId=$("#dessertId").val();
+	var num=$("#quantity").val();
+	var price=$("#price").text();
+	var url="waitress.jsp?dessertId="+dessertId+"&num="+num+"&price="+price+"&action=waitress_appointment";
+	window.location.href=url;
 }
 
 function buy () {
@@ -75,7 +87,7 @@ function process (action,payMethod) {
 }
 
 function cart () {
-	alert("cart");
+	alert("dessertDeatail.js:cart");
 }
 
 function messageOK () {

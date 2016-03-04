@@ -13,7 +13,6 @@ pageEncoding="utf-8"%>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/ul-li.css">
 	<link rel="stylesheet" type="text/css" href="css/base.css">
-	<link rel="stylesheet" type="text/css" href="css/瀑布流效果.css">
 	<link rel="stylesheet" type="text/css" href="css/table_css/sb-admin-2.css"><!--达到灰色背景的效果-->
 	<style>
 		#info {
@@ -48,6 +47,21 @@ pageEncoding="utf-8"%>
 	<script src="js/waitress.js"></script>
 </head>
 <body>
+	<%
+		String dessertId = request.getParameter("dessertId");
+		String numStr = request.getParameter("num");
+		String priceStr = request.getParameter("price");
+		String action = request.getParameter("action");
+		int num = 0;
+		double price = 0;
+		if (numStr != null) {
+			num = Integer.parseInt(numStr);
+		}
+		if (priceStr != null) {
+			price = Double.parseDouble(priceStr);
+		}
+		double money = num * price;
+	%>
 	<!-- 顶部导航栏 -->
 	<header></header>
 	<script type="text/javascript">
@@ -91,24 +105,27 @@ pageEncoding="utf-8"%>
 						<div class="span4">
 							<div class=""> 
 								<div class="property">编　号：</div> 
-								<div class="value" id="dessertId">1
+								<div class="value">
+									<span id="dessertId"><%=dessertId %></span>
 								</div> 
 							</div>
 							<div class="table-row"> 
 								<div class="property">单　价：</div> 
-								<div class="value" id="price">1
+								<div class="value">
+									<span id="price"><%=price %></span>
 								</div> 
 							</div>
 						</div>
 						<div class="span4">
 							<div class=""> 
 								<div class="property">数　量：</div> 
-								<div class="value" id="num">213
+								<div class="value">
+									<span id="num"><%=num %></span>
 								</div>
 							</div>
 							<div class="table-row"> 
 								<div class="property">总　价：</div> 
-								<div class="value" id="money">100
+								<div class="value" id="money"><%=money %>
 								</div> 
 							</div>
 						</div>
@@ -154,12 +171,12 @@ pageEncoding="utf-8"%>
 								<div style="width:800px;margin-left: 102px;">
 									<div class="span4">
 										<div class="table-row"> 
-											<input type="button" class="btn" onclick="alert('确认')" value="销售">
+											<input type="button" class="btn" onclick="confirm();" value="销售">
 										</div>
 									</div>
 									<div class="span4">
 										<div class="table-row"> 
-											<input type="button" class="btn" onclick="alert('取消')" value="取消">
+											<input type="button" class="btn" onclick="cancel();" value="取消">
 										</div>
 									</div>
 								</div>
@@ -183,6 +200,8 @@ pageEncoding="utf-8"%>
 			</h4>
 		</div>
 	</div>
+	
+	<div id="consume_result"></div>
 
 	<!-- 加载js -->
 	<script src='bootstrap/js/bootstrap.js'></script>

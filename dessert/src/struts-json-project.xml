@@ -53,7 +53,7 @@
 				<param name="message">message</param>
 			</result>
 		</action>
-		<action name="getShop" class="shopJsonController" method="getShop">
+		<action name="getShop" class="shopJsonController" method="shop">
 			<result type="json">
 				<param name="shopVO">shopVO</param>
 			</result>

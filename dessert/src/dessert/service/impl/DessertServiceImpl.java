@@ -129,7 +129,7 @@ public class DessertServiceImpl implements DessertService {
 		if (!cash) {
 			// 从会员余额中扣钱
 			double originalMoney = member.getValidMoney();
-			double validMoney = originalMoney - payMoney;
+			double validMoney = originalMoney - payMoney + discount;
 			if (validMoney < 0) {
 				result.put("msg", Configure.CARD_NOT_ENOUGH);
 			} else {

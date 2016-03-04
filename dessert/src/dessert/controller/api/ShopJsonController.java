@@ -1,5 +1,6 @@
 package dessert.controller.api;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,12 +23,13 @@ public class ShopJsonController extends BaseController {
 	private ShopService shopService;
 	private String message;
 	private ShopVO shopVO;
+	private ArrayList<ShopVO> shops;
 	private Map<String, Week> weeks = new LinkedHashMap<String, Week>();
 
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-		// shops = shopService.getShops();
+		shops = shopService.getShops();
 		// HttpSession session = session();
 		// session.setAttribute(Configure.SHOP_SESSION, shops);
 		return Configure.SUCCESS;
@@ -88,7 +90,7 @@ public class ShopJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
-	public String getShop() {
+	public String shop() {
 		Map<String, String> params = getParams();
 		String name = params.get("shopName");
 		shopVO = shopService.getShop(name);
@@ -122,6 +124,14 @@ public class ShopJsonController extends BaseController {
 
 	public void setWeeks(Map<String, Week> weeks) {
 		this.weeks = weeks;
+	}
+
+	public ArrayList<ShopVO> getShops() {
+		return shops;
+	}
+
+	public void setShops(ArrayList<ShopVO> shops) {
+		this.shops = shops;
 	}
 
 }

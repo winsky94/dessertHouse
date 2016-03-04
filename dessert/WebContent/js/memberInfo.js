@@ -19,7 +19,7 @@ function writeMemberShowInfo () {
 				var txt='\
 					<ul class="collection">\
 						<li class="collection-item"><img src="image/index1.jpg" width="180px" height="150px">\
-							<h5 id="memberId" class="text-center">欢迎您~~'+id+'</h5>\
+							<h5 class="text-center">欢迎您~~<span id="memberId">'+id+'</span></h5>\
 						</li>\
 						<li class="collection-item">\
 							<p>\
@@ -45,6 +45,11 @@ function writeMemberShowInfo () {
 				';
 			}
 			$("#memberInfo").html(txt);
+			
+			//给导航栏上的消费记录增加参数
+			var hrefObj=document.getElementById("consume_href");
+			var hrefs=hrefObj.getAttribute("href")+"?memberId="+id;
+			hrefObj.setAttribute("href",hrefs);
 		}
 	});
 }

@@ -50,5 +50,8 @@
 		<action name="member_info" class="memberInfoController">
 			<result name="member_info">memberManage.jsp</result>
 		</action>
+		<action name="member_consume" class="consumeController">
+			<result name="member_consume">consumeRecord.jsp</result>
+		</action>
 	</package>
 </struts>

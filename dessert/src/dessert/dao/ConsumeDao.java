@@ -1,5 +1,7 @@
 package dessert.dao;
 
+import java.util.List;
+
 import dessert.entity.ConsumeRecord;
 
 /**
@@ -8,4 +10,6 @@ import dessert.entity.ConsumeRecord;
  */
 public interface ConsumeDao {
 	public long consume(ConsumeRecord record);
+
+	public List<ConsumeRecord> getConsumeRecord(String memberId);
 }

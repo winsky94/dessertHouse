@@ -110,7 +110,15 @@ function write_header_login(userName, type) {
 								<li><a href="#"">我的购物车</a></li>\
 							</ul>\
 						</li>\
-						<li><a href="member_info">会员资格</a></li>\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">会员管理<b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
+								<li><a id="consume_href" href="member_consume">已买到的</a></li>\
+								<li><a href="#"">充值记录</a></li>\
+								<li class="divider"></li>\
+								<li><a href="member_info">资格管理</a></li>\
+							</ul>\
+						</li>\
 					</ul>\
 					<ul class="nav navbar-nav clearfix pull-right">\
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\

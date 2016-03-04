@@ -8,6 +8,9 @@ function verify_sign_up() {
 	var birthday = $("#birthday").val();
 	var telephone = $("#telephone").val();
 	var cardId = $("#cardId").val();
+	var prov = jQuery("#prov option:selected").text();
+	var city = jQuery("#city option:selected").text();
+	var dist = jQuery("#dist option:selected").text();
 
 	if (userName == "") {
 		var divNode = document.getElementById("message");
@@ -69,6 +72,12 @@ function verify_sign_up() {
 		divNode.innerHTML = "银行卡号不能为空";
 		return;
 	}
+	if(prov == ""){
+		var divNode = document.getElementById("message");
+		$("#prov").focus();
+		divNode.innerHTML = "请选择地址";
+		return;
+	}
 
 	$.ajax({
 		url : 'api/signUp',
@@ -81,7 +90,10 @@ function verify_sign_up() {
 			sex : sex,
 			birthday : birthday,
 			telephone : telephone,
-			cardId : cardId
+			cardId : cardId,
+			prov : prov,
+			city : city,
+			dist : dist
 		},
 		success : function(result, textStatus) {
 			callback_signup(result);
@@ -96,7 +108,10 @@ function callback_signup(result) {
 		var message = result.message;
 		if (message == "success") {
 			add_cookie('userName', userName, 30 * 24);
-			alert("成功啦");
+			//下面两个cookie可能有问题
+			add_cookie("type", "member", 30 * 24);
+			add_cookie("lastLoadTime", lastLoadTime, 30 * 24);
+
 			window.location.href = "index.html";
 		} else {
 			var divNode = document.getElementById("message");

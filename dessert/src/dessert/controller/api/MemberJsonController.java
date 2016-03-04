@@ -71,8 +71,11 @@ public class MemberJsonController extends BaseController {
 		if ("-".equals(validDate)) {
 			validDate = null;
 		}
-		
-		Member member = new Member();
+		String prov = params.get("prov");
+		String city = params.get("city");
+		String dist = params.get("dist");
+
+		Member member = memberService.getMemberByMemberId(memberId);
 		member.setId(id);
 		member.setName(userName);
 		member.setPassword(password);
@@ -88,6 +91,9 @@ public class MemberJsonController extends BaseController {
 		member.setValidMoney(validMoney);
 		member.setMemberId(memberId);
 		member.setPoint(point);
+		member.setProv(prov);
+		member.setCity(city);
+		member.setDist(dist);
 
 		message = memberService.update(member);
 
@@ -126,6 +132,13 @@ public class MemberJsonController extends BaseController {
 		memberService.cancelMember(memberId);
 
 		message = Configure.SUCCESS;
+		return Configure.SUCCESS;
+	}
+
+	public String blank() {
+		Map<String, String> params = getParams();
+		String memberId = params.get("memberId");
+
 		return Configure.SUCCESS;
 	}
 

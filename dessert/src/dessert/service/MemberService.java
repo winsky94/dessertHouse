@@ -1,5 +1,8 @@
 package dessert.service;
 
+import java.util.ArrayList;
+
+import dessert.VO.ConsumeVO;
 import dessert.entity.Member;
 import dessert.entity.RechargeRecord;
 
@@ -31,4 +34,12 @@ public interface MemberService {
 	 *            会员编号
 	 */
 	public void cancelMember(String memberId);
+
+	/**
+	 * 获得会员的消费记录
+	 * 
+	 * @param memberId
+	 * @return
+	 */
+	public ArrayList<ConsumeVO> getConsumeRecord(String memberId);
 }

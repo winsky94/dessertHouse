@@ -1,5 +1,7 @@
 package dessert.dao.impl;
 
+import java.util.List;
+
 import dessert.dao.ConsumeDao;
 import dessert.entity.ConsumeRecord;
 
@@ -14,6 +16,12 @@ public class ConsumeDaoImpl extends BaseDaoImpl<ConsumeRecord> implements
 	public long consume(ConsumeRecord record) {
 		// TODO Auto-generated method stub
 		return super.add(record);
+	}
+
+	@Override
+	public List<ConsumeRecord> getConsumeRecord(String memberId) {
+		// TODO Auto-generated method stub
+		return getListByColumn(ConsumeRecord.class, "memberId", memberId);
 	}
 
 }

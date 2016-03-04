@@ -87,10 +87,17 @@ public class Configure {
 	// 会员消费行为
 	public static final String APPOINTMENT = "appointment";// 预约
 	public static final String BUY = "buy";// 购买
+	public static final String APPOINTMENT_CN = "预约";// 预约
+	public static final String BUY_CN = "购买";// 购买
 	// 会员付费行为
 	public static final String CASH = "cash";// 现金付费
 	public static final String CARD = "card";// 会员账户余额
+	public static final String CASH_CN = "现金";// 现金付费
+	public static final String CARD_CN = "刷卡";//
 	public static final String CARD_NOT_ENOUGH = "账户余额不足，请至相应店面使用现金支付~~";// 会员账户余额
 	public static final String STOCK_NOT_ENOUGH = "库存不足，下次早点来哦~~";// 会员账户余额
+	// 会员消费记录
+	public static final String Member_CONSUME_SESSION = "member_consume_session";// session
+	public static final String Member_CONSUME = "member_consume";// 页面跳转
 
 }

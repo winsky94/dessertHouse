@@ -1,15 +1,22 @@
 package dessert.service.impl;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.ConsumeVO;
+import dessert.VO.DessertVO;
 import dessert.configure.Configure;
+import dessert.dao.ConsumeDao;
 import dessert.dao.MemberDao;
 import dessert.dao.RechargeDao;
+import dessert.entity.ConsumeRecord;
 import dessert.entity.Member;
 import dessert.entity.RechargeRecord;
+import dessert.service.DessertService;
 import dessert.service.MemberService;
 import dessert.util.DateUtil;
 import dessert.util.DesUtils;
@@ -25,6 +32,10 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private RechargeDao rechargeDao;
+	@Autowired
+	private ConsumeDao consumeDao;
+	@Autowired
+	private DessertService dessertService;
 
 	@Override
 	public String signUp(Member member) {
@@ -80,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
 		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
 		String password = des.decrypt(member.getPassword());
 		member.setPassword(password);
-		
+
 		return member;
 	}
 
@@ -176,5 +187,33 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMemberByMemberId(String memberId) {
 		// TODO Auto-generated method stub
 		return memberDao.getMemberInfoById(memberId);
+	}
+
+	@Override
+	public ArrayList<ConsumeVO> getConsumeRecord(String memberId) {
+		// TODO Auto-generated method stub
+		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
+		List<ConsumeRecord> records = consumeDao.getConsumeRecord(memberId);
+		if (records != null) {
+			for (ConsumeRecord record : records) {
+				long id = record.getId();
+				String action = record.getAction();
+				String date = record.getDate();
+				long dessertId = record.getDessertId();
+				double money = record.getMoney();
+				int num = record.getNum();
+				boolean cash = record.getCash();
+				DessertVO dessert = dessertService.getDessertById(dessertId);
+				if (dessert != null) {
+					String dessertName = dessert.getName();
+					ConsumeVO vo = new ConsumeVO(id, memberId, dessertName,
+							num, date, money, action, cash);
+					result.add(vo);
+				}
+
+			}
+		}
+
+		return result;
 	}
 }

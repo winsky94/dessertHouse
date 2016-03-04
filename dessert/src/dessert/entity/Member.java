@@ -32,6 +32,10 @@ public class Member {
 	private double validMoney;// 会员卡上余额
 	private String validDate;// 会员有效期
 	private String overDate;// 需要停止会员记录的时间，暂停1年后未支付，会员记录停止
+	private String prov;// 省
+	private String city;// 市
+	private String dist;// 县
+	private String createAt;// 注册日期
 
 	public String getLastLoadTime() {
 		return lastLoadTime;
@@ -147,6 +151,38 @@ public class Member {
 
 	public String getValidDate() {
 		return validDate;
+	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getProv() {
+		return prov;
+	}
+
+	public void setProv(String prov) {
+		this.prov = prov;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDist() {
+		return dist;
+	}
+
+	public void setDist(String dist) {
+		this.dist = dist;
 	}
 
 	public String getOverDate() {

@@ -25,6 +25,9 @@ function getMemberInfo() {
 				validMoney = member.validMoney;
 				validDate = member.validDate;
 				id = member.id;
+				prov = member.prov;
+				city = member.city;
+				dist = member.dist;
 				
 				if(validDate=="null"||validDate==null){
 					validDate="-";
@@ -173,6 +176,12 @@ function update() {
 		divNode.innerHTML = "银行卡号不能为空";
 		return;
 	}
+	if(prov == ""){
+		var divNode = document.getElementById("message");
+		$("#prov").focus();
+		divNode.innerHTML = "请选择地址";
+		return;
+	}
 
 	$.ajax({
 		url : 'api/member/update',
@@ -193,7 +202,10 @@ function update() {
 			point : point,
 			rank : rank,
 			validMoney : validMoney,
-			validDate : validDate//注意这儿可能传递的是-，后面判断一下
+			validDate : validDate,//注意这儿可能传递的是-，后面判断一下
+			prov : prov,
+			city : city,
+			dist : dist
 		},
 		success : function(result, textStatus) {
 			callback_update(result);
@@ -306,6 +318,19 @@ function editInfo() {
 			</div>\
 			<div class="row-fluid control-group"></div>\
 			<div class="row-fluid control-group">\
+				<div class="span12">\
+					<label class="control-label" for="address">地　址：</label>\
+					<div class="controls">\
+						<div id="address">\
+			                   <select class="prov" id="prov" style="width:160px;"></select> \
+			                   <select class="city" id="city" style="margin-left: 26px;width:160px;" disabled="disabled"></select>\
+			                   <select class="dist" id="dist" style="margin-left: 26px;width:160px;" disabled="disabled"></select>\
+               			</div>\
+					</div>\
+				</div>\
+			</div>\
+			<div class="row-fluid control-group"></div>\
+			<div class="row-fluid control-group">\
 				<div class="span4">\
 					<div class="controls">\
 						<button type="button" class="btn" onclick="update();">\
@@ -328,6 +353,14 @@ function editInfo() {
 	';
 	$("#info").html('');
 	$("#edit_info").html(txt);
+	$(function() {
+        $("#address").citySelect({
+            //设置默认数据
+          	prov:prov, 
+          	city:city, 
+          	dist:dist
+        });
+	});
 }
 
 function showInfo() {

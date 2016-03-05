@@ -25,4 +25,6 @@ public interface WorkerDao {
 	public String getMaxWorkerId();
 
 	public Worker getWorkerByWorkerId(String workerId);
+
+	public String changePW(String workerId, String originalPW, String newPW);
 }

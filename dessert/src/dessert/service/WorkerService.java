@@ -27,4 +27,14 @@ public interface WorkerService {
 	 * @return
 	 */
 	public String getWorkerShop(String workerId);
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param workerId
+	 * @param originalPW
+	 * @param newPW
+	 * @return
+	 */
+	public String changePW(String workerId, String originalPW, String newPW);
 }

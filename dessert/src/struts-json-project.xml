@@ -9,6 +9,13 @@
 			<result type="json" />
 		</action>
 	</package>
+	
+	<package name="changePW" namespace="/api/worker" extends="json-default">
+		<action name="changePW" class="workerJsonController">
+			<result type="json" />
+		</action>
+	</package>
+	
 	<!-- 用户注册 -->
 	<package name="sign_up" namespace="/api" extends="json-default">
 		<action name="signUp" class="signUpJsonController">

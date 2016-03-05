@@ -239,13 +239,13 @@ function editInfo() {
 			<div class="row-fluid control-group"></div>\
 			<input type="hidden" id="id" value="'+id+'">\
 			<div class="row-fluid control-group">\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="memberName">用户名：</label>\
 					<div class="controls">\
 						<input type="text" id="memberName" placeholder="用户名" value="'+name+'" disabled>\
 					</div>\
 				</div>\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="age">年　龄：</label>\
 					<div class="controls">\
 						<input type="number" id="age" placeholder="年　龄" min="0" max="100" value="'+age+'">\
@@ -254,13 +254,13 @@ function editInfo() {
 			</div>\
 			<div class="row-fluid control-group"></div>\
 			<div class="row-fluid control-group">\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="password">密　码：</label>\
 					<div class="controls">\
 						<input type="password" id="password" placeholder="密　码" value="'+password+'">\
 					</div>\
 				</div>\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="confirm_password">确认密码：</label>\
 					<div class="controls">\
 						<input type="password" id="confirm_password" placeholder="确认密码" value="'+password+'">\
@@ -269,7 +269,7 @@ function editInfo() {
 			</div>\
 			<div class="row-fluid control-group"></div>\
 			<div class="row-fluid control-group">\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="age">性　别：</label>\
 					<div class="controls">\
 						<select class="browser-default" id="sex">\
@@ -298,7 +298,7 @@ function editInfo() {
 						</select>\
 					</div>\
 				</div>\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="birthday">生　日：</label>\
 					<div class="controls">\
 						<input id="birthday" class="Wdate" type="text" onClick="WdatePicker();" placeholder="生　日" value="'+birthday+'">\
@@ -307,13 +307,13 @@ function editInfo() {
 			</div>\
 			<div class="row-fluid control-group"></div>\
 			<div class="row-fluid control-group">\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="telephone">电　话：</label>\
 					<div class="controls">\
 						<input type="tel" id="telephone" placeholder="电　话" value="'+telephone+'">\
 					</div>\
 				</div>\
-				<div class="span4">\
+				<div class="span5">\
 					<label class="control-label" for="cardId">银行卡号：</label>\
 					<div class="controls">\
 						<input type="text" id="cardId" placeholder="银行卡号" onkeyup="formatBankNo(this)" onkeydown="formatBankNo(this)" value="'+cardId+'">\
@@ -326,16 +326,16 @@ function editInfo() {
 					<label class="control-label" for="address">地　址：</label>\
 					<div class="controls">\
 						<div id="address">\
-			                   <select class="prov" id="prov" style="width:160px;"></select> \
-			                   <select class="city" id="city" style="margin-left: 26px;width:160px;" disabled="disabled"></select>\
-			                   <select class="dist" id="dist" style="margin-left: 26px;width:160px;" disabled="disabled"></select>\
+			                   <select class="prov" id="prov" style="width:165px;"></select> \
+			                   <select class="city" id="city" style="margin-left: 28px;width:165px;" disabled="disabled"></select>\
+			                   <select class="dist" id="dist" style="margin-left: 28px;width:165px;" disabled="disabled"></select>\
                			</div>\
 					</div>\
 				</div>\
 			</div>\
 			<div class="row-fluid control-group"></div>\
 			<div class="row-fluid control-group">\
-				<div class="span4">\
+				<div class="span5">\
 					<div class="controls">\
 						<button type="button" class="btn" onclick="update();">\
 							确认\
@@ -345,7 +345,7 @@ function editInfo() {
 						</button>\
 					</div>\
 				</div>\
-				<div class="span4">\
+				<div class="span5">\
 					<div class="controls">\
 						<font color="red" size="2" style="display:inline;">\
 							<span id="message"></span>\

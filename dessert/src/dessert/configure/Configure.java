@@ -30,6 +30,8 @@ public class Configure {
 	public static final String ADMIN = "admin";
 	// 总经理身份，指向店铺用-2表示
 	public static final String MANAGER = "manager";
+	// 修改密码
+	public static final String WRONG_ORIGINAL_PW = "原密码错误，请重新输入";
 
 	// ==================================管理员==========================================
 	// 管理员管理店面的session名

@@ -39,7 +39,7 @@ public class ChangeStateTask {
 	}
 
 	/**
-	 * 上次任务结束后一分钟后再次执行 ChangeStateTask.doJob2()<BR>
+	 * 上次任务结束后一分钟后再次执行
 	 */
 	@Scheduled(fixedDelay = 60 * 1000)
 	public void doJob2() {

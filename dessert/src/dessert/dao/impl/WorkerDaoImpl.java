@@ -10,9 +10,11 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 
+import dessert.configure.Configure;
 import dessert.dao.WorkerDao;
 import dessert.entity.Worker;
 import dessert.util.CheckError;
+import dessert.util.DesUtils;
 import dessert.util.TimeUtil;
 import dessert.util.UserType;
 
@@ -99,6 +101,22 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 	public Worker getWorkerByWorkerId(String workerId) {
 		// TODO Auto-generated method stub
 		return getByColumn(Worker.class, "workerId", workerId);
+	}
+
+	@Override
+	public String changePW(String workerId, String originalPW, String newPW) {
+		// TODO Auto-generated method stub
+		Worker worker = getWorkerByWorkerId(workerId);
+		// 把原密码解密
+		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
+		String password = des.decrypt(worker.getPassword());
+		if(!password.equals(originalPW)){
+			return Configure.WRONG_ORIGINAL_PW;
+		}else{
+			// 加密新密码
+			worker.setPassword(des.encrypt(newPW));
+			return Configure.SUCCESS;
+		}
 	}
 
 }

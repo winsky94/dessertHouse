@@ -111,4 +111,10 @@ public class WorkerServiceImpl implements WorkerService {
 		return owingTo;
 	}
 
+	@Override
+	public String changePW(String workerId, String originalPW, String newPW) {
+		// TODO Auto-generated method stub
+		return workerDao.changePW(workerId,originalPW,newPW);
+	}
+
 }

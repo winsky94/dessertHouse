@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
+import dessert.entity.Member;
 import dessert.entity.Shop;
 import dessert.entity.Worker;
 import dessert.service.DessertService;
+import dessert.service.MemberService;
 import dessert.service.PlanService;
 import dessert.service.ShopService;
 import dessert.service.TestService;
 import dessert.service.WorkerService;
+import dessert.util.DateUtil;
 import dessert.util.UserType;
 
 public class TestController extends BaseController {
@@ -27,12 +30,12 @@ public class TestController extends BaseController {
 	public PlanService planService;
 	@Autowired
 	public DessertService dessertService;
+	@Autowired
+	private MemberService memberService;
 
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-
-		System.out.println(dessertService.getDessertIdByName("周三单品"));
 
 		// Dessert dessert = dessertService.getDessertById(17);
 		// System.out.println(dessert.getName());
@@ -40,6 +43,8 @@ public class TestController extends BaseController {
 		// initShops();
 
 		// initWorker();
+
+		initMember();
 
 		// PlanVO planVO = planService.getPlans("shop2", false);
 		// if (planVO == null) {
@@ -61,11 +66,11 @@ public class TestController extends BaseController {
 	}
 
 	public void initShops() {
-		for (int i = 0; i < 26; i++) {
+		for (int i = 0; i < 14; i++) {
 			Shop shop = new Shop();
 			shop.setName("shop" + (i + 1));
 			shop.setAddress("江苏省南京市鼓楼区汉口路22号");
-			shop.setOwner("严顺宽");
+			shop.setOwner("小马甲");
 			shop.setTelephone("18013878510");
 			shopService.add(shop);
 		}
@@ -89,4 +94,41 @@ public class TestController extends BaseController {
 		workerService.add(worker);
 	}
 
+	public void initMember() {
+		for (int i = 1; i < 100; i++) {
+			String userName = "member" + i;
+			String password = "12345a";
+			int age = (int) (Math.random() * 100);
+			double d = Math.random();
+			String sex = "女";
+			if (d >= 0.5) {
+				sex = "男";
+			}
+			String birthday = (2016 - age) + "-" + (int) (Math.random() * 12)
+					+ "-" + (int) (Math.random() * 30);
+			String telephone = "18013878510";
+			String cardId = "1234567890098765432";
+			String prov = "江苏";
+			String city = "南京";
+			String dist = "鼓楼区";
+
+			Member member = new Member();
+			member.setName(userName);
+			member.setPassword(password);
+			member.setAge(age);
+			member.setSex(sex);
+			member.setBirthday(birthday);
+			member.setTelephone(telephone);
+			member.setCardId(cardId);
+			member.setProv(prov);
+			member.setCity(city);
+			member.setDist(dist);
+			String createAt = DateUtil.getToday();
+			member.setCreateAt(createAt);
+
+			String message = memberService.signUp(member);
+			System.out.println(message);
+		}
+
+	}
 }

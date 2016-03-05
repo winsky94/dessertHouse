@@ -314,7 +314,6 @@ public class PlanJsonController extends BaseController {
 		session().removeAttribute(Configure.PLAN_SHOP_ALL);
 		session().removeAttribute(Configure.PLAN_SESSION);
 
-		System.out.println("提交计划");
 		message = Configure.SUCCESS;
 		return Configure.SUCCESS;
 	}

@@ -87,7 +87,7 @@ function write_header_login(userName, type) {
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
-								<li><a href="#">个人信息</a></li>\
+								<li><a href="workerMyInfo.jsp">修改密码</a></li>\
 								<li class="divider"></li>\
 								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
 							</ul>\
@@ -157,7 +157,7 @@ function write_header_login(userName, type) {
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
-								<li><a href="#">个人信息</a></li>\
+								<li><a href="workerMyInfo.jsp">修改密码</a></li>\
 								<li class="divider"></li>\
 								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
 							</ul>\
@@ -233,7 +233,7 @@ function write_header_login(userName, type) {
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown"> '+ userName +' <b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
-								<li><a href="#">个人信息</a></li>\
+								<li><a href="workerMyInfo.jsp">修改密码</a></li>\
 								<li class="divider"></li>\
 								<li><a href="index.html" onclick="exit();">退出登录</a></li>\
 							</ul>\

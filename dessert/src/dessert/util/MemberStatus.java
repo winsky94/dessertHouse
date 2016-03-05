@@ -30,4 +30,25 @@ public enum MemberStatus {
 
 		return status;
 	}
+	
+	public static int getStatusInt(MemberStatus status){
+		int result=0;
+		switch (status) {
+		case Init:
+			result=0;
+			break;
+		case OK:
+			result=1;
+			break;
+		case pause:
+			result=2;
+			break;
+		case over:
+			result=3;
+			break;
+		default:
+			break;
+		}
+		return result;
+	}
 }

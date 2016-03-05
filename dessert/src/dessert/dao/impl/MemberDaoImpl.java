@@ -107,15 +107,15 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		// 检查会员失效
 		String sql = "update member";
-		sql += " set status=" + MemberStatus.pause;
+		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.pause);
 		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
 		sql += " where validDate < curdate();";
 		doSql(sql);
 
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
-		sql += " set status=" + MemberStatus.over;
-		sql += " where overDate <　curdate();";
+		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);;
+		sql += " where overDate < curdate();";
 		doSql(sql);
 	}
 

@@ -1,7 +1,9 @@
 package dessert.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import dessert.VO.ConsumeStats;
 import dessert.entity.ConsumeRecord;
 
 /**
@@ -18,4 +20,8 @@ public interface ConsumeDao {
 	public ConsumeRecord getConsumeRecord(long id);
 
 	public void delete(ConsumeRecord record);
+
+	public List<ConsumeRecord> getConsumeRecord(String year, String month);
+
+	public ArrayList<ConsumeStats> consumeStats(String year, String month);
 }

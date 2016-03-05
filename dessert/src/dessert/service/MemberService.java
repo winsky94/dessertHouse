@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dessert.VO.ConsumeStats;
 import dessert.VO.ConsumeVO;
 import dessert.entity.Member;
 import dessert.entity.RechargeRecord;
@@ -97,4 +98,15 @@ public interface MemberService {
 	 * @return
 	 */
 	public HashMap<String, Integer> getAddressData();
+
+	public ArrayList<ConsumeVO> getConsumeRecord(String year, String month);
+
+	/**
+	 * 总经理按店面统计销售、预订情况
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public ArrayList<ConsumeStats> consumeStats(String year, String month);
 }

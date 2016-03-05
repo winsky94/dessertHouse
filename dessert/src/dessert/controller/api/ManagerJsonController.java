@@ -1,10 +1,13 @@
 package dessert.controller.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.ConsumeStats;
+import dessert.VO.ConsumeVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.service.MemberService;
@@ -23,6 +26,8 @@ public class ManagerJsonController extends BaseController {
 	private HashMap<String, Integer> ageInfo = new HashMap<String, Integer>();
 	private HashMap<String, Integer> sexInfo = new HashMap<String, Integer>();
 	private HashMap<String, Integer> addressInfo = new HashMap<String, Integer>();
+	private ArrayList<ConsumeVO> data;
+	private ArrayList<ConsumeStats> consumeResult;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -43,11 +48,38 @@ public class ManagerJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	/**
+	 * 统计会员的基本信息情况
+	 * 
+	 * @return
+	 */
 	public String baseData() {
 		ageInfo = memberService.getAgeData();
 		sexInfo = memberService.getSexData();
 		addressInfo = memberService.getAddressData();
 
+		return Configure.SUCCESS;
+	}
+
+	public String consumeData() {
+		Map<String, String> params = getParams();
+		String year = params.get("year");
+		String month = params.get("month");
+		if (year == null || month == null) {
+			data = memberService.getConsumeRecord();
+		} else {
+			data = memberService.getConsumeRecord(year, month);
+		}
+		return Configure.SUCCESS;
+	}
+
+	public String consumeStats() {
+		Map<String, String> params = getParams();
+		consumeResult = new ArrayList<ConsumeStats>();
+
+		String year = params.get("year");
+		String month = params.get("month");
+		consumeResult = memberService.consumeStats(year, month);
 		return Configure.SUCCESS;
 	}
 
@@ -81,6 +113,22 @@ public class ManagerJsonController extends BaseController {
 
 	public void setAddressInfo(HashMap<String, Integer> addressInfo) {
 		this.addressInfo = addressInfo;
+	}
+
+	public ArrayList<ConsumeVO> getData() {
+		return data;
+	}
+
+	public void setData(ArrayList<ConsumeVO> data) {
+		this.data = data;
+	}
+
+	public ArrayList<ConsumeStats> getConsumeResult() {
+		return consumeResult;
+	}
+
+	public void setConsumeResult(ArrayList<ConsumeStats> consumeResult) {
+		this.consumeResult = consumeResult;
 	}
 
 }

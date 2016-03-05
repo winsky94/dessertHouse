@@ -1,10 +1,13 @@
 package dessert.VO;
 
+import java.io.Serializable;
+
 /**
  * @author 严顺宽
  * @date 2016年3月4日 上午9:53:00
  */
-public class ConsumeVO {
+public class ConsumeVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	public long id;
 	private String memberId;// 会员的七位识别码
 	private String dessertName;// 消费的商品的编号

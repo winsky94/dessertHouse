@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dessert.VO.ConsumeStats;
 import dessert.VO.ConsumeVO;
 import dessert.VO.DessertVO;
 import dessert.configure.Configure;
@@ -275,8 +276,8 @@ public class MemberServiceImpl implements MemberService {
 			double originalMoney = member.getValidMoney();
 			double validMoney = exMoney + originalMoney;
 			member.setValidMoney(validMoney);
-			
-			//更新会员信息
+
+			// 更新会员信息
 			memberDao.update(member);
 
 			return Configure.SUCCESS;
@@ -299,5 +300,20 @@ public class MemberServiceImpl implements MemberService {
 	public HashMap<String, Integer> getAddressData() {
 		// TODO Auto-generated method stub
 		return memberDao.getAddressData();
+	}
+
+	@Override
+	public ArrayList<ConsumeVO> getConsumeRecord(String year, String month) {
+		// TODO Auto-generated method stub
+		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
+		List<ConsumeRecord> records = consumeDao.getConsumeRecord(year, month);
+		result = recordToVO(records);
+		return result;
+	}
+
+	@Override
+	public ArrayList<ConsumeStats> consumeStats(String year, String month) {
+		// TODO Auto-generated method stub
+		return consumeDao.consumeStats(year, month);
 	}
 }

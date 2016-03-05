@@ -68,11 +68,14 @@ pageEncoding="utf-8"%>
 					<table id="consumeTable" class="table display dataTable">
 						<thead>
 							<tr>
-								<th class="order-header text-center">分店名称</th>
-								<th class="order-header text-center">预订数量</th>
-								<th class="order-header text-center">预订总额</th>
-								<th class="order-header text-center">销售数量</th>
-								<th class="order-header text-center">销售总额</th>
+								<th class="order-header text-center">会员编号</th>
+								<th class="order-header text-center">商品名称</th>
+								<th class="order-header text-center">数量</th>
+								<th class="order-header text-center">优惠</th>
+								<th class="order-header text-center">总价</th>
+								<th class="order-header text-center">积分</th>
+								<th class="order-header text-center">行为</th>
+								<th class="order-header text-center">付款方式</th>
 							</tr>
 						</thead>
 					</table>
@@ -104,8 +107,7 @@ pageEncoding="utf-8"%>
 		$(document).ready(function() {
 			var table=$('#consumeTable').DataTable({
 				"ajax": {
-				    url: "api/manager/consumeStats",
-				    dataSrc: 'consumeResult',
+				    url: "api/manager/consumeData",
 				    "data":function() {
 				    	var year=$("#year").val();
 				    	var month=$("#month").val();
@@ -118,11 +120,14 @@ pageEncoding="utf-8"%>
 				    }
 				  },
 		        "columns": [
-		            { data: "shopName" },
-		            { data: "appointmentNum" },
-		            { data: "appointmentMoney" },
-		            { data: "saleNum" },
-		            { data: "saleMoney" },
+		            { "data": "memberId" },
+		            { "data": "dessertName" },
+		            { "data": "num" },
+		            { "data": "discount" },
+		            { "data": "money" },
+		            { "data": "point" },
+		            { "data": "action" },
+		            { "data": "cash" }
 		        ],
 				"bStateSave": true,
 				select : true,

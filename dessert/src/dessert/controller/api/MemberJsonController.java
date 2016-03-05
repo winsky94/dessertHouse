@@ -142,6 +142,16 @@ public class MemberJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	public String exchange() {
+		Map<String, String> params = getParams();
+
+		String memberId = params.get("memberId");
+		int point = Integer.parseInt(params.get("point"));
+		message=memberService.exchange(memberId, point);
+
+		return Configure.SUCCESS;
+	}
+
 	public String cancelMember() {
 		Map<String, String> params = getParams();
 		String memberId = params.get("memberId");

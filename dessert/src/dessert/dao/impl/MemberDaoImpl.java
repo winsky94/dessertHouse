@@ -126,4 +126,62 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		member.setStatus(MemberStatus.over);
 		update(member);
 	}
+
+	@Override
+	public HashMap<String, Integer> getAgeData() {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+
+		String sql = "select sum(age<20) as '20以下', sum(age>=20 and age<30) as '20-30', sum(age>=30 and age<40) as '30-40', sum(age>=40 and age<50) as '40-50', sum(age>=50 and age<60) as '50-60', sum(age>=60) as '60以上' from member;";
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		Object[] res = list.get(0);
+		int n1 = Integer.parseInt(res[0].toString());
+		int n2 = Integer.parseInt(res[1].toString());
+		int n3 = Integer.parseInt(res[2].toString());
+		int n4 = Integer.parseInt(res[3].toString());
+		int n5 = Integer.parseInt(res[4].toString());
+		int n6 = Integer.parseInt(res[5].toString());
+
+		result.put("20以下", n1);
+		result.put("20-30", n2);
+		result.put("30-40", n3);
+		result.put("40-50", n4);
+		result.put("50-60", n5);
+		result.put("60以上", n6);
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getSexData() {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select sum(sex='男') as 男,sum(sex='女') as 女 from member;";
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		Object[] res = list.get(0);
+		int man = Integer.parseInt(res[0].toString());
+		int woman = Integer.parseInt(res[1].toString());
+		result.put("男", man);
+		result.put("女", woman);
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getAddressData() {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select prov,count(*) from member group by prov;";
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		for (Object[] objects : list) {
+			String prov = (String) objects[0];
+			int num = Integer.parseInt(objects[1].toString());
+			result.put(prov, num);
+		}
+
+		return result;
+	}
 }

@@ -215,6 +215,9 @@ function write_header_login(userName, type) {
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">统计分析<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
+								<li><a href="managerMemberBaseInfo.jsp">会员分布</a></li>\
+								<li><a href="#">会员状态</a></li>\
+								<li class="divider"></li>\
 								<li><a href="manager_consume">消费统计</a></li>\
 								<li><a href="manager_recharge"">充值统计</a></li>\
 								<li class="divider"></li>\

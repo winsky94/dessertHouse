@@ -3,45 +3,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>会员管理</title>
-<meta charset="utf-8">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<title>会员管理</title>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
 
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/ul-li.css">
-<link rel="stylesheet" type="text/css"
-	href="css/table_css/sb-admin-2.css">
-<link rel="stylesheet" type="text/css" href="css/base.css">
-<style>
-#info {
-	display: table;
-	/*border-spacing: 10px;*/
-	padding-left: 280px;
-}
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/ul-li.css">
+	<link rel="stylesheet" type="text/css" href="css/table_css/sb-admin-2.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<style>
+	#info {
+		display: table;
+		/*border-spacing: 10px;*/
+		padding-left: 280px;
+	}
 
-#edit_info {
-	display: table;
-	/*border-spacing: 10px;*/
-	padding-left: 100px;
-}
+	#edit_info {
+		display: table;
+		/*border-spacing: 10px;*/
+		padding-left: 100px;
+	}
 
-.table-row {
-	/*display: table-row;*/
-	padding-top: 20px;
-}
+	.table-row {
+		/*display: table-row;*/
+		padding-top: 20px;
+	}
 
-.property {
-	display: table-cell;
-}
+	.property {
+		display: table-cell;
+	}
 
-.value {
-	display: table-cell;
-}
-</style>
+	.value {
+		display: table-cell;
+	}
+	</style>
 
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/cookie.js"></script>
-<script src="js/memberManage.js"></script>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/cookie.js"></script>
+	<script src="js/memberManage.js"></script>
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -64,10 +63,15 @@
 						<h4 style="display: inline;">会员详情</h4>
 						<div style="display: inline;">
 							<a class="btn pull-right margin_button" href="#"
+								onclick="ex();"> <i class="icon-star"></i>&nbsp;兑换
+							</a> 
+							<a class="btn pull-right margin_button" href="#"
 								onclick="charge();"> <i class="icon-filter"></i>&nbsp;充值
-							</a> <a class="btn pull-right margin_button" href="#"
+							</a> 
+							<a class="btn pull-right margin_button" href="#"
 								onclick="cancelMember();"> <i class="icon-remove"></i>&nbsp;注销
-							</a> <a class="btn pull-right margin_button" href="#"
+							</a> 
+							<a class="btn pull-right margin_button" href="#"
 								onclick="editInfo();"> <i class="icon-edit"></i>&nbsp;编辑
 							</a>
 						</div>
@@ -88,6 +92,7 @@
 					</div>
 				</div>
 
+				<!-- 会员充值 -->
 				<%
 					String action = request.getParameter("action");
 					if ("pay".equals(action)) {
@@ -109,16 +114,15 @@
 							</div>
 						</div>
 						<form class="form-horizontal">
-
 							<div class="row-fluid control-group">
 								<div class="span4">
-									<label class="control-label" for="memberName">金 额：</label>
+									<label class="control-label" for="money">金 额：</label>
 									<div class="controls">
 										<input type="number" id="money" placeholder="充值金额">
 									</div>
 								</div>
 								<div class="span4">
-									<label class="control-label" for="age">确 认：</label>
+									<label class="control-label" for="money_confirm">确 认：</label>
 									<div class="controls">
 										<input type="number" id="money_confirm" placeholder="确认金额">
 									</div>
@@ -143,10 +147,57 @@
 									</div>
 								</div>
 							</div>
-
 						</form>
-
 					</div>
+					<!-- 会员充值 结束 -->
+					
+					<!-- 会员积分兑换 -->
+					<div id="exchange" class="well" style="display: none;">
+						<div class="row-fluid control-group">
+							<div class="span8">
+								<div class="controls">
+									<h4>积分兑换</h4>
+								</div>
+							</div>
+						</div>
+						<form class="form-horizontal">
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<label class="control-label" for="ex_point">金 额：</label>
+									<div class="controls">
+										<input type="number" id="ex_point" placeholder="兑换数量">
+									</div>
+								</div>
+								<div class="span4">
+									<label class="control-label" for="point_confirm">确 认：</label>
+									<div class="controls">
+										<input type="number" id="point_confirm" placeholder="确认数量">
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid control-group"></div>
+							<div class="row-fluid control-group">
+								<div class="span4">
+									<div class="controls center">
+										<button type="button" class="btn" onclick="exchange();">兑换
+										</button>
+										<button type="button" class="btn" style="margin-left: 20px;"
+											onclick="$('#exchange').toggle();">取消</button>
+									</div>
+								</div>
+
+								<div class="span4">
+									<div class="controls">
+										<font color="red" size="2" class="center">
+										 <span id="exchange_message"></span>
+										</font>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 会员积分兑换 结束 -->
+					
 
 				</div>
 				<!--右侧会员具体信息 结束 -->

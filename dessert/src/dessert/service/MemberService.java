@@ -1,6 +1,7 @@
 package dessert.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dessert.VO.ConsumeVO;
@@ -66,4 +67,34 @@ public interface MemberService {
 	 * @return
 	 */
 	public List<RechargeRecord> getRechargeRecord();
+
+	/**
+	 * 积分兑换
+	 * 
+	 * @param memberId
+	 * @param point
+	 * @return
+	 */
+	public String exchange(String memberId, int point);
+
+	/**
+	 * 统计注册会员年龄分布：20以下，20-30,30-40,40-50,50-60,60以上
+	 * 
+	 * @return
+	 */
+	public HashMap<String, Integer> getAgeData();
+
+	/**
+	 * 统计注册会员男女比
+	 * 
+	 * @return
+	 */
+	public HashMap<String, Integer> getSexData();
+
+	/**
+	 * 统计注册会员地域分布，省份为单位
+	 * 
+	 * @return
+	 */
+	public HashMap<String, Integer> getAddressData();
 }

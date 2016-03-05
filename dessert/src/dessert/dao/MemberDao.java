@@ -36,4 +36,10 @@ public interface MemberDao {
 	 * @param memberId
 	 */
 	public void cancelMember(String memberId);
+
+	public HashMap<String, Integer> getAgeData();
+
+	public HashMap<String, Integer> getSexData();
+
+	public HashMap<String, Integer> getAddressData();
 }

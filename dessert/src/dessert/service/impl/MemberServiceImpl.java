@@ -3,6 +3,7 @@ package dessert.service.impl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -219,7 +220,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<RechargeRecord> getRechargeRecord(String memberId) {
 		// TODO Auto-generated method stub
 		List<RechargeRecord> result = new ArrayList<RechargeRecord>();
-		result=rechargeDao.getRechargeRecord(memberId);
+		result = rechargeDao.getRechargeRecord(memberId);
 		return result;
 	}
 
@@ -227,7 +228,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<RechargeRecord> getRechargeRecord() {
 		// TODO Auto-generated method stub
 		List<RechargeRecord> result = new ArrayList<RechargeRecord>();
-		result=rechargeDao.getRechargeRecord();
+		result = rechargeDao.getRechargeRecord();
 		return result;
 	}
 
@@ -255,5 +256,48 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public String exchange(String memberId, int point) {
+		// TODO Auto-generated method stub
+		Member member = memberDao.getMemberInfoById(memberId);
+		int originalPoint = member.getPoint();
+		if (originalPoint < point) {
+			return Configure.POINT_NOT_ENOUGH;
+		} else {
+			// 减会员积分数
+			int valid = originalPoint - point;
+			member.setPoint(valid);
+
+			// 加会员账户余额
+			double exMoney = MemberHelper.getExchangeMoney(point);
+			double originalMoney = member.getValidMoney();
+			double validMoney = exMoney + originalMoney;
+			member.setValidMoney(validMoney);
+			
+			//更新会员信息
+			memberDao.update(member);
+
+			return Configure.SUCCESS;
+		}
+	}
+
+	@Override
+	public HashMap<String, Integer> getAgeData() {
+		// TODO Auto-generated method stub
+		return memberDao.getAgeData();
+	}
+
+	@Override
+	public HashMap<String, Integer> getSexData() {
+		// TODO Auto-generated method stub
+		return memberDao.getSexData();
+	}
+
+	@Override
+	public HashMap<String, Integer> getAddressData() {
+		// TODO Auto-generated method stub
+		return memberDao.getAddressData();
 	}
 }

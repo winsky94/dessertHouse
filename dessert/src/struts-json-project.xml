@@ -176,6 +176,11 @@
 				<param name="message">message</param>
 			</result>
 		</action>
+		<action name="exchange" class="memberJsonController" method="exchange">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 		<action name="checkStatus" class="memberJsonController" method="checkMemberStatus">
 			<result type="json">
 				<param name="message">message</param>
@@ -206,7 +211,15 @@
 				<param name="message">message</param>
 			</result>
 		</action>
-
+	</package>
+	
+	<!-- 总经理分析 -->
+	<package name="memberManage" namespace="/api/manager" extends="json-default">
+		<action name="baseData" class="managerJsonController" method="baseData">
+			<result type="json">
+				<param name="ageInfo">ageInfo</param>
+			</result>
+		</action>
 	</package>
 
 </struts>

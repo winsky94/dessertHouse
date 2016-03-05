@@ -63,4 +63,15 @@ public class MemberHelper {
 		}
 		return penalty;
 	}
+
+	/**
+	 * 计算积分可以兑换的金额，暂定算法，1积分换1毛钱
+	 * 
+	 * @param point
+	 * @return
+	 */
+	public static double getExchangeMoney(int point) {
+		double money = point / 100.0;
+		return money;
+	}
 }

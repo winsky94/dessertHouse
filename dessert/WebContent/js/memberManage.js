@@ -68,8 +68,55 @@ function cancelMember() {
     }
 }
 
+function ex(){
+	$("#pay").hide();
+	$('#exchange').toggle();
+}
+
 function charge() {
+	$("#exchange").hide();
 	$("#pay").toggle();
+}
+
+function exchange() {
+	var ex_point=$("#ex_point").val();
+	var confirm_point=$("#point_confirm").val();
+	if(ex_point!=confirm_point){
+		var divNode = document.getElementById("exchange_message");
+		$("#point_confirm").focus();
+		divNode.innerHTML = "兑换积分两次输入不一致";
+		return;
+	}
+	if(ex_point>point){
+		var divNode = document.getElementById("exchange_message");
+		$("#point").focus();
+		divNode.innerHTML = "兑换积分超过已有积分";
+		return;
+	}
+
+	$.ajax({
+		url : 'api/member/exchange',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			memberId : memberId,
+			point : ex_point
+		},
+		success : function(result, textStatus) {
+			if (result.length == 0) {
+				alert("出现错误");
+			} else {
+				var message = result.message;
+				if (message == "success") {
+					alert("恭喜您，积分兑换成功~~~~");
+					window.location.href = "member_info";
+				} else {
+					var divNode = document.getElementById("exchange_message");
+					divNode.innerHTML = message;
+				}
+			}
+		}
+	});
 }
 
 function pay () {
@@ -233,6 +280,7 @@ function callback_update(result) {
 }
 
 function editInfo() {
+	$("#exchange").hide();
 	$("#pay").hide();
 	var txt = '\
 		<form class="form-horizontal">\

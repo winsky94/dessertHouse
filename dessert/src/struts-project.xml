@@ -80,5 +80,9 @@
 		<action name="member_recharge" class="rechargeController">
 			<result name="member_recharge">PayRecord.jsp</result>
 		</action>
+		<action name="member_cart" class="cartController">
+			<result name="member_cart">cart.jsp</result>
+			<result name="member_empty_cart">EmptyCart.jsp</result>
+		</action>
 	</package>
 </struts>

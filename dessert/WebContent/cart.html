@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的购物车</title>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/ul-li.css">
+	<link rel="stylesheet" type="text/css" href="css/table_css/sb-admin-2.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/dessertDetail.css">
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/cookie.js"></script>
+</head>
+<body>
+	<!-- 顶部导航栏 -->
+	<header></header>
+	<script type="text/javascript">
+		write_header();
+	</script>
+	<!-- 导航栏结束 -->
+
+	<!-- 正文内容 -->
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<!--左侧用户信息-->
+			<%@ include file="memberInfo.jsp"%>
+			<!-- 左侧用户信息结束 -->
+			<!--右侧购物车具体信息 -->
+			<div class="span10">
+				<div id="cart" class="container-fluid">
+					店铺： <span id="shopName" class="price_word">shop1</span>
+					<div class="well row-fluid row" style="margin-top: 10px;">
+						<label class="checkbox inline pull-left">
+							<input type="checkbox">
+						</label>
+						<div class="span1 inline pull-left">
+							<img src="image/2.jpg">
+							<div class="" style="margin-top: 10px;">
+								<div class="price_word center">捕风</div>
+								<div class="price_word center">2016.03.01</div>
+							</div>
+						</div>
+
+						<div class="span2">
+							<h4 class="dessert_title" id="dessertName">提拉米苏</h4>
+							<input type="hidden" id="dessertId" value="<%=dessertId%>">
+						</div>
+						
+						<div class="span2" style="padding-top: 15px;">
+							<span class="price_word">单价:</span>
+							<span class="price_num"style="margin-left: 10px;">
+								￥<strong id="price">100</strong>
+							</span>
+							<br><br>
+							<span class="price_word" style="margin-left:15px;">
+								库存:</span> <span class="price_word" id="stockNum">
+										10
+									</span>
+									<span class="price_word">件</span>
+						</div>
+						<div class="span3">
+							<div class="input-prepend input-append" style="margin-left: 10px;padding-top: 30px;">
+								<button id="delBtn" class="btn" type="button" onclick="delNum();">-</button>
+								<input id="quantity" class="span2 text-center" type="text" value="1">
+								<button id="addBtn" class="btn" type="button" onclick="addNum();">+</button>
+							</div>
+						</div>
+						<div class="span3">
+							<div style="padding-top: 30px;">
+								<span class="price_word">总价:</span>
+								<span class="price_num" style="margin-left: 0px;">
+									￥<strong id="totalMoney">100</strong>
+								</span>
+
+								<a href="#" style="margin-left: 10px;float: right" onclick="del()">删除</a>
+								<a href="#" style="float: right" onclick="buy()">购买</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--右侧购物车具体信息 结束 -->
+		</div>
+	</div>
+	<!-- 正文内容 结束 -->
+
+	<!-- 页脚 -->
+	<div class="navbar navbar-default navbar-fixed-bottom"
+		role="navigation">
+		<div class="navbar-inner text-center">
+			<h4>
+				© 2016 <abbr title="Email:ysk13@software.nju.edu.cn">winsky</abbr>,software institute, NJU
+			</h4>
+		</div>
+	</div>
+	
+	<!-- 加载js -->
+	<script src='bootstrap/js/bootstrap.js'></script>
+	<script src="js/cart.js"></script>
+</body>
+</html>

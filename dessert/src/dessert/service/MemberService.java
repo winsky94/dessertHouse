@@ -64,10 +64,16 @@ public interface MemberService {
 	/**
 	 * 得到全部会员的充值记录
 	 * 
-	 * @param memberId
 	 * @return
 	 */
 	public List<RechargeRecord> getRechargeRecord();
+
+	/**
+	 * 得到全部会员的充值记录
+	 * 
+	 * @return
+	 */
+	public List<RechargeRecord> getRechargeRecord(String year, String month);
 
 	/**
 	 * 积分兑换

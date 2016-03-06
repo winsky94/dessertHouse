@@ -15,5 +15,7 @@ public interface RechargeDao {
 
 	public List<RechargeRecord> getRechargeRecord(String memberId);
 
+	public List<RechargeRecord> getRechargeRecord(String year, String month);
+
 	public List<RechargeRecord> getRechargeRecord();
 }

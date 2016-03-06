@@ -59,38 +59,20 @@
 			<!--左侧用户信息 结束-->
 			<!--右侧充值记录表格 -->
 			<div class="span10">
+				<!-- 年份月份选择 -->
+				<div style="margin-bottom: 20px;">
+					<%@ include file="year-month-select.jsp"%>
+				</div>
+				<!-- 年份月份选择 结束 -->
 				<div class="table-container table-responsive">
 					<table id="payTable" class="table display dataTable">
 						<thead>
 							<tr>
-								<th style="display:none">id</th>
 								<th class="order-header text-center">会员编号</th>
 								<th class="order-header text-center">充值时间</th>
 								<th class="order-header text-center">金额</th>
 							</tr>
 						</thead>
-						<tbody>
-						<%
-							@SuppressWarnings("unchecked")
-							List<RechargeRecord> records=(List<RechargeRecord>)session.getAttribute(Configure.MANAGER_RECHARGE_SESSION);
-							if(records!=null){
-								for(RechargeRecord record:records){
-									long id = record.getId();
-									String memberId=record.getMemberId();
-									String date = record.getDate();
-									double money=record.getMoney();
-						%>
-							<tr class="point-line" onclick='getLine(this)'>
-								<td style="display:none;"><%=id %></td>
-								<td><%=memberId %></td>
-								<td><%=date %></td>
-								<td><%=money %></td>
-							</tr>
-						<%
-								}
-							}
-						%>
-						</tbody>
 					</table>
 				</div>
 			</div>
@@ -115,9 +97,29 @@
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
+	<script src="js/managerPay.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table=$('#payTable').DataTable({
+				"ajax": {
+				    url: "api/manager/rechargeData",
+				    dataSrc: 'rechargeResult',
+				    "data":function() {
+				    	var year=$("#year").val();
+				    	var month=$("#month").val();
+
+				    	arguments={
+				    		"year":year,
+				    		"month":month,
+				    	}
+				    	return arguments;
+				    }
+				  },
+		        "columns": [
+		            { data: "memberId" },
+		            { data: "money" },
+		            { data: "date" }
+		        ],
 				"bStateSave": true,
 				select : true,
 				filter : true,

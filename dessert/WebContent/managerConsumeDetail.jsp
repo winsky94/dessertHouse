@@ -27,13 +27,13 @@ pageEncoding="utf-8"%>
 	<link href="css/table_css/buttons.dataTables.min.css" rel="stylesheet" media="screen" />
 	
 	<style type="text/css">
-		#consumeTable thead tr th {
+		#consumeDetailTable thead tr th {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
 		}
 
-		#consumeTable tbody tr td {
+		#consumeDetailTable tbody tr td {
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
@@ -65,7 +65,7 @@ pageEncoding="utf-8"%>
 				</div>
 				<!-- 年份月份选择 结束 -->
 				<div class="table-container table-responsive">
-					<table id="consumeTable" class="table display dataTable">
+					<table id="consumeDetailTable" class="table display dataTable">
 						<thead>
 							<tr>
 								<th class="order-header text-center">会员编号</th>
@@ -102,10 +102,10 @@ pageEncoding="utf-8"%>
 	<script src="js/table_js/jquery.dataTables.min.js"></script>
 	<script src="js/table_js/dataTables.buttons.min.js" charset="UTF-8"></script>
 	<script src="js/table_js/dataTables.select.min.js" charset="UTF-8"></script>
-	<script src="js/managerConsume.js"></script>
+	<script src="js/managerConsumeDetail.js"></script>
 	<script>
 		$(document).ready(function() {
-			var table=$('#consumeTable').DataTable({
+			var table=$('#consumeDetailTable').DataTable({
 				"ajax": {
 				    url: "api/manager/consumeData",
 				    "data":function() {

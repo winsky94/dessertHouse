@@ -2,8 +2,10 @@ package dessert.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import dessert.VO.DessertVO;
+import dessert.VO.HotDessert;
 import dessert.entity.ConsumeRecord;
 import dessert.entity.Dessert;
 
@@ -61,4 +63,13 @@ public interface DessertService {
 	 * @param id
 	 */
 	public void cancelConsume(long id);
+
+	/**
+	 * 逐月统计产品销量
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public LinkedList<HotDessert> hotDessert(String year, String month);
 }

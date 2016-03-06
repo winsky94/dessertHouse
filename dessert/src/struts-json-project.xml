@@ -240,6 +240,11 @@
 				<param name="consumeResult">consumeResult</param>
 			</result>
 		</action>
+		<action name="hotDessert" class="managerJsonController" method="hotDessert">
+			<result type="json">
+				<param name="dessertResult">dessertResult</param>
+			</result>
+		</action>
 	</package>
 
 </struts>

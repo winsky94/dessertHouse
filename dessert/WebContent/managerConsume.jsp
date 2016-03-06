@@ -37,6 +37,7 @@ pageEncoding="utf-8"%>
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
+			cursor: pointer;
 		}
 	</style>
 

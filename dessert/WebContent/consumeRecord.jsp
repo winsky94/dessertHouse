@@ -37,6 +37,7 @@ pageEncoding="utf-8"%>
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
+			cursor: pointer;
 		}
 	</style>
 
@@ -88,15 +89,7 @@ pageEncoding="utf-8"%>
 									int num = record.getNum();
 									double discount = record.getDiscount();
 									int point = record.getPoint();
-									boolean cash=record.getCash();
-									String method = Configure.CARD_CN; 
-									if(cash){
-										method=Configure.CASH_CN;
-									}
-									String actionCN=Configure.BUY_CN;
-									if(Configure.APPOINTMENT.equals(action)){
-										actionCN=Configure.APPOINTMENT_CN;
-									}
+									String method=record.getCash();
 						%>
 							<tr class="point-line" onclick='getLine(this)'>
 								<td style="display:none;"><%=id %></td>
@@ -105,7 +98,7 @@ pageEncoding="utf-8"%>
 								<td><%=discount %></td>
 								<td><%=money %></td>
 								<td><%=point %></td>
-								<td><%=actionCN %></td>
+								<td><%=action %></td>
 								<td><%=method %></td>
 								<td>
 									<button type="button" class="btn btn-mini btn-success" role="button" onclick="cancelOrder(<%=id %>);">
@@ -150,6 +143,10 @@ pageEncoding="utf-8"%>
 				select : true,
 				filter : true,
 				ordering : true,
+				columnDefs:[{
+	                orderable:false,//禁用排序
+	                targets:[8,8]   //指定的列
+             	}],
 				language : {
 					paginate : {
 						first : '第一页',

@@ -1,6 +1,3 @@
-<%@page import="dessert.configure.Configure"%>
-<%@page import="dessert.entity.RechargeRecord"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
@@ -37,6 +34,7 @@
 			text-align: center;
 			font-size: 16px;
 			line-height: 14px;
+			cursor: pointer;
 		}
 	</style>
 

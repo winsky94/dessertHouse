@@ -2,10 +2,12 @@ package dessert.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.DessertVO;
+import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.dao.ConsumeDao;
 import dessert.dao.DessertDao;
@@ -118,6 +120,11 @@ public class DessertServiceImpl implements DessertService {
 		int point = MemberHelper.getPoint(member, payMoney);
 		result.put("discount", discount);
 		result.put("point", point);
+
+		double originalPayMoney = record.getMoney();
+		double real = originalPayMoney - discount;
+
+		record.setMoney(real);
 		record.setDiscount(discount);
 		record.setPoint(point);
 
@@ -210,5 +217,11 @@ public class DessertServiceImpl implements DessertService {
 
 		// 删除消费记录
 		consumeDao.delete(record);
+	}
+
+	@Override
+	public LinkedList<HotDessert> hotDessert(String year, String month) {
+		// TODO Auto-generated method stub
+		return dessertDao.hotDessert(year, month);
 	}
 }

@@ -15,7 +15,7 @@ public class ConsumeVO implements Serializable{
 	private String date;// 消费日期
 	private double money;// 消费金额
 	private String action;// 行为：预约：appointment or 购买：buy
-	private String cash;// 是否是现金支付，现金or从会员账户扣钱
+	private String cash;// 是否是现金支付，现金or从会员账户扣钱:现金 or 刷卡
 	private double discount;// 优惠
 	private int point;// 累积积分
 

@@ -1,7 +1,9 @@
 package dessert.dao;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
+import dessert.VO.HotDessert;
 import dessert.entity.Dessert;
 
 /**
@@ -14,11 +16,13 @@ public interface DessertDao {
 
 	public void update(Dessert dessert);
 
-	public boolean checkExist(String name,String date,String shopName);
+	public boolean checkExist(String name, String date, String shopName);
 
 	public Dessert getDessertByName(String name);
-	
+
 	public Dessert getDessertById(long id);
 
 	public ArrayList<Dessert> getAllDesserts();
+
+	public LinkedList<HotDessert> hotDessert(String year, String month);
 }

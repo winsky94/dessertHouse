@@ -2,12 +2,14 @@ package dessert.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.dao.DessertDao;
 import dessert.entity.Dessert;
@@ -39,16 +41,6 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 	@Override
 	public Dessert getDessertByName(String name) {
 		// TODO Auto-generated method stub
-		// Session session = sessionFactory.getCurrentSession();
-		// Criteria criteria = session.createCriteria(Dessert.class);
-		// criteria.add(Restrictions.eq("name", name));
-		// @SuppressWarnings("unchecked")
-		// List<Dessert> desserts = criteria.list();
-		// if (desserts == null || desserts.size() == 0) {
-		// return null;
-		// } else {
-		// return desserts.get(0);
-		// }
 		return getByColumn(Dessert.class, "name", name);
 	}
 
@@ -103,6 +95,39 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 			}
 		}
 
+		return result;
+	}
+
+	@Override
+	public LinkedList<HotDessert> hotDessert(String year, String month) {
+		// TODO Auto-generated method stub
+		LinkedList<HotDessert> result = new LinkedList<HotDessert>();
+
+		String sql = "select dessertId, name, owingTo, sum(num) as num,sum(money) as money";
+		sql += " from consumeRecord c, dessert d";
+		sql += " where Year(c.date)='" + year + "'";
+		sql += " and Month(c.date)='" + month + "'";
+		sql += " and c.dessertId=d.id group by dessertId";
+		sql += " order by num desc";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		try {
+			for (Object[] object : list) {
+				String dessertId = object[0].toString();
+				String name = object[1].toString();
+				String owingTo = object[2].toString();
+				int num = Integer.parseInt(object[3].toString());
+				double money = Double.parseDouble(object[4].toString());
+
+				HotDessert hotDessert = new HotDessert(dessertId, name,
+						owingTo, num, money);
+				result.add(hotDessert);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
 		return result;
 	}
 }

@@ -2,6 +2,7 @@ package dessert.controller.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.ConsumeStats;
 import dessert.VO.ConsumeVO;
+import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.RechargeRecord;
+import dessert.service.DessertService;
 import dessert.service.MemberService;
 import dessert.service.PlanService;
 
@@ -25,13 +28,16 @@ public class ManagerJsonController extends BaseController {
 	private PlanService planService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private DessertService dessertService;
 	private HashMap<String, Integer> ageInfo = new HashMap<String, Integer>();
 	private HashMap<String, Integer> sexInfo = new HashMap<String, Integer>();
 	private HashMap<String, Integer> addressInfo = new HashMap<String, Integer>();
 	private ArrayList<ConsumeVO> data;
 	private ArrayList<ConsumeStats> consumeResult;
-	private HashMap<String, Integer> stastics=new HashMap<String, Integer>();
-	List<RechargeRecord> rechargeResult;
+	private HashMap<String, Integer> stastics = new HashMap<String, Integer>();
+	private List<RechargeRecord> rechargeResult;
+	private LinkedList<HotDessert> dessertResult;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -93,7 +99,7 @@ public class ManagerJsonController extends BaseController {
 	}
 
 	public String consumeData() {
-		data=null;
+		data = null;
 		Map<String, String> params = getParams();
 		String year = params.get("year");
 		String month = params.get("month");
@@ -104,9 +110,9 @@ public class ManagerJsonController extends BaseController {
 		}
 		return Configure.SUCCESS;
 	}
-	
+
 	public String rechargeData() {
-		data=null;
+		data = null;
 		Map<String, String> params = getParams();
 		String year = params.get("year");
 		String month = params.get("month");
@@ -125,6 +131,17 @@ public class ManagerJsonController extends BaseController {
 		String year = params.get("year");
 		String month = params.get("month");
 		consumeResult = memberService.consumeStats(year, month);
+		return Configure.SUCCESS;
+	}
+
+	public String hotDessert() {
+		Map<String, String> params = getParams();
+		dessertResult = new LinkedList<HotDessert>();
+
+		String year = params.get("year");
+		String month = params.get("month");
+		dessertResult = dessertService.hotDessert(year, month);
+		
 		return Configure.SUCCESS;
 	}
 
@@ -190,6 +207,14 @@ public class ManagerJsonController extends BaseController {
 
 	public void setRechargeResult(List<RechargeRecord> rechargeResult) {
 		this.rechargeResult = rechargeResult;
+	}
+
+	public LinkedList<HotDessert> getDessertResult() {
+		return dessertResult;
+	}
+
+	public void setDessertResult(LinkedList<HotDessert> dessertResult) {
+		this.dessertResult = dessertResult;
 	}
 
 }

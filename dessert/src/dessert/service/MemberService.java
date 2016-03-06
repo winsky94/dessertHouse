@@ -158,4 +158,5 @@ public interface MemberService {
 	 * @return
 	 */
 	public HashMap<String, Integer> getTotalInfo(String year, String month);
+
 }

@@ -42,4 +42,14 @@ public interface MemberDao {
 	public HashMap<String, Integer> getSexData();
 
 	public HashMap<String, Integer> getAddressData();
+
+	public HashMap<String, Integer> getAgeData(String year, String month);
+
+	public HashMap<String, Integer> getSexData(String year, String month);
+
+	public HashMap<String, Integer> getAddressData(String year, String month);
+
+	public HashMap<String, Integer> getTotalInfo();
+
+	public HashMap<String, Integer> getTotalInfo(String year, String month);
 }

@@ -109,4 +109,47 @@ public interface MemberService {
 	 * @return
 	 */
 	public ArrayList<ConsumeStats> consumeStats(String year, String month);
+
+	/**
+	 * 统计注册会员年龄分布：20以下，20-30,30-40,40-50,50-60,60以上
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public HashMap<String, Integer> getAgeData(String year, String month);
+
+	/**
+	 * 统计注册会员男女比
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public HashMap<String, Integer> getSexData(String year, String month);
+
+	/**
+	 * 统计注册会员地域分布，省份为单位
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public HashMap<String, Integer> getAddressData(String year, String month);
+
+	/**
+	 * 统计当月会员注册、有效、暂停、取消等人数
+	 * 
+	 * @return
+	 */
+	public HashMap<String, Integer> getTotalInfo();
+
+	/**
+	 * 统计当月会员注册、有效、暂停、取消等人数
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public HashMap<String, Integer> getTotalInfo(String year, String month);
 }

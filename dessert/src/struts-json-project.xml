@@ -220,6 +220,11 @@
 				<param name="ageInfo">ageInfo</param>
 			</result>
 		</action>
+		<action name="totalInfo" class="managerJsonController" method="totalInfo">
+			<result type="json">
+				<param name="stastics">stastics</param>
+			</result>
+		</action>
 		<action name="consumeData" class="managerJsonController" method="consumeData">
 			<result type="json">
 				<param name="data">data</param>

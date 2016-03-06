@@ -240,18 +240,27 @@ public class MemberServiceImpl implements MemberService {
 				long id = record.getId();
 				String memberId = record.getMemberId();
 				String action = record.getAction();
+				if ("buy".equals(action)) {
+					action = "购买";
+				} else if ("appointment".equals(action)) {
+					action = "预约";
+				}
 				String date = record.getDate();
 				long dessertId = record.getDessertId();
 				double money = record.getMoney();
 				int num = record.getNum();
 				boolean cash = record.getCash();
+				String cashCN = "现金";
+				if (!cash) {
+					cashCN = "刷卡";
+				}
 				double discount = record.getDiscount();
 				int point = record.getPoint();
 				DessertVO dessert = dessertService.getDessertById(dessertId);
 				if (dessert != null) {
 					String dessertName = dessert.getName();
 					ConsumeVO vo = new ConsumeVO(id, memberId, dessertName,
-							num, date, money, action, cash, discount, point);
+							num, date, money, action, cashCN, discount, point);
 					result.add(vo);
 				}
 			}
@@ -315,5 +324,35 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<ConsumeStats> consumeStats(String year, String month) {
 		// TODO Auto-generated method stub
 		return consumeDao.consumeStats(year, month);
+	}
+
+	@Override
+	public HashMap<String, Integer> getAgeData(String year, String month) {
+		// TODO Auto-generated method stub
+		return memberDao.getAgeData(year, month);
+	}
+
+	@Override
+	public HashMap<String, Integer> getSexData(String year, String month) {
+		// TODO Auto-generated method stub
+		return memberDao.getSexData(year, month);
+	}
+
+	@Override
+	public HashMap<String, Integer> getAddressData(String year, String month) {
+		// TODO Auto-generated method stub
+		return memberDao.getAddressData(year, month);
+	}
+
+	@Override
+	public HashMap<String, Integer> getTotalInfo() {
+		// TODO Auto-generated method stub
+		return memberDao.getTotalInfo();
+	}
+
+	@Override
+	public HashMap<String, Integer> getTotalInfo(String year, String month) {
+		// TODO Auto-generated method stub
+		return memberDao.getTotalInfo(year, month);
 	}
 }

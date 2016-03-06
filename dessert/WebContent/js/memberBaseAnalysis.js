@@ -1,3 +1,32 @@
+function getTotalInfo () {
+	var year=$("#year").val();
+	var month=$("#month").val();
+
+	$.ajax({
+		url : 'api/manager/totalInfo',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			year:year,
+			month:month
+		},
+		success : function(result, textStatus) {
+			var stastics=result.stastics;
+			var totalNum=stastics["totalNum"];
+			var newNum=stastics["newNum"];
+			var validNum=stastics["validNum"];
+			var pauseNum=stastics["pauseNum"];
+			var overNum=stastics["overNum"];
+
+			$("#totalNum").html(totalNum);
+			$("#newNum").html(newNum);
+			$("#validNum").html(validNum);
+			$("#pauseNum").html(pauseNum);
+			$("#overNum").html(overNum);
+		}
+	});
+}
+
 require.config({
 	paths : {
 		echarts : 'js/eChart-2.2.7/build/dist'
@@ -5,20 +34,38 @@ require.config({
 });
 
 // 使用
-require([ 'echarts', 'echarts/chart/pie',// 饼状图
-'echarts/chart/funnel', // 漏斗图
-'echarts/chart/map' // 地图
-], function(ec) {
-	// 基于准备好的dom，初始化echarts图表
-	baseData(ec);
+require(
+	[ 
+	  	'echarts', 'echarts/chart/pie',// 饼状图
+		'echarts/chart/funnel', // 漏斗图
+		'echarts/chart/map' // 地图
+	], function(ec) {
+		// 基于准备好的dom，初始化echarts图表
+		baseData(ec);
 });
 
+function refresh(){
+	getTotalInfo();//刷新统计
+	//刷新图表，传入空，basedata中判断如果是空就ec = require('echarts');
+	baseData("");
+}
+
+
 function baseData(ec) {
+	if (ec == "") {
+        ec = require('echarts');
+    }
+	var year=$("#year").val();
+	var month=$("#month").val();
+	
 	$.ajax({
 		url : 'api/manager/baseData',
 		type : 'post',
 		dataType : 'json',
-		data : {},
+		data : {
+			year:year,
+			month:month
+		},
 		success : function(result, textStatus) {
 			var ageInfo = result.ageInfo;
 			var sexInfo = result.sexInfo;
@@ -92,7 +139,7 @@ function baseData(ec) {
 			};
 			ageData.push(arr6);
 
-			ageChart(ec, ageData, maxAge);
+			ageChart(ec, ageData, maxAge,year,month);
 
 			// 拼装sex================================================================================================
 			var n1 = sexInfo["男"];
@@ -115,7 +162,7 @@ function baseData(ec) {
 			};
 			sexData.push(arr2);
 
-			sexChart(ec, sexData, maxSex);
+			sexChart(ec, sexData, maxSex,year,month);
 
 			// 拼装address================================================================================================
 			$.each(addressInfo, function(key, value) {
@@ -128,17 +175,17 @@ function baseData(ec) {
 				};
 				addressData.push(arr);
 			});
-			addrChart(ec, addressData, maxAddr);
+			addrChart(ec, addressData, maxAddr,year,month);
 		}
 	});
 }
 
-function ageChart(ec, ageData, maxAge) {
+function ageChart(ec, ageData, maxAge,year,month) {
 	var myAgeChart = ec.init(document.getElementById('age'));
 	var optionAge = {
 		title : {
 			text : '会员年龄分布',
-			subtext : '截止当前时间',
+			subtext : '截止'+year+"年"+month+"月",
 			x : 'center'
 		},
 		tooltip : {
@@ -201,12 +248,13 @@ function ageChart(ec, ageData, maxAge) {
 	myAgeChart.setOption(optionAge);
 }
 
-function sexChart(ec, sexData, maxSex) {
+
+function sexChart(ec, sexData, maxSex,year,month) {
 	var mySexChart = ec.init(document.getElementById('sex'));
 	var optionSex = {
 		title : {
 			text : '会员性别百分比',
-			subtext : '截止当前时间',
+			subtext : '截止'+year+"年"+month+"月",
 			x : 'center'
 		},
 		tooltip : {
@@ -265,12 +313,13 @@ function sexChart(ec, sexData, maxSex) {
 	mySexChart.setOption(optionSex);
 }
 
-function addrChart(ec, addressData, maxAddr) {
+
+function addrChart(ec, addressData, maxAddr,year,month) {
 	var myAddrChart = ec.init(document.getElementById('address'));
 	var optionAddr = {
 		title : {
 			text : '会员地域分布',
-			subtext : '截止当前时间',
+			subtext : '截止'+year+"年"+month+"月",
 			x : 'center'
 		},
 		tooltip : {

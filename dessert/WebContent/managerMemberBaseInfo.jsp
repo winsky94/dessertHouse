@@ -11,10 +11,17 @@
 	<link rel="stylesheet" type="text/css" href="css/ul-li.css">
 	<link rel="stylesheet" type="text/css" href="css/table_css/sb-admin-2.css">
 	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<style type="text/css">
+		.num{
+			font-size: 20px;
+			font-weight: 800;
+		}
+	</style>
 
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
 	<script src="js/eChart-2.2.7/build/dist/echarts.js"></script>
+	<script src="js/memberBaseAnalysis.js"></script>
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -32,6 +39,23 @@
 			<!-- 左侧用户信息结束 -->
 			<!--右侧会员具体信息 -->
 			<div class="span10">
+				<!-- 年份月份选择 -->
+				<div style="margin-bottom: 20px;">
+					<%@ include file="year-month-select.jsp"%>
+				</div>
+				<div class="well">
+					<div style="font-family: 微软雅黑;">
+						截止当前，
+						本系统共有 <span id="totalNum" class="num"> </span> 名注册会员，
+						当月新注册 <span id="newNum" class="num"> </span> 人，
+						<span id="validNum" class="num"> </span> 人会员卡有效，
+						<span id="pauseNum" class="num"> </span> 人会员卡停止，
+						<span id="overNum" class="num"> </span> 人会员卡取消。
+					</div>
+				</div>
+				<script type="text/javascript">
+					getTotalInfo();
+				</script>
 				<div>
 					<!-- 年龄分布 -->
 					<div style="float: left;">
@@ -68,6 +92,5 @@
 
 	<!-- 加载js -->
 	<script src='bootstrap/js/bootstrap.js'></script>
-	<script src="js/memberBaseAnalysis.js"></script>
 </body>
 </html>

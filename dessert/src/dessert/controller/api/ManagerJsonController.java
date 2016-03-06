@@ -28,6 +28,7 @@ public class ManagerJsonController extends BaseController {
 	private HashMap<String, Integer> addressInfo = new HashMap<String, Integer>();
 	private ArrayList<ConsumeVO> data;
 	private ArrayList<ConsumeStats> consumeResult;
+	private HashMap<String, Integer> stastics=new HashMap<String, Integer>();
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -54,14 +55,42 @@ public class ManagerJsonController extends BaseController {
 	 * @return
 	 */
 	public String baseData() {
-		ageInfo = memberService.getAgeData();
-		sexInfo = memberService.getSexData();
-		addressInfo = memberService.getAddressData();
+		Map<String, String> params = getParams();
+		String year = params.get("year");
+		String month = params.get("month");
+		if (year == null || month == null) {
+			ageInfo = memberService.getAgeData();
+			sexInfo = memberService.getSexData();
+			addressInfo = memberService.getAddressData();
+		} else {
+			ageInfo = memberService.getAgeData(year, month);
+			sexInfo = memberService.getSexData(year, month);
+			addressInfo = memberService.getAddressData(year, month);
+		}
+
+		return Configure.SUCCESS;
+	}
+
+	/**
+	 * 统计会员总人数
+	 * 
+	 * @return
+	 */
+	public String totalInfo() {
+		Map<String, String> params = getParams();
+		String year = params.get("year");
+		String month = params.get("month");
+		if (year == null || month == null) {
+			stastics = memberService.getTotalInfo();
+		} else {
+			stastics = memberService.getTotalInfo(year, month);
+		}
 
 		return Configure.SUCCESS;
 	}
 
 	public String consumeData() {
+		data=null;
 		Map<String, String> params = getParams();
 		String year = params.get("year");
 		String month = params.get("month");
@@ -129,6 +158,14 @@ public class ManagerJsonController extends BaseController {
 
 	public void setConsumeResult(ArrayList<ConsumeStats> consumeResult) {
 		this.consumeResult = consumeResult;
+	}
+
+	public HashMap<String, Integer> getStastics() {
+		return stastics;
+	}
+
+	public void setStastics(HashMap<String, Integer> stastics) {
+		this.stastics = stastics;
 	}
 
 }

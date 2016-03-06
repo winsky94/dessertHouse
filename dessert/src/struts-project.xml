@@ -46,11 +46,15 @@
 		</action>
 		<!-- 消费统计 -->
 		<action name="manager_consume" class="managerMemberController" method="consume">
-			<result name="manager_consume">managerConsume.jsp</result>
+			<result name="manager_consume">managerConsumeDetail.jsp</result>
 		</action>
 		<!-- 充值统计 -->
 		<action name="manager_recharge" class="managerMemberController" method="recharge">
 			<result name="manager_recharge">managerPay.jsp</result>
+		</action>
+		<!-- 销售业绩 -->
+		<action name="manager_sale" class="managerMemberController" method="manager_sale">
+			<result name="manager_sale">managerConsume.jsp</result>
 		</action>
 	</package>
 	

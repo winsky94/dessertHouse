@@ -31,8 +31,8 @@ public class DateUtil {
 //			System.out.println(s + ":" + result.get(s));
 //		}
 		
-		System.out.println(getDateAfter(new Date(), 365));
-
+//		System.out.println(getDateAfter(new Date(), 365));
+		
 	}
 
 	/**

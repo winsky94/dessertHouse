@@ -84,6 +84,9 @@ public class Configure {
 	// 会员充值记录
 	public static final String MANAGER_RECHARGE_SESSION = "manager_recharge_session";// session
 	public static final String MANAGER_RECHARGE = "manager_recharge";// 页面跳转
+	// 店面业绩
+	public static final String MANAGER_SALE_SESSION = "manager_sale_session";// session
+	public static final String MANAGER_SALE = "manager_sale";// 页面跳转
 
 	// ==================================会员===========================================
 	public static final String DESSERT_DETAIL = "dessert_detail";
@@ -98,7 +101,7 @@ public class Configure {
 	public static final String MEMBER_OK_MES = "状态正常";
 	public static final String MEMBER_PAUSE_MES = "您的会员资格已暂停，请尽快充值以恢复";
 	public static final String MEMBER_OVER_MES = "状态停止";
-	public static final String POINT_NOT_ENOUGH= "卡积分不足，兑换失败";
+	public static final String POINT_NOT_ENOUGH = "卡积分不足，兑换失败";
 	// 会员消费行为
 	public static final String APPOINTMENT = "appointment";// 预约
 	public static final String BUY = "buy";// 购买

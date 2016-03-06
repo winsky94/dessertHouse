@@ -114,7 +114,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
-		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);;
+		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);
+		;
 		sql += " where overDate < curdate();";
 		doSql(sql);
 	}
@@ -180,6 +181,158 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 			String prov = (String) objects[0];
 			int num = Integer.parseInt(objects[1].toString());
 			result.put(prov, num);
+		}
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getAgeData(String year, String month) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+
+		String sql = "select sum(age<20) as '20以下', sum(age>=20 and age<30) as '20-30', sum(age>=30 and age<40) as '30-40', sum(age>=40 and age<50) as '40-50', sum(age>=50 and age<60) as '50-60', sum(age>=60) as '60以上' from member";
+		sql += " where Year(createAt)='" + year + "'";
+		sql += " and Month(createAt)='" + month + "'";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		try {
+			Object[] res = list.get(0);
+			int n1 = Integer.parseInt(res[0].toString());
+			int n2 = Integer.parseInt(res[1].toString());
+			int n3 = Integer.parseInt(res[2].toString());
+			int n4 = Integer.parseInt(res[3].toString());
+			int n5 = Integer.parseInt(res[4].toString());
+			int n6 = Integer.parseInt(res[5].toString());
+
+			result.put("20以下", n1);
+			result.put("20-30", n2);
+			result.put("30-40", n3);
+			result.put("40-50", n4);
+			result.put("50-60", n5);
+			result.put("60以上", n6);
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getSexData(String year, String month) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select sum(sex='男') as 男,sum(sex='女') as 女 from member";
+		sql += " where Year(createAt)='" + year + "'";
+		sql += " and Month(createAt)='" + month + "'";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+
+		try {
+			Object[] res = list.get(0);
+			int man = Integer.parseInt(res[0].toString());
+			int woman = Integer.parseInt(res[1].toString());
+			result.put("男", man);
+			result.put("女", woman);
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getAddressData(String year, String month) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select prov,count(*) from member";
+		sql += " where Year(createAt)='" + year + "'";
+		sql += " and Month(createAt)='" + month + "'";
+		sql += " group by prov";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		try {
+			for (Object[] objects : list) {
+				String prov = (String) objects[0];
+				int num = Integer.parseInt(objects[1].toString());
+				result.put(prov, num);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getTotalInfo() {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select count(*) as total ,count(*) as new,sum(status=1),sum(status=2),sum(status=3) from member;";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+
+		try {
+			Object[] res = list.get(0);
+			int totalNum = Integer.parseInt(res[0].toString());
+			int newNum = Integer.parseInt(res[1].toString());
+			int validNum = Integer.parseInt(res[2].toString());
+			int pauseNum = Integer.parseInt(res[3].toString());
+			int overNum = Integer.parseInt(res[4].toString());
+
+			result.put("totalNum", totalNum);
+			result.put("newNum", newNum);
+			result.put("validNum", validNum);
+			result.put("pauseNum", pauseNum);
+			result.put("overNum", overNum);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
+
+		return result;
+	}
+
+	@Override
+	public HashMap<String, Integer> getTotalInfo(String year, String month) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		String order = " Year(createAt)='" + year + "'";
+		order += " and Month(createAt)='" + month + "') ";
+		String sql = "select count(*),sum(" + order;
+		sql += ",sum(status=1 and" + order;
+		sql += ",sum(status=2 and" + order;
+		sql += ",sum(status=3 and" + order;
+		sql += " from member;";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+
+		try {
+			Object[] res = list.get(0);
+			int totalNum = Integer.parseInt(res[0].toString());
+			int newNum = Integer.parseInt(res[1].toString());
+			int validNum = Integer.parseInt(res[2].toString());
+			int pauseNum = Integer.parseInt(res[3].toString());
+			int overNum = Integer.parseInt(res[4].toString());
+
+			result.put("totalNum", totalNum);
+			result.put("newNum", newNum);
+			result.put("validNum", validNum);
+			result.put("pauseNum", pauseNum);
+			result.put("overNum", overNum);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
 		}
 
 		return result;

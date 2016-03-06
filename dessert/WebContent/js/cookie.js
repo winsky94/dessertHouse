@@ -211,17 +211,16 @@ function write_header_login(userName, type) {
 				<div class="navbar-inner">\
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
-						<li><a href="manager_shop_plan">计划批准</a></li>\
+						<li><a href="manager_shop_plan">计划审核</a></li>\
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">统计分析<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
 								<li><a href="managerMemberBaseInfo.jsp">会员分布</a></li>\
-								<li><a href="#">会员状态</a></li>\
-								<li class="divider"></li>\
 								<li><a href="manager_consume">消费统计</a></li>\
 								<li><a href="manager_recharge"">充值统计</a></li>\
 								<li class="divider"></li>\
-								<li><a href="#"">预留</a></li>\
+								<li><a href="manager_sale"">销售业绩</a></li>\
+								<li><a href="#"">会员喜好</a></li>\
 							</ul>\
 						</li>\
 					</ul>\

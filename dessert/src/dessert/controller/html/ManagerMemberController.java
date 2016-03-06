@@ -31,14 +31,26 @@ public class ManagerMemberController extends BaseController {
 		String sessionName = Configure.MANAGER_CONSUME_SESSION;
 		session().removeAttribute(sessionName);
 
+//		ArrayList<ConsumeVO> records = memberService.getConsumeRecord();
+//		if (records == null) {
+//		} else {
+//			session().setAttribute(sessionName, records);
+//		}
+		return Configure.MANAGER_CONSUME;
+	}
+
+	public String manager_sale() {
+		String sessionName = Configure.MANAGER_SALE_SESSION;
+		session().removeAttribute(sessionName);
+
 		ArrayList<ConsumeVO> records = memberService.getConsumeRecord();
 		if (records == null) {
 		} else {
 			session().setAttribute(sessionName, records);
 		}
-		return Configure.MANAGER_CONSUME;
+		return Configure.MANAGER_SALE;
 	}
-	
+
 	public String recharge() {
 		String sessionName = Configure.MANAGER_RECHARGE_SESSION;
 		session().removeAttribute(sessionName);
@@ -50,5 +62,4 @@ public class ManagerMemberController extends BaseController {
 		}
 		return Configure.MANAGER_RECHARGE;
 	}
-
 }

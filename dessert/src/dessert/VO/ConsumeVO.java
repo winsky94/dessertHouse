@@ -15,12 +15,12 @@ public class ConsumeVO implements Serializable{
 	private String date;// 消费日期
 	private double money;// 消费金额
 	private String action;// 行为：预约：appointment or 购买：buy
-	private boolean cash;// 是否是现金支付，现金or从会员账户扣钱
+	private String cash;// 是否是现金支付，现金or从会员账户扣钱
 	private double discount;// 优惠
 	private int point;// 累积积分
 
 	public ConsumeVO(long id, String memberId, String dessertName, int num,
-			String date, double money, String action, boolean cash,
+			String date, double money, String action, String cash,
 			double discount, int point) {
 		super();
 		this.id = id;
@@ -91,11 +91,11 @@ public class ConsumeVO implements Serializable{
 		this.action = action;
 	}
 
-	public boolean getCash() {
+	public String getCash() {
 		return cash;
 	}
 
-	public void setCash(boolean cash) {
+	public void setCash(String cash) {
 		this.cash = cash;
 	}
 

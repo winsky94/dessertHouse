@@ -221,7 +221,7 @@ function write_header_login(userName, type) {
 								<li><a href="#"">会员喜好</a></li>\
 								<li class="divider"></li>\
 								<li><a href="manager_sale">销售业绩</a></li>\
-								<li><a href="#">热卖产品</a></li>\
+								<li><a href="manager_hot_dessert">热卖产品</a></li>\
 							</ul>\
 						</li>\
 					</ul>\

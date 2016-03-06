@@ -56,6 +56,10 @@
 		<action name="manager_sale" class="managerMemberController" method="manager_sale">
 			<result name="manager_sale">managerConsume.jsp</result>
 		</action>
+		<!-- 热卖产品 -->
+		<action name="manager_hot_dessert" class="managerMemberController" method="hotDessert">
+			<result name="manager_hot_dessert">hotDessert.jsp</result>
+		</action>
 	</package>
 	
 	<!-- 会员 -->

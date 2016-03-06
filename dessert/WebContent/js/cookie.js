@@ -218,7 +218,7 @@ function write_header_login(userName, type) {
 								<li><a href="managerMemberBaseInfo.jsp">会员分布</a></li>\
 								<li><a href="manager_consume">消费统计</a></li>\
 								<li><a href="manager_recharge">充值统计</a></li>\
-								<li><a href="#"">会员喜好</a></li>\
+								<li><a href="memberFavorite.jsp">会员喜好</a></li>\
 								<li class="divider"></li>\
 								<li><a href="manager_sale">销售业绩</a></li>\
 								<li><a href="manager_hot_dessert">热卖产品</a></li>\

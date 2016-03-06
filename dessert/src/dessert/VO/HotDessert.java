@@ -8,16 +8,16 @@ package dessert.VO;
  */
 public class HotDessert {
 	private String dessertId;
-	private String dessetName;
+	private String dessertName;
 	private String owingTo;
 	private int totalNum;
 	private double totalMoney;
 
-	public HotDessert(String dessertId, String dessetName, String owingTo,
+	public HotDessert(String dessertId, String dessertName, String owingTo,
 			int totalNum, double totalMoney) {
 		super();
 		this.dessertId = dessertId;
-		this.dessetName = dessetName;
+		this.dessertName = dessertName;
 		this.owingTo = owingTo;
 		this.totalNum = totalNum;
 		this.totalMoney = totalMoney;
@@ -31,12 +31,12 @@ public class HotDessert {
 		this.dessertId = dessertId;
 	}
 
-	public String getDessetName() {
-		return dessetName;
+	public String getDessertName() {
+		return dessertName;
 	}
 
-	public void setDessetName(String dessetName) {
-		this.dessetName = dessetName;
+	public void setDessertName(String dessertName) {
+		this.dessertName = dessertName;
 	}
 
 	public String getOwingTo() {

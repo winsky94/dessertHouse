@@ -245,6 +245,11 @@
 				<param name="dessertResult">dessertResult</param>
 			</result>
 		</action>
+		<action name="memberFavorite" class="managerJsonController" method="memberFavorite">
+			<result type="json">
+				<param name="favorites">favorites</param>
+			</result>
+		</action>
 	</package>
 
 </struts>

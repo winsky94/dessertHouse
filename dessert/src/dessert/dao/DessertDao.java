@@ -3,6 +3,7 @@ package dessert.dao;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import dessert.VO.Favorite;
 import dessert.VO.HotDessert;
 import dessert.entity.Dessert;
 
@@ -25,4 +26,6 @@ public interface DessertDao {
 	public ArrayList<Dessert> getAllDesserts();
 
 	public LinkedList<HotDessert> hotDessert(String year, String month);
+
+	public ArrayList<Favorite> memberFavorite(String year, String month);
 }

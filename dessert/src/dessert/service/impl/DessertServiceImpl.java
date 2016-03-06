@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.DessertVO;
+import dessert.VO.Favorite;
 import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.dao.ConsumeDao;
@@ -223,5 +224,11 @@ public class DessertServiceImpl implements DessertService {
 	public LinkedList<HotDessert> hotDessert(String year, String month) {
 		// TODO Auto-generated method stub
 		return dessertDao.hotDessert(year, month);
+	}
+
+	@Override
+	public ArrayList<Favorite> memberFavorite(String year, String month) {
+		// TODO Auto-generated method stub
+		return dessertDao.memberFavorite(year, month);
 	}
 }

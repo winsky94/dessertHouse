@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import dessert.VO.DessertVO;
+import dessert.VO.Favorite;
 import dessert.VO.HotDessert;
 import dessert.entity.ConsumeRecord;
 import dessert.entity.Dessert;
@@ -72,4 +73,13 @@ public interface DessertService {
 	 * @return
 	 */
 	public LinkedList<HotDessert> hotDessert(String year, String month);
+
+	/**
+	 * 逐月统计会员喜好
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public ArrayList<Favorite> memberFavorite(String year, String month);
 }

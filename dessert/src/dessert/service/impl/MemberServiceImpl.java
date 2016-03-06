@@ -143,7 +143,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setOverDate(overDate);
 
 		// 会员等级
-		int rank = MemberHelper.getRank(pay_money);
+		int rank = MemberHelper.getRank(member,pay_money);
 		member.setRank(rank);
 
 		// 会员状态

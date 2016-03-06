@@ -197,6 +197,11 @@
 				<param name="message">message</param>
 			</result>
 		</action>
+		<action name="myCart" class="cartJsonController" method="myCart">
+			<result type="json">
+				<param name="message">message</param>
+			</result>
+		</action>
 	</package>
 
 	<!-- 商品管理 -->

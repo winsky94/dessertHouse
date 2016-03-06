@@ -40,6 +40,8 @@
 	<bean id="rechargeController" class="dessert.controller.html.RechargeController" />
 	<bean id="managerMemberController" class="dessert.controller.html.ManagerMemberController" />
 	<bean id="workerJsonController" class="dessert.controller.api.WorkerJsonController" />
+	<bean id="cartJsonController" class="dessert.controller.api.CartJsonController" />
+	<bean id="cartController" class="dessert.controller.html.CartController" />
 
 	<!-- service -->
 	<bean id="testService" class="dessert.service.impl.TestServiceImpl" />

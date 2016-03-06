@@ -13,9 +13,9 @@ public class MemberHelper {
 		System.out.println(getPenalty(12));
 	}
 
-	public static int getRank(double money) {
+	public static int getRank(Member member,double money) {
 		int rank = 0;
-		rank = (int) (rank + money / 200);
+		rank = member.getRank() +(int) ( money / 2000);
 		return rank;
 	}
 

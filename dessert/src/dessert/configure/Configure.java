@@ -87,6 +87,8 @@ public class Configure {
 	// 店面业绩
 	public static final String MANAGER_SALE_SESSION = "manager_sale_session";// session
 	public static final String MANAGER_SALE = "manager_sale";// 页面跳转
+	//热卖产品
+	public static final String MANAGER_HOT_DESSERT = "manager_hot_dessert";// 页面跳转
 
 	// ==================================会员===========================================
 	public static final String DESSERT_DETAIL = "dessert_detail";

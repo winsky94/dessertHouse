@@ -233,6 +233,14 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public List<RechargeRecord> getRechargeRecord(String year, String month) {
+		// TODO Auto-generated method stub
+		List<RechargeRecord> result = new ArrayList<RechargeRecord>();
+		result = rechargeDao.getRechargeRecord(year, month);
+		return result;
+	}
+
 	private ArrayList<ConsumeVO> recordToVO(List<ConsumeRecord> records) {
 		ArrayList<ConsumeVO> result = new ArrayList<ConsumeVO>();
 		if (records != null) {

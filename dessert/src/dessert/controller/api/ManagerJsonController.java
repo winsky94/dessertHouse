@@ -2,6 +2,7 @@ package dessert.controller.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import dessert.VO.ConsumeStats;
 import dessert.VO.ConsumeVO;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
+import dessert.entity.RechargeRecord;
 import dessert.service.MemberService;
 import dessert.service.PlanService;
 
@@ -29,6 +31,7 @@ public class ManagerJsonController extends BaseController {
 	private ArrayList<ConsumeVO> data;
 	private ArrayList<ConsumeStats> consumeResult;
 	private HashMap<String, Integer> stastics=new HashMap<String, Integer>();
+	List<RechargeRecord> rechargeResult;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -101,6 +104,19 @@ public class ManagerJsonController extends BaseController {
 		}
 		return Configure.SUCCESS;
 	}
+	
+	public String rechargeData() {
+		data=null;
+		Map<String, String> params = getParams();
+		String year = params.get("year");
+		String month = params.get("month");
+		if (year == null || month == null) {
+			rechargeResult = memberService.getRechargeRecord();
+		} else {
+			rechargeResult = memberService.getRechargeRecord(year, month);
+		}
+		return Configure.SUCCESS;
+	}
 
 	public String consumeStats() {
 		Map<String, String> params = getParams();
@@ -166,6 +182,14 @@ public class ManagerJsonController extends BaseController {
 
 	public void setStastics(HashMap<String, Integer> stastics) {
 		this.stastics = stastics;
+	}
+
+	public List<RechargeRecord> getRechargeResult() {
+		return rechargeResult;
+	}
+
+	public void setRechargeResult(List<RechargeRecord> rechargeResult) {
+		this.rechargeResult = rechargeResult;
 	}
 
 }

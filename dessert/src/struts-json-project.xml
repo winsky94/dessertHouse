@@ -230,6 +230,11 @@
 				<param name="data">data</param>
 			</result>
 		</action>
+		<action name="rechargeData" class="managerJsonController" method="rechargeData">
+			<result type="json">
+				<param name="rechargeResult">rechargeResult</param>
+			</result>
+		</action>
 		<action name="consumeStats" class="managerJsonController" method="consumeStats">
 			<result type="json">
 				<param name="consumeResult">consumeResult</param>

@@ -24,8 +24,9 @@ function del(index){
 	});
 }
 
-function buy(index){
+function buy(index,many){
 	var dessertId = $("#dessertId"+index).val();
+	alert(dessertId);
 	var num=$("#quantity"+index).val();
 	var memberName=get_cookie("userName");
 	
@@ -45,36 +46,40 @@ function buy(index){
 			} else {
 				var message = result.message;
 				if (message == "success") {
-					var discount = result.discount;
-					var point = result.point;
-					var txt = '\
-				<!-- Modal -->\
-				<div id="consumeResultModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">\
-					<div class="modal-header">\
-						<h3>消费结果提示</h3>\
-					</div>\
-					<div class="modal-body">\
-						<div class="center">\
-							恭喜您，您此次消费：\
-							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'
-							+ discount
-							+ '\
-							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'
-							+ point
-							+ '\
+					if(many=="many"){
+						alert("购买成功");
+					}else{
+						var discount = result.discount;
+						var point = result.point;
+						var txt = '\
+					<!-- Modal -->\
+					<div id="consumeResultModel" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">\
+						<div class="modal-header">\
+							<h3>消费结果提示</h3>\
+						</div>\
+						<div class="modal-body">\
+							<div class="center">\
+								恭喜您，您此次消费：\
+								<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'
+								+ discount
+								+ '\
+								<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'
+								+ point
+								+ '\
+							</div>\
+						</div>\
+						<div class="modal-footer">\
+							<div style="text-align:center">\
+								<button class="btn btn-primary" onclick="hide()">确认</button>\
+							</div>\
+					\
 						</div>\
 					</div>\
-					<div class="modal-footer">\
-						<div style="text-align:center">\
-							<button class="btn btn-primary" onclick="hide()">确认</button>\
-						</div>\
-				\
-					</div>\
-				</div>\
-			';
+				';
 
-					$("#consume_result").html(txt);
-					$("#consumeResultModel").modal('show');
+						$("#consume_result").html(txt);
+						$("#consumeResultModel").modal('show');
+					}
 				} else {
 					alert(message);
 				}
@@ -85,6 +90,7 @@ function buy(index){
 
 function hide(){
 	$("#consumeResultModel").modal('hide');
+	window.location.reload();
 }
 
 function addNum (index) {
@@ -150,4 +156,30 @@ function addListener(index){
 		var totalMoney= parseFloat(price)*parseInt(original);
 		$("#totalMoney"+index).html(parseFloat(totalMoney));
 	})
+}
+
+function clearAll() {
+	
+}
+
+function deleteSelected() {
+	
+}
+
+function buySelected() {
+	var es=getAllSelected();
+	for(var i=0;i<es.length;i++){
+		buy(es[i],'many');
+	}
+}
+
+function getAllSelected(){
+	var arr=new Array(); 
+	var r=document.getElementsByName("checkbox");  
+    for(var i=0;i<r.length;i++){
+         if(r[i].checked){
+        	 arr.push(r[i].value);
+       }
+    } 
+	return arr;
 }

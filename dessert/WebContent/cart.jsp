@@ -32,6 +32,19 @@
 	</script>
 	<!-- 导航栏结束 -->
 
+	<%
+	String sessionName = Configure.Member_CART_SESSION;
+	Cart myCart = (Cart) request.getSession().getAttribute(sessionName);
+	ArrayList<CartDessert> carts = new ArrayList<CartDessert>();
+	if (myCart != null) {
+		carts = myCart.getMyCart();
+	}else{
+		ServletContext sc = getServletContext();
+		RequestDispatcher rd = null;
+		rd = sc.getRequestDispatcher("/EmptyCart.jsp"); //定向的页面
+		rd.forward(request, response);
+	}
+	%>
 	<!-- 正文内容 -->
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -40,20 +53,26 @@
 			<!-- 左侧用户信息结束 -->
 			<!--右侧购物车具体信息 -->
 			<div class="span10">
+				<!-- 操作 -->
+				<div style="margin-bottom: 20px;">
+					<h4 style="display: inline;">会员详情</h4>
+					<div style="display: inline;">
+						<a class="btn pull-right margin_button" href="#"
+							onclick="clearAll();"> <i class="icon-trash"></i>&nbsp;清空
+						</a> 
+						<a class="btn pull-right margin_button" href="#"
+							onclick="deleteSelected();"> <i class="icon-remove"></i>&nbsp;删除
+						</a> 
+						<a class="btn pull-right margin_button" href="#"
+							onclick="buySelected();"> <i class=" icon-folder-open"></i>&nbsp;购买
+						</a> 
+					</div>
+				</div>
+				<div class="dotted_line" style="margin-bottom: 10px;"></div>
+				<!-- 操作  结束-->
 				<div id="cart" class="container-fluid">
 					<%
-						String sessionName = Configure.Member_CART_SESSION;
-						Cart myCart = (Cart) request.getSession().getAttribute(sessionName);
-						ArrayList<CartDessert> carts = new ArrayList<CartDessert>();
-						if (myCart != null) {
-							carts = myCart.getMyCart();
-						}else{
-							ServletContext sc = getServletContext();
-							RequestDispatcher rd = null;
-							rd = sc.getRequestDispatcher("EmptyCart.jsp"); //定向的页面
-							rd.forward(request, response);
-						}
-						if(carts!=null){
+						if(carts!=null&&carts.size()!=0){
 							int i=0;
 							for(CartDessert cartDessert:carts){
 								i++;
@@ -71,7 +90,7 @@
 					店铺： <span id="shopName" class="price_word<%=i %>"><%=owingTo %></span>
 					<div class="well row-fluid row" style="margin-top: 10px;">
 						<label class="checkbox inline pull-left">
-							<input type="checkbox">
+							<input type="checkbox" name="checkbox" value="<%=i %>">
 						</label>
 						<div class="span1 inline pull-left">
 							<img src="<%=path %>">
@@ -121,7 +140,7 @@
 						}else{
 							ServletContext sc = getServletContext();
 							RequestDispatcher rd = null;
-							rd = sc.getRequestDispatcher("EmptyCart.jsp"); //定向的页面
+							rd = sc.getRequestDispatcher("/EmptyCart.jsp"); //定向的页面
 							rd.forward(request, response);
 						}
 					%>

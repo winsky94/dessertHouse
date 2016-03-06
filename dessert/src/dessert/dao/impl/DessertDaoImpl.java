@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import dessert.VO.Favorite;
 import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.dao.DessertDao;
@@ -128,6 +129,41 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 			// TODO: handle exception
 		} finally {
 		}
+		return result;
+	}
+
+	@Override
+	public ArrayList<Favorite> memberFavorite(String year, String month) {
+		// TODO Auto-generated method stub
+		ArrayList<Favorite> result = new ArrayList<Favorite>();
+
+		String sql = "select m.memberId,m.name,coalesce(d.id,'-'),coalesce(d.name,'-'),coalesce(owingTo,'-'),coalesce(t2.num,0),coalesce(t2.money,0) from member m left join (select t.memberId,t.dessertId,max(t.total) as num,t.money from (select memberId,c1.dessertId,sum(c1.num) as total,sum(money) as money from consumeRecord c1 where Year(c1.date)='"
+				+ year
+				+ "' and Month(c1.date)='"
+				+ month
+				+ "' group by dessertId,memberId order by sum(c1.num) desc) as t group by memberId) as t2 on m.memberId=t2.memberId left join dessert d on t2.dessertId=d.id;";
+
+		@SuppressWarnings("unchecked")
+		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
+		try {
+			for (Object[] object : list) {
+				String memberId = object[0].toString();
+				String memberName = object[1].toString();
+				String dessertId = object[2].toString();
+				String dessertName = object[3].toString();
+				String owingTo = object[4].toString();
+				int num = Integer.parseInt(object[5].toString());
+				double money = Double.parseDouble(object[6].toString());
+
+				Favorite favorite = new Favorite(memberId, memberName,
+						dessertId, dessertName, owingTo, num, money);
+				result.add(favorite);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+		}
+
 		return result;
 	}
 }

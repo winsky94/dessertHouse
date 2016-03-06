@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dessert.VO.ConsumeStats;
 import dessert.VO.ConsumeVO;
+import dessert.VO.Favorite;
 import dessert.VO.HotDessert;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
@@ -38,6 +39,7 @@ public class ManagerJsonController extends BaseController {
 	private HashMap<String, Integer> stastics = new HashMap<String, Integer>();
 	private List<RechargeRecord> rechargeResult;
 	private LinkedList<HotDessert> dessertResult;
+	private ArrayList<Favorite> favorites;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -141,7 +143,18 @@ public class ManagerJsonController extends BaseController {
 		String year = params.get("year");
 		String month = params.get("month");
 		dessertResult = dessertService.hotDessert(year, month);
-		
+
+		return Configure.SUCCESS;
+	}
+
+	public String memberFavorite() {
+		Map<String, String> params = getParams();
+		favorites = new ArrayList<Favorite>();
+
+		String year = params.get("year");
+		String month = params.get("month");
+		favorites = dessertService.memberFavorite(year, month);
+
 		return Configure.SUCCESS;
 	}
 
@@ -215,6 +228,14 @@ public class ManagerJsonController extends BaseController {
 
 	public void setDessertResult(LinkedList<HotDessert> dessertResult) {
 		this.dessertResult = dessertResult;
+	}
+
+	public ArrayList<Favorite> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(ArrayList<Favorite> favorites) {
+		this.favorites = favorites;
 	}
 
 }

@@ -160,7 +160,7 @@
 							<!-- 左侧用户信息 -->
 							<div class="span1">
 								<img src="image/2.jpg">
-								<div class="center" style="margin-top: 10px;">
+								<div class="" style="margin-top: 10px;">
 									<div class="price_word center">捕风</div>
 									<div class="price_word center">2016.03.01</div>
 								</div>

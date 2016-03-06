@@ -210,6 +210,7 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 
 		List<Date> dates = DateUtil.getCurrentWeek(DateUtil.getDate(date));
 		String validSunday = DateUtil.getFormattedDate(dates.get(0));
+
 		// 直接联表查询得了，真是的
 		String hql = "select d.name, d.path, d.price, d.stockNum, d.id";
 		hql += " from plan p, planDetail pd, dessert d";
@@ -218,6 +219,7 @@ public class PlanDaoImpl extends BaseDaoImpl<Plan> implements PlanDao {
 		hql += " and p.validSunday='" + validSunday + "'";
 		hql += " and pd.weekDay='" + weekDay + "'";
 		hql += " and p.id=pd.planId and pd.dessertName=d.name";
+		hql += " and d.date='" + date + "'";
 		List<?> lists = doHqlQuery(hql);
 		if (lists != null) {
 			for (int i = 0; i < lists.size(); i++) {

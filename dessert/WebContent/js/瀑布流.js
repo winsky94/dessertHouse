@@ -11,7 +11,7 @@ window.onload = function () {
                 //创建图片节点
                 var cContent = document.createElement("div");
                 cContent.className = "box";
-                // cParent.appendChild(cContent);
+                cParent.appendChild(cContent);
 
                 var boxImg = document.createElement("div");
                 boxImg.className = "box_img";
@@ -37,7 +37,11 @@ function checkFlag(parent, content) {
     var cContent = getChildElemet(cParent, content);
 
     //最后一张图片距离顶部的高度，通过offsetTop得到
-    var lastContentHeight = cContent[cContent.length - 1].offsetTop;
+    var lastContentHeight=0;
+    if(cContent[cContent.length - 1]!=undefined){
+        lastContentHeight = cContent[cContent.length - 1].offsetTop;
+    }
+    
     //滚动条高度
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     //当前页面的高度

@@ -1,5 +1,6 @@
 package dessert.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.Map;
 public class DateUtil {
 
 	public static void main(String[] args) {
+		System.out.println(getFrontBackStrDate("2016-03-30",-1));
+		
 		// 定义输出日期格式
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//
@@ -25,14 +28,39 @@ public class DateUtil {
 		// System.out.println(sdf.format(date));
 		// }
 
-//		Map<String, Week> result = new LinkedHashMap<String, Week>();
-//		result = getNextSevenDay();
-//		for (String s : result.keySet()) {
-//			System.out.println(s + ":" + result.get(s));
-//		}
-		
-//		System.out.println(getDateAfter(new Date(), 365));
-		
+		// Map<String, Week> result = new LinkedHashMap<String, Week>();
+		// result = getNextSevenDay();
+		// for (String s : result.keySet()) {
+		// System.out.println(s + ":" + result.get(s));
+		// }
+
+		// System.out.println(getDateAfter(new Date(), 365));
+
+	}
+
+	/**
+	 * 
+	 * 方法描述：取得当前日期的上月或下月日期 ,amount=-1为上月日期，amount=1为下月日期；创建人：jya
+	 * 
+	 * @param s_DateStr
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getFrontBackStrDate(String strDate, int amount){
+		if (null == strDate) {
+			return null;
+		}
+		try {
+
+			DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar c = Calendar.getInstance();
+			c.setTime(fmt.parse(strDate));
+			c.add(Calendar.MONTH, amount);
+			return fmt.format(c.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package dessert.dao.impl;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -109,13 +110,13 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		String sql = "update member";
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.pause);
 		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
-		sql += " where validDate < curdate();";
+		sql += " where validDate < curdate()";
+		sql+=" and status=+"+MemberStatus.getStatusInt(MemberStatus.OK)+";";
 		doSql(sql);
-
+		
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);
-		;
 		sql += " where overDate < curdate();";
 		doSql(sql);
 	}
@@ -335,6 +336,14 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		} finally {
 		}
 
+		return result;
+	}
+
+	@Override
+	public LinkedList<HashMap<String, Integer>> getMemberStatus(String date) {
+		// TODO Auto-generated method stub
+		LinkedList<HashMap<String, Integer>> result = new LinkedList<HashMap<String,Integer>>();
+		
 		return result;
 	}
 }

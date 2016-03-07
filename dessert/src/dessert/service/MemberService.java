@@ -2,6 +2,7 @@ package dessert.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import dessert.VO.ConsumeStats;
@@ -158,5 +159,8 @@ public interface MemberService {
 	 * @return
 	 */
 	public HashMap<String, Integer> getTotalInfo(String year, String month);
+
+	public LinkedList<HashMap<String, Integer>> getMemberStatus(String year,
+			String month);
 
 }

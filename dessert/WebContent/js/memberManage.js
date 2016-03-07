@@ -451,9 +451,14 @@ function showInfo() {
 				</div> \
 				<div class="table-row"> \
 					<div class="property">有效期：</div> \
-					<div class="value" id="validDate">'
-			+ validDate
-			+ '</div> \
+					<div class="value" id="validDate">';
+		if(status=="pause"){
+			txt+="已暂停";
+		}else{
+			txt+= validDate;
+		}
+	
+			txt+= '</div> \
 				</div> \
 			</div>\
 			<!-- 会员左侧信息 结束 -->\

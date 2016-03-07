@@ -26,15 +26,16 @@ public class ChangeStateTask {
 	 */
 	@Scheduled(cron = "0 0 0 * * ?")
 	public void doJob() {
-		memberService.deactivate();
-		System.out.println("check all members and update status");
+//		memberService.deactivate();
+//		System.out.println("check all members and update status");
 	}
 
 	/**
 	 * 固定每分钟执行一次 ChangeStateTask.doJob1()
 	 */
-	@Scheduled(fixedRate = 60 * 1000)
+	@Scheduled(fixedRate = 1 * 1000)
 	public void doJob1() {
+		memberService.deactivate();
 		// System.out.println(new Date() + "-----------------doJob1");
 	}
 

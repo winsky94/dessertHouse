@@ -40,6 +40,7 @@ public class PlanController extends BaseController {
 
 		} else if ("view".equals(action) || "update".equals(action)
 				|| "approve".equals(action) || "approveView".equals(action)) {
+			//因为这儿老是从数据库获取，所以加不进来！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 			PlanVO planVO = planService.getPlans(shopName, false);
 			if (planVO == null) {
 				plan = null;

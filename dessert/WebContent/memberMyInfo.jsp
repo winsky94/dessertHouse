@@ -41,7 +41,7 @@
 
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/cookie.js"></script>
-<script src="js/memberManage.js"></script>
+<script src="js/memberMyInfo.js"></script>
 </head>
 <body>
 	<!-- 顶部导航栏 -->

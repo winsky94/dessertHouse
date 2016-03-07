@@ -1,5 +1,5 @@
 function getLine(tr) {
-	var show_day = new Array('Sunday', 'Monday', 'TuesDay', 'Wednesday',
+	var show_day = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday',
 			'Thursday', 'Friday', 'Saturday');
 	var time = new Date();
 	var day = time.getDay();
@@ -10,7 +10,7 @@ function getLine(tr) {
 	cells = tr.cells;
 	var name = cells[1].innerHTML;
 	var url = "shop_dessert?shopName=" + name + "&weekDay=" + weekDay
-			+ "&date=" + date+"&type=member";
+			+ "&date=" + date+"&type=member"+"&from=table";
 	window.location.href = url;
 }
 

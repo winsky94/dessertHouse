@@ -213,15 +213,21 @@ function write_header_login(userName, type) {
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
 						<li><a href="manager_shop_plan">计划审核</a></li>\
 						<li class="dropdown">\
-							<a href="#" class="dropdown-toggle"data-toggle="dropdown">统计分析<b class="caret"></b></a>\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">会员统计<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\
 								<li><a href="managerMemberBaseInfo.jsp">会员分布</a></li>\
+								<li class="divider"></li>\
 								<li><a href="manager_consume">消费统计</a></li>\
 								<li><a href="manager_recharge">充值统计</a></li>\
-								<li><a href="memberFavorite.jsp">会员喜好</a></li>\
-								<li class="divider"></li>\
+							</ul>\
+						</li>\
+						<li class="dropdown">\
+							<a href="#" class="dropdown-toggle"data-toggle="dropdown">业绩分析<b class="caret"></b></a>\
+							<ul class="dropdown-menu">\
 								<li><a href="manager_sale">销售业绩</a></li>\
 								<li><a href="manager_hot_dessert">热卖产品</a></li>\
+								<li class="divider"></li>\
+								<li><a href="memberFavorite.jsp">会员喜好</a></li>\
 							</ul>\
 						</li>\
 					</ul>\

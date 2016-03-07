@@ -67,7 +67,7 @@ public class WaitressJsonController extends BaseController {
 	public String editWaitress() {
 		Map<String, String> params = getParams();
 
-		Worker worker = new Worker();
+		Worker worker = workerService.getWorkerById(Long.parseLong(params.get("wid")));
 		worker.setId(Long.parseLong(params.get("wid")));
 		worker.setWorkerId(params.get("workerId"));
 		worker.setType(EnumUtil.getEnuByName(UserType.class, params.get("type")));

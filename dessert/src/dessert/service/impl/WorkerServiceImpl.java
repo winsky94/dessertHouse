@@ -117,4 +117,10 @@ public class WorkerServiceImpl implements WorkerService {
 		return workerDao.changePW(workerId,originalPW,newPW);
 	}
 
+	@Override
+	public Worker getWorkerById(long id) {
+		// TODO Auto-generated method stub
+		return workerDao.getWorkerById(id);
+	}
+
 }

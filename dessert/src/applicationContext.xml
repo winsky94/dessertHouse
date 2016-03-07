@@ -19,6 +19,7 @@
 	<!-- controller -->
 	<bean id="testController" class="dessert.controller.html.TestController"
 		scope="prototype" />
+	<bean id="dessertController" class="dessert.controller.html.DessertController" />
 	<bean id="testJsonController" class="dessert.controller.api.TestJsonController" />
 	<bean id="signUpJsonController" class="dessert.controller.api.SignUpJsonController" />
 	<bean id="shopController" class="dessert.controller.html.ShopController" />

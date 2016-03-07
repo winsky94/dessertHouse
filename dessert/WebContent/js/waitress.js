@@ -258,7 +258,9 @@ function calChange(){
 	if(change>=0){
 		$("#change").val(change);
 	}else{
-		alert("付款额不足以支付商品费用");
+		if(pay!=""){
+			alert("付款额不足以支付商品费用");
+		}
 	}
 	
 }

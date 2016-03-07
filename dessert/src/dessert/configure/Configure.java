@@ -126,5 +126,10 @@ public class Configure {
 	public static final String Member_CART_SESSION = "member_cart_session";// session
 	public static final String Member_CART = "member_cart";// 页面跳转
 	public static final String Member_EMPTY_CART = "member_empty_cart";// 页面跳转
+	// 浏览商品
+	public static final String All_DESSERT_SESSION = "all_dessert_session";
+	public static final String All_DESSERT = "all_dessert";
+	public static final String SHOP_DESSERT_SESSION = "shop_dessert_session";
+	public static final String SHOP_DESSERT = "shop_dessert";
 
 }

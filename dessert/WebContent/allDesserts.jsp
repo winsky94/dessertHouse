@@ -56,7 +56,7 @@ pageEncoding="utf-8"%>
 						<div class="box">
 							<input id="shopName" type="hidden" value="'+shopName+'">
 							<div class="box_img">
-								<a href="dessert_detail?shopName=<%=shopName %>&id=<%=id %>" target="_self">
+								<a href="dessert_detail?shopName=<%=shopName %>&id=<%=id %>&type=member" target="_self">
 									<img src="<%=path %>">
 									<br>
 									<div class="text_center">

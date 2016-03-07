@@ -109,6 +109,7 @@ function addNum (index) {
 		$("#quantity"+index).val(original);
 		$("#totalMoney"+index).html(parseFloat(totalMoney));
 	}
+	getClick();
 }
 
 function delNum (index) {
@@ -124,6 +125,7 @@ function delNum (index) {
 
 	$("#quantity"+index).val(original);
 	$("#totalMoney"+index).html(parseFloat(totalMoney));
+	getClick();
 }
 
 function addListener(index){
@@ -133,6 +135,7 @@ function addListener(index){
 	    	var temp_amount=c.val().replace(/[^\d]/g,'');
 	    	$(this).val(temp_amount);
 	    }
+	    getClick();
 	})
 
 	$("#quantity"+index).blur(function(){ 
@@ -152,7 +155,9 @@ function addListener(index){
 		var price = $("#price"+index).html();
 		var totalMoney= parseFloat(price)*parseInt(original);
 		$("#totalMoney"+index).html(parseFloat(totalMoney));
+		getClick();
 	})
+	
 }
 
 function clearAll() {
@@ -191,4 +196,25 @@ function getAllSelected(){
     result.push(actionArr);
     
 	return result;
+}
+
+function selectAll(){
+	var r=document.getElementsByName("checkbox");  
+    for(var i=0;i<r.length;i++){
+    	r[i].checked=true;
+    }
+    getClick();
+}
+
+function getClick(){
+	var allMoney=0;
+	var es=getAllSelected();
+	var index=es[0];
+	for(var i=0;i<index.length;i++){
+		var num=$("#quantity"+index[i]).val();
+		var price =$("#price"+index[i]).html();
+		allMoney+=parseInt(num)*parseFloat(price);
+	}
+	
+	$("#allMoney").html(allMoney);
 }

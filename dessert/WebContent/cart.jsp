@@ -56,10 +56,17 @@
 				<!-- 操作 -->
 				<div style="margin-bottom: 20px;">
 					<h4 style="display: inline;">购物车详情</h4>
+					<div style="display: inline;margin-left: 20px;">
+						<span class="price_word">购物车总额：</span>
+						<span id="allMoney" class="price_num" style="margin-left: 10px;">0</span>元
+					</div>
 					<div style="display: inline;">
 						<a class="btn pull-right margin_button" href="#"
 							onclick="clearAll();"> <i class="icon-trash"></i>&nbsp;清空
 						</a> 
+						<a class="btn pull-right margin_button" href="#"
+							onclick="selectAll();"> <i class="icon-check"></i>&nbsp;全选
+						</a>
 						<a class="btn pull-right margin_button" href="#"
 							onclick="deleteSelected();"> <i class="icon-remove"></i>&nbsp;删除
 						</a> 
@@ -90,7 +97,7 @@
 					店铺： <span id="shopName" class="price_word<%=i %>"><%=owingTo %></span>
 					<div class="well row-fluid row" style="margin-top: 10px;">
 						<label class="checkbox inline pull-left">
-							<input type="checkbox" name="checkbox" value="<%=i %>">
+							<input type="checkbox" name="checkbox" value="<%=i %>" onchange="getClick()">
 						</label>
 						<div class="span1 inline pull-left">
 							<img src="<%=path %>">

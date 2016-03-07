@@ -152,6 +152,7 @@ public class ManagerJsonController extends BaseController {
 
 		String year = params.get("year");
 		String month = params.get("month");
+		
 		dessertResult = dessertService.hotDessert(year, month);
 
 		return Configure.SUCCESS;

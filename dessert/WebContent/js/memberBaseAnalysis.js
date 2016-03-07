@@ -1,6 +1,9 @@
 function getTotalInfo () {
 	var year=$("#year").val();
 	var month=$("#month").val();
+	if(year==null){
+		year=2016;
+	}
 
 	$.ajax({
 		url : 'api/manager/totalInfo',
@@ -14,12 +17,14 @@ function getTotalInfo () {
 			var stastics=result.stastics;
 			var totalNum=stastics["totalNum"];
 			var newNum=stastics["newNum"];
+			var initNum=stastics["initNum"];
 			var validNum=stastics["validNum"];
 			var pauseNum=stastics["pauseNum"];
 			var overNum=stastics["overNum"];
 
 			$("#totalNum").html(totalNum);
 			$("#newNum").html(newNum);
+			$("#initNum").html(initNum);
 			$("#validNum").html(validNum);
 			$("#pauseNum").html(pauseNum);
 			$("#overNum").html(overNum);

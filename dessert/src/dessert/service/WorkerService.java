@@ -37,4 +37,6 @@ public interface WorkerService {
 	 * @return
 	 */
 	public String changePW(String workerId, String originalPW, String newPW);
+
+	public Worker getWorkerById(long id);
 }

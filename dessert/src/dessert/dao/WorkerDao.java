@@ -27,4 +27,6 @@ public interface WorkerDao {
 	public Worker getWorkerByWorkerId(String workerId);
 
 	public String changePW(String workerId, String originalPW, String newPW);
+
+	public Worker getWorkerById(long id);
 }

@@ -110,13 +110,19 @@ public class WorkerDaoImpl extends BaseDaoImpl<Worker> implements WorkerDao {
 		// 把原密码解密
 		DesUtils des = new DesUtils(Configure.KEY);// 自定义密钥
 		String password = des.decrypt(worker.getPassword());
-		if(!password.equals(originalPW)){
+		if (!password.equals(originalPW)) {
 			return Configure.WRONG_ORIGINAL_PW;
-		}else{
+		} else {
 			// 加密新密码
 			worker.setPassword(des.encrypt(newPW));
 			return Configure.SUCCESS;
 		}
+	}
+
+	@Override
+	public Worker getWorkerById(long id) {
+		// TODO Auto-generated method stub
+		return getByColumn(Worker.class, "id", id);
 	}
 
 }

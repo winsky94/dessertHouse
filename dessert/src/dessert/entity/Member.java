@@ -32,7 +32,6 @@ public class Member {
 	private double validMoney;// 会员卡上余额
 	private String validDate;// 会员有效期
 	private String overDate;// 需要停止会员记录的时间，暂停1年后未支付，会员记录停止
-	private String overCreateAt;// 什么时候停止的
 	private String prov;// 省
 	private String city;// 市
 	private String dist;// 县
@@ -136,14 +135,6 @@ public class Member {
 
 	public int getPoint() {
 		return point;
-	}
-
-	public String getOverCreateAt() {
-		return overCreateAt;
-	}
-
-	public void setOverCreateAt(String overCreateAt) {
-		this.overCreateAt = overCreateAt;
 	}
 
 	public void setPoint(int point) {

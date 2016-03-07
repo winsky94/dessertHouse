@@ -471,6 +471,12 @@ function showInfo() {
 			+ '</div> \
 				</div>\
 				<div class="table-row"> \
+					<div class="property">编　号：</div> \
+					<div class="value" id="age">'
+			+ memberId
+			+ '</div> \
+				</div> \
+				<div class="table-row"> \
 					<div class="property">年　龄：</div> \
 					<div class="value" id="age">'
 			+ age
@@ -492,12 +498,6 @@ function showInfo() {
 					<div class="property">家庭住址：</div> \
 					<div class="value" id="address">'
 			+ prov+'-'+city+'-'+dist
-			+ '</div> \
-				</div> \
-				<div class="table-row"> \
-					<div class="property">创建日期：</div> \
-					<div class="value" id="createAt">'
-			+ createAt
 			+ '</div> \
 				</div> \
 			</div>\

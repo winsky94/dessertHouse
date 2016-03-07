@@ -12,7 +12,6 @@ import dessert.configure.Configure;
 import dessert.dao.MemberDao;
 import dessert.entity.Member;
 import dessert.util.CheckError;
-import dessert.util.DateUtil;
 import dessert.util.MemberStatus;
 import dessert.util.TimeUtil;
 import dessert.util.UserType;
@@ -128,7 +127,6 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);
-		sql += " ,overCreateAt=curdate()";
 		sql += " where overDate < curdate();";
 		doSql(sql);
 	}
@@ -138,7 +136,6 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		Member member = getByColumn(Member.class, "memberId", memberId);
 		member.setStatus(MemberStatus.over);
-		member.setOverCreateAt(DateUtil.getToday());
 		update(member);
 	}
 

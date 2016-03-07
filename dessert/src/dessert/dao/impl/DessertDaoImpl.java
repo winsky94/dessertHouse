@@ -109,7 +109,7 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 		sql += " where Year(c.date)='" + year + "'";
 		sql += " and Month(c.date)='" + month + "'";
 		sql += " and c.dessertId=d.id group by dessertId";
-		sql += " order by num desc";
+		sql += " order by num desc, money desc";
 
 		@SuppressWarnings("unchecked")
 		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);

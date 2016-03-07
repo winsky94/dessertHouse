@@ -24,9 +24,8 @@ function del(index){
 	});
 }
 
-function buy(index,many){
+function buy(index,many,action){
 	var dessertId = $("#dessertId"+index).val();
-	alert(dessertId);
 	var num=$("#quantity"+index).val();
 	var memberName=get_cookie("userName");
 	
@@ -38,7 +37,7 @@ function buy(index,many){
 			dessertId : dessertId,
 			num: num,
 			memberName:memberName,
-			action : 'buy'
+			action : action
 		},
 		success : function(result, textStatus) {
 			if (result.length == 0) {
@@ -46,9 +45,7 @@ function buy(index,many){
 			} else {
 				var message = result.message;
 				if (message == "success") {
-					if(many=="many"){
-						alert("购买成功");
-					}else{
+					if(many!="many"){
 						var discount = result.discount;
 						var point = result.point;
 						var txt = '\
@@ -168,18 +165,30 @@ function deleteSelected() {
 
 function buySelected() {
 	var es=getAllSelected();
-	for(var i=0;i<es.length;i++){
-		buy(es[i],'many');
+	var arr=es[0];
+	var actionArr=es[1];
+	for(var i=0;i<arr.length;i++){
+		buy(arr[i],'many',actionArr[i]);
 	}
+	alert("您已成功下单~~~");
+	window.location.reload();
 }
 
 function getAllSelected(){
-	var arr=new Array(); 
+	var arr=new Array();
+	var actionArr=new Array();
+	
 	var r=document.getElementsByName("checkbox");  
     for(var i=0;i<r.length;i++){
          if(r[i].checked){
-        	 arr.push(r[i].value);
+        	 var a=r[i].value
+        	 arr.push(a);
+        	 actionArr.push($("#action"+a).val());
        }
     } 
-	return arr;
+    var result =new Array();
+    result.push(arr);
+    result.push(actionArr);
+    
+	return result;
 }

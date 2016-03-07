@@ -82,7 +82,7 @@ public class CartJsonController extends BaseController {
 			cart.delete(dessertId);
 			session().setAttribute(sessionName, cart);
 			message = Configure.SUCCESS;
-		} else if ("buy".equals(action)) {
+		} else if ("buy".equals(action)||"appointment".equals(action)) {
 			String numStr = params.get("num");
 			int num = Integer.parseInt(numStr);
 			String memberName = params.get("memberName");

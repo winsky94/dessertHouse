@@ -77,7 +77,7 @@ $.ajax({
 //				</div>\
 //			';
 		}
-		imgLocation("container", "box");
+//		imgLocation("container", "box");
 		//重新设置商品内容
 		if(data.length==0){
 			txt='\

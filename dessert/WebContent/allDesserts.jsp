@@ -1,8 +1,8 @@
 <%@page import="dessert.configure.Configure"%>
+<%@page import="dessert.VO.DessertVO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <%@ page language="java" import="java.util.*"%>
-<%@ page language="java" import="dessert.configure.*"%>
 <!-- http://localhost:8080/dessert/shopDetail.jsp?shopName=shop1 -->
 
 <html>
@@ -21,7 +21,7 @@ pageEncoding="utf-8"%>
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/cookie.js"></script>
 	<script src="js/瀑布流.js"></script>
-	<script src="js/allDesserts.js"></script>
+	<!-- <script src="js/allDesserts.js"></script> -->
 </head>
 <body>
 	<!-- 顶部导航栏 -->
@@ -40,16 +40,43 @@ pageEncoding="utf-8"%>
 			<!--右侧店铺内甜点图片 -->
 			<div class="span10" id="desserts">
 				<div id="container">
-					<!-- <div class="box">
-						<div class="box_img">
-							<a href="dessert_detail?shopName=shop1" target="_self">
-								<img src="image/desserts/shop1/1.jpg">
-								<div class="text">
-									这是海中体育馆
+				<%
+				String sessionName=Configure.All_DESSERT_SESSION;
+				@SuppressWarnings("unchecked")
+				ArrayList<DessertVO> desserts =(ArrayList<DessertVO>)session.getAttribute(sessionName);
+				if(desserts!=null){
+					for(DessertVO dessert:desserts){
+						long id=dessert.getId();
+						String path=dessert.getPath();
+						String name=dessert.getName();
+						double price=dessert.getPrice();
+						int stockNum=dessert.getStockNum();
+						String shopName=dessert.getOwingTo();
+						%>
+						<div class="box">
+							<input id="shopName" type="hidden" value="'+shopName+'">
+							<div class="box_img">
+								<a href="dessert_detail?shopName=<%=shopName %>&id=<%=id %>" target="_self">
+									<img src="<%=path %>">
+									<br>
+									<div class="text_center">
+										<span><%=name %></span>
+									</div>
+								</a>
+								<div class="text" >
+									<span style="color: red">￥<%=price %> </span>
+									<span style="float:right;color:rgb(163,167,176)">库存：<%=stockNum %>个</span>
 								</div>
-							</a>
+							</div>
 						</div>
-					</div> -->
+						<%
+					}
+				}else{
+					%>
+					<p class="text-center muted" style="padding-top:5%;font-size:16px;">暂无可售商品~~~敬请期待...</p>
+					<%
+				}
+				%>
 				</div>
 			</div>
 			<!--右侧店面甜点图片结束 -->

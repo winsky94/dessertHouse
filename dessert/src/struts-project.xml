@@ -10,6 +10,15 @@
 		</action>
 	</package>
 	
+	<package name="dessert" extends="struts-default">
+		<action name="all_dessert" class="dessertController">
+			<result name="all_dessert">allDesserts.jsp</result>
+		</action>
+		<action name="shop_dessert" class="dessertController" method="shopDesessert">
+			<result name="shop_dessert">shopDetail.jsp</result>
+		</action>
+	</package>
+	
 	<package name="admin" extends="struts-default">
 		<!-- 店面管理 -->
 		<action name="shop_manage" class="shopController">

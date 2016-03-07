@@ -1,4 +1,4 @@
-<%@page import="java.security.acl.Owner"%>
+<%@page import="dessert.util.DateUtil"%>
 <%@page import="dessert.util.Week"%>
 <%@page import="dessert.VO.CartDessert"%>
 <%@page import="java.util.ArrayList"%>
@@ -55,7 +55,7 @@
 			<div class="span10">
 				<!-- 操作 -->
 				<div style="margin-bottom: 20px;">
-					<h4 style="display: inline;">会员详情</h4>
+					<h4 style="display: inline;">购物车详情</h4>
 					<div style="display: inline;">
 						<a class="btn pull-right margin_button" href="#"
 							onclick="clearAll();"> <i class="icon-trash"></i>&nbsp;清空
@@ -64,7 +64,7 @@
 							onclick="deleteSelected();"> <i class="icon-remove"></i>&nbsp;删除
 						</a> 
 						<a class="btn pull-right margin_button" href="#"
-							onclick="buySelected();"> <i class=" icon-folder-open"></i>&nbsp;购买
+							onclick="buySelected();"> <i class=" icon-folder-open"></i>&nbsp;提交
 						</a> 
 					</div>
 				</div>
@@ -128,7 +128,21 @@
 								</span>
 
 								<a href="#" style="margin-left: 10px;float: right" onclick="del(<%=i %>)">删除</a>
-								<a href="#" style="float: right" onclick="buy(<%=i %>)">购买</a>
+								<% 
+								String today = DateUtil.getToday();
+								
+								if (today.equals(date)) {
+								%>
+								<input id="action<%=i %>" type="hidden" value="buy">
+								<a href="#" style="float: right" onclick="buy(<%=i %>,'no','buy')">购买</a>
+								<%
+								}else{
+									%>
+								<input id="action<%=i %>" type="hidden" value="appointment">
+								<a href="#" style="float: right" onclick="buy(<%=i %>,'no','appointment')">预约</a>	
+								<%
+								}
+								%>
 							</div>
 						</div>
 					</div>

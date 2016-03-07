@@ -48,7 +48,7 @@ public class MemberHelper {
 	}
 
 	/**
-	 * 计算会员取消订单的违约金，暂定算法：金额*0.02
+	 * 计算会员取消订单的违约金，暂定算法：金额*0.02，至少2元
 	 * 
 	 * @param record
 	 * @return

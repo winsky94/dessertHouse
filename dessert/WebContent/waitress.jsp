@@ -143,7 +143,7 @@ pageEncoding="utf-8"%>
 									<div class="span4">
 										<div class="table-row"> 
 											<label class="radio inline">
-												<input type="radio" name="optionsRadios" id="card" value="card" checked>
+												<input type="radio" name="optionsRadios" id="card" value="card" checked onchange="showCash(false)">
 												会员支付
 											</label>
 										</div>
@@ -151,7 +151,7 @@ pageEncoding="utf-8"%>
 									<div class="span4">
 										<div class="table-row"> 
 											<label class="radio inline">
-												<input type="radio" name="optionsRadios" id="cash" value="cash">
+												<input type="radio" name="optionsRadios" id="cash" value="cash" onchange="showCash(true)">
 												现金支付
 											</label>
 										</div>
@@ -163,6 +163,28 @@ pageEncoding="utf-8"%>
 				</div>
 				<!-- 支付方式 结束 -->
 				
+				<!-- 现金支付 -->
+				<div class="form-horizontal well" style="padding-left: 200px;display: none" id="cashWall">
+					<div class="row-fluid control-group"></div>
+					<div class="row-fluid control-group">
+						<div class="span8">
+							<label class="control-label" for="payMoney">付款：</label>
+							<div class="controls">
+								<input type="text" id="payMoney" placeholder="请输入付款金额..." onblur="calChange()">
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid control-group">
+						<div class="span8">
+							<label class="control-label" for="change">找零：</label>
+							<div class="controls">
+								<input type="text" id="change" placeholder="找零" value="" disabled>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 现金支付结束 -->
+				
 				<!-- 操作按钮 -->
 				<div class="form-horizontal well">
 					<div class="row-fluid control-group">
@@ -171,7 +193,7 @@ pageEncoding="utf-8"%>
 								<div style="width:800px;margin-left: 102px;">
 									<div class="span4">
 										<div class="table-row"> 
-											<input type="button" class="btn" onclick="confirm();" value="销售">
+											<input type="button" class="btn" onclick="confirm();" value="提交">
 										</div>
 									</div>
 									<div class="span4">

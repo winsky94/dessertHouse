@@ -446,7 +446,7 @@ function showInfo() {
 				<div class="table-row"> \
 					<div class="property">余　额：</div> \
 					<div class="value" id="validMoney">'
-			+ validMoney
+			+ validMoney.toFixed(2)
 			+ '元</div> \
 				</div> \
 				<div class="table-row"> \

@@ -39,6 +39,8 @@ function getMemberInfo(){
 				}
 
 				showInfo();
+			}else{
+				showNotFound();
 			}
 		}
 	});
@@ -75,7 +77,7 @@ function showInfo() {
 				<div class="table-row"> \
 					<div class="property">余　额：</div> \
 					<div class="value" id="validMoney">'
-			+ validMoney
+			+ validMoney.toFixed(2)
 			+ '元</div> \
 				</div> \
 				<div class="table-row"> \
@@ -129,4 +131,11 @@ function showInfo() {
 	';
 	$("#info").html(txt);
 	$("#memberInfo").show();
+}
+
+function showNotFound(){
+	var txt='<p class="muted" style="margin-left:70px;margin-tp:10px;font-size:16px;">没有找到该会员信息/(ㄒoㄒ)/~~</p>';
+	$("#info").html(txt);
+	$("#memberInfo").show();
+	
 }

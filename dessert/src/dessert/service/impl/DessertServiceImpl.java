@@ -214,6 +214,12 @@ public class DessertServiceImpl implements DessertService {
 		double money = member.getValidMoney();
 		double validMoney = money + payMoney - penalty;
 		member.setValidMoney(validMoney);
+		
+		int point=record.getPoint();
+		int originalPoint=member.getPoint();
+		int validPoint=originalPoint-point;
+		member.setPoint(validPoint);
+		
 		memberService.update(member);
 
 		// 删除消费记录

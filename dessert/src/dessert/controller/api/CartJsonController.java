@@ -51,11 +51,15 @@ public class CartJsonController extends BaseController {
 
 		String action = params.get("action");
 
-		if (dessertIdStr == null) {
-			return Configure.ERROR;
+		
+		long dessertId =-1;
+		
+		if (!"clear".equals(action)) {
+			if (dessertIdStr == null) {
+				return Configure.ERROR;
+			}
+			dessertId = Long.parseLong(dessertIdStr);
 		}
-
-		long dessertId = Long.parseLong(dessertIdStr);
 
 		if ("add".equals(action)) {
 			String numStr = params.get("num");
@@ -82,7 +86,7 @@ public class CartJsonController extends BaseController {
 			cart.delete(dessertId);
 			session().setAttribute(sessionName, cart);
 			message = Configure.SUCCESS;
-		} else if ("buy".equals(action)||"appointment".equals(action)) {
+		} else if ("buy".equals(action) || "appointment".equals(action)) {
 			String numStr = params.get("num");
 			int num = Integer.parseInt(numStr);
 			String memberName = params.get("memberName");
@@ -120,6 +124,10 @@ public class CartJsonController extends BaseController {
 				cart.delete(dessertId);
 				session().setAttribute(sessionName, cart);
 			}
+		} else if ("clear".equals(action)) {
+			cart.clear();
+			session().setAttribute(sessionName, cart);
+			message = Configure.SUCCESS;
 		}
 
 		return Configure.SUCCESS;

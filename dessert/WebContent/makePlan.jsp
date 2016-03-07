@@ -158,42 +158,42 @@ pageEncoding="utf-8"%>
 					if("create".equals(action)||"update".equals(action)){
 				%>
 					<a class="btn btn-small pull-left margin_button" href="#" onclick="submitPlan();">
-						<i class="icon-ok"></i>提交
+						<i class="icon-ok"></i>&nbsp;提交
 					</a>
 					<a class="btn btn-small pull-right margin_button" href="#" onclick="deleteDessert();">
-						<i class="icon-minus"></i>删除
+						<i class="icon-minus"></i>&nbsp;删除
 					</a>
 					<a id="update" class="btn btn-small pull-right margin_button" href="#dessertModel" role="button" data-toggle="modal" onclick="changeAction('update');">
-						<i class="icon-edit"></i>修改
+						<i class="icon-edit"></i>&nbsp;修改
 					</a>
 					<a class="btn btn-small pull-right margin_button" href="#dessertModel" role="button" data-toggle="modal" onclick="changeAction('add');">
-						<i class="icon-plus"></i>增加
+						<i class="icon-plus"></i>&nbsp;增加
 					</a>
 				<%
 					}else if("approve".equals(action)){
 						//总经理审批界面
 				%>
 					<a class="btn btn-small pull-left margin_button" href="manager_shop_plan">
-						<i class="icon-ok"></i>返回
+						<i class="icon-tasks"></i>&nbsp;返回
 					</a>
 					<a id="update" class="btn btn-small pull-right margin_button" style="margin-left:4%;" href="#" role="button" onclick="approve('不过');">
-						<i class="icon-remove"></i>不过
+						<i class="icon-remove"></i>&nbsp;不过
 					</a>
 					<a class="btn btn-small pull-right margin_button" href="#" role="button" onclick="approve('通过');">
-						<i class="icon-ok"></i>通过
+						<i class="icon-ok"></i>&nbsp;通过
 					</a>
 				<%
 					}else if("approveView".equals(action)){
 						//总经理审批后查看界面
 				%>
 					<a class="btn btn-small pull-left margin_button" href="manager_shop_plan">
-						<i class="icon-ok"></i>返回
+						<i class="icon-tasks"></i>&nbsp;返回
 					</a>
 				<%
 					}else{
 				%>
 					<a class="btn btn-small pull-left margin_button" href="ZD_shop">
-						<i class="icon-ok"></i>返回
+						<i class="icon-tasks"></i>&nbsp;返回
 					</a>
 				<%	
 					}

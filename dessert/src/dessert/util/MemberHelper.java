@@ -30,7 +30,6 @@ public class MemberHelper {
 		double discount = 0;
 		int rank = member.getRank();
 		discount = rank * money / 50;
-
 		return discount;
 	}
 

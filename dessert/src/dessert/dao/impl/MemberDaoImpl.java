@@ -12,6 +12,7 @@ import dessert.configure.Configure;
 import dessert.dao.MemberDao;
 import dessert.entity.Member;
 import dessert.util.CheckError;
+import dessert.util.DateUtil;
 import dessert.util.MemberStatus;
 import dessert.util.TimeUtil;
 import dessert.util.UserType;
@@ -111,12 +112,23 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.pause);
 		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
 		sql += " where validDate < curdate()";
-		sql+=" and status=+"+MemberStatus.getStatusInt(MemberStatus.OK)+";";
+		sql += " and status=+" + MemberStatus.getStatusInt(MemberStatus.OK)
+				+ ";";
 		doSql(sql);
-		
+
+		// 账户金额小于10，会员暂停
+		sql = "update member";
+		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.pause);
+		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
+		sql += " where validMoney<10";
+		sql += " and status=+" + MemberStatus.getStatusInt(MemberStatus.OK)
+				+ ";";
+		doSql(sql);
+
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况
 		sql = "update member";
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.over);
+		sql += " ,overCreateAt=curdate()";
 		sql += " where overDate < curdate();";
 		doSql(sql);
 	}
@@ -126,6 +138,7 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		Member member = getByColumn(Member.class, "memberId", memberId);
 		member.setStatus(MemberStatus.over);
+		member.setOverCreateAt(DateUtil.getToday());
 		update(member);
 	}
 
@@ -193,8 +206,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 
 		String sql = "select sum(age<20) as '20以下', sum(age>=20 and age<30) as '20-30', sum(age>=30 and age<40) as '30-40', sum(age>=40 and age<50) as '40-50', sum(age>=50 and age<60) as '50-60', sum(age>=60) as '60以上' from member";
-		sql += " where Year(createAt)='" + year + "'";
-		sql += " and Month(createAt)='" + month + "'";
+		sql += " where Year(createAt)<='" + year + "'";
+		sql += " and Month(createAt)<='" + month + "'";
 
 		@SuppressWarnings("unchecked")
 		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
@@ -226,8 +239,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		String sql = "select sum(sex='男') as 男,sum(sex='女') as 女 from member";
-		sql += " where Year(createAt)='" + year + "'";
-		sql += " and Month(createAt)='" + month + "'";
+		sql += " where Year(createAt)<='" + year + "'";
+		sql += " and Month(createAt)<='" + month + "'";
 
 		@SuppressWarnings("unchecked")
 		List<Object[]> list = (List<Object[]>) doSqlQuery(sql);
@@ -251,8 +264,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		// TODO Auto-generated method stub
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		String sql = "select prov,count(*) from member";
-		sql += " where Year(createAt)='" + year + "'";
-		sql += " and Month(createAt)='" + month + "'";
+		sql += " where Year(createAt)<='" + year + "'";
+		sql += " and Month(createAt)<='" + month + "'";
 		sql += " group by prov";
 
 		@SuppressWarnings("unchecked")
@@ -306,12 +319,15 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	public HashMap<String, Integer> getTotalInfo(String year, String month) {
 		// TODO Auto-generated method stub
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
-		String order = " Year(createAt)='" + year + "'";
-		order += " and Month(createAt)='" + month + "') ";
-		String sql = "select count(*),sum(" + order;
+		String order = " Year(createAt)<='" + year + "'";
+		order += " and Month(createAt)<='" + month + "') ";
+		String sql = "select count(*),";
+		sql += "sum(Year(createAt)='" + year + "' and Month(createAt)='"
+				+ month + "')";
 		sql += ",sum(status=1 and" + order;
 		sql += ",sum(status=2 and" + order;
 		sql += ",sum(status=3 and" + order;
+		sql += ",sum(status=0 and" + order;
 		sql += " from member;";
 
 		@SuppressWarnings("unchecked")
@@ -324,12 +340,14 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 			int validNum = Integer.parseInt(res[2].toString());
 			int pauseNum = Integer.parseInt(res[3].toString());
 			int overNum = Integer.parseInt(res[4].toString());
+			int initNum = Integer.parseInt(res[5].toString());
 
 			result.put("totalNum", totalNum);
 			result.put("newNum", newNum);
 			result.put("validNum", validNum);
 			result.put("pauseNum", pauseNum);
 			result.put("overNum", overNum);
+			result.put("initNum", initNum);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -342,8 +360,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 	@Override
 	public LinkedList<HashMap<String, Integer>> getMemberStatus(String date) {
 		// TODO Auto-generated method stub
-		LinkedList<HashMap<String, Integer>> result = new LinkedList<HashMap<String,Integer>>();
-		
+		LinkedList<HashMap<String, Integer>> result = new LinkedList<HashMap<String, Integer>>();
+
 		return result;
 	}
 }

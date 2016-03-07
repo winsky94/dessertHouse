@@ -48,6 +48,7 @@
 						截止当前，
 						本系统共有 <span id="totalNum" class="num"> </span> 名注册会员，
 						当月新注册 <span id="newNum" class="num"> </span> 人，
+						<span id="initNum" class="num"> </span> 人尚未激活，
 						<span id="validNum" class="num"> </span> 人会员卡有效，
 						<span id="pauseNum" class="num"> </span> 人会员卡停止，
 						<span id="overNum" class="num"> </span> 人会员卡取消。

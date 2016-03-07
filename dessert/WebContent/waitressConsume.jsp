@@ -113,9 +113,9 @@ pageEncoding="utf-8"%>
 									int num = record.getNum();
 									double discount = record.getDiscount();
 									int point = record.getPoint();
-									boolean cash=record.getCash();
+									String cash=record.getCash();
 									String method = Configure.CARD_CN; 
-									if(cash){
+									if(Configure.CASH.equals(cash)){
 										method=Configure.CASH_CN;
 									}
 									String actionCN=Configure.BUY_CN;

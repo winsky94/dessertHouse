@@ -174,7 +174,7 @@ function write_header_login(userName, type) {
 				<div class="navbar-inner">\
 					<a class="brand" href="index.html" style="margin-left: 5%">Dessert House</a>\
 					<ul class="nav navbar-nav" style="margin-left: 5%">\
-						<li><a href="shopDetail.jsp?shopName='+get_cookie("owingTo")+'">产品销售</a></li>\
+						<li><a href="shopDetail.jsp?shopName='+get_cookie("owingTo")+'&type=waitress">产品销售</a></li>\
 						<li class="dropdown">\
 							<a href="#" class="dropdown-toggle"data-toggle="dropdown">会员信息<b class="caret"></b></a>\
 							<ul class="dropdown-menu">\

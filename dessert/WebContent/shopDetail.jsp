@@ -48,6 +48,7 @@ pageEncoding="utf-8"%>
 				<!-- 选择周几的产品 结束-->
 				<div id="container">
 					<%
+				String type=request.getParameter("type"); 
 				String sessionName=Configure.SHOP_DESSERT_SESSION;
 				@SuppressWarnings("unchecked")
 				ArrayList<DessertVO> desserts =(ArrayList<DessertVO>)session.getAttribute(sessionName);
@@ -63,7 +64,7 @@ pageEncoding="utf-8"%>
 						<div class="box">
 							<input id="shopName" type="hidden" value="'+shopName+'">
 							<div class="box_img">
-								<a href="dessert_detail?shopName=<%=thisShopName %>&id=<%=id %>" target="_self">
+								<a href="dessert_detail?shopName=<%=thisShopName %>&id=<%=id %>&type=<%=type %>" target="_self">
 									<img src="<%=path %>">
 									<br>
 									<div class="text_center">

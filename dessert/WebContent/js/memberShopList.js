@@ -10,7 +10,7 @@ function getLine(tr) {
 	cells = tr.cells;
 	var name = cells[1].innerHTML;
 	var url = "shop_dessert?shopName=" + name + "&weekDay=" + weekDay
-			+ "&date=" + date;
+			+ "&date=" + date+"&type=member";
 	window.location.href = url;
 }
 

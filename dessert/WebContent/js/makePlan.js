@@ -157,7 +157,7 @@ function deleteDessert () {
 	   alert("请选择一行");
 	   return;
 	} else {
-		if(window.confirm('你确定要删除所选店面吗？')){
+		if(window.confirm('你确定要删除所选商品吗？')){
 		    var dessertId = cells[0].innerHTML;
 		    dessertId = dessertId.replace(/[\r\n]/g,"");//去掉回车换行
 			var picName = cells[1].innerHTML;

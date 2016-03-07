@@ -19,6 +19,7 @@ import dessert.controller.BaseController;
 import dessert.entity.Dessert;
 import dessert.service.DessertService;
 import dessert.service.PlanService;
+import dessert.util.ConvertVO;
 import dessert.util.DateUtil;
 import dessert.util.Week;
 
@@ -139,10 +140,14 @@ public class PlanJsonController extends BaseController {
 				}
 				ArrayList<String> dayPlan = planWithDessertName.get(weekDay);
 				if (dayPlan == null) {
+					System.out.println("dayplan==null");
 					dayPlan = new ArrayList<String>();
 				}
+				System.out.println("dsfsdfsd");
 				dayPlan.add(dessert.getName());
+				System.out.println(weekDay);
 				planWithDessertName.put(weekDay, dayPlan);
+				
 				// 更新session的内容
 				session().setAttribute(Configure.PLAN_SHOP_ALL,
 						planWithDessertName);
@@ -150,6 +155,8 @@ public class PlanJsonController extends BaseController {
 				e.printStackTrace();
 			}
 			// }
+		}else{
+			System.out.println("文件为空");
 		}
 	}
 
@@ -337,15 +344,14 @@ public class PlanJsonController extends BaseController {
 	}
 
 	public String dayDessert() {
-		 Map<String, String> params = getParams();
-		 String weekDay = params.get("weekDay");
-		 String date = params.get("date");
-		 String shopName = params.get("shopName");
-		 desserts = planService.getDayDessert(date, weekDay, shopName);
+		Map<String, String> params = getParams();
+		String weekDay = params.get("weekDay");
+		String date = params.get("date");
+		String shopName = params.get("shopName");
+		desserts = planService.getDayDessert(date, weekDay, shopName);
 
 		return Configure.SUCCESS;
 	}
-	
 
 	public String getMessage() {
 		return message;

@@ -57,7 +57,7 @@ $(function() {
             if(jsonObject.message!=""){
             	$("#process_result").html(jsonObject.message);
             }else{
-            	// alert("success，界面跳转，刷新界面");
+            	 alert("success，界面跳转，刷新界面");
             	location.reload();
             }
         },

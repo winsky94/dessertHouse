@@ -13,11 +13,29 @@ function refreshSelectedDay() {
 	// 选中的星期是哪一天
 	var date = $("#" + selectedDay).val();
 	var shopName = getQueryString("shopName");
-	if (selectedDay != getQueryString("weekDay")) {
-		window.location.href = "shop_dessert?shopName=" + shopName
-				+ "&weekDay=" + selectedDay + "&date=" + date;
+	var type = getQueryString("type");
+	window.location.href = "shop_dessert?shopName=" + shopName + "&weekDay="
+			+ selectedDay + "&date=" + date + "&type=" + type;
+}
+
+//刚进来的时候跳转方法
+function jump() {
+	// 选中周几
+	var selectedDay = $("input[name='week']:checked").val();
+	// 选中的星期是哪一天
+	var date = $("#" + selectedDay).val();
+	var shopName = getQueryString("shopName");
+	var type = getQueryString("type");
+	var from = getQueryString("from");
+	if (type == "member" && from == "table") {
+		selectedDay = getQueryString("weekDay");
+		date = getQueryString("date");
 	}
 
+	if (selectedDay != getQueryString("weekDay")) {
+		window.location.href = "shop_dessert?shopName=" + shopName
+				+ "&weekDay=" + selectedDay + "&date=" + date + "&type=" + type;
+	}
 }
 
 function setWeekBar() {
@@ -59,7 +77,7 @@ function setWeekBar() {
 					}
 				}
 			}
-			refreshSelectedDay();
+			jump();
 		}
 	});
 }

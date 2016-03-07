@@ -19,6 +19,24 @@ function confirm(){
 	}else if(actionP=="waitress_appointment"){
 		var action="appointment";
 	}
+	
+	if(payMethod=="cash"){
+		var pay=$("#payMoney").val();
+		if(pay==""){
+			alert("请输入付款金额");
+			return;
+		}else{
+			var real=$("#money").html();
+			
+			var change=parseFloat(pay)-parseFloat(real);
+			if(change>=0){
+			}else{
+				alert("付款额不足以支付商品费用");
+				return;
+			}
+		}
+		
+	}
 
 	if(memberId==""){
 		alert("请选择购物会员");
@@ -54,8 +72,8 @@ function confirm(){
 							<div class="modal-body">\
 								<div class="center">\
 									恭喜您，您此次消费：\
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'+discount+'\
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'+point+'\
+									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'+discount+'元\
+									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'+point+'分\
 								</div>\
 							</div>\
 							<div class="modal-footer">\
@@ -76,7 +94,6 @@ function confirm(){
 			
 		}
 	});
-
 }
 
 function cancel(){
@@ -163,7 +180,7 @@ function showInfo() {
 				<div class="table-row"> \
 					<div class="property">余　额：</div> \
 					<div class="value" id="validMoney">'
-			+ validMoney
+			+ validMoney.toFixed(2)
 			+ '元</div> \
 				</div> \
 				<div class="table-row"> \
@@ -222,4 +239,26 @@ function showInfo() {
 function messageOK () {
 	var url = 'shopDetail.jsp?shopName='+get_cookie("owingTo");
 	window.location.href=url;
+}
+
+function showCash(select){
+	if(select){
+		$("#cashWall").show();
+	}else{
+		$("#cashWall").hide();
+	}
+}
+
+function calChange(){
+	var pay=$("#payMoney").val();
+	var real=$("#money").html();
+	
+	
+	var change=parseFloat(pay)-parseFloat(real);
+	if(change>=0){
+		$("#change").val(change);
+	}else{
+		alert("付款额不足以支付商品费用");
+	}
+	
 }

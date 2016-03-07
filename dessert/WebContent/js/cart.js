@@ -161,11 +161,35 @@ function addListener(index){
 }
 
 function clearAll() {
-	
+	$.ajax({
+		url : 'api/member/myCart',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			action : 'clear'
+		},
+		success : function(result, textStatus) {
+			if (result.length == 0) {
+				alert("出现错误");
+			} else {
+				var message = result.message;
+				if (message == "success") {
+					window.location.reload();
+				} else {
+					alert(message);
+				}
+			}
+		}
+	});
 }
 
 function deleteSelected() {
-	
+	var es=getAllSelected();
+	var arr=es[0];
+	for(var i=0;i<arr.length;i++){
+		del(arr[i]);
+	}
+	getClick();
 }
 
 function buySelected() {

@@ -66,10 +66,10 @@ function process(action, payMethod) {
 									恭喜您，您此次消费：\
 									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得折扣：'
 									+ discount
-									+ '\
+									+ '元\
 									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;获得积分：'
 									+ point
-									+ '\
+									+ '分\
 								</div>\
 							</div>\
 							<div class="modal-footer">\

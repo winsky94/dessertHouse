@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -362,5 +363,13 @@ public class MemberServiceImpl implements MemberService {
 	public HashMap<String, Integer> getTotalInfo(String year, String month) {
 		// TODO Auto-generated method stub
 		return memberDao.getTotalInfo(year, month);
+	}
+
+	@Override
+	public LinkedList<HashMap<String, Integer>> getMemberStatus(String year,
+			String month) {
+		// TODO Auto-generated method stub
+//		return memberDao.getMemberStatus(year,month);
+		return null;
 	}
 }

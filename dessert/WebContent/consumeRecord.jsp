@@ -1,3 +1,4 @@
+<%@page import="dessert.util.DateUtil"%>
 <%@page import="dessert.configure.Configure"%>
 <%@page import="dessert.VO.ConsumeVO"%>
 <%@page import="java.util.List"%>
@@ -101,9 +102,23 @@ pageEncoding="utf-8"%>
 								<td><%=action %></td>
 								<td><%=method %></td>
 								<td>
+								<%
+								String today=DateUtil.getToday();
+								if(date.compareTo(today)<0){
+								%>
+									<button type="button" class="btn btn-mini btn-success" role="button" onclick="cancelOrder(<%=id %>);" disabled>
+										<i class="icon-remove icon-white"></i> &nbsp;退单
+									</button>
+								<%
+								}else{
+								%>
 									<button type="button" class="btn btn-mini btn-success" role="button" onclick="cancelOrder(<%=id %>);">
 										<i class="icon-remove icon-white"></i> &nbsp;退单
 									</button>
+								<%
+								}
+								%>
+									
 								</td>
 							</tr>
 						<%

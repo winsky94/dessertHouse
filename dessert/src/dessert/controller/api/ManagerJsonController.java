@@ -40,6 +40,7 @@ public class ManagerJsonController extends BaseController {
 	private List<RechargeRecord> rechargeResult;
 	private LinkedList<HotDessert> dessertResult;
 	private ArrayList<Favorite> favorites;
+	private LinkedList<HashMap<String, Integer>> statusInfo;
 
 	@Override
 	public String process(Map<String, String> params) {
@@ -82,6 +83,15 @@ public class ManagerJsonController extends BaseController {
 		return Configure.SUCCESS;
 	}
 
+	public String status(){
+		Map<String, String> params = getParams();
+		String year = params.get("year");
+		String month = params.get("month");
+		statusInfo=memberService.getMemberStatus(year,month);
+		
+		return Configure.SUCCESS;
+	}
+	
 	/**
 	 * 统计会员总人数
 	 * 
@@ -232,6 +242,14 @@ public class ManagerJsonController extends BaseController {
 
 	public ArrayList<Favorite> getFavorites() {
 		return favorites;
+	}
+
+	public LinkedList<HashMap<String, Integer>> getStatusInfo() {
+		return statusInfo;
+	}
+
+	public void setStatusInfo(LinkedList<HashMap<String, Integer>> statusInfo) {
+		this.statusInfo = statusInfo;
 	}
 
 	public void setFavorites(ArrayList<Favorite> favorites) {

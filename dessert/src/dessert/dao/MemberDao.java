@@ -1,6 +1,7 @@
 package dessert.dao;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import dessert.entity.Member;
 import dessert.util.UserType;
@@ -52,4 +53,6 @@ public interface MemberDao {
 	public HashMap<String, Integer> getTotalInfo();
 
 	public HashMap<String, Integer> getTotalInfo(String year, String month);
+
+	public LinkedList<HashMap<String, Integer>> getMemberStatus(String date);
 }

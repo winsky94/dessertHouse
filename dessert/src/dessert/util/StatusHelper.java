@@ -14,6 +14,9 @@ public class StatusHelper {
 		if (MemberStatus.Init.equals(status) && money >= 200) {
 			status = MemberStatus.OK;
 		}
+		if(MemberStatus.pause.equals(status)){
+			status=MemberStatus.OK;
+		}
 
 		return status;
 	}

@@ -40,12 +40,30 @@ public class PlanController extends BaseController {
 
 		} else if ("view".equals(action) || "update".equals(action)
 				|| "approve".equals(action) || "approveView".equals(action)) {
-			//因为这儿老是从数据库获取，所以加不进来！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+			// 因为这儿老是从数据库获取，所以加不进来！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 			PlanVO planVO = planService.getPlans(shopName, false);
 			if (planVO == null) {
 				plan = null;
 			} else {
 				HashMap<Week, ArrayList<String>> result = planVO.getPlans();
+				// 这儿要处理一下，修改的时候，要加新增的商品
+				if ("update".equals(action)) {
+					HashMap<Week, ArrayList<String>> updateAdd = (HashMap<Week, ArrayList<String>>) session()
+							.getAttribute(Configure.UPDATE_ADD_SESSION);
+					if (updateAdd != null) {
+						for (Week key : result.keySet()) {
+							ArrayList<String> newAdd = updateAdd.get(key);
+							if (newAdd != null) {
+								ArrayList<String> updateResult = result
+										.get(key);
+								//因为newadd中保存的是增加后的值
+								updateResult=newAdd;
+								result.put(key, updateResult);
+							}
+						}
+					}
+				}
+
 				long planId = planVO.getId();
 				session().setAttribute(Configure.PLAN_ID, planId);
 				session().setAttribute(Configure.PLAN_SHOP_ALL, result);

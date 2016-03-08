@@ -61,7 +61,6 @@ public class DessertServiceImpl implements DessertService {
 		ArrayList<DessertVO> result = new ArrayList<DessertVO>();
 		for (String name : names) {
 			Dessert dessert = dessertDao.getDessertByName(name);
-			System.out.println(name);
 			if (dessert != null) {
 				result.add(ConvertVO.dessertToVO(dessert));
 			} else {

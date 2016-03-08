@@ -25,6 +25,8 @@ public interface PlanService {
 	 */
 	public PlanVO getPlans(String shopName, boolean current);
 
+	public void deletePlanDetail(String dessertName, long planId, String weekDay);
+
 	public void submitPlans(PlanVO plan);
 
 	/**

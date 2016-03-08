@@ -16,4 +16,6 @@ public interface PlanDetailDao {
 
 	public List<PlanDetail> getListByColumn(@SuppressWarnings("rawtypes") Class t, String column, Object value);
 
+	public void deleteDetail(String dessertName, long planId, String weekDay);
+
 }

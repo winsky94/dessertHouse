@@ -1,5 +1,6 @@
 package dessert.controller.html;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import dessert.configure.Configure;
 import dessert.controller.BaseController;
 import dessert.entity.Member;
+import dessert.entity.RechargeRecord;
 import dessert.entity.Shop;
 import dessert.entity.Worker;
 import dessert.service.DessertService;
@@ -44,7 +46,12 @@ public class TestController extends BaseController {
 
 		// initWorker();
 
-		initMember();
+		List<RechargeRecord> records=memberService.getRechargeRecord("2016", "03");
+		for(RechargeRecord rechargeRecord:records){
+			System.out.println(rechargeRecord.getId());
+		}
+		
+		// initMember();
 
 		// PlanVO planVO = planService.getPlans("shop2", false);
 		// if (planVO == null) {

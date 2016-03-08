@@ -85,9 +85,6 @@ public class DessertDaoImpl extends BaseDaoImpl<Dessert> implements DessertDao {
 
 				Dessert dessert = new Dessert();
 				dessert.setId(id);
-				if(name.contains("草莓奶酪蛋糕")){
-					System.out.println(id+" "+name);
-				}
 				dessert.setName(name);
 				dessert.setOwingTo(shopName);
 				dessert.setPath(path);

@@ -59,12 +59,15 @@ public class DessertServiceImpl implements DessertService {
 	public ArrayList<DessertVO> getDessertByName(ArrayList<String> names) {
 		// TODO Auto-generated method stub
 		ArrayList<DessertVO> result = new ArrayList<DessertVO>();
+		if(names==null){
+			return result;
+		}
 		for (String name : names) {
 			Dessert dessert = dessertDao.getDessertByName(name);
 			if (dessert != null) {
 				result.add(ConvertVO.dessertToVO(dessert));
 			} else {
-				System.err.println("有个商品的名字不存在~，名字为：" + name);
+//				System.err.println("有个商品的名字不存在~，名字为：" + name);
 			}
 		}
 		return result;

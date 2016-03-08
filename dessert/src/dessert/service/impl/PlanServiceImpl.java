@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import dessert.VO.DessertVO;
 import dessert.VO.PlanVO;
 import dessert.dao.PlanDao;
+import dessert.dao.PlanDetailDao;
 import dessert.entity.Dessert;
 import dessert.entity.Plan;
 import dessert.service.PlanService;
@@ -18,6 +19,8 @@ import dessert.util.ConvertVO;
 public class PlanServiceImpl implements PlanService {
 	@Autowired
 	public PlanDao planDao;
+	@Autowired
+	public PlanDetailDao planDetailDao;
 
 	@Override
 	public long add(Plan plan) {
@@ -70,6 +73,12 @@ public class PlanServiceImpl implements PlanService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public void deletePlanDetail(String dessertName, long planId, String weekDay) {
+		// TODO Auto-generated method stub
+		planDetailDao.deleteDetail(dessertName, planId, weekDay);
 	}
 
 }

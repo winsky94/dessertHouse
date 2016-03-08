@@ -134,12 +134,13 @@ public class PlanJsonController extends BaseController {
 				Map<Week, ArrayList<String>> planWithDessertName = (Map<Week, ArrayList<String>>) session()
 						.getAttribute(Configure.PLAN_SHOP_ALL);
 				if (planWithDessertName == null) {
+//					System.out.println("planWithDessertName==null");
 					planWithDessertName = new HashMap<Week, ArrayList<String>>();
 
 				}
 				ArrayList<String> dayPlan = planWithDessertName.get(weekDay);
 				if (dayPlan == null) {
-					System.out.println("dayplan==null");
+//					System.out.println("dayplan==null");
 					dayPlan = new ArrayList<String>();
 				}
 				dayPlan.add(dessert.getName());
@@ -153,12 +154,26 @@ public class PlanJsonController extends BaseController {
 					updateAdd = new HashMap<Week, ArrayList<String>>();
 				}
 				updateAdd.put(weekDay, dayPlan);
+//				System.out.println(weekDay+" : "+dayPlan.size());
 				session().setAttribute(Configure.UPDATE_ADD_SESSION, updateAdd);
 				// ================================================================
 
 				// 更新session的内容
 				session().setAttribute(Configure.PLAN_SHOP_ALL,
 						planWithDessertName);
+				//============
+//				System.out.println("-------------------------------------------");
+//				Map<Week, ArrayList<String>> test = (Map<Week, ArrayList<String>>) session()
+//						.getAttribute(Configure.PLAN_SHOP_ALL);
+//				for(Week key:test.keySet()){
+//					System.out.println(key);
+//					ArrayList<String> rArrayList=test.get(key);
+//					for(String string : rArrayList){
+//						System.out.println(string);
+//					}
+//				}
+//				System.out.println("-------------------------------------------");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -201,8 +216,8 @@ public class PlanJsonController extends BaseController {
 				// ======================================================================
 				if (!uploadFilesFileName.get(0).equals(originalPicName)) {
 					// 删除原图片
-					String path = folder + "\\" + originalPicName;
-					deleteFile(path);
+					//String path = folder + "\\" + originalPicName;
+					//deleteFile(path);
 					// 重新复制图片
 					FileUtils.copyFile(uploadFiles.get(0), new File(fileFolder
 							+ File.separator + uploadFilesFileName.get(0)));
@@ -249,9 +264,9 @@ public class PlanJsonController extends BaseController {
 
 		Map<String, String> params = getParams();
 		long dessertId = Long.parseLong(params.get("dessertId"));
-//		String picName = params.get("picName");
-		Dessert dessert = new Dessert();
-		dessert.setId(dessertId);
+		// String picName = params.get("picName");
+
+		String weekDay = "";// 这是周几的商品
 
 		// 删除session中对应的
 		@SuppressWarnings("unchecked")
@@ -269,6 +284,8 @@ public class PlanJsonController extends BaseController {
 						long id = dessertService.getDessertIdByName(name);
 						if (id != dessertId) {
 							dessertNamesResult.add(name);
+						} else {
+							weekDay = Week.toString(key);
 						}
 					}
 					planAllResult.put(key, dessertNamesResult);
@@ -277,14 +294,26 @@ public class PlanJsonController extends BaseController {
 			session().setAttribute(Configure.PLAN_SHOP_ALL, planAllResult);
 		}
 
-		dessertService.delete(dessert);
 		// 删除原图片
 		// String folder = Configure.FOLDER;
 		// String path = folder + "\\" + picName;
-//		deleteFile(path);
+		// deleteFile(path);
+
+		// 删除plandetail的内容
+
+		DessertVO dessertToDel = dessertService.getDessertById(dessertId);
+		String name = dessertToDel.getName();
+		long planId = (long) session().getAttribute(Configure.PLAN_ID);
+
+//		System.out.println(weekDay);
+		planService.deletePlanDetail(name, planId, weekDay);
+
+		Dessert dessert = new Dessert();
+		dessert.setId(dessertId);
+		dessertService.delete(dessert);
 
 		message = "success";
-		System.out.println("delete");
+//		System.out.println("delete");
 
 		return Configure.SUCCESS;
 	}
@@ -299,8 +328,11 @@ public class PlanJsonController extends BaseController {
 				.getAttribute(Configure.PLAN_SHOP_ALL);
 		if (plan != null) {
 			for (Week key : plan.keySet()) {
+//				System.out.println(key);
 				ArrayList<String> dessertNames = plan.get(key);
+//				System.out.println(dessertNames.size());
 				planDetail.put(key, dessertNames);
+//				System.out.println("====");
 			}
 		}
 		Map<String, String> params = getParams();

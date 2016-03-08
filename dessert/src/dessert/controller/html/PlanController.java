@@ -42,6 +42,7 @@ public class PlanController extends BaseController {
 				|| "approve".equals(action) || "approveView".equals(action)) {
 			// 因为这儿老是从数据库获取，所以加不进来！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 			PlanVO planVO = planService.getPlans(shopName, false);
+//			System.out.println("PlanController===========================================");
 			if (planVO == null) {
 				plan = null;
 			} else {
@@ -51,14 +52,42 @@ public class PlanController extends BaseController {
 					HashMap<Week, ArrayList<String>> updateAdd = (HashMap<Week, ArrayList<String>>) session()
 							.getAttribute(Configure.UPDATE_ADD_SESSION);
 					if (updateAdd != null) {
+//						System.out
+//								.println("PlanController.process() update add 不等于null");
+//						for (Week key : updateAdd.keySet()) {
+//							System.out.println(key);
+//						}
+						// 万一有某一天没有产品，修改的时候新加产品
+						boolean find = false;
 						for (Week key : result.keySet()) {
+							if (Week.toString(key).equals(day)) {
+								find = true;
+							}
+//							System.out.println(find);
+//							System.out.println(key);
 							ArrayList<String> newAdd = updateAdd.get(key);
 							if (newAdd != null) {
+//								System.out
+//										.println("PlanController.process() new add 不等于null");
 								ArrayList<String> updateResult = result
 										.get(key);
-								//因为newadd中保存的是增加后的值
-								updateResult=newAdd;
+								// 因为newadd中保存的是增加后的值
+								updateResult = newAdd;
 								result.put(key, updateResult);
+							}
+						}
+						// 万一有某一天没有产品，修改的时候新加产品
+						if (!find) {
+							System.out.println(day);
+							ArrayList<String> newAdd = updateAdd.get(Week.getWeek(day));
+							if (newAdd != null) {
+//								System.out.println(newAdd.size());
+								ArrayList<String> updateResult = new ArrayList<String>();
+								updateResult = newAdd;
+//								System.out.println(Week.getWeek(day));
+								result.put(Week.getWeek(day), updateResult);
+							}else{
+//								System.out.println("new add == null");
 							}
 						}
 					}
@@ -74,9 +103,17 @@ public class PlanController extends BaseController {
 			session().removeAttribute(Configure.PLAN_SESSION);
 			for (Week key : plan.keySet()) {
 				if (Week.toString(key).equals(day)) {
+//					System.out.println(Week.toString(key) + " : " + day);
 					ArrayList<String> dessertNames = plan.get(key);
+					if (dessertNames == null) {
+//						System.out.println("dessertNames == null ");
+					} else {
+//						System.out.println(dessertNames.size());
+					}
+
 					ArrayList<DessertVO> desserts = dessertService
 							.getDessertByName(dessertNames);
+//					System.out.println(desserts.size());
 
 					if (desserts != null) {
 						session()

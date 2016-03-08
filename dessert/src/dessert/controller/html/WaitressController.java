@@ -49,7 +49,7 @@ public class WaitressController extends BaseController {
 					.getConsumeRecord(memberId);
 			session().setAttribute(sessionName, records);
 		} else {
-			System.err.println("WaitressController 会员id为空，查不到消费记录");
+//			System.err.println("WaitressController 会员id为空，查不到消费记录");
 		}
 
 		return Configure.WAITRESS_CONSUME;
@@ -66,7 +66,7 @@ public class WaitressController extends BaseController {
 					.getRechargeRecord(memberId);
 			session().setAttribute(sessionName, records);
 		} else {
-			System.err.println("WaitressController 会员id为空，查不到充值记录");
+//			System.err.println("WaitressController 会员id为空，查不到充值记录");
 		}
 
 		return Configure.WAITRESS_RECHARGE;

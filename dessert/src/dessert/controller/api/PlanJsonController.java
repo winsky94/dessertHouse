@@ -19,7 +19,6 @@ import dessert.controller.BaseController;
 import dessert.entity.Dessert;
 import dessert.service.DessertService;
 import dessert.service.PlanService;
-import dessert.util.ConvertVO;
 import dessert.util.DateUtil;
 import dessert.util.Week;
 
@@ -147,7 +146,18 @@ public class PlanJsonController extends BaseController {
 				dayPlan.add(dessert.getName());
 				System.out.println(weekDay);
 				planWithDessertName.put(weekDay, dayPlan);
-				
+
+				// 向UPDATE_ADD_SESSION中增加内容便于planController中显示的时候读取
+				@SuppressWarnings("unchecked")
+				HashMap<Week, ArrayList<String>> updateAdd = (HashMap<Week, ArrayList<String>>) session()
+						.getAttribute(Configure.UPDATE_ADD_SESSION);
+				if (updateAdd == null) {
+					updateAdd = new HashMap<Week, ArrayList<String>>();
+				}
+				updateAdd.put(weekDay, dayPlan);
+				session().setAttribute(Configure.UPDATE_ADD_SESSION, updateAdd);
+				// ================================================================
+
 				// 更新session的内容
 				session().setAttribute(Configure.PLAN_SHOP_ALL,
 						planWithDessertName);
@@ -155,7 +165,7 @@ public class PlanJsonController extends BaseController {
 				e.printStackTrace();
 			}
 			// }
-		}else{
+		} else {
 			System.out.println("文件为空");
 		}
 	}
@@ -320,6 +330,7 @@ public class PlanJsonController extends BaseController {
 		// 删除session，免得混淆其他店面的
 		session().removeAttribute(Configure.PLAN_SHOP_ALL);
 		session().removeAttribute(Configure.PLAN_SESSION);
+		session().removeAttribute(Configure.UPDATE_ADD_SESSION);
 
 		message = Configure.SUCCESS;
 		return Configure.SUCCESS;

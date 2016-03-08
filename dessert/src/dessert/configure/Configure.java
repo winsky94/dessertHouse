@@ -132,4 +132,7 @@ public class Configure {
 	public static final String SHOP_DESSERT_SESSION = "shop_dessert_session";
 	public static final String SHOP_DESSERT = "shop_dessert";
 
+	
+	//总店服务员修改计划
+	public static final String UPDATE_ADD_SESSION = "update_add_session";
 }

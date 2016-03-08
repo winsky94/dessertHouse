@@ -71,7 +71,7 @@
 							onclick="deleteSelected();"> <i class="icon-remove"></i>&nbsp;删除
 						</a> 
 						<a class="btn pull-right margin_button" href="#"
-							onclick="buySelected();"> <i class=" icon-folder-open"></i>&nbsp;提交
+							onclick="buySelected();"> <i class=" icon-folder-open"></i>&nbsp;下单
 						</a> 
 					</div>
 				</div>

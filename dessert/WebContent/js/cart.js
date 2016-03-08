@@ -199,7 +199,12 @@ function buySelected() {
 	for(var i=0;i<arr.length;i++){
 		buy(arr[i],'many',actionArr[i]);
 	}
-	alert("您已成功下单~~~");
+	if(arr.length>0){
+		alert("您已成功下单~~~");
+	}else{
+		alert("亲，请选择商品~~~");
+	}
+	
 	window.location.reload();
 }
 

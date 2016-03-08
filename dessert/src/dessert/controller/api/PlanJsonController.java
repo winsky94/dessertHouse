@@ -218,6 +218,7 @@ public class PlanJsonController extends BaseController {
 					// 删除原图片
 					//String path = folder + "\\" + originalPicName;
 					//deleteFile(path);
+					
 					// 重新复制图片
 					FileUtils.copyFile(uploadFiles.get(0), new File(fileFolder
 							+ File.separator + uploadFilesFileName.get(0)));

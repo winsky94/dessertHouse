@@ -1,4 +1,18 @@
 function getShop(shopName) {
+	
+	//给导航栏上的消费记录增加参数
+	var hrefObj=document.getElementById("consume_href");
+	if(typeof(hrefObj)!=undefined && hrefObj!=null){
+		var hrefs=hrefObj.getAttribute("href")+"?memberId="+get_cookie("memberId");
+		hrefObj.setAttribute("href",hrefs);
+	}
+	//给导航栏上的充值记录增加参数
+	var rechargeHrefObj=document.getElementById("recharge_href");
+	if(typeof(rechargeHrefObj)!=undefined && rechargeHrefObj!=null){
+		var hrefs=rechargeHrefObj.getAttribute("href")+"?memberId="+get_cookie("memberId");
+		rechargeHrefObj.setAttribute("href",hrefs);
+	}
+	
 	$.ajax({
 		url : 'api/shop/getShop',
 		type : 'post',

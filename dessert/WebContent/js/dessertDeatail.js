@@ -121,7 +121,7 @@ function cart() {
 }
 
 function messageOK() {
-	history.back();
+	window.location.href = document.referrer;//返回上一页并刷新  
 }
 
 function addNum() {

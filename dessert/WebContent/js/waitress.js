@@ -237,8 +237,41 @@ function showInfo() {
 }
 
 function messageOK () {
-	var url = 'shopDetail.jsp?shopName='+get_cookie("owingTo");
+	var show_day = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday', 'Saturday');
+	var time = new Date();
+	var day = time.getDay();
+
+	var weekDay = show_day[day];
+	var date=new Date().format("yyyy-MM-dd");
+	
+	var url = 'shop_dessert?shopName='+get_cookie("owingTo")+'&weekDay='+weekDay+'&date='+date+'&type=waitress';
 	window.location.href=url;
+}
+
+Date.prototype.format = function(format) {
+	var o = {
+		"M+" : this.getMonth() + 1, // month
+		"d+" : this.getDate(), // day
+		"h+" : this.getHours(), // hour
+		"m+" : this.getMinutes(), // minute
+		"s+" : this.getSeconds(), // second
+		"q+" : Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" : this.getMilliseconds()
+	// millisecond
+	}
+
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+	}
+
+	for ( var k in o) {
+		if (new RegExp("(" + k + ")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
 }
 
 function showCash(select){

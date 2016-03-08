@@ -103,8 +103,7 @@ pageEncoding="utf-8"%>
 								<td><%=method %></td>
 								<td>
 								<%
-								String today=DateUtil.getToday();
-								if(date.compareTo(today)<0){
+								if(Configure.BUY_CN.equals(action)||Configure.BUY.equals(action)){
 								%>
 									<button type="button" class="btn btn-mini btn-success" role="button" onclick="cancelOrder(<%=id %>);" disabled>
 										<i class="icon-remove icon-white"></i> &nbsp;退单

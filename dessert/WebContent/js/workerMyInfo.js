@@ -32,7 +32,7 @@ function callback_changePW(result) {
 		exit();
 	} else {
 		var divNode = document.getElementById("message");
-		$("#confirm_password").focus();
+		$("#oldPassword").focus();
 		divNode.innerHTML = message;
 	}
 }

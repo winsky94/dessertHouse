@@ -142,9 +142,7 @@ public class PlanJsonController extends BaseController {
 					System.out.println("dayplan==null");
 					dayPlan = new ArrayList<String>();
 				}
-				System.out.println("dsfsdfsd");
 				dayPlan.add(dessert.getName());
-				System.out.println(weekDay);
 				planWithDessertName.put(weekDay, dayPlan);
 
 				// 向UPDATE_ADD_SESSION中增加内容便于planController中显示的时候读取
@@ -251,7 +249,7 @@ public class PlanJsonController extends BaseController {
 
 		Map<String, String> params = getParams();
 		long dessertId = Long.parseLong(params.get("dessertId"));
-		String picName = params.get("picName");
+//		String picName = params.get("picName");
 		Dessert dessert = new Dessert();
 		dessert.setId(dessertId);
 
@@ -268,8 +266,6 @@ public class PlanJsonController extends BaseController {
 				ArrayList<String> dessertNamesResult = new ArrayList<String>();
 				if (dessertNames != null) {
 					for (String name : dessertNames) {
-						System.out.println("PlanJsonController.deletePlan() "
-								+ name);
 						long id = dessertService.getDessertIdByName(name);
 						if (id != dessertId) {
 							dessertNamesResult.add(name);
@@ -283,9 +279,9 @@ public class PlanJsonController extends BaseController {
 
 		dessertService.delete(dessert);
 		// 删除原图片
-		String folder = Configure.FOLDER;
-		String path = folder + "\\" + picName;
-		deleteFile(path);
+		// String folder = Configure.FOLDER;
+		// String path = folder + "\\" + picName;
+//		deleteFile(path);
 
 		message = "success";
 		System.out.println("delete");

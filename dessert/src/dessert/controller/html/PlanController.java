@@ -70,7 +70,6 @@ public class PlanController extends BaseController {
 				plan = result;
 			}
 		}
-		System.out.println("plancontroller....");
 		if (plan != null) {
 			session().removeAttribute(Configure.PLAN_SESSION);
 			for (Week key : plan.keySet()) {

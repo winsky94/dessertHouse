@@ -78,7 +78,7 @@ public class PlanController extends BaseController {
 						}
 						// 万一有某一天没有产品，修改的时候新加产品
 						if (!find) {
-							System.out.println(day);
+//							System.out.println(day);
 							ArrayList<String> newAdd = updateAdd.get(Week.getWeek(day));
 							if (newAdd != null) {
 //								System.out.println(newAdd.size());

@@ -120,8 +120,8 @@ public class MemberDaoImpl extends BaseDaoImpl<Member> implements MemberDao {
 		sql += " set status=" + MemberStatus.getStatusInt(MemberStatus.pause);
 		sql += " , overDate=date_add(curdate(), interval 1 year )";// 停止日期是失效日期的一年后
 		sql += " where validMoney<10";
-		sql += " and status=+" + MemberStatus.getStatusInt(MemberStatus.OK)
-				+ ";";
+		sql += " and status=" + MemberStatus.getStatusInt(MemberStatus.OK);
+		sql += " and validDate=curdate();";
 		doSql(sql);
 
 		// 检查会员记录停止——后面可能需要删除那些不需要的记录，省的麻烦——好像好不能删除，因为要统计停止情况

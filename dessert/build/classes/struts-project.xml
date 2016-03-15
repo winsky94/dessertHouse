@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="test" extends="struts-default">
+		<action name="test" class="testController">
+			<result name="success">index.jsp</result>
+		</action>
+	</package>
+	
+	<package name="dessert" extends="struts-default">
+		<action name="all_dessert" class="dessertController">
+			<result name="all_dessert">allDesserts.jsp</result>
+		</action>
+		<action name="shop_dessert" class="dessertController" method="shopDesessert">
+			<result name="shop_dessert">shopDetail.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin" extends="struts-default">
+		<!-- 店面管理 -->
+		<action name="shop_manage" class="shopController">
+			<result name="admin_shop">shopManage.jsp</result>
+		</action>
+		
+		<!-- 服务员管理 -->
+		<action name="waitress_manage" class="waitressController">
+			<result name="admin_waitress">waitressManage.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 服务员 -->
+	<package name="waitress" extends="struts-default">
+		<action name="ZD_waitress" class="planController">
+			<result name="ZD_waitress">makePlan.jsp</result>
+		</action>
+		<action name="ZD_shop" class="zDShopController">
+			<result name="ZD_shop">waitressManager.jsp</result>
+		</action>
+		<action name="waitress_consume" class="waitressController" method="memberConsume">
+			<result name="waitress_consume">waitressConsume.jsp</result>
+		</action>
+		<action name="waitress_recharge" class="waitressController" method="memberRecharge">
+			<result name="waitress_recharge">waitressRecharge.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 经理 -->
+	<package name="manager" extends="struts-default">
+		<!-- 计划批准-->
+		<action name="manager_shop_plan" class="managerShopController">
+			<result name="manager shop list">manager_shop_plan.jsp</result>
+		</action>
+		<!-- 消费统计 -->
+		<action name="manager_consume" class="managerMemberController" method="consume">
+			<result name="manager_consume">managerConsumeDetail.jsp</result>
+		</action>
+		<!-- 充值统计 -->
+		<action name="manager_recharge" class="managerMemberController" method="recharge">
+			<result name="manager_recharge">managerPay.jsp</result>
+		</action>
+		<!-- 销售业绩 -->
+		<action name="manager_sale" class="managerMemberController" method="manager_sale">
+			<result name="manager_sale">managerConsume.jsp</result>
+		</action>
+		<!-- 热卖产品 -->
+		<action name="manager_hot_dessert" class="managerMemberController" method="hotDessert">
+			<result name="manager_hot_dessert">hotDessert.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 会员 -->
+	<package name="member" extends="struts-default">
+		<action name="dessert_detail" class="dessertDetailController">
+			<result name="dessert_detail">dessertDetail.jsp</result>
+			<result name="dessert_detail_not_found">dessertDetailNotFound.jsp</result>
+		</action>
+		<action name="memebr_shop_list" class="memberShopController">
+			<result name="member_shop">memberShopList.jsp</result>
+		</action>
+		<action name="member_info" class="memberInfoController">
+			<result name="member_info">memberManage.jsp</result>
+		</action>
+		<action name="member_consume" class="consumeController">
+			<result name="member_consume">consumeRecord.jsp</result>
+		</action>
+		<action name="member_recharge" class="rechargeController">
+			<result name="member_recharge">PayRecord.jsp</result>
+		</action>
+		<action name="member_cart" class="cartController">
+			<result name="member_cart">cart.jsp</result>
+			<result name="member_empty_cart">EmptyCart.jsp</result>
+		</action>
+	</package>
+</struts>
